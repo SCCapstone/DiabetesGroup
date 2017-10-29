@@ -30,6 +30,9 @@ export default class App extends Component<{}> {
           To get started, edit App.js
         </Text>
         <Text style={styles.instructions}>
+          Additional text
+        </Text>
+        <Text style={styles.instructions}>
           {instructions}
         </Text>
       </View>
