@@ -34,6 +34,7 @@ export default class App extends Component<{}> {
         </Text>
 	    <Text style = {styles.instructions}>
 	    	Mims SourceControl Milestone.
+	    	Merge Conflict!!!!
 	    </Text>
       </View>
     );
