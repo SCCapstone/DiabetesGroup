@@ -31,6 +31,7 @@ export default class App extends Component<{}> {
         </Text>
         <Text style={styles.instructions}>
           {instructions}
+        </Text>
       </View>
     );
   }
