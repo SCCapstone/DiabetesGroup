@@ -32,6 +32,9 @@ export default class App extends Component<{}> {
         <Text style={styles.instructions}>
           {instructions}
         </Text>
+	    <Text style = {styles.instructions}>
+	    	Mims SourceControl Milestone.
+	    </Text>
       </View>
     );
   }
