@@ -5,6 +5,7 @@
  */
 
 import React, { Component } from 'react';
+const SeafoamButton = require('./components/SeafoamButton');
 import {
   Platform,
   StyleSheet,
@@ -32,6 +33,7 @@ export default class App extends Component<{}> {
         <Text style={styles.instructions}>
           {instructions}
         </Text>
+        <SeafoamButton title="Sea-foam Button Component" />
       </View>
     );
   }
