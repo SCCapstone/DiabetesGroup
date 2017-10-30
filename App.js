@@ -30,7 +30,7 @@ export default class App extends Component<{}> {
           To get started, edit App.js
         </Text>
         <Text style={styles.instructions}>
-          Additional text
+          Chaszar Source Control
         </Text>
         <Text style={styles.instructions}>
           {instructions}
