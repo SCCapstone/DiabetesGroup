@@ -9,11 +9,11 @@ import {
 class SeafoamButton extends Component {
     render() {
         return (
-            <View style={styles.press}>
+            <View style={styles.container}>
                 <TouchableHighlight
-                    underlayColor="#008D4D"
+                    underlayColor="rgba(253,138,94,0.2)"
                     onPress={this.props.onPress}>
-                    <Text style={styles.pressText}>{this.props.title}</Text>
+                    <Text style={styles.welcome}>{this.props.title}</Text>
                 </TouchableHighlight>
             </View>
         );
@@ -22,22 +22,23 @@ class SeafoamButton extends Component {
 
 
 const styles = StyleSheet.create({
-    press: {
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#1FC97C',
-        borderColor: '#000000',
-        overflow: 'hidden',
-        borderRadius: 12,
-        borderWidth: 3,
-        paddingLeft: 10,
-        paddingRight: 10,
-        paddingTop: 10,
-        paddingBottom: 10,
-
+		marginBottom: 470,
     },
-    pressText: {
-        color: '#000000',
-        fontSize: 16,
+    welcome: {
+        fontSize: 20,
         textAlign: 'center',
+        margin: 10,	
+    },
+
+	instruction: {
+	    textAlign: 'center',
+        color: '#333333',
+        marginBottom: 5,
     },
 });
 
