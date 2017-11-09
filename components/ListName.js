@@ -19,6 +19,11 @@ const styles = StyleSheet.create({
         color: '#FF5500',
         fontSize: 22,
         fontWeight: 'bold',
+<<<<<<< HEAD
+=======
+//        paddingTop: 40,
+//        paddingBottom: 40,
+>>>>>>> ad9218f... added my partial patientlist, screens folder, added navigator, and fixed the SeaFoamButton.
     },
     nm: {
         backgroundColor: '#BBFFB6',
