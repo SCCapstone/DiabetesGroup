@@ -54,6 +54,7 @@ export default class createNewUser extends Component<{}> {
 
                     <SeafoamButton
                       title="Submit"
+                      //onPress connect values to firebase
                     />
                 </View>
       		</View> 	
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 35,
     paddingBottom: 10,
-
+    textAlign: 'center',
 
   },
   input:{

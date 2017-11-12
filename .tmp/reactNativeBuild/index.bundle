@@ -77376,6 +77376,8 @@ var createNewUser = _wrapComponent('createNewUser')((_temp = _class = function (
   _createClass(createNewUser, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var navigate = this.props.navigation.navigate;
 
       return _react3.default.createElement(
@@ -77401,10 +77403,52 @@ var createNewUser = _wrapComponent('createNewUser')((_temp = _class = function (
             },
             'Enter your information below:'
           ),
-          _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Username',
-            underlineColorAndroid: 'transparent', __source: {
+          _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Your name',
+            underlineColorAndroid: 'transparent',
+            onChangeText: function onChangeText(text) {
+              return _this2.setState({ text: text });
+            },
+            __source: {
               fileName: _jsxFileName,
               lineNumber: 30
+            }
+          }),
+          _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Email',
+            underlineColorAndroid: 'transparent',
+            onChangeText: function onChangeText(text) {
+              return _this2.setState({ text: text });
+            },
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 36
+            }
+          }),
+          _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Username',
+            underlineColorAndroid: 'transparent',
+            onChangeText: function onChangeText(text) {
+              return _this2.setState({ text: text });
+            },
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 42
+            }
+          }),
+          _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Password',
+            underlineColorAndroid: 'transparent',
+            secureTextEntry: true,
+            onChangeText: function onChangeText(text) {
+              return _this2.setState({ text: text });
+            },
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 48
+            }
+          }),
+          _react3.default.createElement(SeafoamButton, {
+            title: 'Submit',
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 55
             }
           })
         )
@@ -77426,6 +77470,16 @@ var styles = _reactNative.StyleSheet.create({
     paddingRight: 55,
     backgroundColor: '#F5FCFF'
   },
+  submitbutton: {
+    padding: 20,
+    marginTop: 30,
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    backgroundColor: '#1FC97C'
+  },
+  submittext: {
+    fontWeight: 'bold'
+  },
   welcome: {
     fontSize: 25,
     textAlign: 'center',
@@ -77438,14 +77492,17 @@ var styles = _reactNative.StyleSheet.create({
   title: {
     fontSize: 20,
     marginBottom: 35,
-    paddingBottom: 10
+    paddingBottom: 10,
+    textAlign: 'center'
 
   },
   input: {
     height: 40,
     marginBottom: 30,
     alignSelf: 'stretch',
-    color: "#000000"
+    color: "#000000",
+    borderColor: "#000000",
+    borderWidth: 1
 
   }
 
