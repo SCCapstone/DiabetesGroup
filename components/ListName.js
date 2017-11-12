@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import ReactNative from 'react-native';
 const { View, Text, StyleSheet } = ReactNative;
 
-//This is the buttons that contain the patients name and age
+//These are the buttons that contain the patients name and age
 class ListName extends Component {
     render() {
         return (
             <View style={styles.nm}>
+
                 <Text style={styles.nText}>{this.props.name.Name}</Text>
+
             </View>
         );
     }
@@ -23,15 +25,15 @@ const styles = StyleSheet.create({
 //        paddingBottom: 40,
     },
     nm: {
-        backgroundColor: '#BBFFB6',
-        borderBottomColor: '#BBFFB6',
+        backgroundColor: '#F7F1D2',
+        borderBottomColor: '#F7F1D2',
         borderColor: 'transparent',
         borderWidth: 1,
         paddingTop: 14,
         paddingBottom: 14,
     },
     nText: {
-        color: '#333',
+        color: '#000000',
         textAlign: 'center',
         fontSize: 16,
     },

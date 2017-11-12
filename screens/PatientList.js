@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, ListView, BackHandler, StyleSheet} from 'react-native';
+import {View, ListView, BackHandler, StyleSheet, FlatList} from 'react-native';
 import firebaseApp from './FireBaseApp';
 const ListName = require('../components/ListName');
-
+/**
 export default class PatientList extends React.Component {
     static navigationOptions = {
         title: 'Patient List',
@@ -71,6 +71,7 @@ export default class PatientList extends React.Component {
     renderName(name) {
         return (
             <ListName name={name} />
+
         );
     }
 
@@ -79,6 +80,59 @@ export default class PatientList extends React.Component {
         return goBack();
     }
 }
+**/
+
+export default class PatientList extends React.Component {
+    static navigationOptions = {
+        title: 'Patient List',
+    };
+
+    constructor(props) {
+        super(props);
+        console.ignoredYellowBox = [
+            'Setting a timer'
+        ];
+        this.itemsRef = firebaseApp.database().ref('Patients');
+        this.state = { Name: '', Patients: []};
+    }
+
+    keyExtractor = (item) => item.id;
+
+    listenForItems(itemsRef) {
+        itemsRef.on('value', (snap) => {
+            var items = [];
+            snap.forEach((child) => {
+                items.push({
+                    id: child.key,
+                    Name: child.val().Name,
+                });
+            });
+            this.setState({Patients: items});
+        });
+    }
+
+    componentDidMount() {
+        this.listenForItems(this.itemsRef);
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <FlatList
+                    data = {this.state.Patients}
+                    keyExtractor = {this.keyExtractor}
+                    renderItem = {({item}) => (
+                        //<Text style={styles.nText}>{item.Name}</Text>
+
+                        <ListName name = {item.Name} />
+                    )}
+                    style={{marginTop: 20}}
+                />
+            </View>
+        );
+    }
+}
+
 
 const styles = StyleSheet.create({
     container: {
@@ -86,9 +140,14 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
-        backgroundColor: '#BBFFB6',
+        backgroundColor: '#F7F1D2',
     },
     namelistview: {
         flex: 1,
+    },
+    nText: {
+        color: '#000000',
+        textAlign: 'center',
+        fontSize: 16,
     },
 });
