@@ -33,6 +33,12 @@ export default class createNewUser extends Component<{}> {
                      //value={this.state.name}
                     />
 
+                    <TextInput style={styles.input} placeholder="Email"
+                     underlineColorAndroid ={'transparent'}
+                     onChangeText={(text) => this.setState({text})}
+                     //value={this.state.email}
+                    />
+
                     <TextInput style={styles.input} placeholder="Username"
                      underlineColorAndroid ={'transparent'}
                      onChangeText={(text) => this.setState({text})}
@@ -46,11 +52,9 @@ export default class createNewUser extends Component<{}> {
                      //value={this.state.password}
                     />
 
-                    <TouchableOpacity style={styles.submitbutton}>
-                        <Text style={styles.submittext}>
-                        Submit
-                        </Text>
-                    </TouchableOpacity>
+                    <SeafoamButton
+                      title="Submit"
+                    />
                 </View>
       		</View> 	
     	);
