@@ -6,9 +6,11 @@ import {
   Platform,
   StyleSheet,
   Text,
+  TextInput,
   View,
   Button,
-  AppRegistry
+  AppRegistry,
+  TouchableOpacity,
 } from 'react-native';
 
 export default class createNewUser extends Component<{}> {
@@ -18,10 +20,38 @@ export default class createNewUser extends Component<{}> {
 	render() {
 		const {navigate} = this.props.navigation;
 		return (
+
         	<View style={styles.container}>
- 				<Text style={styles.welcome}>
-				This is where we put in the create user code
-				</Text>
+                <View style={styles.stretched}>
+                    <Text style={styles.title}>
+                        Enter your information below:
+                    </Text>
+
+                    <TextInput style={styles.input} placeholder="Your name"
+                     underlineColorAndroid ={'transparent'}
+                     onChangeText={(text) => this.setState({text})}
+                     //value={this.state.name}
+                    />
+
+                    <TextInput style={styles.input} placeholder="Username"
+                     underlineColorAndroid ={'transparent'}
+                     onChangeText={(text) => this.setState({text})}
+                     //value={this.state.username}
+                    />
+
+                    <TextInput style={styles.input} placeholder="Password"
+                     underlineColorAndroid ={'transparent'}
+                     secureTextEntry={true}
+                     onChangeText={(text) => this.setState({text})}
+                     //value={this.state.password}
+                    />
+
+                    <TouchableOpacity style={styles.submitbutton}>
+                        <Text style={styles.submittext}>
+                        Submit
+                        </Text>
+                    </TouchableOpacity>
+                </View>
       		</View> 	
     	);
   	}
@@ -30,19 +60,45 @@ export default class createNewUser extends Component<{}> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent: 'center',
-	height:80,
-    //alignItems: 'center',
+    justifyContent: 'center',
+	paddingLeft: 55,
+    paddingRight: 55,
     backgroundColor: '#F5FCFF',
   },
+  submitbutton:{
+    padding: 20,
+    marginTop: 30,
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    backgroundColor: '#1FC97C'
+  },
+  submittext:{
+      fontWeight: 'bold',
+  },
   welcome: {
+    fontSize: 25,
+    textAlign: 'center',
+    margin: 15,
+    height: 70,
+  },
+  stretched: {
+          alignSelf: 'stretch',
+  },
+  title: {
     fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    marginBottom: 35,
+    paddingBottom: 10,
+
+
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  input:{
+      height: 40,
+      marginBottom: 30,
+      alignSelf: 'stretch',
+      color: "#000000",
+      borderColor: "#000000",
+      borderWidth: 1,
+
   },
+
 });

@@ -24,9 +24,9 @@ class SeafoamButton extends Component {
 const styles = StyleSheet.create({
     press: {
         backgroundColor: '#1FC97C',
+        borderRadius: 12,
         borderColor: '#000000',
         overflow: 'hidden',
-        borderRadius: 12,
         borderWidth: 3,
         paddingLeft: 10,
         paddingRight: 10,
