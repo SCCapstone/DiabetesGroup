@@ -17,7 +17,7 @@ const AppNavigator = StackNavigator({
         PList: {screen: PatientList}
     },
     {
-        initialRouteName: 'PList'
+        initialRouteName: 'NewUser'
     }
 );
 

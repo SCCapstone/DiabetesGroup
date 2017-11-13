@@ -17,8 +17,43 @@ export default class createNewUser extends Component<{}> {
 
 	static navigationOptions = {title: 'Create a new account',};
 
+	constructor(props) {
+	    super(props);
+	    this.state = {email: '', password: ''};
+    }
+
+    _signUp() {
+
+        var email = this.state.email;
+        var password = this.state.password;
+
+        if(email.length < 4){
+            alert('Please enter an email address.');
+        }
+        if(password.length < 4) {
+            alert('Please enter a password.');
+        }
+
+        //Sign in with email and password.
+        //Creating the email
+        firebaseApp.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+            //Hendle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // [START_EXCLUDE]
+            if (errorCode === 'auth/weak-password') {
+                alert('The password is too weak.');
+            } else {
+                alert(errorMessage);
+            }
+            console.log(error);
+        });
+        // [END createwitheamil
+        const {navigate} = this.props.navigation;
+        navigate('User')
+    }
+
 	render() {
-		const {navigate} = this.props.navigation;
 		return (
 
         	<View style={styles.container}>
@@ -27,33 +62,22 @@ export default class createNewUser extends Component<{}> {
                         Enter your information below:
                     </Text>
 
-                    <TextInput style={styles.input} placeholder="Your name"
-                     underlineColorAndroid ={'transparent'}
-                     onChangeText={(text) => this.setState({text})}
-                     //value={this.state.name}
-                    />
-
                     <TextInput style={styles.input} placeholder="Email"
                      underlineColorAndroid ={'transparent'}
-                     onChangeText={(text) => this.setState({text})}
-                     //value={this.state.email}
-                    />
-
-                    <TextInput style={styles.input} placeholder="Username"
-                     underlineColorAndroid ={'transparent'}
-                     onChangeText={(text) => this.setState({text})}
-                     //value={this.state.username}
+                     onChangeText={(text) => this.setState({email: text})}
+                     value={this.state.email}
                     />
 
                     <TextInput style={styles.input} placeholder="Password"
                      underlineColorAndroid ={'transparent'}
                      secureTextEntry={true}
-                     onChangeText={(text) => this.setState({text})}
-                     //value={this.state.password}
+                     onChangeText={(text) => this.setState({password: text})}
+                     value={this.state.password}
                     />
 
                     <SeafoamButton
                       title="Submit"
+                      onPress = {() => this._signUp()}
                       //onPress connect values to firebase
                     />
                 </View>
@@ -68,7 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 	paddingLeft: 55,
     paddingRight: 55,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F7F1D2',
   },
   submitbutton:{
     padding: 20,
