@@ -1319,7 +1319,7 @@ var AppNavigator = (0, _reactNavigation.StackNavigator)({
     NewUser: { screen: _createNewUser2.default },
     PList: { screen: _PatientList2.default }
 }, {
-    initialRouteName: 'User'
+    initialRouteName: 'PList'
 });
 
 _reactNative.AppRegistry.registerComponent('DiabetesGroup', function () {
@@ -8424,123 +8424,159 @@ __d(/* react/index.js */function(global, require, module, exports) {'use strict'
 if (process.env.NODE_ENV === 'production') {
   module.exports = require(37                             ); // 37 = ./cjs/react.production.min.js
 } else {
-  module.exports = require(41                          ); // 41 = ./cjs/react.development.js
+  module.exports = require(42                          ); // 42 = ./cjs/react.development.js
 }
 }, 36, null, "react/index.js");
-__d(/* react/cjs/react.production.min.js */function(global, require, module, exports) {/** @license React v16.1.0
- * react.production.min.js
- *
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-'use strict';
-var m = require(38             ), // 38 = object-assign
-    n = require(39                    ), // 39 = fbjs/lib/emptyObject
-    p = require(40                      ); // 40 = fbjs/lib/emptyFunction
-function q(a) {
-  for (var b = arguments.length - 1, e = "Minified React error #" + a + "; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d" + a, d = 0; d < b; d++) {
-    e += "\x26args[]\x3d" + encodeURIComponent(arguments[d + 1]);
-  }b = Error(e + " for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name = "Invariant Violation";b.framesToPop = 1;throw b;
-}
-var r = { isMounted: function isMounted() {
-    return !1;
-  }, enqueueForceUpdate: function enqueueForceUpdate() {}, enqueueReplaceState: function enqueueReplaceState() {}, enqueueSetState: function enqueueSetState() {} };function t(a, b, e) {
-  this.props = a;this.context = b;this.refs = n;this.updater = e || r;
-}t.prototype.isReactComponent = {};t.prototype.setState = function (a, b) {
-  "object" !== typeof a && "function" !== typeof a && null != a ? q("85") : void 0;this.updater.enqueueSetState(this, a, b, "setState");
-};t.prototype.forceUpdate = function (a) {
-  this.updater.enqueueForceUpdate(this, a, "forceUpdate");
-};
-function u(a, b, e) {
-  this.props = a;this.context = b;this.refs = n;this.updater = e || r;
-}function v() {}v.prototype = t.prototype;var w = u.prototype = new v();w.constructor = u;m(w, t.prototype);w.isPureReactComponent = !0;function x(a, b, e) {
-  this.props = a;this.context = b;this.refs = n;this.updater = e || r;
-}var y = x.prototype = new v();y.constructor = x;m(y, t.prototype);y.unstable_isAsyncReactComponent = !0;y.render = function () {
-  return this.props.children;
-};
-var z = { current: null },
-    A = Object.prototype.hasOwnProperty,
-    B = "function" === typeof Symbol && Symbol["for"] && Symbol["for"]("react.element") || 60103,
-    C = { key: !0, ref: !0, __self: !0, __source: !0 };
-function D(a, b, e) {
-  var d,
-      c = {},
-      h = null,
-      k = null;if (null != b) for (d in void 0 !== b.ref && (k = b.ref), void 0 !== b.key && (h = "" + b.key), b) {
-    A.call(b, d) && !C.hasOwnProperty(d) && (c[d] = b[d]);
-  }var f = arguments.length - 2;if (1 === f) c.children = e;else if (1 < f) {
-    for (var g = Array(f), l = 0; l < f; l++) {
-      g[l] = arguments[l + 2];
-    }c.children = g;
-  }if (a && a.defaultProps) for (d in f = a.defaultProps, f) {
-    void 0 === c[d] && (c[d] = f[d]);
-  }return { $$typeof: B, type: a, key: h, ref: k, props: c, _owner: z.current };
-}function E(a) {
-  return "object" === typeof a && null !== a && a.$$typeof === B;
-}
-var F = "function" === typeof Symbol && (typeof Symbol === "function" ? Symbol.iterator : "@@iterator"),
-    G = "function" === typeof Symbol && Symbol["for"] && Symbol["for"]("react.element") || 60103,
-    H = "function" === typeof Symbol && Symbol["for"] && Symbol["for"]("react.portal") || 60106;function escape(a) {
-  var b = { "\x3d": "\x3d0", ":": "\x3d2" };return "$" + ("" + a).replace(/[=:]/g, function (a) {
-    return b[a];
+__d(/* react/cjs/react.production.min.js */function(global, require, module, exports) {"use strict";
+function e(e) {
+  for (var t = arguments.length - 1, n = "Minified React error #" + e + "; visit http://facebook.github.io/react/docs/error-decoder.html?invariant=" + e, r = 0; r < t; r++) {
+    n += "&args[]=" + encodeURIComponent(arguments[r + 1]);
+  }n += " for the full message or use the non-minified dev environment for full errors and additional helpful warnings.";var o = new Error(n);throw o.name = "Invariant Violation", o.framesToPop = 1, o;
+}function t(e, t) {}function n(e, t, n) {
+  this.props = e, this.context = t, this.refs = g, this.updater = n || R;
+}function r(e, t, n) {
+  this.props = e, this.context = t, this.refs = g, this.updater = n || R;
+}function o() {}function u(e, t, n) {
+  this.props = e, this.context = t, this.refs = g, this.updater = n || R;
+}function l(e) {
+  return void 0 !== e.ref;
+}function i(e) {
+  return void 0 !== e.key;
+}function c(e) {
+  var t = { "=": "=0", ":": "=2" };return "$" + ("" + e).replace(/[=:]/g, function (e) {
+    return t[e];
   });
-}var I = /\/+/g,
-    J = [];
-function K(a, b, e, d) {
-  if (J.length) {
-    var c = J.pop();c.result = a;c.keyPrefix = b;c.func = e;c.context = d;c.count = 0;return c;
-  }return { result: a, keyPrefix: b, func: e, context: d, count: 0 };
-}function L(a) {
-  a.result = null;a.keyPrefix = null;a.func = null;a.context = null;a.count = 0;10 > J.length && J.push(a);
-}
-function M(a, b, e, d) {
-  var c = typeof a;if ("undefined" === c || "boolean" === c) a = null;if (null === a || "string" === c || "number" === c || "object" === c && a.$$typeof === G || "object" === c && a.$$typeof === H) return e(d, a, "" === b ? "." + N(a, 0) : b), 1;var h = 0;b = "" === b ? "." : b + ":";if (Array.isArray(a)) for (var k = 0; k < a.length; k++) {
-    c = a[k];var f = b + N(c, k);h += M(c, f, e, d);
-  } else if (f = F && a[F] || a["@@iterator"], "function" === typeof f) for (a = f.call(a), k = 0; !(c = a.next()).done;) {
-    c = c.value, f = b + N(c, k++), h += M(c, f, e, d);
-  } else "object" === c && (e = "" + a, q("31", "[object Object]" === e ? "object with keys {" + Object.keys(a).join(", ") + "}" : e, ""));return h;
-}function N(a, b) {
-  return "object" === typeof a && null !== a && null != a.key ? escape(a.key) : b.toString(36);
-}function O(a, b) {
-  a.func.call(a.context, b, a.count++);
-}
-function P(a, b, e) {
-  var d = a.result,
-      c = a.keyPrefix;a = a.func.call(a.context, b, a.count++);Array.isArray(a) ? Q(a, d, e, p.thatReturnsArgument) : null != a && (E(a) && (b = c + (!a.key || b && b.key === a.key ? "" : ("" + a.key).replace(I, "$\x26/") + "/") + e, a = { $$typeof: B, type: a.type, key: b, ref: a.ref, props: a.props, _owner: a._owner }), d.push(a));
-}function Q(a, b, e, d, c) {
-  var h = "";null != e && (h = ("" + e).replace(I, "$\x26/") + "/");b = K(b, h, d, c);null == a || M(a, "", P, b);L(b);
-}"function" === typeof Symbol && Symbol["for"] && Symbol["for"]("react.fragment");
-var R = { Children: { map: function map(a, b, e) {
-      if (null == a) return a;var d = [];Q(a, d, null, b, e);return d;
-    }, forEach: function forEach(a, b, e) {
-      if (null == a) return a;b = K(null, null, b, e);null == a || M(a, "", O, b);L(b);
-    }, count: function count(a) {
-      return null == a ? 0 : M(a, "", p.thatReturnsNull, null);
-    }, toArray: function toArray(a) {
-      var b = [];Q(a, b, null, p.thatReturnsArgument);return b;
-    }, only: function only(a) {
-      E(a) ? void 0 : q("143");return a;
-    } }, Component: t, PureComponent: u, unstable_AsyncComponent: x, createElement: D, cloneElement: function cloneElement(a, b, e) {
-    var d = m({}, a.props),
-        c = a.key,
-        h = a.ref,
-        k = a._owner;if (null != b) {
-      void 0 !== b.ref && (h = b.ref, k = z.current);void 0 !== b.key && (c = "" + b.key);if (a.type && a.type.defaultProps) var f = a.type.defaultProps;for (g in b) {
-        A.call(b, g) && !C.hasOwnProperty(g) && (d[g] = void 0 === b[g] && void 0 !== f ? f[g] : b[g]);
-      }
-    }var g = arguments.length - 2;if (1 === g) d.children = e;else if (1 < g) {
-      f = Array(g);for (var l = 0; l < g; l++) {
-        f[l] = arguments[l + 2];
-      }d.children = f;
-    }return { $$typeof: B, type: a.type, key: c, ref: h, props: d, _owner: k };
-  }, createFactory: function createFactory(a) {
-    var b = D.bind(null, a);b.type = a;return b;
-  }, isValidElement: E,
-  version: "16.1.0", __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: { ReactCurrentOwner: z, assign: m } },
-    S = Object.freeze({ default: R }),
-    T = S && R || S;module.exports = T["default"] ? T["default"] : T;
+}function a(e) {
+  return ("" + e).replace(B, "$&/");
+}function f(e, t, n, r) {
+  if (Y.length) {
+    var o = Y.pop();return o.result = e, o.keyPrefix = t, o.func = n, o.context = r, o.count = 0, o;
+  }return { result: e, keyPrefix: t, func: n, context: r, count: 0 };
+}function p(e) {
+  e.result = null, e.keyPrefix = null, e.func = null, e.context = null, e.count = 0, Y.length < W && Y.push(e);
+}function s(e, t, n, r) {
+  var o = typeof e;if ("undefined" !== o && "boolean" !== o || (e = null), null === e || "string" === o || "number" === o || "object" === o && e.$$typeof === D) return n(r, e, "" === t ? K + d(e, 0) : t), 1;var u,
+      l,
+      i = 0,
+      c = "" === t ? K : t + M;if (Array.isArray(e)) for (var a = 0; a < e.length; a++) {
+    u = e[a], l = c + d(u, a), i += s(u, l, n, r);
+  } else {
+    var f = T && e[T] || e[L];if ("function" == typeof f) for (var p, y = f.call(e), m = 0; !(p = y.next()).done;) {
+      u = p.value, l = c + d(u, m++), i += s(u, l, n, r);
+    } else if ("object" === o) {
+      var h = "" + e;C("31", "[object Object]" === h ? "object with keys {" + Object.keys(e).join(", ") + "}" : h, "");
+    }
+  }return i;
+}function y(e, t, n) {
+  return null == e ? 0 : s(e, "", t, n);
+}function d(e, t) {
+  return "object" == typeof e && null !== e && null != e.key ? c(e.key) : t.toString(36);
+}function m(e, t, n) {
+  var r = e.func,
+      o = e.context;r.call(o, t, e.count++);
+}function h(e, t, n) {
+  if (null == e) return e;var r = f(null, null, t, n);y(e, m, r), p(r);
+}function v(e, t, n) {
+  var r = e.result,
+      o = e.keyPrefix,
+      u = e.func,
+      l = e.context,
+      i = u.call(l, t, e.count++);Array.isArray(i) ? b(i, r, n, j.thatReturnsArgument) : null != i && (N.isValidElement(i) && (i = N.cloneAndReplaceKey(i, o + (!i.key || t && t.key === i.key ? "" : a(i.key) + "/") + n)), r.push(i));
+}function b(e, t, n, r, o) {
+  var u = "";null != n && (u = a(n) + "/");var l = f(t, u, r, o);y(e, v, l), p(l);
+}function _(e, t, n) {
+  if (null == e) return e;var r = [];return b(e, r, null, t, n), r;
+}function E(e, t) {
+  return y(e, j.thatReturnsNull, null);
+}function S(e) {
+  var t = [];return b(e, t, null, j.thatReturnsArgument), t;
+}function k(e) {
+  return N.isValidElement(e) || C("143"), e;
+}var A = require(38             ), // 38 = object-assign
+    g = require(39                    );require(40                  );var j = require(41                      ), // 41 = fbjs/lib/emptyFunction // 40 = fbjs/lib/invariant // 39 = fbjs/lib/emptyObject
+    C = e,
+    P = { isMounted: function isMounted(e) {
+    return !1;
+  }, enqueueForceUpdate: function enqueueForceUpdate(e, n, r) {
+    t(e, "forceUpdate");
+  }, enqueueReplaceState: function enqueueReplaceState(e, n, r, o) {
+    t(e, "replaceState");
+  }, enqueueSetState: function enqueueSetState(e, n, r, o) {
+    t(e, "setState");
+  } },
+    R = P;n.prototype.isReactComponent = {}, n.prototype.setState = function (e, t) {
+  "object" != typeof e && "function" != typeof e && null != e && C("85"), this.updater.enqueueSetState(this, e, t, "setState");
+}, n.prototype.forceUpdate = function (e) {
+  this.updater.enqueueForceUpdate(this, e, "forceUpdate");
+}, o.prototype = n.prototype;var x = r.prototype = new o();x.constructor = r, A(x, n.prototype), x.isPureReactComponent = !0;var w = u.prototype = new o();w.constructor = u, A(w, n.prototype), w.unstable_isAsyncReactComponent = !0, w.render = function () {
+  return this.props.children;
+};var O = { Component: n, PureComponent: r, AsyncComponent: u },
+    q = { current: null },
+    U = q,
+    $ = Object.prototype.hasOwnProperty,
+    F = "function" == typeof Symbol && (typeof Symbol === "function" ? Symbol.for : "@@for") && (typeof Symbol === "function" ? Symbol.for : "@@for")("react.element") || 60103,
+    V = { key: !0, ref: !0, __self: !0, __source: !0 },
+    I = function I(e, t, n, r, o, u, l) {
+  return { $$typeof: F, type: e, key: t, ref: n, props: l, _owner: u };
+};I.createElement = function (e, t, n) {
+  var r,
+      o = {},
+      u = null,
+      c = null,
+      a = null,
+      f = null;if (null != t) {
+    l(t) && (c = t.ref), i(t) && (u = "" + t.key), a = void 0 === t.__self ? null : t.__self, f = void 0 === t.__source ? null : t.__source;for (r in t) {
+      $.call(t, r) && !V.hasOwnProperty(r) && (o[r] = t[r]);
+    }
+  }var p = arguments.length - 2;if (1 === p) o.children = n;else if (p > 1) {
+    for (var s = Array(p), y = 0; y < p; y++) {
+      s[y] = arguments[y + 2];
+    }o.children = s;
+  }if (e && e.defaultProps) {
+    var d = e.defaultProps;for (r in d) {
+      void 0 === o[r] && (o[r] = d[r]);
+    }
+  }return I(e, u, c, a, f, U.current, o);
+}, I.createFactory = function (e) {
+  var t = I.createElement.bind(null, e);return t.type = e, t;
+}, I.cloneAndReplaceKey = function (e, t) {
+  return I(e.type, t, e.ref, e._self, e._source, e._owner, e.props);
+}, I.cloneElement = function (e, t, n) {
+  var r,
+      o = A({}, e.props),
+      u = e.key,
+      c = e.ref,
+      a = e._self,
+      f = e._source,
+      p = e._owner;if (null != t) {
+    l(t) && (c = t.ref, p = U.current), i(t) && (u = "" + t.key);var s;e.type && e.type.defaultProps && (s = e.type.defaultProps);for (r in t) {
+      $.call(t, r) && !V.hasOwnProperty(r) && (void 0 === t[r] && void 0 !== s ? o[r] = s[r] : o[r] = t[r]);
+    }
+  }var y = arguments.length - 2;if (1 === y) o.children = n;else if (y > 1) {
+    for (var d = Array(y), m = 0; m < y; m++) {
+      d[m] = arguments[m + 2];
+    }o.children = d;
+  }return I(e.type, u, c, a, f, p, o);
+}, I.isValidElement = function (e) {
+  return "object" == typeof e && null !== e && e.$$typeof === F;
+};var N = I,
+    T = "function" == typeof Symbol && (typeof Symbol === "function" ? Symbol.iterator : "@@iterator"),
+    L = "@@iterator",
+    D = "function" == typeof Symbol && (typeof Symbol === "function" ? Symbol.for : "@@for") && (typeof Symbol === "function" ? Symbol.for : "@@for")("react.element") || 60103,
+    K = ".",
+    M = ":",
+    B = /\/+/g,
+    W = 10,
+    Y = [],
+    z = { forEach: h, map: _, count: E, toArray: S },
+    G = z,
+    H = "16.0.0-beta.5",
+    J = k,
+    Q = N.createElement,
+    X = N.createFactory,
+    Z = N.cloneElement,
+    ee = { Children: { map: G.map, forEach: G.forEach, count: G.count, toArray: G.toArray, only: J }, Component: O.Component, PureComponent: O.PureComponent, unstable_AsyncComponent: O.AsyncComponent, createElement: Q, cloneElement: Z, isValidElement: N.isValidElement, createFactory: X, version: H, __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: { ReactCurrentOwner: U } },
+    te = ee;module.exports = te;
 }, 37, null, "react/cjs/react.production.min.js");
 __d(/* object-assign/index.js */function(global, require, module, exports) {/*
 object-assign
@@ -8640,6 +8676,43 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = emptyObject;
 }, 39, null, "fbjs/lib/emptyObject.js");
+__d(/* fbjs/lib/invariant.js */function(global, require, module, exports) {
+
+'use strict';
+
+var validateFormat = function validateFormat(format) {};
+
+if (process.env.NODE_ENV !== 'production') {
+  validateFormat = function validateFormat(format) {
+    if (format === undefined) {
+      throw new Error('invariant requires an error message argument');
+    }
+  };
+}
+
+function invariant(condition, format, a, b, c, d, e, f) {
+  validateFormat(format);
+
+  if (!condition) {
+    var error;
+    if (format === undefined) {
+      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+    } else {
+      var args = [a, b, c, d, e, f];
+      var argIndex = 0;
+      error = new Error(format.replace(/%s/g, function () {
+        return args[argIndex++];
+      }));
+      error.name = 'Invariant Violation';
+    }
+
+    error.framesToPop = 1;
+    throw error;
+  }
+}
+
+module.exports = invariant;
+}, 40, null, "fbjs/lib/invariant.js");
 __d(/* fbjs/lib/emptyFunction.js */function(global, require, module, exports) {"use strict";
 
 function makeEmptyFunction(arg) {
@@ -8662,33 +8735,51 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-}, 40, null, "fbjs/lib/emptyFunction.js");
-__d(/* react/cjs/react.development.js */function(global, require, module, exports) {/** @license React v16.1.0
- * react.development.js
- *
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-'use strict';
+}, 41, null, "fbjs/lib/emptyFunction.js");
+__d(/* react/cjs/react.development.js */function(global, require, module, exports) {'use strict';
 
 if (process.env.NODE_ENV !== "production") {
   (function () {
+
     'use strict';
 
-    var _assign = require(38             ); // 38 = object-assign
-    var invariant = require(42                  ); // 42 = fbjs/lib/invariant
+    var objectAssign$1 = require(38             ); // 38 = object-assign
+    var require$$0 = require(43                ); // 43 = fbjs/lib/warning
     var emptyObject = require(39                    ); // 39 = fbjs/lib/emptyObject
-    var warning = require(43                ); // 43 = fbjs/lib/warning
-    var emptyFunction = require(40                      ); // 40 = fbjs/lib/emptyFunction
+    var invariant = require(40                  ); // 40 = fbjs/lib/invariant
+    var emptyFunction = require(41                      ); // 41 = fbjs/lib/emptyFunction
     var checkPropTypes = require(44                         ); // 44 = prop-types/checkPropTypes
 
-    var ReactVersion = '16.1.0';
+    {
+      var warning = require$$0;
+    }
 
-    var enableReactFragment = false;
+    function warnNoop(publicInstance, callerName) {
+      {
+        var constructor = publicInstance.constructor;
+        warning(false, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op.\n\nPlease check the code for the %s component.', callerName, callerName, constructor && (constructor.displayName || constructor.name) || 'ReactClass');
+      }
+    }
 
+    var ReactNoopUpdateQueue = {
+      isMounted: function isMounted(publicInstance) {
+        return false;
+      },
+
+      enqueueForceUpdate: function enqueueForceUpdate(publicInstance, callback, callerName) {
+        warnNoop(publicInstance, 'forceUpdate');
+      },
+
+      enqueueReplaceState: function enqueueReplaceState(publicInstance, completeState, callback, callerName) {
+        warnNoop(publicInstance, 'replaceState');
+      },
+
+      enqueueSetState: function enqueueSetState(publicInstance, partialState, callback, callerName) {
+        warnNoop(publicInstance, 'setState');
+      }
+    };
+
+    var ReactNoopUpdateQueue_1 = ReactNoopUpdateQueue;
 
     var lowPriorityWarning = function lowPriorityWarning() {};
 
@@ -8724,57 +8815,24 @@ if (process.env.NODE_ENV !== "production") {
       };
     }
 
-    var lowPriorityWarning$1 = lowPriorityWarning;
+    var lowPriorityWarning_1 = lowPriorityWarning;
 
-    var didWarnStateUpdateForUnmountedComponent = {};
-
-    function warnNoop(publicInstance, callerName) {
-      {
-        var constructor = publicInstance.constructor;
-        var componentName = constructor && (constructor.displayName || constructor.name) || 'ReactClass';
-        var warningKey = componentName + '.' + callerName;
-        if (didWarnStateUpdateForUnmountedComponent[warningKey]) {
-          return;
-        }
-        warning(false, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op.\n\nPlease check the code for the %s component.', callerName, callerName, componentName);
-        didWarnStateUpdateForUnmountedComponent[warningKey] = true;
-      }
-    }
-
-    var ReactNoopUpdateQueue = {
-      isMounted: function isMounted(publicInstance) {
-        return false;
-      },
-
-      enqueueForceUpdate: function enqueueForceUpdate(publicInstance, callback, callerName) {
-        warnNoop(publicInstance, 'forceUpdate');
-      },
-
-      enqueueReplaceState: function enqueueReplaceState(publicInstance, completeState, callback, callerName) {
-        warnNoop(publicInstance, 'replaceState');
-      },
-
-      enqueueSetState: function enqueueSetState(publicInstance, partialState, callback, callerName) {
-        warnNoop(publicInstance, 'setState');
-      }
-    };
-
-    function Component(props, context, updater) {
+    function ReactComponent(props, context, updater) {
       this.props = props;
       this.context = context;
       this.refs = emptyObject;
 
-      this.updater = updater || ReactNoopUpdateQueue;
+      this.updater = updater || ReactNoopUpdateQueue_1;
     }
 
-    Component.prototype.isReactComponent = {};
+    ReactComponent.prototype.isReactComponent = {};
 
-    Component.prototype.setState = function (partialState, callback) {
+    ReactComponent.prototype.setState = function (partialState, callback) {
       !(typeof partialState === 'object' || typeof partialState === 'function' || partialState == null) ? invariant(false, 'setState(...): takes an object of state variables to update or a function which returns an object of state variables.') : void 0;
       this.updater.enqueueSetState(this, partialState, callback, 'setState');
     };
 
-    Component.prototype.forceUpdate = function (callback) {
+    ReactComponent.prototype.forceUpdate = function (callback) {
       this.updater.enqueueForceUpdate(this, callback, 'forceUpdate');
     };
 
@@ -8784,9 +8842,9 @@ if (process.env.NODE_ENV !== "production") {
         replaceState: ['replaceState', 'Refactor your code to use setState instead (see ' + 'https://github.com/facebook/react/issues/3236).']
       };
       var defineDeprecationWarning = function defineDeprecationWarning(methodName, info) {
-        Object.defineProperty(Component.prototype, methodName, {
+        Object.defineProperty(ReactComponent.prototype, methodName, {
           get: function get() {
-            lowPriorityWarning$1(false, '%s(...) is deprecated in plain JavaScript React classes. %s', info[0], info[1]);
+            lowPriorityWarning_1(false, '%s(...) is deprecated in plain JavaScript React classes. %s', info[0], info[1]);
             return undefined;
           }
         });
@@ -8798,44 +8856,56 @@ if (process.env.NODE_ENV !== "production") {
       }
     }
 
-    function PureComponent(props, context, updater) {
+    function ReactPureComponent(props, context, updater) {
       this.props = props;
       this.context = context;
       this.refs = emptyObject;
 
-      this.updater = updater || ReactNoopUpdateQueue;
+      this.updater = updater || ReactNoopUpdateQueue_1;
     }
 
     function ComponentDummy() {}
-    ComponentDummy.prototype = Component.prototype;
-    var pureComponentPrototype = PureComponent.prototype = new ComponentDummy();
-    pureComponentPrototype.constructor = PureComponent;
+    ComponentDummy.prototype = ReactComponent.prototype;
+    var pureComponentPrototype = ReactPureComponent.prototype = new ComponentDummy();
+    pureComponentPrototype.constructor = ReactPureComponent;
 
-    _assign(pureComponentPrototype, Component.prototype);
+    objectAssign$1(pureComponentPrototype, ReactComponent.prototype);
     pureComponentPrototype.isPureReactComponent = true;
 
-    function AsyncComponent(props, context, updater) {
+    function ReactAsyncComponent(props, context, updater) {
       this.props = props;
       this.context = context;
       this.refs = emptyObject;
 
-      this.updater = updater || ReactNoopUpdateQueue;
+      this.updater = updater || ReactNoopUpdateQueue_1;
     }
 
-    var asyncComponentPrototype = AsyncComponent.prototype = new ComponentDummy();
-    asyncComponentPrototype.constructor = AsyncComponent;
+    var asyncComponentPrototype = ReactAsyncComponent.prototype = new ComponentDummy();
+    asyncComponentPrototype.constructor = ReactAsyncComponent;
 
-    _assign(asyncComponentPrototype, Component.prototype);
+    objectAssign$1(asyncComponentPrototype, ReactComponent.prototype);
     asyncComponentPrototype.unstable_isAsyncReactComponent = true;
     asyncComponentPrototype.render = function () {
       return this.props.children;
+    };
+
+    var ReactBaseClasses = {
+      Component: ReactComponent,
+      PureComponent: ReactPureComponent,
+      AsyncComponent: ReactAsyncComponent
     };
 
     var ReactCurrentOwner = {
       current: null
     };
 
+    var ReactCurrentOwner_1 = ReactCurrentOwner;
+
     var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+    {
+      var warning$2 = require$$0;
+    }
 
     var REACT_ELEMENT_TYPE$1 = typeof Symbol === 'function' && Symbol['for'] && Symbol['for']('react.element') || 0xeac7;
 
@@ -8877,7 +8947,7 @@ if (process.env.NODE_ENV !== "production") {
       var warnAboutAccessingKey = function warnAboutAccessingKey() {
         if (!specialPropKeyWarningShown) {
           specialPropKeyWarningShown = true;
-          warning(false, '%s: `key` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
+          warning$2(false, '%s: `key` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
         }
       };
       warnAboutAccessingKey.isReactWarning = true;
@@ -8891,7 +8961,7 @@ if (process.env.NODE_ENV !== "production") {
       var warnAboutAccessingRef = function warnAboutAccessingRef() {
         if (!specialPropRefWarningShown) {
           specialPropRefWarningShown = true;
-          warning(false, '%s: `ref` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
+          warning$2(false, '%s: `ref` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
         }
       };
       warnAboutAccessingRef.isReactWarning = true;
@@ -8945,7 +9015,7 @@ if (process.env.NODE_ENV !== "production") {
       return element;
     };
 
-    function createElement(type, config, children) {
+    ReactElement.createElement = function (type, config, children) {
       var propName;
 
       var props = {};
@@ -9010,19 +9080,26 @@ if (process.env.NODE_ENV !== "production") {
           }
         }
       }
-      return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props);
-    }
+      return ReactElement(type, key, ref, self, source, ReactCurrentOwner_1.current, props);
+    };
 
-    function cloneAndReplaceKey(oldElement, newKey) {
+    ReactElement.createFactory = function (type) {
+      var factory = ReactElement.createElement.bind(null, type);
+
+      factory.type = type;
+      return factory;
+    };
+
+    ReactElement.cloneAndReplaceKey = function (oldElement, newKey) {
       var newElement = ReactElement(oldElement.type, newKey, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, oldElement.props);
 
       return newElement;
-    }
+    };
 
-    function cloneElement(element, config, children) {
+    ReactElement.cloneElement = function (element, config, children) {
       var propName;
 
-      var props = _assign({}, element.props);
+      var props = objectAssign$1({}, element.props);
 
       var key = element.key;
       var ref = element.ref;
@@ -9036,7 +9113,7 @@ if (process.env.NODE_ENV !== "production") {
       if (config != null) {
         if (hasValidRef(config)) {
           ref = config.ref;
-          owner = ReactCurrentOwner.current;
+          owner = ReactCurrentOwner_1.current;
         }
         if (hasValidKey(config)) {
           key = '' + config.key;
@@ -9069,11 +9146,13 @@ if (process.env.NODE_ENV !== "production") {
       }
 
       return ReactElement(element.type, key, ref, self, source, owner, props);
-    }
+    };
 
-    function isValidElement(object) {
+    ReactElement.isValidElement = function (object) {
       return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE$1;
-    }
+    };
+
+    var ReactElement_1 = ReactElement;
 
     var ReactDebugCurrentFrame = {};
 
@@ -9089,10 +9168,19 @@ if (process.env.NODE_ENV !== "production") {
       };
     }
 
+    var ReactDebugCurrentFrame_1 = ReactDebugCurrentFrame;
+
+    {
+      var warning$1 = require$$0;
+
+      var _require = ReactDebugCurrentFrame_1,
+          getStackAddendum = _require.getStackAddendum;
+    }
+
     var ITERATOR_SYMBOL = typeof Symbol === 'function' && (typeof Symbol === 'function' ? Symbol.iterator : '@@iterator');
     var FAUX_ITERATOR_SYMBOL = '@@iterator';
     var REACT_ELEMENT_TYPE = typeof Symbol === 'function' && Symbol['for'] && Symbol['for']('react.element') || 0xeac7;
-    var REACT_PORTAL_TYPE = typeof Symbol === 'function' && Symbol['for'] && Symbol['for']('react.portal') || 0xeaca;
+
     var SEPARATOR = '.';
     var SUBSEPARATOR = ':';
 
@@ -9156,7 +9244,7 @@ if (process.env.NODE_ENV !== "production") {
         children = null;
       }
 
-      if (children === null || type === 'string' || type === 'number' || type === 'object' && children.$$typeof === REACT_ELEMENT_TYPE || type === 'object' && children.$$typeof === REACT_PORTAL_TYPE) {
+      if (children === null || type === 'string' || type === 'number' || type === 'object' && children.$$typeof === REACT_ELEMENT_TYPE) {
         callback(traverseContext, children, nameSoFar === '' ? SEPARATOR + getComponentKey(children, 0) : nameSoFar);
         return 1;
       }
@@ -9177,7 +9265,7 @@ if (process.env.NODE_ENV !== "production") {
         if (typeof iteratorFn === 'function') {
           {
             if (iteratorFn === children.entries) {
-              warning(didWarnAboutMaps, 'Using Maps as children is unsupported and will likely yield ' + 'unexpected results. Convert it to a sequence/iterable of keyed ' + 'ReactElements instead.%s', ReactDebugCurrentFrame.getStackAddendum());
+              warning$1(didWarnAboutMaps, 'Using Maps as children is unsupported and will likely yield ' + 'unexpected results. Convert it to a sequence/iterable of keyed ' + 'ReactElements instead.%s', getStackAddendum());
               didWarnAboutMaps = true;
             }
           }
@@ -9193,7 +9281,7 @@ if (process.env.NODE_ENV !== "production") {
         } else if (type === 'object') {
           var addendum = '';
           {
-            addendum = ' If you meant to render a collection of children, use an array ' + 'instead.' + ReactDebugCurrentFrame.getStackAddendum();
+            addendum = ' If you meant to render a collection of children, use an array ' + 'instead.' + getStackAddendum();
           }
           var childrenString = '' + children;
           invariant(false, 'Objects are not valid as a React child (found: %s).%s', childrenString === '[object Object]' ? 'object with keys {' + Object.keys(children).join(', ') + '}' : childrenString, addendum);
@@ -9245,8 +9333,8 @@ if (process.env.NODE_ENV !== "production") {
       if (Array.isArray(mappedChild)) {
         mapIntoWithKeyPrefixInternal(mappedChild, result, childKey, emptyFunction.thatReturnsArgument);
       } else if (mappedChild != null) {
-        if (isValidElement(mappedChild)) {
-          mappedChild = cloneAndReplaceKey(mappedChild, keyPrefix + (mappedChild.key && (!child || child.key !== mappedChild.key) ? escapeUserProvidedKey(mappedChild.key) + '/' : '') + childKey);
+        if (ReactElement_1.isValidElement(mappedChild)) {
+          mappedChild = ReactElement_1.cloneAndReplaceKey(mappedChild, keyPrefix + (mappedChild.key && (!child || child.key !== mappedChild.key) ? escapeUserProvidedKey(mappedChild.key) + '/' : '') + childKey);
         }
         result.push(mappedChild);
       }
@@ -9281,28 +9369,57 @@ if (process.env.NODE_ENV !== "production") {
       return result;
     }
 
+    var ReactChildren = {
+      forEach: forEachChildren,
+      map: mapChildren,
+      count: countChildren,
+      toArray: toArray
+    };
+
+    var ReactChildren_1 = ReactChildren;
+
+    var ReactVersion = '16.0.0-beta.5';
+
     function onlyChild(children) {
-      !isValidElement(children) ? invariant(false, 'React.Children.only expected to receive a single React element child.') : void 0;
+      !ReactElement_1.isValidElement(children) ? invariant(false, 'React.Children.only expected to receive a single React element child.') : void 0;
       return children;
     }
 
-    var describeComponentFrame = function describeComponentFrame(name, source, ownerName) {
+    var onlyChild_1 = onlyChild;
+
+    var describeComponentFrame$1 = function describeComponentFrame$1(name, source, ownerName) {
       return '\n    in ' + (name || 'Unknown') + (source ? ' (at ' + source.fileName.replace(/^.*[\\\/]/, '') + ':' + source.lineNumber + ')' : ownerName ? ' (created by ' + ownerName + ')' : '');
     };
 
-    function getComponentName(fiber) {
-      var type = fiber.type;
-
-      if (typeof type === 'string') {
-        return type;
+    function getComponentName$1(instanceOrFiber) {
+      if (typeof instanceOrFiber.getName === 'function') {
+        var instance = instanceOrFiber;
+        return instance.getName();
       }
-      if (typeof type === 'function') {
-        return type.displayName || type.name;
+      if (typeof instanceOrFiber.tag === 'number') {
+        var fiber = instanceOrFiber;
+        var type = fiber.type;
+
+        if (typeof type === 'string') {
+          return type;
+        }
+        if (typeof type === 'function') {
+          return type.displayName || type.name;
+        }
       }
       return null;
     }
 
+    var getComponentName_1 = getComponentName$1;
+
     {
+      var checkPropTypes$1 = checkPropTypes;
+      var lowPriorityWarning$1 = lowPriorityWarning_1;
+      var ReactDebugCurrentFrame$1 = ReactDebugCurrentFrame_1;
+      var warning$3 = require$$0;
+      var describeComponentFrame = describeComponentFrame$1;
+      var getComponentName = getComponentName_1;
+
       var currentlyValidatingElement = null;
 
       var getDisplayName = function getDisplayName(element) {
@@ -9312,35 +9429,29 @@ if (process.env.NODE_ENV !== "production") {
           return '#text';
         } else if (typeof element.type === 'string') {
           return element.type;
-        } else if (element.type === REACT_FRAGMENT_TYPE$1) {
-          return 'React.Fragment';
         } else {
           return element.type.displayName || element.type.name || 'Unknown';
         }
       };
 
-      var getStackAddendum = function getStackAddendum() {
+      var getStackAddendum$1 = function getStackAddendum$1() {
         var stack = '';
         if (currentlyValidatingElement) {
           var name = getDisplayName(currentlyValidatingElement);
           var owner = currentlyValidatingElement._owner;
           stack += describeComponentFrame(name, currentlyValidatingElement._source, owner && getComponentName(owner));
         }
-        stack += ReactDebugCurrentFrame.getStackAddendum() || '';
+        stack += ReactDebugCurrentFrame$1.getStackAddendum() || '';
         return stack;
       };
-
-      var REACT_FRAGMENT_TYPE$1 = typeof Symbol === 'function' && Symbol['for'] && Symbol['for']('react.fragment') || 0xeacb;
-
-      var VALID_FRAGMENT_PROPS = new Map([['children', true], ['key', true]]);
     }
 
     var ITERATOR_SYMBOL$1 = typeof Symbol === 'function' && (typeof Symbol === 'function' ? Symbol.iterator : '@@iterator');
     var FAUX_ITERATOR_SYMBOL$1 = '@@iterator';
 
     function getDeclarationErrorAddendum() {
-      if (ReactCurrentOwner.current) {
-        var name = getComponentName(ReactCurrentOwner.current);
+      if (ReactCurrentOwner_1.current) {
+        var name = getComponentName(ReactCurrentOwner_1.current);
         if (name) {
           return '\n\nCheck the render method of `' + name + '`.';
         }
@@ -9385,14 +9496,12 @@ if (process.env.NODE_ENV !== "production") {
       ownerHasKeyUseWarning[currentComponentErrorInfo] = true;
 
       var childOwner = '';
-      if (element && element._owner && element._owner !== ReactCurrentOwner.current) {
+      if (element && element._owner && element._owner !== ReactCurrentOwner_1.current) {
         childOwner = ' It was passed a child from ' + getComponentName(element._owner) + '.';
       }
 
       currentlyValidatingElement = element;
-      {
-        warning(false, 'Each child in an array or iterator should have a unique "key" prop.' + '%s%s See https://fb.me/react-warning-keys for more information.%s', currentComponentErrorInfo, childOwner, getStackAddendum());
-      }
+      warning$3(false, 'Each child in an array or iterator should have a unique "key" prop.' + '%s%s See https://fb.me/react-warning-keys for more information.%s', currentComponentErrorInfo, childOwner, getStackAddendum$1());
       currentlyValidatingElement = null;
     }
 
@@ -9403,11 +9512,11 @@ if (process.env.NODE_ENV !== "production") {
       if (Array.isArray(node)) {
         for (var i = 0; i < node.length; i++) {
           var child = node[i];
-          if (isValidElement(child)) {
+          if (ReactElement_1.isValidElement(child)) {
             validateExplicitKey(child, parentType);
           }
         }
-      } else if (isValidElement(node)) {
+      } else if (ReactElement_1.isValidElement(node)) {
         if (node._store) {
           node._store.validated = true;
         }
@@ -9418,7 +9527,7 @@ if (process.env.NODE_ENV !== "production") {
             var iterator = iteratorFn.call(node);
             var step;
             while (!(step = iterator.next()).done) {
-              if (isValidElement(step.value)) {
+              if (ReactElement_1.isValidElement(step.value)) {
                 validateExplicitKey(step.value, parentType);
               }
             }
@@ -9433,223 +9542,424 @@ if (process.env.NODE_ENV !== "production") {
         return;
       }
       var name = componentClass.displayName || componentClass.name;
-      var propTypes = componentClass.propTypes;
+
+      var propTypes = typeof componentClass.__propTypesSecretDontUseThesePlease === 'object' ? componentClass.__propTypesSecretDontUseThesePlease : componentClass.propTypes;
 
       if (propTypes) {
         currentlyValidatingElement = element;
-        checkPropTypes(propTypes, element.props, 'prop', name, getStackAddendum);
+        checkPropTypes$1(propTypes, element.props, 'prop', name, getStackAddendum$1);
         currentlyValidatingElement = null;
       }
       if (typeof componentClass.getDefaultProps === 'function') {
-        warning(componentClass.getDefaultProps.isReactClassApproved, 'getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.');
+        warning$3(componentClass.getDefaultProps.isReactClassApproved, 'getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.');
       }
     }
 
-    function validateFragmentProps(fragment) {
-      currentlyValidatingElement = fragment;
+    var ReactElementValidator$1 = {
+      createElement: function createElement(type, props, children) {
+        var validType = typeof type === 'string' || typeof type === 'function';
 
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+        if (!validType) {
+          var info = '';
+          if (type === undefined || typeof type === 'object' && type !== null && Object.keys(type).length === 0) {
+            info += ' You likely forgot to export your component from the file ' + "it's defined in.";
+          }
 
-      try {
-        for (var _iterator = Object.keys(fragment.props)[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator'](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var key = _step.value;
+          var sourceInfo = getSourceInfoErrorAddendum(props);
+          if (sourceInfo) {
+            info += sourceInfo;
+          } else {
+            info += getDeclarationErrorAddendum();
+          }
 
-          if (!VALID_FRAGMENT_PROPS.has(key)) {
-            warning(false, 'Invalid prop `%s` supplied to `React.Fragment`. ' + 'React.Fragment can only have `key` and `children` props.%s', key, getStackAddendum());
-            break;
+          info += ReactDebugCurrentFrame$1.getStackAddendum() || '';
+
+          warning$3(false, 'React.createElement: type is invalid -- expected a string (for ' + 'built-in components) or a class/function (for composite ' + 'components) but got: %s.%s', type == null ? type : typeof type, info);
+        }
+
+        var element = ReactElement_1.createElement.apply(this, arguments);
+
+        if (element == null) {
+          return element;
+        }
+
+        if (validType) {
+          for (var i = 2; i < arguments.length; i++) {
+            validateChildKeys(arguments[i], type);
           }
         }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator['return']) {
-            _iterator['return']();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
 
-      if (fragment.ref !== null) {
-        warning(false, 'Invalid attribute `ref` supplied to `React.Fragment`.%s', getStackAddendum());
-      }
-
-      currentlyValidatingElement = null;
-    }
-
-    function createElementWithValidation(type, props, children) {
-      var validType = typeof type === 'string' || typeof type === 'function' || typeof type === 'symbol' || typeof type === 'number';
-
-      if (!validType) {
-        var info = '';
-        if (type === undefined || typeof type === 'object' && type !== null && Object.keys(type).length === 0) {
-          info += ' You likely forgot to export your component from the file ' + "it's defined in.";
-        }
-
-        var sourceInfo = getSourceInfoErrorAddendum(props);
-        if (sourceInfo) {
-          info += sourceInfo;
-        } else {
-          info += getDeclarationErrorAddendum();
-        }
-
-        info += getStackAddendum() || '';
-
-        warning(false, 'React.createElement: type is invalid -- expected a string (for ' + 'built-in components) or a class/function (for composite ' + 'components) but got: %s.%s', type == null ? type : typeof type, info);
-      }
-
-      var element = createElement.apply(this, arguments);
-
-      if (element == null) {
-        return element;
-      }
-
-      if (validType) {
-        for (var i = 2; i < arguments.length; i++) {
-          validateChildKeys(arguments[i], type);
-        }
-      }
-
-      if (typeof type === 'symbol' && type === REACT_FRAGMENT_TYPE$1) {
-        validateFragmentProps(element);
-      } else {
         validatePropTypes(element);
-      }
 
-      return element;
+        return element;
+      },
+
+      createFactory: function createFactory(type) {
+        var validatedFactory = ReactElementValidator$1.createElement.bind(null, type);
+
+        validatedFactory.type = type;
+
+        {
+          Object.defineProperty(validatedFactory, 'type', {
+            enumerable: false,
+            get: function get() {
+              lowPriorityWarning$1(false, 'Factory.type is deprecated. Access the class directly ' + 'before passing it to createFactory.');
+              Object.defineProperty(this, 'type', {
+                value: type
+              });
+              return type;
+            }
+          });
+        }
+
+        return validatedFactory;
+      },
+
+      cloneElement: function cloneElement(element, props, children) {
+        var newElement = ReactElement_1.cloneElement.apply(this, arguments);
+        for (var i = 2; i < arguments.length; i++) {
+          validateChildKeys(arguments[i], newElement.type);
+        }
+        validatePropTypes(newElement);
+        return newElement;
+      }
+    };
+
+    var ReactElementValidator_1 = ReactElementValidator$1;
+
+    {
+      var warning$4 = require$$0;
     }
 
-    function createFactoryWithValidation(type) {
-      var validatedFactory = createElementWithValidation.bind(null, type);
+    function isNative(fn) {
+      var funcToString = Function.prototype.toString;
+      var reIsNative = RegExp('^' + funcToString.call(Object.prototype.hasOwnProperty).replace(/[\\^$.*+?()[\]{}|]/g, '\\$&').replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$');
+      try {
+        var source = funcToString.call(fn);
+        return reIsNative.test(source);
+      } catch (err) {
+        return false;
+      }
+    }
 
-      validatedFactory.type = type;
+    var canUseCollections = typeof Array.from === 'function' && typeof Map === 'function' && isNative(Map) && Map.prototype != null && typeof Map.prototype.keys === 'function' && isNative(Map.prototype.keys) && typeof Set === 'function' && isNative(Set) && Set.prototype != null && typeof Set.prototype.keys === 'function' && isNative(Set.prototype.keys);
 
-      {
-        Object.defineProperty(validatedFactory, 'type', {
-          enumerable: false,
-          get: function get() {
-            lowPriorityWarning$1(false, 'Factory.type is deprecated. Access the class directly ' + 'before passing it to createFactory.');
-            Object.defineProperty(this, 'type', {
-              value: type
-            });
-            return type;
+    var setItem;
+    var getItem;
+    var removeItem;
+    var getItemIDs;
+    var addRoot;
+    var removeRoot;
+    var getRootIDs;
+
+    if (canUseCollections) {
+      var itemMap = new Map();
+      var rootIDSet = new Set();
+
+      setItem = function setItem(id, item) {
+        itemMap.set(id, item);
+      };
+      getItem = function getItem(id) {
+        return itemMap.get(id);
+      };
+      removeItem = function removeItem(id) {
+        itemMap['delete'](id);
+      };
+      getItemIDs = function getItemIDs() {
+        return Array.from(itemMap.keys());
+      };
+
+      addRoot = function addRoot(id) {
+        rootIDSet.add(id);
+      };
+      removeRoot = function removeRoot(id) {
+        rootIDSet['delete'](id);
+      };
+      getRootIDs = function getRootIDs() {
+        return Array.from(rootIDSet.keys());
+      };
+    } else {
+      var itemByKey = {};
+      var rootByKey = {};
+
+      var getKeyFromID = function getKeyFromID(id) {
+        return '.' + id;
+      };
+      var getIDFromKey = function getIDFromKey(key) {
+        return parseInt(key.substr(1), 10);
+      };
+
+      setItem = function setItem(id, item) {
+        var key = getKeyFromID(id);
+        itemByKey[key] = item;
+      };
+      getItem = function getItem(id) {
+        var key = getKeyFromID(id);
+        return itemByKey[key];
+      };
+      removeItem = function removeItem(id) {
+        var key = getKeyFromID(id);
+        delete itemByKey[key];
+      };
+      getItemIDs = function getItemIDs() {
+        return Object.keys(itemByKey).map(getIDFromKey);
+      };
+
+      addRoot = function addRoot(id) {
+        var key = getKeyFromID(id);
+        rootByKey[key] = true;
+      };
+      removeRoot = function removeRoot(id) {
+        var key = getKeyFromID(id);
+        delete rootByKey[key];
+      };
+      getRootIDs = function getRootIDs() {
+        return Object.keys(rootByKey).map(getIDFromKey);
+      };
+    }
+
+    var unmountedIDs = [];
+
+    function purgeDeep(id) {
+      var item = getItem(id);
+      if (item) {
+        var childIDs = item.childIDs;
+
+        removeItem(id);
+        childIDs.forEach(purgeDeep);
+      }
+    }
+
+    function getDisplayName$1(element) {
+      if (element == null) {
+        return '#empty';
+      } else if (typeof element === 'string' || typeof element === 'number') {
+        return '#text';
+      } else if (typeof element.type === 'string') {
+        return element.type;
+      } else {
+        return element.type.displayName || element.type.name || 'Unknown';
+      }
+    }
+
+    function describeID(id) {
+      var name = ReactComponentTreeHook.getDisplayName(id);
+      var element = ReactComponentTreeHook.getElement(id);
+      var ownerID = ReactComponentTreeHook.getOwnerID(id);
+      var ownerName = void 0;
+
+      if (ownerID) {
+        ownerName = ReactComponentTreeHook.getDisplayName(ownerID);
+      }
+      warning$4(element, 'ReactComponentTreeHook: Missing React element for debugID %s when ' + 'building stack', id);
+      return describeComponentFrame$1(name || '', element && element._source, ownerName || '');
+    }
+
+    var ReactComponentTreeHook = {
+      onSetChildren: function onSetChildren(id, nextChildIDs) {
+        var item = getItem(id);
+        !item ? invariant(false, 'Item must have been set') : void 0;
+        item.childIDs = nextChildIDs;
+
+        for (var i = 0; i < nextChildIDs.length; i++) {
+          var nextChildID = nextChildIDs[i];
+          var nextChild = getItem(nextChildID);
+          !nextChild ? invariant(false, 'Expected hook events to fire for the child before its parent includes it in onSetChildren().') : void 0;
+          !(nextChild.childIDs != null || typeof nextChild.element !== 'object' || nextChild.element == null) ? invariant(false, 'Expected onSetChildren() to fire for a container child before its parent includes it in onSetChildren().') : void 0;
+          !nextChild.isMounted ? invariant(false, 'Expected onMountComponent() to fire for the child before its parent includes it in onSetChildren().') : void 0;
+          if (nextChild.parentID == null) {
+            nextChild.parentID = id;
           }
-        });
-      }
+          !(nextChild.parentID === id) ? invariant(false, 'Expected onBeforeMountComponent() parent and onSetChildren() to be consistent (%s has parents %s and %s).', nextChildID, nextChild.parentID, id) : void 0;
+        }
+      },
+      onBeforeMountComponent: function onBeforeMountComponent(id, element, parentID) {
+        var item = {
+          element: element,
+          parentID: parentID,
+          text: null,
+          childIDs: [],
+          isMounted: false,
+          updateCount: 0
+        };
+        setItem(id, item);
+      },
+      onBeforeUpdateComponent: function onBeforeUpdateComponent(id, element) {
+        var item = getItem(id);
+        if (!item || !item.isMounted) {
+          return;
+        }
+        item.element = element;
+      },
+      onMountComponent: function onMountComponent(id) {
+        var item = getItem(id);
+        !item ? invariant(false, 'Item must have been set') : void 0;
+        item.isMounted = true;
+        var isRoot = item.parentID === 0;
+        if (isRoot) {
+          addRoot(id);
+        }
+      },
+      onUpdateComponent: function onUpdateComponent(id) {
+        var item = getItem(id);
+        if (!item || !item.isMounted) {
+          return;
+        }
+        item.updateCount++;
+      },
+      onUnmountComponent: function onUnmountComponent(id) {
+        var item = getItem(id);
+        if (item) {
+          item.isMounted = false;
+          var isRoot = item.parentID === 0;
+          if (isRoot) {
+            removeRoot(id);
+          }
+        }
+        unmountedIDs.push(id);
+      },
+      purgeUnmountedComponents: function purgeUnmountedComponents() {
+        if (ReactComponentTreeHook._preventPurging) {
+          return;
+        }
 
-      return validatedFactory;
+        for (var i = 0; i < unmountedIDs.length; i++) {
+          var id = unmountedIDs[i];
+          purgeDeep(id);
+        }
+        unmountedIDs.length = 0;
+      },
+      isMounted: function isMounted(id) {
+        var item = getItem(id);
+        return item ? item.isMounted : false;
+      },
+      getCurrentStackAddendum: function getCurrentStackAddendum() {
+        var info = '';
+        var currentOwner = ReactCurrentOwner_1.current;
+        if (currentOwner) {
+          !(typeof currentOwner.tag !== 'number') ? invariant(false, 'Fiber owners should not show up in Stack stack traces.') : void 0;
+          if (typeof currentOwner._debugID === 'number') {
+            info += ReactComponentTreeHook.getStackAddendumByID(currentOwner._debugID);
+          }
+        }
+        return info;
+      },
+      getStackAddendumByID: function getStackAddendumByID(id) {
+        var info = '';
+        while (id) {
+          info += describeID(id);
+          id = ReactComponentTreeHook.getParentID(id);
+        }
+        return info;
+      },
+      getChildIDs: function getChildIDs(id) {
+        var item = getItem(id);
+        return item ? item.childIDs : [];
+      },
+      getDisplayName: function getDisplayName(id) {
+        var element = ReactComponentTreeHook.getElement(id);
+        if (!element) {
+          return null;
+        }
+        return getDisplayName$1(element);
+      },
+      getElement: function getElement(id) {
+        var item = getItem(id);
+        return item ? item.element : null;
+      },
+      getOwnerID: function getOwnerID(id) {
+        var element = ReactComponentTreeHook.getElement(id);
+        if (!element || !element._owner) {
+          return null;
+        }
+        return element._owner._debugID;
+      },
+      getParentID: function getParentID(id) {
+        var item = getItem(id);
+        return item ? item.parentID : null;
+      },
+      getSource: function getSource(id) {
+        var item = getItem(id);
+        var element = item ? item.element : null;
+        var source = element != null ? element._source : null;
+        return source;
+      },
+      getText: function getText(id) {
+        var element = ReactComponentTreeHook.getElement(id);
+        if (typeof element === 'string') {
+          return element;
+        } else if (typeof element === 'number') {
+          return '' + element;
+        } else {
+          return null;
+        }
+      },
+      getUpdateCount: function getUpdateCount(id) {
+        var item = getItem(id);
+        return item ? item.updateCount : 0;
+      },
+
+      getRootIDs: getRootIDs,
+      getRegisteredIDs: getItemIDs
+    };
+
+    var ReactComponentTreeHook_1 = ReactComponentTreeHook;
+
+    var createElement = ReactElement_1.createElement;
+    var createFactory = ReactElement_1.createFactory;
+    var cloneElement = ReactElement_1.cloneElement;
+
+    {
+      var ReactElementValidator = ReactElementValidator_1;
+      createElement = ReactElementValidator.createElement;
+      createFactory = ReactElementValidator.createFactory;
+      cloneElement = ReactElementValidator.cloneElement;
     }
-
-    function cloneElementWithValidation(element, props, children) {
-      var newElement = cloneElement.apply(this, arguments);
-      for (var i = 2; i < arguments.length; i++) {
-        validateChildKeys(arguments[i], newElement.type);
-      }
-      validatePropTypes(newElement);
-      return newElement;
-    }
-
-    var REACT_FRAGMENT_TYPE = typeof Symbol === 'function' && Symbol['for'] && Symbol['for']('react.fragment') || 0xeacb;
 
     var React = {
       Children: {
-        map: mapChildren,
-        forEach: forEachChildren,
-        count: countChildren,
-        toArray: toArray,
-        only: onlyChild
+        map: ReactChildren_1.map,
+        forEach: ReactChildren_1.forEach,
+        count: ReactChildren_1.count,
+        toArray: ReactChildren_1.toArray,
+        only: onlyChild_1
       },
 
-      Component: Component,
-      PureComponent: PureComponent,
-      unstable_AsyncComponent: AsyncComponent,
+      Component: ReactBaseClasses.Component,
+      PureComponent: ReactBaseClasses.PureComponent,
+      unstable_AsyncComponent: ReactBaseClasses.AsyncComponent,
 
-      createElement: createElementWithValidation,
-      cloneElement: cloneElementWithValidation,
-      createFactory: createFactoryWithValidation,
-      isValidElement: isValidElement,
+      createElement: createElement,
+      cloneElement: cloneElement,
+      isValidElement: ReactElement_1.isValidElement,
+
+      createFactory: createFactory,
 
       version: ReactVersion,
 
       __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: {
-        ReactCurrentOwner: ReactCurrentOwner,
-
-        assign: _assign
+        ReactCurrentOwner: ReactCurrentOwner_1
       }
     };
 
-    if (enableReactFragment) {
-      React.Fragment = REACT_FRAGMENT_TYPE;
-    }
-
     {
-      _assign(React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED, {
-        ReactDebugCurrentFrame: ReactDebugCurrentFrame,
-
-        ReactComponentTreeHook: {}
+      objectAssign$1(React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED, {
+        ReactComponentTreeHook: ReactComponentTreeHook_1,
+        ReactDebugCurrentFrame: ReactDebugCurrentFrame_1
       });
     }
 
-    var React$2 = Object.freeze({
-      default: React
-    });
+    var ReactEntry = React;
 
-    var React$3 = React$2 && React || React$2;
-
-    var react = React$3['default'] ? React$3['default'] : React$3;
-
-    module.exports = react;
+    module.exports = ReactEntry;
   })();
 }
-}, 41, null, "react/cjs/react.development.js");
-__d(/* fbjs/lib/invariant.js */function(global, require, module, exports) {
-
-'use strict';
-
-var validateFormat = function validateFormat(format) {};
-
-if (process.env.NODE_ENV !== 'production') {
-  validateFormat = function validateFormat(format) {
-    if (format === undefined) {
-      throw new Error('invariant requires an error message argument');
-    }
-  };
-}
-
-function invariant(condition, format, a, b, c, d, e, f) {
-  validateFormat(format);
-
-  if (!condition) {
-    var error;
-    if (format === undefined) {
-      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-    } else {
-      var args = [a, b, c, d, e, f];
-      var argIndex = 0;
-      error = new Error(format.replace(/%s/g, function () {
-        return args[argIndex++];
-      }));
-      error.name = 'Invariant Violation';
-    }
-
-    error.framesToPop = 1;
-    throw error;
-  }
-}
-
-module.exports = invariant;
-}, 42, null, "fbjs/lib/invariant.js");
+}, 42, null, "react/cjs/react.development.js");
 __d(/* fbjs/lib/warning.js */function(global, require, module, exports) {
 
 'use strict';
 
-var emptyFunction = require(40               ); // 40 = ./emptyFunction
+var emptyFunction = require(41               ); // 41 = ./emptyFunction
 
 var warning = emptyFunction;
 
@@ -9697,7 +10007,7 @@ __d(/* prop-types/checkPropTypes.js */function(global, require, module, exports)
 'use strict';
 
 if (process.env.NODE_ENV !== 'production') {
-  var invariant = require(42                  ); // 42 = fbjs/lib/invariant
+  var invariant = require(40                  ); // 40 = fbjs/lib/invariant
   var warning = require(43                ); // 43 = fbjs/lib/warning
   var ReactPropTypesSecret = require(45                          ); // 45 = ./lib/ReactPropTypesSecret
   var loggedTypeFailures = {};
@@ -10155,19 +10465,14 @@ if (!global.__fbDisableExceptionsManager) {
   ErrorUtils.setGlobalHandler(handleError);
 }
 
-var _require = require(15             ), // 15 = NativeModules
-    PlatformConstants = _require.PlatformConstants;
+var formatVersion = function formatVersion(version) {
+  return version.major + '.' + version.minor + '.' + version.patch + (version.prerelease !== null ? '-' + version.prerelease : '');
+};
 
-if (PlatformConstants) {
-  var formatVersion = function formatVersion(version) {
-    return version.major + '.' + version.minor + '.' + version.patch + (version.prerelease !== null ? '-' + version.prerelease : '');
-  };
-
-  var ReactNativeVersion = require(56                  ); // 56 = ReactNativeVersion
-  var nativeVersion = PlatformConstants.reactNativeVersion;
-  if (ReactNativeVersion.version.major !== nativeVersion.major || ReactNativeVersion.version.minor !== nativeVersion.minor) {
-    throw new Error('React Native version mismatch.\n\nJavaScript version: ' + formatVersion(ReactNativeVersion.version) + '\n' + ('Native version: ' + formatVersion(nativeVersion) + '\n\n') + 'Make sure that you have rebuilt the native code. If the problem persists ' + 'try clearing the watchman and packager caches with `watchman watch-del-all ' + '&& react-native start --reset-cache`.');
-  }
+var ReactNativeVersion = require(56                  ); // 56 = ReactNativeVersion
+var nativeVersion = require(15             ).PlatformConstants.reactNativeVersion; // 15 = NativeModules
+if (ReactNativeVersion.version.major !== nativeVersion.major || ReactNativeVersion.version.minor !== nativeVersion.minor) {
+  throw new Error('React Native version mismatch.\n\nJavaScript version: ' + formatVersion(ReactNativeVersion.version) + '\n' + ('Native version: ' + formatVersion(nativeVersion) + '\n\n') + 'Make sure that you have rebuilt the native code. If the problem persists ' + 'try clearing the watchman and packager caches with `watchman watch-del-all ' + '&& react-native start --reset-cache`.');
 }
 
 var _shouldPolyfillCollection = require(57                            ); // 57 = _shouldPolyfillES6Collection
@@ -10299,7 +10604,7 @@ __d(/* ReactNativeVersion */function(global, require, module, exports) {
 exports.version = {
   major: 0,
   minor: 49,
-  patch: 5,
+  patch: 3,
   prerelease: null
 };
 }, 56, null, "ReactNativeVersion");
@@ -22130,8 +22435,8 @@ __d(/* prop-types/factoryWithTypeCheckers.js */function(global, require, module,
 
 'use strict';
 
-var emptyFunction = require(40                      ); // 40 = fbjs/lib/emptyFunction
-var invariant = require(42                  ); // 42 = fbjs/lib/invariant
+var emptyFunction = require(41                      ); // 41 = fbjs/lib/emptyFunction
+var invariant = require(40                  ); // 40 = fbjs/lib/invariant
 var warning = require(43                ); // 43 = fbjs/lib/warning
 var assign = require(38             ); // 38 = object-assign
 
@@ -22539,8 +22844,8 @@ __d(/* prop-types/factoryWithThrowingShims.js */function(global, require, module
 
 'use strict';
 
-var emptyFunction = require(40                      ); // 40 = fbjs/lib/emptyFunction
-var invariant = require(42                  ); // 42 = fbjs/lib/invariant
+var emptyFunction = require(41                      ); // 41 = fbjs/lib/emptyFunction
+var invariant = require(40                  ); // 40 = fbjs/lib/invariant
 var ReactPropTypesSecret = require(45                          ); // 45 = ./lib/ReactPropTypesSecret
 
 module.exports = function () {
@@ -24193,7 +24498,7 @@ __d(/* create-react-class/factory.js */function(global, require, module, exports
 var _assign = require(38             ); // 38 = object-assign
 
 var emptyObject = require(39                    ); // 39 = fbjs/lib/emptyObject
-var _invariant = require(42                  ); // 42 = fbjs/lib/invariant
+var _invariant = require(40                  ); // 40 = fbjs/lib/invariant
 
 if (process.env.NODE_ENV !== 'production') {
   var warning = require(43                ); // 43 = fbjs/lib/warning
@@ -41659,9 +41964,6 @@ var SpringAnimation = function (_Animation) {
         restSpeedThreshold: this._restSpeedThreshold,
         tension: this._tension,
         friction: this._friction,
-        stiffness: this._tension,
-        damping: this._friction,
-        mass: 1,
         initialVelocity: withDefault(this._initialVelocity, this._lastVelocity),
         toValue: this._toValue,
         iterations: this.__iterations
@@ -44455,23 +44757,18 @@ module.exports = StatusBar;
 __d(/* FlatList */function(global, require, module, exports) {
 'use strict';
 
-var _react2 = require(36     ); // 36 = react
-
-var _react3 = _interopRequireDefault(_react2);
-
-var _index2 = require(160                                          ); // 160 = ./../../../react-transform-hmr/lib/index.js
-
-var _index3 = _interopRequireDefault(_index2);
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\node_modules\\react-native\\Libraries\\Lists\\FlatList.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+<<<<<<< HEAD
 var _class,
     _temp2,
     _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-native\\Libraries\\Lists\\FlatList.js';
 
+=======
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -44479,6 +44776,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _components = {
   FlatList: {
     displayName: 'FlatList'
@@ -44498,6 +44796,8 @@ function _wrapComponent(id) {
   };
 }
 
+=======
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 var MetroListView = require(398            ); // 398 = MetroListView
 var React = require(129    ); // 129 = React
 var View = require(124   ); // 124 = View
@@ -44509,7 +44809,7 @@ var defaultProps = _extends({}, VirtualizedList.defaultProps, {
   numColumns: 1
 });
 
-var FlatList = _wrapComponent('FlatList')((_temp2 = _class = function (_React$PureComponent) {
+var FlatList = function (_React$PureComponent) {
   _inherits(FlatList, _React$PureComponent);
 
   function FlatList() {
@@ -44737,7 +45037,10 @@ var FlatList = _wrapComponent('FlatList')((_temp2 = _class = function (_React$Pu
   }]);
 
   return FlatList;
-}(React.PureComponent), _class.defaultProps = defaultProps, _temp2));
+}(React.PureComponent);
+
+FlatList.defaultProps = defaultProps;
+
 
 module.exports = FlatList;
 }, 397, null, "FlatList");
@@ -45927,15 +46230,20 @@ var _index2 = require(160                                          ); // 160 = .
 
 var _index3 = _interopRequireDefault(_index2);
 
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\node_modules\\react-native\\Libraries\\Lists\\VirtualizedList.js';
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+<<<<<<< HEAD
 var _class,
     _temp,
     _initialiseProps,
     _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-native\\Libraries\\Lists\\VirtualizedList.js';
 
+=======
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -45947,9 +46255,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _components = {
-  VirtualizedList: {
-    displayName: 'VirtualizedList'
-  },
   CellRenderer: {
     displayName: 'CellRenderer'
   }
@@ -45989,7 +46294,7 @@ var _require = require(409              ), // 409 = VirtualizeUtils
 
 var _usedIndexForKey = false;
 
-var VirtualizedList = _wrapComponent('VirtualizedList')((_temp = _class = function (_React$PureComponent) {
+var VirtualizedList = function (_React$PureComponent) {
   _inherits(VirtualizedList, _React$PureComponent);
 
   _createClass(VirtualizedList, [{
@@ -46575,7 +46880,9 @@ var VirtualizedList = _wrapComponent('VirtualizedList')((_temp = _class = functi
   }]);
 
   return VirtualizedList;
-}(React.PureComponent), _class.defaultProps = {
+}(React.PureComponent);
+
+VirtualizedList.defaultProps = {
   disableVirtualization: false,
   horizontal: false,
   initialNumToRender: 10,
@@ -46590,20 +46897,24 @@ var VirtualizedList = _wrapComponent('VirtualizedList')((_temp = _class = functi
   onEndReachedThreshold: 2,
   scrollEventThrottle: 50,
   updateCellsBatchingPeriod: 50,
-  windowSize: 21 }, _class.contextTypes = {
+  windowSize: 21 };
+VirtualizedList.contextTypes = {
   virtualizedList: PropTypes.shape({
     horizontal: PropTypes.bool
   })
-}, _class.childContextTypes = {
+};
+VirtualizedList.childContextTypes = {
   virtualizedList: PropTypes.shape({
     horizontal: PropTypes.bool
   })
-}, _initialiseProps = function _initialiseProps() {
-  var _this4 = this;
+};
+
+var _initialiseProps = function _initialiseProps() {
+  var _this5 = this;
 
   this._onUpdateSeparators = function (keys, newProps) {
     keys.forEach(function (key) {
-      var ref = key != null && _this4._cellRefs[key];
+      var ref = key != null && _this5._cellRefs[key];
       ref && ref.updateSeparatorProps(newProps);
     });
   };
@@ -46632,11 +46943,11 @@ var VirtualizedList = _wrapComponent('VirtualizedList')((_temp = _class = functi
   this._totalCellsMeasured = 0;
 
   this._captureScrollRef = function (ref) {
-    _this4._scrollRef = ref;
+    _this5._scrollRef = ref;
   };
 
   this._defaultRenderScrollComponent = function (props) {
-    if (_this4._isNestedWithSameOrientation()) {
+    if (_this5._isNestedWithSameOrientation()) {
       return React.createElement(View, _extends({}, props, {
         __source: {
           fileName: _jsxFileName,
@@ -46671,56 +46982,56 @@ var VirtualizedList = _wrapComponent('VirtualizedList')((_temp = _class = functi
   };
 
   this._onCellUnmount = function (cellKey) {
-    var curr = _this4._frames[cellKey];
+    var curr = _this5._frames[cellKey];
     if (curr) {
-      _this4._frames[cellKey] = _extends({}, curr, { inLayout: false });
+      _this5._frames[cellKey] = _extends({}, curr, { inLayout: false });
     }
   };
 
   this._onLayout = function (e) {
-    _this4._scrollMetrics.visibleLength = _this4._selectLength(e.nativeEvent.layout);
-    _this4.props.onLayout && _this4.props.onLayout(e);
-    _this4._scheduleCellsToRenderUpdate();
-    _this4._maybeCallOnEndReached();
+    _this5._scrollMetrics.visibleLength = _this5._selectLength(e.nativeEvent.layout);
+    _this5.props.onLayout && _this5.props.onLayout(e);
+    _this5._scheduleCellsToRenderUpdate();
+    _this5._maybeCallOnEndReached();
   };
 
   this._onLayoutEmpty = function (e) {
-    _this4.props.onLayout && _this4.props.onLayout(e);
+    _this5.props.onLayout && _this5.props.onLayout(e);
   };
 
   this._onLayoutFooter = function (e) {
-    _this4._footerLength = _this4._selectLength(e.nativeEvent.layout);
+    _this5._footerLength = _this5._selectLength(e.nativeEvent.layout);
   };
 
   this._onLayoutHeader = function (e) {
-    _this4._headerLength = _this4._selectLength(e.nativeEvent.layout);
+    _this5._headerLength = _this5._selectLength(e.nativeEvent.layout);
   };
 
   this._onContentSizeChange = function (width, height) {
-    if (_this4.props.onContentSizeChange) {
-      _this4.props.onContentSizeChange(width, height);
+    if (_this5.props.onContentSizeChange) {
+      _this5.props.onContentSizeChange(width, height);
     }
-    _this4._scrollMetrics.contentLength = _this4._selectLength({ height: height, width: width });
-    _this4._scheduleCellsToRenderUpdate();
-    _this4._maybeCallOnEndReached();
+    _this5._scrollMetrics.contentLength = _this5._selectLength({ height: height, width: width });
+    _this5._scheduleCellsToRenderUpdate();
+    _this5._maybeCallOnEndReached();
   };
 
   this._onScroll = function (e) {
-    if (_this4.props.onScroll) {
-      _this4.props.onScroll(e);
+    if (_this5.props.onScroll) {
+      _this5.props.onScroll(e);
     }
     var timestamp = e.timeStamp;
-    var visibleLength = _this4._selectLength(e.nativeEvent.layoutMeasurement);
-    var contentLength = _this4._selectLength(e.nativeEvent.contentSize);
-    var offset = _this4._selectOffset(e.nativeEvent.contentOffset);
-    var dt = _this4._scrollMetrics.timestamp ? Math.max(1, timestamp - _this4._scrollMetrics.timestamp) : 1;
-    if (dt > 500 && _this4._scrollMetrics.dt > 500 && contentLength > 5 * visibleLength && !_this4._hasWarned.perf) {
-      infoLog('VirtualizedList: You have a large list that is slow to update - make sure your ' + 'renderItem function renders components that follow React performance best practices ' + 'like PureComponent, shouldComponentUpdate, etc.', { dt: dt, prevDt: _this4._scrollMetrics.dt, contentLength: contentLength });
-      _this4._hasWarned.perf = true;
+    var visibleLength = _this5._selectLength(e.nativeEvent.layoutMeasurement);
+    var contentLength = _this5._selectLength(e.nativeEvent.contentSize);
+    var offset = _this5._selectOffset(e.nativeEvent.contentOffset);
+    var dt = _this5._scrollMetrics.timestamp ? Math.max(1, timestamp - _this5._scrollMetrics.timestamp) : 1;
+    if (dt > 500 && _this5._scrollMetrics.dt > 500 && contentLength > 5 * visibleLength && !_this5._hasWarned.perf) {
+      infoLog('VirtualizedList: You have a large list that is slow to update - make sure your ' + 'renderItem function renders components that follow React performance best practices ' + 'like PureComponent, shouldComponentUpdate, etc.', { dt: dt, prevDt: _this5._scrollMetrics.dt, contentLength: contentLength });
+      _this5._hasWarned.perf = true;
     }
-    var dOffset = offset - _this4._scrollMetrics.offset;
+    var dOffset = offset - _this5._scrollMetrics.offset;
     var velocity = dOffset / dt;
-    _this4._scrollMetrics = {
+    _this5._scrollMetrics = {
       contentLength: contentLength,
       dt: dt,
       dOffset: dOffset,
@@ -46729,66 +47040,66 @@ var VirtualizedList = _wrapComponent('VirtualizedList')((_temp = _class = functi
       velocity: velocity,
       visibleLength: visibleLength
     };
-    _this4._updateViewableItems(_this4.props.data);
-    if (!_this4.props) {
+    _this5._updateViewableItems(_this5.props.data);
+    if (!_this5.props) {
       return;
     }
-    _this4._maybeCallOnEndReached();
+    _this5._maybeCallOnEndReached();
     if (velocity !== 0) {
-      _this4._fillRateHelper.activate();
+      _this5._fillRateHelper.activate();
     }
-    _this4._computeBlankness();
-    _this4._scheduleCellsToRenderUpdate();
+    _this5._computeBlankness();
+    _this5._scheduleCellsToRenderUpdate();
   };
 
   this._onScrollBeginDrag = function (e) {
-    _this4._viewabilityHelper.recordInteraction();
-    _this4.props.onScrollBeginDrag && _this4.props.onScrollBeginDrag(e);
+    _this5._viewabilityHelper.recordInteraction();
+    _this5.props.onScrollBeginDrag && _this5.props.onScrollBeginDrag(e);
   };
 
   this._onScrollEndDrag = function (e) {
     var velocity = e.nativeEvent.velocity;
 
     if (velocity) {
-      _this4._scrollMetrics.velocity = _this4._selectOffset(velocity);
+      _this5._scrollMetrics.velocity = _this5._selectOffset(velocity);
     }
-    _this4._computeBlankness();
-    _this4.props.onScrollEndDrag && _this4.props.onScrollEndDrag(e);
+    _this5._computeBlankness();
+    _this5.props.onScrollEndDrag && _this5.props.onScrollEndDrag(e);
   };
 
   this._onMomentumScrollEnd = function (e) {
-    _this4._scrollMetrics.velocity = 0;
-    _this4._computeBlankness();
-    _this4.props.onMomentumScrollEnd && _this4.props.onMomentumScrollEnd(e);
+    _this5._scrollMetrics.velocity = 0;
+    _this5._computeBlankness();
+    _this5.props.onMomentumScrollEnd && _this5.props.onMomentumScrollEnd(e);
   };
 
   this._updateCellsToRender = function () {
-    var _props8 = _this4.props,
-        data = _props8.data,
-        getItemCount = _props8.getItemCount,
-        onEndReachedThreshold = _props8.onEndReachedThreshold;
+    var _props9 = _this5.props,
+        data = _props9.data,
+        getItemCount = _props9.getItemCount,
+        onEndReachedThreshold = _props9.onEndReachedThreshold;
 
-    var isVirtualizationDisabled = _this4._isVirtualizationDisabled();
-    _this4._updateViewableItems(data);
+    var isVirtualizationDisabled = _this5._isVirtualizationDisabled();
+    _this5._updateViewableItems(data);
     if (!data) {
       return;
     }
-    _this4.setState(function (state) {
+    _this5.setState(function (state) {
       var newState = void 0;
       if (!isVirtualizationDisabled) {
-        if (_this4._scrollMetrics.visibleLength) {
-          if (!_this4.props.initialScrollIndex || _this4._scrollMetrics.offset) {
-            newState = computeWindowedRenderLimits(_this4.props, state, _this4._getFrameMetricsApprox, _this4._scrollMetrics);
+        if (_this5._scrollMetrics.visibleLength) {
+          if (!_this5.props.initialScrollIndex || _this5._scrollMetrics.offset) {
+            newState = computeWindowedRenderLimits(_this5.props, state, _this5._getFrameMetricsApprox, _this5._scrollMetrics);
           }
         }
       } else {
-        var _scrollMetrics3 = _this4._scrollMetrics,
+        var _scrollMetrics3 = _this5._scrollMetrics,
             contentLength = _scrollMetrics3.contentLength,
             _offset = _scrollMetrics3.offset,
             visibleLength = _scrollMetrics3.visibleLength;
 
         var _distanceFromEnd = contentLength - visibleLength - _offset;
-        var renderAhead = _distanceFromEnd < onEndReachedThreshold * visibleLength ? _this4.props.maxToRenderPerBatch : 0;
+        var renderAhead = _distanceFromEnd < onEndReachedThreshold * visibleLength ? _this5.props.maxToRenderPerBatch : 0;
         newState = {
           first: 0,
           last: Math.min(state.last + renderAhead, getItemCount(data) - 1)
@@ -46799,10 +47110,10 @@ var VirtualizedList = _wrapComponent('VirtualizedList')((_temp = _class = functi
   };
 
   this._createViewToken = function (index, isViewable) {
-    var _props9 = _this4.props,
-        data = _props9.data,
-        getItem = _props9.getItem,
-        keyExtractor = _props9.keyExtractor;
+    var _props10 = _this5.props,
+        data = _props10.data,
+        getItem = _props10.getItem,
+        keyExtractor = _props10.keyExtractor;
 
     var item = getItem(data, index);
     invariant(item, 'Missing item for index ' + index);
@@ -46810,31 +47121,31 @@ var VirtualizedList = _wrapComponent('VirtualizedList')((_temp = _class = functi
   };
 
   this._getFrameMetricsApprox = function (index) {
-    var frame = _this4._getFrameMetrics(index);
+    var frame = _this5._getFrameMetrics(index);
     if (frame && frame.index === index) {
       return frame;
     } else {
-      var _getItemLayout = _this4.props.getItemLayout;
+      var _getItemLayout = _this5.props.getItemLayout;
 
       invariant(!_getItemLayout, 'Should not have to estimate frames when a measurement metrics function is provided');
       return {
-        length: _this4._averageCellLength,
-        offset: _this4._averageCellLength * index
+        length: _this5._averageCellLength,
+        offset: _this5._averageCellLength * index
       };
     }
   };
 
   this._getFrameMetrics = function (index) {
-    var _props10 = _this4.props,
-        data = _props10.data,
-        getItem = _props10.getItem,
-        getItemCount = _props10.getItemCount,
-        getItemLayout = _props10.getItemLayout,
-        keyExtractor = _props10.keyExtractor;
+    var _props11 = _this5.props,
+        data = _props11.data,
+        getItem = _props11.getItem,
+        getItemCount = _props11.getItemCount,
+        getItemLayout = _props11.getItemLayout,
+        keyExtractor = _props11.keyExtractor;
 
     invariant(getItemCount(data) > index, 'Tried to get frame for out of range index ' + index);
     var item = getItem(data, index);
-    var frame = item && _this4._frames[keyExtractor(item, index)];
+    var frame = item && _this5._frames[keyExtractor(item, index)];
     if (!frame || frame.index !== index) {
       if (getItemLayout) {
         frame = getItemLayout(data, index);
@@ -46850,7 +47161,7 @@ var VirtualizedList = _wrapComponent('VirtualizedList')((_temp = _class = functi
     }
     return frame;
   };
-}, _temp));
+};
 
 var CellRenderer = _wrapComponent('CellRenderer')(function (_React$Component) {
   _inherits(CellRenderer, _React$Component);
@@ -46858,7 +47169,7 @@ var CellRenderer = _wrapComponent('CellRenderer')(function (_React$Component) {
   function CellRenderer() {
     var _ref6;
 
-    var _temp2, _this5, _ret2;
+    var _temp, _this4, _ret2;
 
     _classCallCheck(this, CellRenderer);
 
@@ -46866,38 +47177,38 @@ var CellRenderer = _wrapComponent('CellRenderer')(function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret2 = (_temp2 = (_this5 = _possibleConstructorReturn(this, (_ref6 = CellRenderer.__proto__ || Object.getPrototypeOf(CellRenderer)).call.apply(_ref6, [this].concat(args))), _this5), _this5.state = {
+    return _ret2 = (_temp = (_this4 = _possibleConstructorReturn(this, (_ref6 = CellRenderer.__proto__ || Object.getPrototypeOf(CellRenderer)).call.apply(_ref6, [this].concat(args))), _this4), _this4.state = {
       separatorProps: {
         highlighted: false,
-        leadingItem: _this5.props.item
+        leadingItem: _this4.props.item
       }
-    }, _this5._separators = {
+    }, _this4._separators = {
       highlight: function highlight() {
-        var _this5$props = _this5.props,
-            cellKey = _this5$props.cellKey,
-            prevCellKey = _this5$props.prevCellKey;
+        var _this4$props = _this4.props,
+            cellKey = _this4$props.cellKey,
+            prevCellKey = _this4$props.prevCellKey;
 
-        _this5.props.onUpdateSeparators([cellKey, prevCellKey], {
+        _this4.props.onUpdateSeparators([cellKey, prevCellKey], {
           highlighted: true
         });
       },
       unhighlight: function unhighlight() {
-        var _this5$props2 = _this5.props,
-            cellKey = _this5$props2.cellKey,
-            prevCellKey = _this5$props2.prevCellKey;
+        var _this4$props2 = _this4.props,
+            cellKey = _this4$props2.cellKey,
+            prevCellKey = _this4$props2.prevCellKey;
 
-        _this5.props.onUpdateSeparators([cellKey, prevCellKey], {
+        _this4.props.onUpdateSeparators([cellKey, prevCellKey], {
           highlighted: false
         });
       },
       updateProps: function updateProps(select, newProps) {
-        var _this5$props3 = _this5.props,
-            cellKey = _this5$props3.cellKey,
-            prevCellKey = _this5$props3.prevCellKey;
+        var _this4$props3 = _this4.props,
+            cellKey = _this4$props3.cellKey,
+            prevCellKey = _this4$props3.prevCellKey;
 
-        _this5.props.onUpdateSeparators([select === 'leading' ? prevCellKey : cellKey], newProps);
+        _this4.props.onUpdateSeparators([select === 'leading' ? prevCellKey : cellKey], newProps);
       }
-    }, _temp2), _possibleConstructorReturn(_this5, _ret2);
+    }, _temp), _possibleConstructorReturn(_this4, _ret2);
   }
 
   _createClass(CellRenderer, [{
@@ -46917,14 +47228,14 @@ var CellRenderer = _wrapComponent('CellRenderer')(function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _props11 = this.props,
-          CellRendererComponent = _props11.CellRendererComponent,
-          ItemSeparatorComponent = _props11.ItemSeparatorComponent,
-          fillRateHelper = _props11.fillRateHelper,
-          item = _props11.item,
-          index = _props11.index,
-          inversionStyle = _props11.inversionStyle,
-          parentProps = _props11.parentProps;
+      var _props8 = this.props,
+          CellRendererComponent = _props8.CellRendererComponent,
+          ItemSeparatorComponent = _props8.ItemSeparatorComponent,
+          fillRateHelper = _props8.fillRateHelper,
+          item = _props8.item,
+          index = _props8.index,
+          inversionStyle = _props8.inversionStyle,
+          parentProps = _props8.parentProps;
       var renderItem = parentProps.renderItem,
           getItemLayout = parentProps.getItemLayout;
 
@@ -52753,23 +53064,18 @@ module.exports = DummyProgressViewIOS;
 __d(/* SectionList */function(global, require, module, exports) {
 'use strict';
 
-var _react2 = require(36     ); // 36 = react
-
-var _react3 = _interopRequireDefault(_react2);
-
-var _index = require(160                                          ); // 160 = ./../../../react-transform-hmr/lib/index.js
-
-var _index2 = _interopRequireDefault(_index);
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\node_modules\\react-native\\Libraries\\Lists\\SectionList.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+<<<<<<< HEAD
 var _class,
     _temp2,
     _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-native\\Libraries\\Lists\\SectionList.js';
 
+=======
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -52777,6 +53083,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _components = {
   SectionList: {
     displayName: 'SectionList'
@@ -52796,6 +53103,8 @@ function _wrapComponent(id) {
   };
 }
 
+=======
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 var MetroListView = require(398            ); // 398 = MetroListView
 var Platform = require(51        ); // 51 = Platform
 var React = require(129    ); // 129 = React
@@ -52805,7 +53114,7 @@ var defaultProps = _extends({}, VirtualizedSectionList.defaultProps, {
   stickySectionHeadersEnabled: Platform.OS === 'ios'
 });
 
-var SectionList = _wrapComponent('SectionList')((_temp2 = _class = function (_React$PureComponent) {
+var SectionList = function (_React$PureComponent) {
   _inherits(SectionList, _React$PureComponent);
 
   function SectionList() {
@@ -52878,7 +53187,10 @@ var SectionList = _wrapComponent('SectionList')((_temp2 = _class = function (_Re
   }]);
 
   return SectionList;
-}(React.PureComponent), _class.defaultProps = defaultProps, _temp2));
+}(React.PureComponent);
+
+SectionList.defaultProps = defaultProps;
+
 
 module.exports = SectionList;
 }, 444, null, "SectionList");
@@ -52893,14 +53205,19 @@ var _index = require(160                                          ); // 160 = ./
 
 var _index2 = _interopRequireDefault(_index);
 
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\node_modules\\react-native\\Libraries\\Lists\\VirtualizedSectionList.js';
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+<<<<<<< HEAD
 var _class,
     _temp,
     _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-native\\Libraries\\Lists\\VirtualizedSectionList.js';
 
+=======
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -52910,9 +53227,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _components = {
-  VirtualizedSectionList: {
-    displayName: 'VirtualizedSectionList'
-  },
   ItemWithSeparator: {
     displayName: 'ItemWithSeparator'
   }
@@ -52937,7 +53251,7 @@ var VirtualizedList = require(405              ); // 405 = VirtualizedList
 
 var invariant = require(13                  ); // 13 = fbjs/lib/invariant
 
-var VirtualizedSectionList = _wrapComponent('VirtualizedSectionList')((_temp = _class = function (_React$PureComponent) {
+var VirtualizedSectionList = function (_React$PureComponent) {
   _inherits(VirtualizedSectionList, _React$PureComponent);
 
   _createClass(VirtualizedSectionList, [{
@@ -53163,9 +53477,11 @@ var VirtualizedSectionList = _wrapComponent('VirtualizedSectionList')((_temp = _
   }]);
 
   return VirtualizedSectionList;
-}(React.PureComponent), _class.defaultProps = _extends({}, VirtualizedList.defaultProps, {
+}(React.PureComponent);
+
+VirtualizedSectionList.defaultProps = _extends({}, VirtualizedList.defaultProps, {
   data: []
-}), _temp));
+});
 
 var ItemWithSeparator = _wrapComponent('ItemWithSeparator')(function (_React$Component) {
   _inherits(ItemWithSeparator, _React$Component);
@@ -53173,7 +53489,7 @@ var ItemWithSeparator = _wrapComponent('ItemWithSeparator')(function (_React$Com
   function ItemWithSeparator() {
     var _ref4;
 
-    var _temp2, _this2, _ret;
+    var _temp, _this2, _ret;
 
     _classCallCheck(this, ItemWithSeparator);
 
@@ -53181,7 +53497,7 @@ var ItemWithSeparator = _wrapComponent('ItemWithSeparator')(function (_React$Com
       args[_key2] = arguments[_key2];
     }
 
-    return _ret = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_ref4 = ItemWithSeparator.__proto__ || Object.getPrototypeOf(ItemWithSeparator)).call.apply(_ref4, [this].concat(args))), _this2), _this2.state = {
+    return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, (_ref4 = ItemWithSeparator.__proto__ || Object.getPrototypeOf(ItemWithSeparator)).call.apply(_ref4, [this].concat(args))), _this2), _this2.state = {
       separatorProps: {
         highlighted: false,
         leadingItem: _this2.props.item,
@@ -53225,7 +53541,7 @@ var ItemWithSeparator = _wrapComponent('ItemWithSeparator')(function (_React$Com
           _this2.props.onUpdateSeparator(select === 'leading' && prevCellKey || cellKey, newProps);
         }
       }
-    }, _temp2), _possibleConstructorReturn(_this2, _ret);
+    }, _temp), _possibleConstructorReturn(_this2, _ret);
   }
 
   _createClass(ItemWithSeparator, [{
@@ -58100,7 +58416,7 @@ function _wrapComponent(id) {
     };
 }
 
-var ListName = require(638                     ); // 638 = ../components/ListName
+var PatientListButton = require(638                              ); // 638 = ../components/PatientListButton
 
 var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_React$Component) {
     _inherits(PatientList, _React$Component);
@@ -58110,89 +58426,79 @@ var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_Rea
 
         var _this = _possibleConstructorReturn(this, (PatientList.__proto__ || Object.getPrototypeOf(PatientList)).call(this, props));
 
-        _this.onBackPress = function () {
-            var goBack = _this.props.navigation.goBack;
-
-            return goBack();
+        _this.keyExtractor = function (item) {
+            return item.id;
         };
 
         console.ignoredYellowBox = ['Setting a timer'];
-        _this.state = {
-            dataSource: new _reactNative.ListView.DataSource({
-                rowHasChanged: function rowHasChanged(row1, row2) {
-                    return row1 !== row2;
-                }
-            })
-        };
-        _this.NamesRef = _this.getRef().child('Patients');return _this;
+        _this.itemsRef = _FireBaseApp2.default.database().ref('Patients');
+        _this.state = { Name: '', Patients: [], Age: '' };
+        return _this;
     }
 
     _createClass(PatientList, [{
-        key: 'getRef',
-        value: function getRef() {
-            return _FireBaseApp2.default.database().ref();
-        }
-    }, {
-        key: 'listenForNames',
-        value: function listenForNames(NamesRef) {
+        key: 'listenForItems',
+        value: function listenForItems(itemsRef) {
             var _this2 = this;
 
-            NamesRef.on('value', function (snap) {
-                var patients = [];
+            itemsRef.on('value', function (snap) {
+                var items = [];
                 snap.forEach(function (child) {
-                    patients.push({
+                    items.push({
+                        id: child.key,
                         Name: child.val().Name,
-                        _key: child.key
+                        Age: child.val().Age
                     });
                 });
-
-                _this2.setState({
-                    dataSource: _this2.state.dataSource.cloneWithRows(patients)
-                });
+                _this2.setState({ Patients: items });
             });
         }
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            this.listenForNames(this.NamesRef);
-            _reactNative.BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
+            this.listenForItems(this.itemsRef);
         }
     }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
-            this.NamesRef.off();
-            _reactNative.BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
+            this.itemsRef.off();
         }
     }, {
         key: 'render',
         value: function render() {
+            var navigate = this.props.navigation.navigate;
+
             return _react3.default.createElement(
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 59
+                        lineNumber: 47
                     }
                 },
-                _react3.default.createElement(_reactNative.ListView, {
-                    dataSource: this.state.dataSource,
-                    renderRow: this.renderName.bind(this),
-                    enableEmptySections: true,
-                    style: styles.namelistview,
+                _react3.default.createElement(_reactNative.FlatList, {
+                    data: this.state.Patients,
+                    keyExtractor: this.keyExtractor,
+                    renderItem: function renderItem(_ref) {
+                        var item = _ref.item;
+                        return _react3.default.createElement(PatientListButton, {
+                            title: item.Name + ', ' + item.Age,
+
+                            onPress: function onPress() {
+                                return navigate('User');
+                            },
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 52
+                            }
+                        });
+                    },
+                    style: { marginTop: 20, marginLeft: 20 },
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 60
+                        lineNumber: 48
                     }
                 })
             );
-        }
-    }, {
-        key: 'renderName',
-        value: function renderName(name) {
-            return _react3.default.createElement(ListName, { name: name, __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 73
-                }
-            });
         }
     }]);
 
@@ -58208,12 +58514,17 @@ var styles = _reactNative.StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        backgroundColor: '#BBFFB6'
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        backgroundColor: '#F7F1D2'
     },
     namelistview: {
         flex: 1
+    },
+    nText: {
+        color: '#000000',
+        textAlign: 'center',
+        fontSize: 16
     }
 });
 }, 491, null, "DiabetesGroup/screens/PatientList.js");
@@ -76849,7 +77160,7 @@ function stop(id) {
 }
 exports.stop = stop;
 }, 637, null, "@firebase/storage/dist/cjs/src/implementation/backoff.js");
-__d(/* DiabetesGroup/components/ListName.js */function(global, require, module, exports) {var _react2 = require(36     ); // 36 = react
+__d(/* DiabetesGroup/components/PatientListButton.js */function(global, require, module, exports) {var _react2 = require(36     ); // 36 = react
 
 var _react3 = _interopRequireDefault(_react2);
 
@@ -76857,13 +77168,15 @@ var _index = require(160                                                 ); // 1
 
 var _index2 = _interopRequireDefault(_index);
 
+<<<<<<< HEAD
 var _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\components\\ListName.js';
+=======
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\components\\PatientListButton.js';
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _reactNative = require(12            ); // 12 = react-native
-
-var _reactNative2 = _interopRequireDefault(_reactNative);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -76874,13 +77187,17 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _components = {
-    ListName: {
-        displayName: 'ListName'
+    PatientListButton: {
+        displayName: 'PatientListButton'
     }
 };
 
 var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+<<<<<<< HEAD
     filename: 'C:/Users/Jimmy/Documents/Capstone/DiabetesGroup/components/ListName.js',
+=======
+    filename: 'C:/Users/shark/Capstone/DiabetesGroup/components/PatientListButton.js',
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
     components: _components,
     locals: [module],
     imports: [_react3.default]
@@ -76892,69 +77209,72 @@ function _wrapComponent(id) {
     };
 }
 
-var View = _reactNative2.default.View,
-    Text = _reactNative2.default.Text,
-    StyleSheet = _reactNative2.default.StyleSheet;
+var PatientListButton = _wrapComponent('PatientListButton')(function (_Component) {
+    _inherits(PatientListButton, _Component);
 
-var ListName = _wrapComponent('ListName')(function (_Component) {
-    _inherits(ListName, _Component);
+    function PatientListButton() {
+        _classCallCheck(this, PatientListButton);
 
-    function ListName() {
-        _classCallCheck(this, ListName);
-
-        return _possibleConstructorReturn(this, (ListName.__proto__ || Object.getPrototypeOf(ListName)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (PatientListButton.__proto__ || Object.getPrototypeOf(PatientListButton)).apply(this, arguments));
     }
 
-    _createClass(ListName, [{
+    _createClass(PatientListButton, [{
         key: 'render',
         value: function render() {
             return _react3.default.createElement(
-                View,
-                { style: styles.nm, __source: {
+                _reactNative.View,
+                { style: styles.press, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 9
+                        lineNumber: 12
                     }
                 },
                 _react3.default.createElement(
-                    Text,
-                    { style: styles.nText, __source: {
+                    _reactNative.TouchableHighlight,
+                    {
+                        underlayColor: '#CD7800',
+                        onPress: this.props.onPress, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 10
+                            lineNumber: 13
                         }
                     },
-                    this.props.name.Name
+                    _react3.default.createElement(
+                        _reactNative.Text,
+                        { style: styles.pressText, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 16
+                            }
+                        },
+                        this.props.title
+                    )
                 )
             );
         }
     }]);
 
-    return ListName;
+    return PatientListButton;
 }(_react2.Component));
 
-var styles = StyleSheet.create({
-    name: {
-        textAlign: 'center',
-        color: '#FF5500',
-        fontSize: 22,
-        fontWeight: 'bold'
+var styles = _reactNative.StyleSheet.create({
+    press: {
+        backgroundColor: '#FFA627',
+        borderColor: '#000000',
+        overflow: 'hidden',
+        borderRadius: 12,
+        borderWidth: 3,
+        paddingLeft: 5,
+        paddingRight: 5,
+        marginBottom: 20
+
     },
-    nm: {
-        backgroundColor: '#BBFFB6',
-        borderBottomColor: '#BBFFB6',
-        borderColor: 'transparent',
-        borderWidth: 1,
-        paddingTop: 14,
-        paddingBottom: 14
-    },
-    nText: {
-        color: '#333',
-        textAlign: 'center',
-        fontSize: 16
+    pressText: {
+        color: '#000000',
+        fontSize: 16,
+        textAlign: 'center'
     }
 });
 
-module.exports = ListName;
-}, 638, null, "DiabetesGroup/components/ListName.js");
+module.exports = PatientListButton;
+}, 638, null, "DiabetesGroup/components/PatientListButton.js");
 __d(/* DiabetesGroup/screens/UserSelect.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -79225,6 +79545,7 @@ __d(/* react-navigation/src/views/Header/Header.js */function(global, require, m
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+<<<<<<< HEAD
 
 var _react2 = require(36     ); // 36 = react
 
@@ -79235,10 +79556,17 @@ var _index = require(160                                             ); // 160 =
 var _index2 = _interopRequireDefault(_index);
 
 var _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\Header\\Header.js';
+=======
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\Header\\Header.js';
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require(36     ); // 36 = react
+
+var React = _interopRequireWildcard(_react);
 
 var _reactNative = require(12            ); // 12 = react-native
 
@@ -79276,6 +79604,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _components = {
   Header: {
     displayName: 'Header'
@@ -79295,11 +79624,13 @@ function _wrapComponent(id) {
   };
 }
 
+=======
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 var APPBAR_HEIGHT = _reactNative.Platform.OS === 'ios' ? 44 : 56;
 var STATUSBAR_HEIGHT = _reactNative.Platform.OS === 'ios' ? 20 : 0;
 var TITLE_OFFSET = _reactNative.Platform.OS === 'ios' ? 70 : 56;
 
-var Header = _wrapComponent('Header')(function (_React$PureComponent) {
+var Header = function (_React$PureComponent) {
   _inherits(Header, _React$PureComponent);
 
   function Header() {
@@ -79592,7 +79923,7 @@ var Header = _wrapComponent('Header')(function (_React$PureComponent) {
   }]);
 
   return Header;
-}(React.PureComponent));
+}(React.PureComponent);
 
 var platformContainerStyles = void 0;
 if (_reactNative.Platform.OS === 'ios') {
@@ -79702,20 +80033,19 @@ exports.default = HeaderTitle;
 __d(/* react-navigation/src/views/Header/HeaderBackButton.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _react2 = require(36     ); // 36 = react
-
-var React = _interopRequireWildcard(_react2);
-
-var _index = require(160                                             ); // 160 = ./../../../../react-transform-hmr/lib/index.js
-
-var _index2 = _interopRequireDefault(_index);
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\Header\\HeaderBackButton.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+<<<<<<< HEAD
 var _class,
     _temp2,
     _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\Header\\HeaderBackButton.js';
+=======
+var _react = require(36     ); // 36 = react
+
+var React = _interopRequireWildcard(_react);
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 
 var _reactNative = require(12            ); // 12 = react-native
 
@@ -79733,6 +80063,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _components = {
   HeaderBackButton: {
     displayName: 'HeaderBackButton'
@@ -79753,6 +80084,9 @@ function _wrapComponent(id) {
 }
 
 var HeaderBackButton = _wrapComponent('HeaderBackButton')((_temp2 = _class = function (_React$PureComponent) {
+=======
+var HeaderBackButton = function (_React$PureComponent) {
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
   _inherits(HeaderBackButton, _React$PureComponent);
 
   function HeaderBackButton() {
@@ -79846,13 +80180,16 @@ var HeaderBackButton = _wrapComponent('HeaderBackButton')((_temp2 = _class = fun
   }]);
 
   return HeaderBackButton;
-}(React.PureComponent), _class.defaultProps = {
+}(React.PureComponent);
+
+HeaderBackButton.defaultProps = {
   pressColorAndroid: 'rgba(0, 0, 0, .32)',
   tintColor: _reactNative.Platform.select({
     ios: '#037aff'
   }),
   truncatedTitle: 'Back'
-}, _temp2));
+};
+
 
 var styles = _reactNative.StyleSheet.create({
   container: {
@@ -80708,20 +81045,19 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 __d(/* react-navigation/src/views/SceneView.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _react2 = require(36     ); // 36 = react
-
-var React = _interopRequireWildcard(_react2);
-
-var _index = require(160                                          ); // 160 = ./../../../react-transform-hmr/lib/index.js
-
-var _index2 = _interopRequireDefault(_index);
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\SceneView.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+<<<<<<< HEAD
 var _class,
     _temp,
     _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\SceneView.js';
+=======
+var _react = require(36     ); // 36 = react
+
+var React = _interopRequireWildcard(_react);
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 
 var _propTypes = require(126         ); // 126 = prop-types
 
@@ -80737,6 +81073,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _components = {
   SceneView: {
     displayName: 'SceneView'
@@ -80757,6 +81094,9 @@ function _wrapComponent(id) {
 }
 
 var SceneView = _wrapComponent('SceneView')((_temp = _class = function (_React$PureComponent) {
+=======
+var SceneView = function (_React$PureComponent) {
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
   _inherits(SceneView, _React$PureComponent);
 
   function SceneView() {
@@ -80790,10 +81130,11 @@ var SceneView = _wrapComponent('SceneView')((_temp = _class = function (_React$P
   }]);
 
   return SceneView;
-}(React.PureComponent), _class.childContextTypes = {
-  navigation: _propTypes2.default.object.isRequired
-}, _temp));
+}(React.PureComponent);
 
+SceneView.childContextTypes = {
+  navigation: _propTypes2.default.object.isRequired
+};
 exports.default = SceneView;
 }, 668, null, "react-navigation/src/views/SceneView.js");
 __d(/* react-navigation/src/views/CardStack/TransitionConfigs.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
@@ -82785,21 +83126,21 @@ __d(/* react-navigation/src/views/TabView/TabView.js */function(global, require,
   value: true
 });
 
-var _react2 = require(36     ); // 36 = react
-
-var React = _interopRequireWildcard(_react2);
-
-var _index = require(160                                             ); // 160 = ./../../../../react-transform-hmr/lib/index.js
-
-var _index2 = _interopRequireDefault(_index);
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\TabView\\TabView.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+<<<<<<< HEAD
 var _class,
     _temp2,
     _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\TabView\\TabView.js';
+=======
+var _react = require(36     ); // 36 = react
+
+var React = _interopRequireWildcard(_react);
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 
 var _reactNative = require(12            ); // 12 = react-native
 
@@ -82827,6 +83168,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _components = {
   TabView: {
     displayName: 'TabView'
@@ -82847,6 +83189,9 @@ function _wrapComponent(id) {
 }
 
 var TabView = _wrapComponent('TabView')((_temp2 = _class = function (_React$PureComponent) {
+=======
+var TabView = function (_React$PureComponent) {
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
   _inherits(TabView, _React$PureComponent);
 
   function TabView() {
@@ -83018,12 +83363,13 @@ var TabView = _wrapComponent('TabView')((_temp2 = _class = function (_React$Pure
   }]);
 
   return TabView;
-}(React.PureComponent), _class.defaultProps = {
+}(React.PureComponent);
+
+TabView.defaultProps = {
   initialLayout: _reactNative.Platform.select({
     android: { width: 1, height: 0 }
   })
-}, _temp2));
-
+};
 exports.default = (0, _withCachedChildNavigation2.default)(TabView);
 
 
@@ -84176,22 +84522,22 @@ __d(/* react-native-tab-view/src/TabBar.js */function(global, require, module, e
   value: true
 });
 
-var _react2 = require(36     ); // 36 = react
-
-var React = _interopRequireWildcard(_react2);
-
-var _index = require(160                                       ); // 160 = ./../../react-transform-hmr/lib/index.js
-
-var _index2 = _interopRequireDefault(_index);
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\node_modules\\react-native-tab-view\\src\\TabBar.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+<<<<<<< HEAD
 var _class,
     _temp,
     _initialiseProps,
     _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-native-tab-view\\src\\TabBar.js';
+=======
+var _react = require(36     ); // 36 = react
+
+var React = _interopRequireWildcard(_react);
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 
 var _propTypes = require(126         ); // 126 = prop-types
 
@@ -84217,6 +84563,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _components = {
   TabBar: {
     displayName: 'TabBar'
@@ -84237,6 +84584,9 @@ function _wrapComponent(id) {
 }
 
 var TabBar = _wrapComponent('TabBar')((_temp = _class = function (_React$PureComponent) {
+=======
+var TabBar = function (_React$PureComponent) {
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
   _inherits(TabBar, _React$PureComponent);
 
   function TabBar(props) {
@@ -84503,7 +84853,9 @@ var TabBar = _wrapComponent('TabBar')((_temp = _class = function (_React$PureCom
   }]);
 
   return TabBar;
-}(React.PureComponent), _class.propTypes = _extends({}, _TabViewPropTypes.SceneRendererPropType, {
+}(React.PureComponent);
+
+TabBar.propTypes = _extends({}, _TabViewPropTypes.SceneRendererPropType, {
   scrollEnabled: _propTypes2.default.bool,
   pressColor: _TouchableItem2.default.propTypes.pressColor,
   pressOpacity: _TouchableItem2.default.propTypes.pressOpacity,
@@ -84514,12 +84866,15 @@ var TabBar = _wrapComponent('TabBar')((_temp = _class = function (_React$PureCom
   onTabPress: _propTypes2.default.func,
   labelStyle: _reactNative.Text.propTypes.style,
   style: _propTypes2.default.any
-}), _class.defaultProps = {
+});
+TabBar.defaultProps = {
   getLabelText: function getLabelText(_ref) {
     var route = _ref.route;
     return route.title ? route.title.toUpperCase() : null;
   }
-}, _initialiseProps = function _initialiseProps() {
+};
+
+var _initialiseProps = function _initialiseProps() {
   var _this4 = this;
 
   this._isManualScroll = false;
@@ -84695,7 +85050,7 @@ var TabBar = _wrapComponent('TabBar')((_temp = _class = function (_React$PureCom
   this._setRef = function (el) {
     return _this4._scrollView = el;
   };
-}, _temp));
+};
 
 exports.default = TabBar;
 
@@ -84900,6 +85255,7 @@ exports.default = TouchableItem;
 __d(/* react-native-tab-view/src/SceneMap.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
+<<<<<<< HEAD
 
 var _react2 = require(36     ); // 36 = react
 
@@ -84910,10 +85266,17 @@ var _index = require(160                                       ); // 160 = ./../
 var _index2 = _interopRequireDefault(_index);
 
 var _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-native-tab-view\\src\\SceneMap.js';
+=======
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\node_modules\\react-native-tab-view\\src\\SceneMap.js';
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 exports.default = SceneMap;
+
+var _react = require(36     ); // 36 = react
+
+var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -84923,6 +85286,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _components = {
   SceneComponent: {
     displayName: 'SceneComponent',
@@ -84943,8 +85307,10 @@ function _wrapComponent(id) {
   };
 }
 
+=======
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 function SceneMap(scenes) {
-  var SceneComponent = _wrapComponent('SceneComponent')(function (_PureComponent) {
+  var SceneComponent = function (_PureComponent) {
     _inherits(SceneComponent, _PureComponent);
 
     function SceneComponent() {
@@ -84956,16 +85322,16 @@ function SceneMap(scenes) {
     _createClass(SceneComponent, [{
       key: 'render',
       value: function render() {
-        return _react3.default.createElement(scenes[this.props.route.key], this.props);
+        return _react2.default.createElement(scenes[this.props.route.key], this.props);
       }
     }]);
 
     return SceneComponent;
-  }(_react2.PureComponent));
+  }(_react.PureComponent);
 
   return function (_ref) {
     var route = _ref.route;
-    return _react3.default.createElement(SceneComponent, { key: route.key, route: route, __source: {
+    return _react2.default.createElement(SceneComponent, { key: route.key, route: route, __source: {
         fileName: _jsxFileName,
         lineNumber: 13
       }
@@ -84977,14 +85343,6 @@ __d(/* react-navigation/src/withCachedChildNavigation.js */function(global, requ
   value: true
 });
 
-var _react2 = require(36     ); // 36 = react
-
-var React = _interopRequireWildcard(_react2);
-
-var _index = require(160                                       ); // 160 = ./../../react-transform-hmr/lib/index.js
-
-var _index2 = _interopRequireDefault(_index);
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\withCachedChildNavigation.js';
@@ -84992,6 +85350,10 @@ var _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_m
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 exports.default = withCachedChildNavigation;
+
+var _react = require(36     ); // 36 = react
+
+var React = _interopRequireWildcard(_react);
 
 var _addNavigationHelpers = require(647                     ); // 647 = ./addNavigationHelpers
 
@@ -85007,6 +85369,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _components = {
   _component: {
     isInFunction: true
@@ -85026,11 +85389,13 @@ function _wrapComponent(id) {
   };
 }
 
+=======
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 function withCachedChildNavigation(Comp) {
   var _class, _temp2;
 
   var displayName = Comp.displayName || Comp.name;
-  return _wrapComponent('_component')((_temp2 = _class = function (_React$PureComponent) {
+  return _temp2 = _class = function (_React$PureComponent) {
     _inherits(_class, _React$PureComponent);
 
     function _class() {
@@ -85085,28 +85450,27 @@ function withCachedChildNavigation(Comp) {
     }]);
 
     return _class;
-  }(React.PureComponent), _class.displayName = 'withCachedChildNavigation(' + displayName + ')', _temp2));
+  }(React.PureComponent), _class.displayName = 'withCachedChildNavigation(' + displayName + ')', _temp2;
 }
 }, 695, null, "react-navigation/src/withCachedChildNavigation.js");
 __d(/* react-navigation/src/views/TabView/TabBarTop.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _react2 = require(36     ); // 36 = react
-
-var React = _interopRequireWildcard(_react2);
-
-var _index = require(160                                             ); // 160 = ./../../../../react-transform-hmr/lib/index.js
-
-var _index2 = _interopRequireDefault(_index);
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\TabView\\TabBarTop.js';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+<<<<<<< HEAD
 var _class,
     _temp2,
     _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\TabView\\TabBarTop.js';
+=======
+var _react = require(36     ); // 36 = react
+
+var React = _interopRequireWildcard(_react);
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 
 var _reactNative = require(12            ); // 12 = react-native
 
@@ -85128,6 +85492,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _components = {
   TabBarTop: {
     displayName: 'TabBarTop'
@@ -85148,6 +85513,9 @@ function _wrapComponent(id) {
 }
 
 var TabBarTop = _wrapComponent('TabBarTop')((_temp2 = _class = function (_React$PureComponent) {
+=======
+var TabBarTop = function (_React$PureComponent) {
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
   _inherits(TabBarTop, _React$PureComponent);
 
   function TabBarTop() {
@@ -85271,15 +85639,16 @@ var TabBarTop = _wrapComponent('TabBarTop')((_temp2 = _class = function (_React$
   }]);
 
   return TabBarTop;
-}(React.PureComponent), _class.defaultProps = {
+}(React.PureComponent);
+
+TabBarTop.defaultProps = {
   activeTintColor: '#fff',
   inactiveTintColor: '#fff',
   showIcon: false,
   showLabel: true,
   upperCaseLabel: true,
   allowFontScaling: true
-}, _temp2));
-
+};
 exports.default = TabBarTop;
 
 
@@ -85299,6 +85668,7 @@ var styles = _reactNative.StyleSheet.create({
 __d(/* react-navigation/src/views/TabView/TabBarIcon.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
+<<<<<<< HEAD
 
 var _react2 = require(36     ); // 36 = react
 
@@ -85309,12 +85679,17 @@ var _index = require(160                                             ); // 160 =
 var _index2 = _interopRequireDefault(_index);
 
 var _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\TabView\\TabBarIcon.js';
+=======
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\TabView\\TabBarIcon.js';
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _reactNative = require(12            ); // 12 = react-native
+var _react = require(36     ); // 36 = react
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var React = _interopRequireWildcard(_react);
+
+var _reactNative = require(12            ); // 12 = react-native
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -85326,6 +85701,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _components = {
   TabBarIcon: {
     displayName: 'TabBarIcon'
@@ -85346,6 +85722,9 @@ function _wrapComponent(id) {
 }
 
 var TabBarIcon = _wrapComponent('TabBarIcon')(function (_React$PureComponent) {
+=======
+var TabBarIcon = function (_React$PureComponent) {
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
   _inherits(TabBarIcon, _React$PureComponent);
 
   function TabBarIcon() {
@@ -85424,7 +85803,7 @@ var TabBarIcon = _wrapComponent('TabBarIcon')(function (_React$PureComponent) {
   }]);
 
   return TabBarIcon;
-}(React.PureComponent));
+}(React.PureComponent);
 
 exports.default = TabBarIcon;
 
@@ -85444,22 +85823,21 @@ var styles = _reactNative.StyleSheet.create({
 __d(/* react-navigation/src/views/TabView/TabBarBottom.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _react2 = require(36     ); // 36 = react
-
-var React = _interopRequireWildcard(_react2);
-
-var _index = require(160                                             ); // 160 = ./../../../../react-transform-hmr/lib/index.js
-
-var _index2 = _interopRequireDefault(_index);
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\TabView\\TabBarBottom.js';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+<<<<<<< HEAD
 var _class,
     _temp2,
     _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\TabView\\TabBarBottom.js';
+=======
+var _react = require(36     ); // 36 = react
+
+var React = _interopRequireWildcard(_react);
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 
 var _reactNative = require(12            ); // 12 = react-native
 
@@ -85487,6 +85865,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _components = {
   TabBarBottom: {
     displayName: 'TabBarBottom'
@@ -85506,11 +85885,13 @@ function _wrapComponent(id) {
   };
 }
 
+=======
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 var majorVersion = parseInt(_reactNative.Platform.Version, 10);
 var isIos = _reactNative.Platform.OS === 'ios';
 var useHorizontalTabs = majorVersion >= 11 && isIos;
 
-var TabBarBottom = _wrapComponent('TabBarBottom')((_temp2 = _class = function (_React$PureComponent) {
+var TabBarBottom = function (_React$PureComponent) {
   _inherits(TabBarBottom, _React$PureComponent);
 
   function TabBarBottom() {
@@ -85710,7 +86091,9 @@ var TabBarBottom = _wrapComponent('TabBarBottom')((_temp2 = _class = function (_
   }]);
 
   return TabBarBottom;
-}(React.PureComponent), _class.defaultProps = {
+}(React.PureComponent);
+
+TabBarBottom.defaultProps = {
   activeTintColor: '#3478f6',
   activeBackgroundColor: 'transparent',
   inactiveTintColor: '#929292',
@@ -85718,7 +86101,8 @@ var TabBarBottom = _wrapComponent('TabBarBottom')((_temp2 = _class = function (_
   showLabel: true,
   showIcon: true,
   allowFontScaling: true
-}, _temp2));
+};
+
 
 var LABEL_LEFT_MARGIN = 20;
 var LABEL_TOP_MARGIN = 15;
@@ -85884,6 +86268,7 @@ exports.default = DrawerNavigator;
 __d(/* react-navigation/src/views/Drawer/DrawerScreen.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
+<<<<<<< HEAD
 
 var _react2 = require(36     ); // 36 = react
 
@@ -85894,8 +86279,15 @@ var _index = require(160                                             ); // 160 =
 var _index2 = _interopRequireDefault(_index);
 
 var _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\Drawer\\DrawerScreen.js';
+=======
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\Drawer\\DrawerScreen.js';
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require(36     ); // 36 = react
+
+var React = _interopRequireWildcard(_react);
 
 var _SceneView = require(668           ); // 668 = ../SceneView
 
@@ -85915,6 +86307,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _components = {
   DrawerScreen: {
     displayName: 'DrawerScreen'
@@ -85935,6 +86328,9 @@ function _wrapComponent(id) {
 }
 
 var DrawerScreen = _wrapComponent('DrawerScreen')(function (_React$PureComponent) {
+=======
+var DrawerScreen = function (_React$PureComponent) {
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
   _inherits(DrawerScreen, _React$PureComponent);
 
   function DrawerScreen() {
@@ -85970,13 +86366,14 @@ var DrawerScreen = _wrapComponent('DrawerScreen')(function (_React$PureComponent
   }]);
 
   return DrawerScreen;
-}(React.PureComponent));
+}(React.PureComponent);
 
 exports.default = (0, _withCachedChildNavigation2.default)(DrawerScreen);
 }, 700, null, "react-navigation/src/views/Drawer/DrawerScreen.js");
 __d(/* react-navigation/src/views/Drawer/DrawerView.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
+<<<<<<< HEAD
 
 var _react2 = require(36     ); // 36 = react
 
@@ -85987,8 +86384,15 @@ var _index2 = require(160                                             ); // 160 
 var _index3 = _interopRequireDefault(_index2);
 
 var _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\Drawer\\DrawerView.js';
+=======
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\Drawer\\DrawerView.js';
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require(36     ); // 36 = react
+
+var React = _interopRequireWildcard(_react);
 
 var _reactNativeDrawerLayoutPolyfill = require(702                                  ); // 702 = react-native-drawer-layout-polyfill
 
@@ -86012,6 +86416,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _components = {
   DrawerView: {
     displayName: 'DrawerView'
@@ -86032,6 +86437,9 @@ function _wrapComponent(id) {
 }
 
 var DrawerView = _wrapComponent('DrawerView')(function (_React$PureComponent) {
+=======
+var DrawerView = function (_React$PureComponent) {
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
   _inherits(DrawerView, _React$PureComponent);
 
   function DrawerView() {
@@ -86168,7 +86576,7 @@ var DrawerView = _wrapComponent('DrawerView')(function (_React$PureComponent) {
   }]);
 
   return DrawerView;
-}(React.PureComponent));
+}(React.PureComponent);
 
 exports.default = DrawerView;
 }, 701, null, "react-navigation/src/views/Drawer/DrawerView.js");
@@ -86177,6 +86585,7 @@ __d(/* react-native-drawer-layout-polyfill/dist/index.android.js */function(glob
 __d(/* react-navigation/src/views/Drawer/DrawerSidebar.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
+<<<<<<< HEAD
 
 var _react2 = require(36     ); // 36 = react
 
@@ -86187,10 +86596,17 @@ var _index = require(160                                             ); // 160 =
 var _index2 = _interopRequireDefault(_index);
 
 var _jsxFileName = 'C:\\Users\\Jimmy\\Documents\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\Drawer\\DrawerSidebar.js';
+=======
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\node_modules\\react-navigation\\src\\views\\Drawer\\DrawerSidebar.js';
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require(36     ); // 36 = react
+
+var React = _interopRequireWildcard(_react);
 
 var _reactNative = require(12            ); // 12 = react-native
 
@@ -86216,6 +86632,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _components = {
   DrawerSidebar: {
     displayName: 'DrawerSidebar'
@@ -86236,6 +86653,9 @@ function _wrapComponent(id) {
 }
 
 var DrawerSidebar = _wrapComponent('DrawerSidebar')(function (_React$PureComponent) {
+=======
+var DrawerSidebar = function (_React$PureComponent) {
+>>>>>>> ec09e4c117e75bcc552437f3d89656aaac8532ed
   _inherits(DrawerSidebar, _React$PureComponent);
 
   function DrawerSidebar() {
@@ -86342,7 +86762,7 @@ var DrawerSidebar = _wrapComponent('DrawerSidebar')(function (_React$PureCompone
   }]);
 
   return DrawerSidebar;
-}(React.PureComponent));
+}(React.PureComponent);
 
 exports.default = (0, _withCachedChildNavigation2.default)(DrawerSidebar);
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, ListView, BackHandler, StyleSheet} from 'react-native';
+import {View, Text, BackHandler, StyleSheet, FlatList} from 'react-native';
 import firebaseApp from './FireBaseApp';
-const ListName = require('../components/ListName');
+const PatientListButton = require('../components/PatientListButton');
 
 export default class PatientList extends React.Component {
     static navigationOptions = {
@@ -13,82 +13,70 @@ export default class PatientList extends React.Component {
         console.ignoredYellowBox = [
             'Setting a timer'
         ];
-        this.state = {
-            dataSource: new ListView.DataSource({
-                rowHasChanged: (row1, row2) => row1 !== row2,
-            })
-        };
-        this.NamesRef = this.getRef().child('Patients'); //Patients is looking at the children of the Patients table in the database
+        this.itemsRef = firebaseApp.database().ref('Patients');
+        this.state = { Name: '', Patients: [], Age: '',};
     }
 
-    getRef() {
-        return firebaseApp.database().ref();
-    }
-
-    listenForNames(NamesRef) {
-        NamesRef.on('value', (snap) => {
-
-            // get children as an array
-            var patients = [];
+    listenForItems(itemsRef) {
+        itemsRef.on('value', (snap) => {
+            var items = [];
             snap.forEach((child) => {
-                patients.push({
+                items.push({
+                    id: child.key,
                     Name: child.val().Name,
-                    _key: child.key
+                    Age: child.val().Age,
                 });
             });
-
-            this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(patients)
-            });
-
+            this.setState({Patients: items});
         });
     }
 
     componentDidMount() {
-        this.listenForNames(this.NamesRef);
-        BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
+        this.listenForItems(this.itemsRef);
     }
 
     componentWillUnmount(){
-        this.NamesRef.off();
-        BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
+        this.itemsRef.off();
     }
 
+    keyExtractor = (item) => item.id;
+
     render() {
+        const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
-                <ListView
-                    dataSource={this.state.dataSource}
-                    renderRow={this.renderName.bind(this)}
-                    enableEmptySections={true}
-                    style={styles.namelistview}
+                <FlatList
+                    data = {this.state.Patients}
+                    keyExtractor = {this.keyExtractor}
+                    renderItem ={({item}) =>
+                        <PatientListButton
+                            title = {item.Name + ', ' + item.Age}
+                            //TODO: Need onPress event to take Nutritionist User to HomeScreen
+                            onPress={() => navigate('User')}
+                        />
+                    }
+                    style={{marginTop: 20, marginLeft: 20,}}
                 />
-
             </View>
         );
     }
-
-    renderName(name) {
-        return (
-            <ListName name={name} />
-        );
-    }
-
-    onBackPress = () => {
-        const {goBack} = this.props.navigation;
-        return goBack();
-    }
 }
+
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        backgroundColor: '#BBFFB6',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        backgroundColor: '#F7F1D2',
     },
     namelistview: {
         flex: 1,
+    },
+    nText: {
+        color: '#000000',
+        textAlign: 'center',
+        fontSize: 16,
     },
 });
