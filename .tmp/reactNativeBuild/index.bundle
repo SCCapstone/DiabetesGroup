@@ -58344,6 +58344,7 @@ function _wrapComponent(id) {
 }
 
 var ListName = require(638                     ); // 638 = ../components/ListName
+var PatientListButton = require(706                              ); // 706 = ../components/PatientListButton
 
 var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_React$Component) {
     _inherits(PatientList, _React$Component);
@@ -58357,9 +58358,20 @@ var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_Rea
             return item.id;
         };
 
+        _this.renderItem = function (_ref) {
+            var item = _ref.item;
+            return _react3.default.createElement(PatientListButton, {
+                title: item.Name + ', ' + item.Age,
+                __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 125
+                }
+            });
+        };
+
         console.ignoredYellowBox = ['Setting a timer'];
         _this.itemsRef = _FireBaseApp2.default.database().ref('Patients');
-        _this.state = { Name: '', Patients: [] };
+        _this.state = { Name: '', Patients: [], Age: '' };
         return _this;
     }
 
@@ -58373,7 +58385,8 @@ var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_Rea
                 snap.forEach(function (child) {
                     items.push({
                         id: child.key,
-                        Name: child.val().Name
+                        Name: child.val().Name,
+                        Age: child.val().Age
                     });
                 });
                 _this2.setState({ Patients: items });
@@ -58385,30 +58398,28 @@ var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_Rea
             this.listenForItems(this.itemsRef);
         }
     }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            this.itemsRef.off();
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react3.default.createElement(
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 120
+                        lineNumber: 134
                     }
                 },
                 _react3.default.createElement(_reactNative.FlatList, {
                     data: this.state.Patients,
                     keyExtractor: this.keyExtractor,
-                    renderItem: function renderItem(_ref) {
-                        var item = _ref.item;
-                        return _react3.default.createElement(ListName, { name: item.Name, __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 127
-                            }
-                        });
-                    },
+                    renderItem: this.renderItem,
                     style: { marginTop: 20 },
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 121
+                        lineNumber: 135
                     }
                 })
             );
@@ -77157,6 +77168,114 @@ var styles = StyleSheet.create({
 
 module.exports = ListName;
 }, 638, null, "DiabetesGroup/components/ListName.js");
+__d(/* DiabetesGroup/components/PatientListButton.js */function(global, require, module, exports) {var _react2 = require(36     ); // 36 = react
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index = require(160                                                 ); // 160 = ./../node_modules/react-transform-hmr/lib/index.js
+
+var _index2 = _interopRequireDefault(_index);
+
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\components\\PatientListButton.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _reactNative = require(12            ); // 12 = react-native
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+    PatientListButton: {
+        displayName: 'PatientListButton'
+    }
+};
+
+var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+    filename: 'C:/Users/shark/Capstone/DiabetesGroup/components/PatientListButton.js',
+    components: _components,
+    locals: [module],
+    imports: [_react3.default]
+});
+
+function _wrapComponent(id) {
+    return function (Component) {
+        return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+    };
+}
+
+var PatientListButton = _wrapComponent('PatientListButton')(function (_Component) {
+    _inherits(PatientListButton, _Component);
+
+    function PatientListButton() {
+        _classCallCheck(this, PatientListButton);
+
+        return _possibleConstructorReturn(this, (PatientListButton.__proto__ || Object.getPrototypeOf(PatientListButton)).apply(this, arguments));
+    }
+
+    _createClass(PatientListButton, [{
+        key: 'render',
+        value: function render() {
+            return _react3.default.createElement(
+                _reactNative.View,
+                { style: styles.press, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 12
+                    }
+                },
+                _react3.default.createElement(
+                    _reactNative.TouchableHighlight,
+                    {
+                        underlayColor: '#CD7800',
+                        onPress: this.props.onPress, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 13
+                        }
+                    },
+                    _react3.default.createElement(
+                        _reactNative.Text,
+                        { style: styles.pressText, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 16
+                            }
+                        },
+                        this.props.title
+                    )
+                )
+            );
+        }
+    }]);
+
+    return PatientListButton;
+}(_react2.Component));
+
+var styles = _reactNative.StyleSheet.create({
+    press: {
+        backgroundColor: '#FFA627',
+        borderColor: '#000000',
+        overflow: 'hidden',
+        borderRadius: 12,
+        borderWidth: 3,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingTop: 10,
+        paddingBottom: 10
+
+    },
+    pressText: {
+        color: '#000000',
+        fontSize: 16,
+        textAlign: 'center'
+    }
+});
+
+module.exports = PatientListButton;
+}, 706, null, "DiabetesGroup/components/PatientListButton.js");
 __d(/* DiabetesGroup/screens/UserSelect.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });

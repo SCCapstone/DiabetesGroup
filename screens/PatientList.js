@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, ListView, BackHandler, StyleSheet, FlatList} from 'react-native';
+import {View, Text, ListView, BackHandler, StyleSheet, FlatList} from 'react-native';
 import firebaseApp from './FireBaseApp';
 const ListName = require('../components/ListName');
+const PatientListButton = require('../components/PatientListButton');
 /**
 export default class PatientList extends React.Component {
     static navigationOptions = {
@@ -93,10 +94,8 @@ export default class PatientList extends React.Component {
             'Setting a timer'
         ];
         this.itemsRef = firebaseApp.database().ref('Patients');
-        this.state = { Name: '', Patients: []};
+        this.state = { Name: '', Patients: [], Age: '',};
     }
-
-    keyExtractor = (item) => item.id;
 
     listenForItems(itemsRef) {
         itemsRef.on('value', (snap) => {
@@ -105,6 +104,7 @@ export default class PatientList extends React.Component {
                 items.push({
                     id: child.key,
                     Name: child.val().Name,
+                    Age: child.val().Age,
                 });
             });
             this.setState({Patients: items});
@@ -115,17 +115,27 @@ export default class PatientList extends React.Component {
         this.listenForItems(this.itemsRef);
     }
 
+    componentWillUnmount(){
+        this.itemsRef.off();
+    }
+
+    keyExtractor = (item) => item.id;
+
+    renderItem = ({item}) =>
+        <PatientListButton
+            title = {item.Name + ', ' + item.Age}
+        />;
+     //   <View >
+     //       <Text style={styles.nText}>{item.Name}, {item.Age}</Text>
+     //   </View>;
+
     render() {
         return (
             <View style={styles.container}>
                 <FlatList
                     data = {this.state.Patients}
                     keyExtractor = {this.keyExtractor}
-                    renderItem = {({item}) => (
-                        //<Text style={styles.nText}>{item.Name}</Text>
-
-                        <ListName name = {item.Name} />
-                    )}
+                    renderItem = {this.renderItem}
                     style={{marginTop: 20}}
                 />
             </View>
