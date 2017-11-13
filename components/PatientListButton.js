@@ -28,10 +28,9 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         borderRadius: 12,
         borderWidth: 3,
-        paddingLeft: 10,
-        paddingRight: 10,
-        paddingTop: 10,
-        paddingBottom: 10,
+        paddingLeft: 5,
+        paddingRight: 5,
+        marginBottom: 20,
 
     },
     pressText: {
