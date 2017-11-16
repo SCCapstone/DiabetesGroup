@@ -41,7 +41,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 	height:80,
     //alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F7F1D2',
+      paddingHorizontal: 20,
+      padding: 20
   },
   welcome: {
     fontSize: 20,
