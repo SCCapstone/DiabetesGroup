@@ -26,7 +26,9 @@ const AppNavigator = StackNavigator({
         PDiet: {screen: patientDiet}
     },
     {
+
         initialRouteName: 'User'
+
     }
 );
 
