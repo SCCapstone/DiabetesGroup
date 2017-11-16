@@ -5,6 +5,11 @@ import UserSelect from './screens/UserSelect';
 import PatientSignIn from './screens/PatientSignIn';
 import NutritionistSignIn from './screens/NutritionistSignIn';
 import createNewUser from './screens/createNewUser';
+import patientHome from './screens/patientHome';
+import glucoseInput from './screens/glucoseInput';
+import patientMedication from './screens/patientMedication';
+import patientDiet from './screens/patientDiet';
+
 
 import {StackNavigator,} from 'react-navigation';
 
@@ -14,10 +19,16 @@ const AppNavigator = StackNavigator({
         PSign: {screen: PatientSignIn},
         NSign: {screen: NutritionistSignIn},
         NewUser: {screen: createNewUser},
-        PList: {screen: PatientList}
+        PList: {screen: PatientList},
+        PHome: {screen: patientHome},
+        GInput: {screen: glucoseInput},
+        PMed: {screen: patientMedication},
+        PDiet: {screen: patientDiet}
     },
     {
-        initialRouteName: 'NewUser'
+
+        initialRouteName: 'User'
+
     }
 );
 
