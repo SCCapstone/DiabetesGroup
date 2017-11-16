@@ -43,7 +43,7 @@ export default class PatientSignIn extends Component<{}> {
 
                     <SeafoamButton
                         title="LOGIN"
-
+			onPress={() => navigate('PHome')}
                     />
 
                 </View>
