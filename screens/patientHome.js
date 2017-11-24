@@ -3,8 +3,7 @@ import {View, Text, BackHandler, StyleSheet, ScrollView} from 'react-native';
 import firebaseApp from './FireBaseApp';
 const SeafoamButton = require('../components/SeafoamButton');
 const GlucoseCircle = require('../components/GlucoseCircle');
-
-//TODO decide if circles will also be buttons, call glucose values from database, make range of values for each button color, add graph and chart
+const MessengerButton = require('../components/MessengerButton');
 
 export default class patientHome extends React.Component {
     static navigationOptions = {
@@ -46,7 +45,11 @@ export default class patientHome extends React.Component {
                     <Text style={{fontSize:26}}>
                         SCROLLVIEW WORKS!!!
                         TODO: graph, chart, messenger button
+
                     </Text>
+
+                    <MessengerButton
+                        onPress={() => navigate('PHome')}/>
 
                     <Text></Text>
                 </View>
