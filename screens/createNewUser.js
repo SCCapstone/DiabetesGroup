@@ -19,13 +19,14 @@ export default class createNewUser extends Component<{}> {
 
 	constructor(props) {
 	    super(props);
-	    this.state = {email: '', password: ''};
+	    this.state = {email: '', password: '', userName: ''};
     }
 
     _signUp() {
 
         var email = this.state.email;
         var password = this.state.password;
+		var userName = this.state.userName;
 
         if(email.length < 4){
             alert('Please enter an email address.');
@@ -48,6 +49,17 @@ export default class createNewUser extends Component<{}> {
             }
             console.log(error);
         });
+
+		var user = firebaseApp.auth().currentUser;
+		var database = firebaseApp.database();
+
+		firebaseApp.database().ref('users/' + user.uid).set({
+			userName: userName,
+			email: email,
+			password: password
+
+		});
+		
         // [END createwitheamil
         const {navigate} = this.props.navigation;
         navigate('User')
@@ -61,6 +73,12 @@ export default class createNewUser extends Component<{}> {
                     <Text style={styles.title}>
                         Enter your information below:
                     </Text>
+
+					<TextInput style={styles.input} placeholder="Name"
+                     underlineColorAndroid ={'transparent'}
+                     onChangeText={(text) => this.setState({userName: text})}
+                     value={this.state.userName}
+                    />
 
                     <TextInput style={styles.input} placeholder="Email"
                      underlineColorAndroid ={'transparent'}
