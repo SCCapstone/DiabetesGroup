@@ -9,6 +9,7 @@ import {
   TextInput,
   View,
   Button,
+  Picker,
   AppRegistry,
   TouchableOpacity,
 } from 'react-native';
@@ -19,7 +20,7 @@ export default class createNewUser extends Component<{}> {
 
 	constructor(props) {
 	    super(props);
-	    this.state = {email: '', password: '', userName: ''};
+	    this.state = {email: '', password: '', userName: '', userType: ''};
     }
 
     _signUp() {
@@ -27,6 +28,8 @@ export default class createNewUser extends Component<{}> {
         var email = this.state.email;
         var password = this.state.password;
 		var userName = this.state.userName;
+        var userType = this.state.userType;
+
 
         if(email.length < 4){
             alert('Please enter an email address.');
@@ -53,12 +56,28 @@ export default class createNewUser extends Component<{}> {
 		var user = firebaseApp.auth().currentUser;
 		var database = firebaseApp.database();
 
-		firebaseApp.database().ref('users/' + user.uid).set({
-			userName: userName,
-			email: email,
-			password: password
+		if(userType === "Nutritionist")
+        {
+            firebaseApp.database().ref('Nutritionists/' + user.uid).set({
+                userName: userName,
+                email: email,
+                password: password
+            });
+        }
 
-		});
+        else if(userType === "Patient")
+        {
+            firebaseApp.database().ref('Patients/' + user.uid).set({
+                userName: userName,
+                email: email,
+                password: password
+
+            });
+        }
+        else
+        {
+            alert('Please select a user type!')
+        }
 		
         // [END createwitheamil
         const {navigate} = this.props.navigation;
@@ -92,9 +111,14 @@ export default class createNewUser extends Component<{}> {
                      onChangeText={(text) => this.setState({password: text})}
                      value={this.state.password}
                     />
-/*
-                    TODO: add in drop down menu for selecting patient or nutritionist account. Also change the database structure to have seperate patients and nutritionists trees.
-*/
+                    <Picker
+                        style={{marginBottom: 25}}
+                        selectedValue={this.state.userType}
+                        onValueChange={(itemValue) => this.setState({userType: itemValue})}>
+                        <Picker.Item label="User Type" value="User Type"/>
+                        <Picker.Item label="Nutritionist" value="Nutritionist" />
+                        <Picker.Item label="Patient" value="Patient" />
+                    </Picker>
                     <SeafoamButton
                       title="Submit"
                       onPress = {() => this._signUp()}
@@ -138,7 +162,7 @@ const styles = StyleSheet.create({
     marginBottom: 35,
     paddingBottom: 10,
     textAlign: 'center',
-
+    color: "#000000",
   },
   input:{
       height: 40,
