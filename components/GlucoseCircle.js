@@ -6,7 +6,7 @@ import {
     TouchableHighlight
 } from 'react-native';
 
-//TODO decide if circles will also be buttons, call glucose values from database, make range of values for each button color
+
 class GlucoseCircle extends Component {
     render() {
         return (
