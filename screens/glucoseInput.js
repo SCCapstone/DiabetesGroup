@@ -19,36 +19,33 @@ export default class glucoseInput extends Component<{}> {
     static navigationOptions = {title: 'Glucose Input',};
     constructor(props) {
         super(props);
-
-        this.state = {date: '', time: '', glucoseLevel: '', readingType:'', notes:''};
+        this.state = {time: '', glucoseLevel: '', readingType:'', notes:''};
     }
 
 
     _patientValues() {
-
-        var date = this.state.date;
-        var time = this.state.time;
+        var options = {hour: 'numeric', minute: '2-digit', month: 'numeric', day: 'numeric', year: 'numeric'};
+        var time = new Date().toLocaleString('en-US', options);
         var glucoseLevel = this.state.glucoseLevel;
         var readingType = this.state.readingType;
         var notes = this.state.notes;
         var user = firebaseApp.auth().currentUser;
 
-        firebaseApp.database().ref('users/' + user.uid + '/logs/').push({
-            glucoseLevel: glucoseLevel,
-            readingType: readingType,
-            notes: notes,
-        });
-
         if(glucoseLevel < 50 || glucoseLevel > 220)
         {
             alert('Please enter a valid glucose level.');
         }
-        else if((readingType.includes('Reading Type', 0)))
+        else if(readingType === "")
         {
             alert('Please select a valid reading type.');
-        }
-
-        else {
+        }else
+        {
+            firebaseApp.database().ref('users/' + user.uid + '/logs/').push({
+                time: time,
+                glucoseLevel: glucoseLevel,
+                readingType: readingType,
+                notes: notes,
+            });
             const {navigate} = this.props.navigation;
             navigate('PHome')
         }
@@ -63,22 +60,6 @@ export default class glucoseInput extends Component<{}> {
                         <Text style={styles.title}>
                             Enter the following fields:
                         </Text>
-
-                        <TextInput style={styles.input} placeholder="Date"
-                                       underlineColorAndroid ={'transparent'}
-                                       onChangeText={(text) => this.setState({date: text})}
-                                       value={this.state.date}
-                        />
-
-
-
-                        <TextInput style={styles.input} placeholder="Time"
-                                   keyboardType='numeric'
-                                   underlineColorAndroid ={'transparent'}
-                                   onChangeText={(text) => this.setState({time: text})}
-                                   value={this.state.time}
-                        />
-
 
                         <TextInput style={styles.input} placeholder="Glucose Level"
                                    underlineColorAndroid ={'transparent'}
@@ -97,8 +78,6 @@ export default class glucoseInput extends Component<{}> {
                             <Picker.Item label="Post-Meal" value="Post-Meal" />
                             <Picker.Item label="Other" value="Other" />
                         </Picker>
-
-                        <Text></Text>
 
                         <TextInput style={styles.input} placeholder="Additional Notes"
                                    underlineColorAndroid ={'transparent'}
