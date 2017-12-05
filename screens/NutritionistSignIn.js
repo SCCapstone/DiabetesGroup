@@ -61,9 +61,12 @@ export default class NutritionistSignIn extends Component<{}> {
 		return (
             <View style={styles.container}>
                 <View style={styles.container}>
-                    <Text>
-                        <Text style={styles.login}>Nutritionist Login</Text>
+                    <Text style={styles.title}>
+                        AahaRX{"\n"}For{"\n"}Diabetes{"\n"}Management
                     </Text>
+                        <Text style={styles.login}>
+                            Nutritionist Login
+                        </Text>
                     <TextInput
                         placeholder={"Enter Username or Email"}
                         placeholderTextColor="#000000"
@@ -108,13 +111,24 @@ const styles = StyleSheet.create({
         fontSize: 16,
         backgroundColor: 'rgba(255,255,255,0.8)',
         marginBottom: 20,
+        marginTop: 30,
         color: '#000000',
         paddingHorizontal: 20
     },
-
+    title: {
+        fontSize: 40,
+        fontWeight: 'bold',
+        marginBottom: 30,
+        textAlign: 'center',
+        alignSelf: 'stretch',
+        color: "#000000",
+    },
     login: {
         fontWeight: 'bold',
-        fontSize: 20
+        fontSize: 20,
+        color: "#000000",
+        textAlign: 'center',
+        alignSelf: 'stretch',
     }
 
 });
