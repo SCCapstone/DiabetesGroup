@@ -92,7 +92,9 @@ export default class createNewUser extends Component<{}> {
                      onChangeText={(text) => this.setState({password: text})}
                      value={this.state.password}
                     />
-
+/*
+                    TODO: add in drop down menu for selecting patient or nutritionist account. Also change the database structure to have seperate patients and nutritionists trees.
+*/
                     <SeafoamButton
                       title="Submit"
                       onPress = {() => this._signUp()}
