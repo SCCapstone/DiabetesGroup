@@ -78386,8 +78386,8 @@ var GlucoseLogTable = _wrapComponent('GlucoseLogTable')(function (_Component) {
         };
 
         console.ignoredYellowBox = ['Setting a timer'];
-        _this.user = _FireBaseApp2.default.auth().currentUser.uid;
-        _this.itemsRef = _FireBaseApp2.default.database().ref('users/logs/');
+        var userID = _FireBaseApp2.default.auth().currentUser.uid;
+        _this.itemsRef = _FireBaseApp2.default.database().ref('Patients/' + userID + '/logs/');
         _this.state = { logs: [], glucoseLevel: '', readingType: '', time: '' };
         return _this;
     }
@@ -78398,14 +78398,12 @@ var GlucoseLogTable = _wrapComponent('GlucoseLogTable')(function (_Component) {
             var _this2 = this;
 
             itemsRef.on('value', function (snap) {
+                var GL = [];
+                var RT = [];
+                var Date = [];
                 var items = [];
                 snap.forEach(function (child) {
-                    items.push({
-                        id: child.key,
-                        glucoseLevel: child.val().glucoseLevel,
-                        readingType: child.val().readingType,
-                        time: child.val().time
-                    });
+                    items.push([child.val().glucoseLevel, child.val().readingType, child.val().time]);
                 });
                 _this2.setState({ logs: items });
             });
@@ -78423,6 +78421,8 @@ var GlucoseLogTable = _wrapComponent('GlucoseLogTable')(function (_Component) {
     }, {
         key: 'render',
         value: function render() {
+            console.log("Printing out logs!!");
+            console.log(this.state.logs);
             var logss = this.state.logs;
             var tableHead = ['Glucose Level (mg/dL)', 'Type', 'Time Recorded'];
             var tableData = [['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '11:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '5:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '11:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '5:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '11:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '5:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '11:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '5:30']];
@@ -78431,7 +78431,7 @@ var GlucoseLogTable = _wrapComponent('GlucoseLogTable')(function (_Component) {
                 {
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 68
+                        lineNumber: 84
                     }
                 },
                 _react3.default.createElement(
@@ -78439,18 +78439,18 @@ var GlucoseLogTable = _wrapComponent('GlucoseLogTable')(function (_Component) {
                     {
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 69
+                            lineNumber: 85
                         }
                     },
                     _react3.default.createElement(_reactNativeTableComponent.Row, { data: tableHead, style: styles.head, textStyle: styles.text, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 70
+                            lineNumber: 87
                         }
                     }),
                     this.state.logs.map(function (data, i) {
                         return _react3.default.createElement(_reactNativeTableComponent.Row, { key: i, data: data, style: [styles.row, i % 2 && { backgroundColor: 'orange' }], textStyle: styles.text, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 73
+                                lineNumber: 90
                             }
                         });
                     })
