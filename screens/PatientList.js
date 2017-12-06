@@ -2,10 +2,12 @@ import React from 'react';
 import {View, Text, BackHandler, StyleSheet, FlatList} from 'react-native';
 import firebaseApp from './FireBaseApp';
 const PatientListButton = require('../components/PatientListButton');
+const MessengerButton = require('../components/MessengerButton');
 
 export default class PatientList extends React.Component {
     static navigationOptions = {
         title: 'Patient List',
+        headerStyle: {backgroundColor: "#FF6127"}
     };
 
     constructor(props) {
@@ -13,8 +15,8 @@ export default class PatientList extends React.Component {
         console.ignoredYellowBox = [
             'Setting a timer'
         ];
-        this.itemsRef = firebaseApp.database().ref('Patients');
-        this.state = { Name: '', Patients: [], Age: '',};
+        this.itemsRef = firebaseApp.database().ref('Patients/');
+        this.state = { userName: '', Patients: [], Age: '',};
     }
 
     listenForItems(itemsRef) {
@@ -23,7 +25,7 @@ export default class PatientList extends React.Component {
             snap.forEach((child) => {
                 items.push({
                     id: child.key,
-                    Name: child.val().Name,
+                    userName: child.val().userName,
                     Age: child.val().Age,
                 });
             });
@@ -50,8 +52,7 @@ export default class PatientList extends React.Component {
                     keyExtractor = {this.keyExtractor}
                     renderItem ={({item}) =>
                         <PatientListButton
-                            title = {item.Name + ', ' + item.Age}
-                            //TODO: Need onPress event to take Nutritionist User to HomeScreen
+                            title={item.userName + ', ' + item.Age}
                             onPress={() => navigate('User')}
                         />
                     }

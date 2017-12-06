@@ -1292,39 +1292,43 @@ var _PatientList = require(491                    ); // 491 = ./screens/PatientL
 
 var _PatientList2 = _interopRequireDefault(_PatientList);
 
-var _UserSelect = require(639                   ); // 639 = ./screens/UserSelect
+var _UserSelect = require(641                   ); // 641 = ./screens/UserSelect
 
 var _UserSelect2 = _interopRequireDefault(_UserSelect);
 
-var _PatientSignIn = require(640                      ); // 640 = ./screens/PatientSignIn
+var _PatientSignIn = require(642                      ); // 642 = ./screens/PatientSignIn
 
 var _PatientSignIn2 = _interopRequireDefault(_PatientSignIn);
 
-var _NutritionistSignIn = require(641                           ); // 641 = ./screens/NutritionistSignIn
+var _NutritionistSignIn = require(643                           ); // 643 = ./screens/NutritionistSignIn
 
 var _NutritionistSignIn2 = _interopRequireDefault(_NutritionistSignIn);
 
-var _createNewUser = require(642                      ); // 642 = ./screens/createNewUser
+var _createNewUser = require(644                      ); // 644 = ./screens/createNewUser
 
 var _createNewUser2 = _interopRequireDefault(_createNewUser);
 
-var _patientHome = require(643                    ); // 643 = ./screens/patientHome
+var _patientHome = require(645                    ); // 645 = ./screens/patientHome
 
 var _patientHome2 = _interopRequireDefault(_patientHome);
 
-var _glucoseInput = require(652                     ); // 652 = ./screens/glucoseInput
+var _glucoseInput = require(653                     ); // 653 = ./screens/glucoseInput
 
 var _glucoseInput2 = _interopRequireDefault(_glucoseInput);
 
-var _patientMedication = require(653                          ); // 653 = ./screens/patientMedication
+var _patientMedication = require(654                          ); // 654 = ./screens/patientMedication
 
 var _patientMedication2 = _interopRequireDefault(_patientMedication);
 
-var _patientDiet = require(654                    ); // 654 = ./screens/patientDiet
+var _patientDiet = require(655                    ); // 655 = ./screens/patientDiet
 
 var _patientDiet2 = _interopRequireDefault(_patientDiet);
 
-var _reactNavigation = require(655               ); // 655 = react-navigation
+var _reactNavigation = require(656               ); // 656 = react-navigation
+
+var _NewPatientInfo = require(719                       ); // 719 = ./screens/NewPatientInfo
+
+var _NewPatientInfo2 = _interopRequireDefault(_NewPatientInfo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -58099,6 +58103,7 @@ function _wrapComponent(id) {
 }
 
 var PatientListButton = require(638                              ); // 638 = ../components/PatientListButton
+var MessengerButton = require(639                            ); // 639 = ../components/MessengerButton
 
 var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_React$Component) {
     _inherits(PatientList, _React$Component);
@@ -58113,8 +58118,8 @@ var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_Rea
         };
 
         console.ignoredYellowBox = ['Setting a timer'];
-        _this.itemsRef = _FireBaseApp2.default.database().ref('Patients');
-        _this.state = { Name: '', Patients: [], Age: '' };
+        _this.itemsRef = _FireBaseApp2.default.database().ref('Patients/');
+        _this.state = { userName: '', Patients: [], Age: '' };
         return _this;
     }
 
@@ -58128,7 +58133,7 @@ var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_Rea
                 snap.forEach(function (child) {
                     items.push({
                         id: child.key,
-                        Name: child.val().Name,
+                        userName: child.val().userName,
                         Age: child.val().Age
                     });
                 });
@@ -58154,7 +58159,7 @@ var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_Rea
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 47
+                        lineNumber: 49
                     }
                 },
                 _react3.default.createElement(_reactNative.FlatList, {
@@ -58163,21 +58168,20 @@ var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_Rea
                     renderItem: function renderItem(_ref) {
                         var item = _ref.item;
                         return _react3.default.createElement(PatientListButton, {
-                            title: item.Name + ', ' + item.Age,
-
+                            title: item.userName + ', ' + item.Age,
                             onPress: function onPress() {
                                 return navigate('User');
                             },
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 52
+                                lineNumber: 54
                             }
                         });
                     },
                     style: { marginTop: 20, marginLeft: 20 },
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 48
+                        lineNumber: 50
                     }
                 })
             );
@@ -58186,7 +58190,8 @@ var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_Rea
 
     return PatientList;
 }(_react3.default.Component), _class.navigationOptions = {
-    title: 'Patient List'
+    title: 'Patient List',
+    headerStyle: { backgroundColor: "#FF6127" }
 }, _temp));
 
 exports.default = PatientList;
@@ -76949,8 +76954,105 @@ var styles = _reactNative.StyleSheet.create({
 
 module.exports = PatientListButton;
 }, 638, null, "DiabetesGroup/components/PatientListButton.js");
+__d(/* DiabetesGroup/components/MessengerButton.js */function(global, require, module, exports) {var _react2 = require(36     ); // 36 = react
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index = require(160                                                 ); // 160 = ./../node_modules/react-transform-hmr/lib/index.js
+
+var _index2 = _interopRequireDefault(_index);
+
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\components\\MessengerButton.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _reactNative = require(12            ); // 12 = react-native
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+    MessengerButton: {
+        displayName: 'MessengerButton'
+    }
+};
+
+var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+    filename: 'C:/Users/shark/Capstone/DiabetesGroup/components/MessengerButton.js',
+    components: _components,
+    locals: [module],
+    imports: [_react3.default]
+});
+
+function _wrapComponent(id) {
+    return function (Component) {
+        return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+    };
+}
+
+var MessengerButton = _wrapComponent('MessengerButton')(function (_Component) {
+    _inherits(MessengerButton, _Component);
+
+    function MessengerButton() {
+        _classCallCheck(this, MessengerButton);
+
+        return _possibleConstructorReturn(this, (MessengerButton.__proto__ || Object.getPrototypeOf(MessengerButton)).apply(this, arguments));
+    }
+
+    _createClass(MessengerButton, [{
+        key: 'render',
+        value: function render() {
+            return _react3.default.createElement(
+                _reactNative.View,
+                { style: styles.press, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 13
+                    }
+                },
+                _react3.default.createElement(
+                    _reactNative.TouchableHighlight,
+                    {
+                        onPress: this.props.onPress, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 14
+                        }
+                    },
+                    _react3.default.createElement(_reactNative.Image, {
+                        style: styles.button,
+                        source: require(640               ), __source: { // 640 = ./MessengerB.png
+                            fileName: _jsxFileName,
+                            lineNumber: 16
+                        }
+                    })
+                )
+            );
+        }
+    }]);
+
+    return MessengerButton;
+}(_react2.Component));
+
+var styles = _reactNative.StyleSheet.create({
+    press: {
+        backgroundColor: '#F7F1D2',
+        overflow: 'hidden'
+    },
+    button: {
+        overlayColor: '#F7F1D2'
+    }
+});
+
+module.exports = MessengerButton;
+}, 639, null, "DiabetesGroup/components/MessengerButton.js");
+__d(/* DiabetesGroup/components/MessengerB.png */function(global, require, module, exports) {module.exports=require(324                                         ).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/components","width":40,"height":39,"scales":[1],"hash":"cc0cc66329dc1a75aef56544c43d16ef","name":"MessengerB","type":"png"}); // 324 = react-native/Libraries/Image/AssetRegistry
+}, 640, null, "DiabetesGroup/components/MessengerB.png");
 __d(/* DiabetesGroup/screens/UserSelect.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _react2 = require(36     ); // 36 = react
@@ -76978,109 +77080,134 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _components = {
-  UserSelect: {
-    displayName: 'UserSelect'
-  }
+    UserSelect: {
+        displayName: 'UserSelect'
+    }
 };
 
 var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
-  filename: 'C:/Users/shark/Capstone/DiabetesGroup/screens/UserSelect.js',
-  components: _components,
-  locals: [module],
-  imports: [_react3.default]
+    filename: 'C:/Users/shark/Capstone/DiabetesGroup/screens/UserSelect.js',
+    components: _components,
+    locals: [module],
+    imports: [_react3.default]
 });
 
 function _wrapComponent(id) {
-  return function (Component) {
-    return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
-  };
+    return function (Component) {
+        return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+    };
 }
 
 var SeafoamButton = require(490                          ); // 490 = ../components/SeafoamButton
 
 var UserSelect = _wrapComponent('UserSelect')((_temp = _class = function (_Component) {
-  _inherits(UserSelect, _Component);
+    _inherits(UserSelect, _Component);
 
-  function UserSelect() {
-    _classCallCheck(this, UserSelect);
+    function UserSelect() {
+        _classCallCheck(this, UserSelect);
 
-    return _possibleConstructorReturn(this, (UserSelect.__proto__ || Object.getPrototypeOf(UserSelect)).apply(this, arguments));
-  }
-
-  _createClass(UserSelect, [{
-    key: 'render',
-    value: function render() {
-      var navigate = this.props.navigation.navigate;
-
-      return _react3.default.createElement(
-        _reactNative.View,
-        { style: styles.container, __source: {
-            fileName: _jsxFileName,
-            lineNumber: 20
-          }
-        },
-        _react3.default.createElement(SeafoamButton, {
-          title: 'Sign into a patient account',
-          onPress: function onPress() {
-            return navigate('PSign');
-          },
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 21
-          }
-        }),
-        _react3.default.createElement(SeafoamButton, {
-          title: 'Sign into a nutritionist account',
-          onPress: function onPress() {
-            return navigate('NSign');
-          },
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 25
-          }
-        }),
-        _react3.default.createElement(SeafoamButton, {
-          title: 'Create new user',
-          onPress: function onPress() {
-            return navigate('NewUser');
-          },
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 29
-          }
-        })
-      );
+        return _possibleConstructorReturn(this, (UserSelect.__proto__ || Object.getPrototypeOf(UserSelect)).apply(this, arguments));
     }
-  }]);
 
-  return UserSelect;
-}(_react2.Component), _class.navigationOptions = { title: 'What kind of user are you?' }, _temp));
+    _createClass(UserSelect, [{
+        key: 'render',
+        value: function render() {
+            var navigate = this.props.navigation.navigate;
+
+            return _react3.default.createElement(
+                _reactNative.View,
+                { style: styles.container, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 23
+                    }
+                },
+                _react3.default.createElement(
+                    _reactNative.Text,
+                    { style: styles.input, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 24
+                        }
+                    },
+                    'AahaRX',
+                    "\n",
+                    'For',
+                    "\n",
+                    'Diabetes',
+                    "\n",
+                    'Management'
+                ),
+                _react3.default.createElement(SeafoamButton, {
+                    style: styles.button,
+                    title: 'Sign into a patient account',
+                    onPress: function onPress() {
+                        return navigate('PSign');
+                    },
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 27
+                    }
+                }),
+                _react3.default.createElement(_reactNative.Text, { style: { marginBottom: 20 }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 32
+                    }
+                }),
+                _react3.default.createElement(SeafoamButton, {
+                    title: 'Sign into a nutritionist account',
+                    onPress: function onPress() {
+                        return navigate('NSign');
+                    },
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 34
+                    }
+                }),
+                _react3.default.createElement(_reactNative.Text, { style: { marginBottom: 20 }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 38
+                    }
+                }),
+                _react3.default.createElement(SeafoamButton, {
+                    title: 'Create new user',
+                    onPress: function onPress() {
+                        return navigate('NewUser');
+                    },
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 40
+                    }
+                })
+            );
+        }
+    }]);
+
+    return UserSelect;
+}(_react2.Component), _class.navigationOptions = {
+    title: 'What kind of user are you?',
+    header: null
+}, _temp));
 
 exports.default = UserSelect;
 
 
 var styles = _reactNative.StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    height: 80,
-
-    backgroundColor: '#F7F1D2',
-    paddingHorizontal: 20,
-    padding: 20
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
-  }
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingLeft: 10,
+        paddingRight: 10,
+        backgroundColor: '#F7F1D2'
+    },
+    input: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        marginBottom: 30,
+        textAlign: 'center',
+        alignSelf: 'stretch',
+        color: "#000000"
+    }
 });
-}, 639, null, "DiabetesGroup/screens/UserSelect.js");
+}, 641, null, "DiabetesGroup/screens/UserSelect.js");
 __d(/* DiabetesGroup/screens/PatientSignIn.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -77188,43 +77315,50 @@ var PatientSignIn = _wrapComponent('PatientSignIn')((_temp = _class = function (
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 62
+                        lineNumber: 65
                     }
                 },
                 _react3.default.createElement(
                     _reactNative.View,
                     { style: styles.container, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 63
+                            lineNumber: 66
                         }
                     },
                     _react3.default.createElement(
                         _reactNative.Text,
-                        {
-                            __source: {
+                        { style: styles.title, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 64
+                                lineNumber: 67
                             }
                         },
-                        _react3.default.createElement(
-                            _reactNative.Text,
-                            { style: styles.login, __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 65
-                                }
-                            },
-                            'Patient Login'
-                        )
+                        'AahaRX',
+                        "\n",
+                        'For',
+                        "\n",
+                        'Diabetes',
+                        "\n",
+                        'Management'
+                    ),
+                    _react3.default.createElement(
+                        _reactNative.Text,
+                        { style: styles.login, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 71
+                            }
+                        },
+                        'Patient Login'
                     ),
                     _react3.default.createElement(_reactNative.TextInput, {
-                        placeholder: "Enter Username or Email",
-                        placeholderTextColor: '#000000',
+                        placeholder: "Enter Email",
+                        placeholderTextColor: '#CFCFCF',
                         onSubmitEditing: function onSubmitEditing() {
                             return _this2.passwordInput.focus();
                         },
                         keyboardType: 'email-address',
                         autoCapitalize: 'none',
                         autoCorrect: false,
+                        underlineColorAndroid: 'transparent',
                         style: styles.input,
                         onChangeText: function onChangeText(text) {
                             return _this2.setState({ email: text });
@@ -77232,13 +77366,14 @@ var PatientSignIn = _wrapComponent('PatientSignIn')((_temp = _class = function (
                         value: this.state.email,
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 67
+                            lineNumber: 73
                         }
                     }),
                     _react3.default.createElement(_reactNative.TextInput, {
                         placeholder: "Enter Password",
-                        placeholderTextColor: '#000000',
+                        placeholderTextColor: '#CFCFCF',
                         secureTextEntry: true,
+                        underlineColorAndroid: 'transparent',
                         style: styles.input,
                         ref: function ref(input) {
                             return _this2.passwordInput = input;
@@ -77249,7 +77384,7 @@ var PatientSignIn = _wrapComponent('PatientSignIn')((_temp = _class = function (
                         value: this.state.password,
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 78
+                            lineNumber: 85
                         }
                     }),
                     _react3.default.createElement(SeafoamButton, {
@@ -77259,7 +77394,7 @@ var PatientSignIn = _wrapComponent('PatientSignIn')((_temp = _class = function (
                         },
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 88
+                            lineNumber: 96
                         }
                     })
                 )
@@ -77268,7 +77403,10 @@ var PatientSignIn = _wrapComponent('PatientSignIn')((_temp = _class = function (
     }]);
 
     return PatientSignIn;
-}(_react2.Component), _class.navigationOptions = { title: 'Please input your login credentials' }, _temp));
+}(_react2.Component), _class.navigationOptions = {
+    title: 'Please input your login credentials',
+    headerStyle: { backgroundColor: "#FF6127" }
+}, _temp));
 
 exports.default = PatientSignIn;
 
@@ -77281,21 +77419,29 @@ var styles = _reactNative.StyleSheet.create({
         justifyContent: 'center'
     },
     input: {
-        height: 55,
         fontSize: 16,
-        backgroundColor: 'rgba(255,255,255,0.8)',
+        backgroundColor: '#FEFDF5',
         marginBottom: 20,
-        color: '#000000',
-        paddingHorizontal: 20
+        borderWidth: 1
     },
-
-    login: {
+    title: {
+        fontSize: 24,
         fontWeight: 'bold',
-        fontSize: 20
+        marginBottom: 30,
+        textAlign: 'center',
+        alignSelf: 'stretch',
+        color: "#000000"
+    },
+    login: {
+        textAlign: 'center',
+        alignSelf: 'stretch',
+        fontWeight: 'bold',
+        fontSize: 14,
+        color: "#000000"
     }
 
 });
-}, 640, null, "DiabetesGroup/screens/PatientSignIn.js");
+}, 642, null, "DiabetesGroup/screens/PatientSignIn.js");
 __d(/* DiabetesGroup/screens/NutritionistSignIn.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -77404,43 +77550,50 @@ var NutritionistSignIn = _wrapComponent('NutritionistSignIn')((_temp = _class = 
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 62
+                        lineNumber: 65
                     }
                 },
                 _react3.default.createElement(
                     _reactNative.View,
                     { style: styles.container, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 63
+                            lineNumber: 66
                         }
                     },
                     _react3.default.createElement(
                         _reactNative.Text,
-                        {
-                            __source: {
+                        { style: styles.title, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 64
+                                lineNumber: 67
                             }
                         },
-                        _react3.default.createElement(
-                            _reactNative.Text,
-                            { style: styles.login, __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 65
-                                }
-                            },
-                            'Nutritionist Login'
-                        )
+                        'AahaRX',
+                        "\n",
+                        'For',
+                        "\n",
+                        'Diabetes',
+                        "\n",
+                        'Management'
+                    ),
+                    _react3.default.createElement(
+                        _reactNative.Text,
+                        { style: styles.login, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 70
+                            }
+                        },
+                        'Nutritionist Login'
                     ),
                     _react3.default.createElement(_reactNative.TextInput, {
-                        placeholder: "Enter Username or Email",
-                        placeholderTextColor: '#000000',
+                        placeholder: "Enter Email",
+                        placeholderTextColor: '#CFCFCF',
                         onSubmitEditing: function onSubmitEditing() {
                             return _this2.passwordInput.focus();
                         },
                         keyboardType: 'email-address',
                         autoCapitalize: 'none',
                         autoCorrect: false,
+                        underlineColorAndroid: 'transparent',
                         style: styles.input,
                         onChangeText: function onChangeText(text) {
                             return _this2.setState({ email: text });
@@ -77448,13 +77601,14 @@ var NutritionistSignIn = _wrapComponent('NutritionistSignIn')((_temp = _class = 
                         value: this.state.email,
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 67
+                            lineNumber: 73
                         }
                     }),
                     _react3.default.createElement(_reactNative.TextInput, {
                         placeholder: "Enter Password",
-                        placeholderTextColor: '#000000',
+                        placeholderTextColor: '#CFCFCF',
                         secureTextEntry: true,
+                        underlineColorAndroid: 'transparent',
                         style: styles.input,
                         ref: function ref(input) {
                             return _this2.passwordInput = input;
@@ -77465,7 +77619,7 @@ var NutritionistSignIn = _wrapComponent('NutritionistSignIn')((_temp = _class = 
                         value: this.state.password,
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 78
+                            lineNumber: 85
                         }
                     }),
                     _react3.default.createElement(SeafoamButton, {
@@ -77475,7 +77629,7 @@ var NutritionistSignIn = _wrapComponent('NutritionistSignIn')((_temp = _class = 
                         },
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 88
+                            lineNumber: 96
                         }
                     })
                 )
@@ -77484,7 +77638,10 @@ var NutritionistSignIn = _wrapComponent('NutritionistSignIn')((_temp = _class = 
     }]);
 
     return NutritionistSignIn;
-}(_react2.Component), _class.navigationOptions = { title: 'Please input your login credentials' }, _temp));
+}(_react2.Component), _class.navigationOptions = {
+    title: 'Please input your login credentials',
+    headerStyle: { backgroundColor: "#FF6127" }
+}, _temp));
 
 exports.default = NutritionistSignIn;
 
@@ -77497,23 +77654,31 @@ var styles = _reactNative.StyleSheet.create({
         justifyContent: 'center'
     },
     input: {
-        height: 55,
         fontSize: 16,
-        backgroundColor: 'rgba(255,255,255,0.8)',
+        backgroundColor: '#FEFDF5',
         marginBottom: 20,
-        color: '#000000',
-        paddingHorizontal: 20
+        borderWidth: 1
     },
-
-    login: {
+    title: {
+        fontSize: 24,
         fontWeight: 'bold',
-        fontSize: 20
+        marginBottom: 30,
+        textAlign: 'center',
+        alignSelf: 'stretch',
+        color: "#000000"
+    },
+    login: {
+        textAlign: 'center',
+        alignSelf: 'stretch',
+        fontWeight: 'bold',
+        fontSize: 14,
+        color: "#000000"
     }
 
 });
-}, 641, null, "DiabetesGroup/screens/NutritionistSignIn.js");
+}, 643, null, "DiabetesGroup/screens/NutritionistSignIn.js");
 __d(/* DiabetesGroup/screens/createNewUser.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _react2 = require(36     ); // 36 = react
@@ -77545,209 +77710,240 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _components = {
-  createNewUser: {
-    displayName: 'createNewUser'
-  }
+    createNewUser: {
+        displayName: 'createNewUser'
+    }
 };
 
 var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
-  filename: 'C:/Users/shark/Capstone/DiabetesGroup/screens/createNewUser.js',
-  components: _components,
-  locals: [module],
-  imports: [_react3.default]
+    filename: 'C:/Users/shark/Capstone/DiabetesGroup/screens/createNewUser.js',
+    components: _components,
+    locals: [module],
+    imports: [_react3.default]
 });
 
 function _wrapComponent(id) {
-  return function (Component) {
-    return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
-  };
+    return function (Component) {
+        return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+    };
 }
 
 var SeafoamButton = require(490                          ); // 490 = ../components/SeafoamButton
 
 var createNewUser = _wrapComponent('createNewUser')((_temp = _class = function (_Component) {
-  _inherits(createNewUser, _Component);
+    _inherits(createNewUser, _Component);
 
-  function createNewUser(props) {
-    _classCallCheck(this, createNewUser);
+    function createNewUser(props) {
+        _classCallCheck(this, createNewUser);
 
-    var _this = _possibleConstructorReturn(this, (createNewUser.__proto__ || Object.getPrototypeOf(createNewUser)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (createNewUser.__proto__ || Object.getPrototypeOf(createNewUser)).call(this, props));
 
-    _this.state = { email: '', password: '', userName: '' };
-    return _this;
-  }
+        _this.state = { email: '', password: '', userName: '', userType: '', Age: '' };
+        return _this;
+    }
 
-  _createClass(createNewUser, [{
-    key: '_signUp',
-    value: function _signUp() {
+    _createClass(createNewUser, [{
+        key: '_signUp',
+        value: function _signUp() {
+            var navigate = this.props.navigation.navigate;
 
-      var email = this.state.email;
-      var password = this.state.password;
-      var userName = this.state.userName;
 
-      if (email.length < 4) {
-        alert('Please enter an email address.');
-      }
-      if (password.length < 4) {
-        alert('Please enter a password.');
-      }
+            var email = this.state.email;
+            var password = this.state.password;
+            var userName = this.state.userName;
+            var userType = this.state.userType;
 
-      _FireBaseApp2.default.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+            if (email.length < 4) {
+                alert('Please enter an email address.');
+            }
+            if (password.length < 4) {
+                alert('Please enter a password.');
+            }
 
-        if (errorCode === 'auth/weak-password') {
-          alert('The password is too weak.');
-        } else {
-          alert(errorMessage);
+            _FireBaseApp2.default.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+
+                if (errorCode === 'auth/weak-password') {
+                    alert('The password is too weak.');
+                } else {
+                    alert(errorMessage);
+                }
+                console.log(error);
+            }).then(function (user) {
+                if (userType === "Nutritionist") {
+                    _FireBaseApp2.default.database().ref('Nutritionists/' + user.uid).set({
+                        userName: userName,
+                        email: email,
+                        password: password
+                    });
+                    navigate('User');
+                } else if (userType === "Patient") {
+                    var Age = Math.floor(Math.random() * 99);
+                    _FireBaseApp2.default.database().ref('Patients/' + user.uid).set({
+                        userName: userName,
+                        email: email,
+                        password: password,
+                        Age: Age,
+                        nextAppt: "12/21/17, 12:20 PM"
+                    });
+                    navigate('User');
+                } else {
+                    alert('Please select a user type!');
+                }
+            });
         }
-        console.log(error);
-      });
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
 
-      var user = _FireBaseApp2.default.auth().currentUser;
-      var database = _FireBaseApp2.default.database();
+            return _react3.default.createElement(
+                _reactNative.View,
+                { style: styles.container, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 93
+                    }
+                },
+                _react3.default.createElement(
+                    _reactNative.View,
+                    { style: styles.stretched, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 94
+                        }
+                    },
+                    _react3.default.createElement(
+                        _reactNative.Text,
+                        { style: styles.title, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 95
+                            }
+                        },
+                        'Enter your information below:'
+                    ),
+                    _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Name',
+                        underlineColorAndroid: 'transparent',
+                        placeholderTextColor: '#CFCFCF',
+                        onChangeText: function onChangeText(text) {
+                            return _this2.setState({ userName: text });
+                        },
+                        value: this.state.userName,
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 99
+                        }
+                    }),
+                    _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Email',
+                        underlineColorAndroid: 'transparent',
+                        placeholderTextColor: '#CFCFCF',
+                        onChangeText: function onChangeText(text) {
+                            return _this2.setState({ email: text });
+                        },
+                        value: this.state.email,
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 106
+                        }
+                    }),
+                    _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Password',
+                        underlineColorAndroid: 'transparent',
+                        placeholderTextColor: '#CFCFCF',
+                        secureTextEntry: true,
+                        onChangeText: function onChangeText(text) {
+                            return _this2.setState({ password: text });
+                        },
+                        value: this.state.password,
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 113
+                        }
+                    }),
+                    _react3.default.createElement(
+                        _reactNative.Picker,
+                        {
+                            style: { marginBottom: 15 },
+                            selectedValue: this.state.userType,
+                            onValueChange: function onValueChange(itemValue) {
+                                return _this2.setState({ userType: itemValue });
+                            }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 120
+                            }
+                        },
+                        _react3.default.createElement(_reactNative.Picker.Item, { label: 'User Type', value: 'User Type', __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 124
+                            }
+                        }),
+                        _react3.default.createElement(_reactNative.Picker.Item, { label: 'Nutritionist', value: 'Nutritionist', __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 125
+                            }
+                        }),
+                        _react3.default.createElement(_reactNative.Picker.Item, { label: 'Patient', value: 'Patient', __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 126
+                            }
+                        })
+                    ),
+                    _react3.default.createElement(SeafoamButton, {
+                        title: 'Submit',
+                        onPress: function onPress() {
+                            return _this2._signUp();
+                        },
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 128
+                        }
+                    })
+                )
+            );
+        }
+    }]);
 
-      _FireBaseApp2.default.database().ref('users/' + user.uid).set({
-        userName: userName,
-        email: email,
-        password: password
-
-      });
-
-      var navigate = this.props.navigation.navigate;
-
-      navigate('User');
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      return _react3.default.createElement(
-        _reactNative.View,
-        { style: styles.container, __source: {
-            fileName: _jsxFileName,
-            lineNumber: 71
-          }
-        },
-        _react3.default.createElement(
-          _reactNative.View,
-          { style: styles.stretched, __source: {
-              fileName: _jsxFileName,
-              lineNumber: 72
-            }
-          },
-          _react3.default.createElement(
-            _reactNative.Text,
-            { style: styles.title, __source: {
-                fileName: _jsxFileName,
-                lineNumber: 73
-              }
-            },
-            'Enter your information below:'
-          ),
-          _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Name',
-            underlineColorAndroid: 'transparent',
-            onChangeText: function onChangeText(text) {
-              return _this2.setState({ userName: text });
-            },
-            value: this.state.userName,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 77
-            }
-          }),
-          _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Email',
-            underlineColorAndroid: 'transparent',
-            onChangeText: function onChangeText(text) {
-              return _this2.setState({ email: text });
-            },
-            value: this.state.email,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 83
-            }
-          }),
-          _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Password',
-            underlineColorAndroid: 'transparent',
-            secureTextEntry: true,
-            onChangeText: function onChangeText(text) {
-              return _this2.setState({ password: text });
-            },
-            value: this.state.password,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 89
-            }
-          }),
-          '//TODO: add in drop down menu for selecting patient or nutritionist account. Also change the database structure to have seperate patients and nutritionists trees.',
-          _react3.default.createElement(SeafoamButton, {
-            title: 'Submit',
-            onPress: function onPress() {
-              return _this2._signUp();
-            },
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 98
-            }
-          })
-        )
-      );
-    }
-  }]);
-
-  return createNewUser;
-}(_react2.Component), _class.navigationOptions = { title: 'Create a new account' }, _temp));
+    return createNewUser;
+}(_react2.Component), _class.navigationOptions = {
+    title: 'New Account',
+    headerStyle: { backgroundColor: "#FF6127" }
+}, _temp));
 
 exports.default = createNewUser;
 
 
 var styles = _reactNative.StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingLeft: 55,
-    paddingRight: 55,
-    backgroundColor: '#F7F1D2'
-  },
-  submitbutton: {
-    padding: 20,
-    marginTop: 30,
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    backgroundColor: '#1FC97C'
-  },
-  submittext: {
-    fontWeight: 'bold'
-  },
-  welcome: {
-    fontSize: 25,
-    textAlign: 'center',
-    margin: 15,
-    height: 70
-  },
-  stretched: {
-    alignSelf: 'stretch'
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 35,
-    paddingBottom: 10,
-    textAlign: 'center'
-
-  },
-  input: {
-    height: 40,
-    marginBottom: 30,
-    alignSelf: 'stretch',
-    color: "#000000",
-    borderColor: "#000000",
-    borderWidth: 1
-
-  }
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingLeft: 55,
+        paddingRight: 55,
+        backgroundColor: '#F7F1D2'
+    },
+    submitbutton: {
+        alignItems: 'center',
+        alignSelf: 'stretch',
+        backgroundColor: '#1FC97C'
+    },
+    submittext: {
+        fontWeight: 'bold'
+    },
+    stretched: {
+        alignSelf: 'stretch'
+    },
+    title: {
+        fontSize: 20,
+        textAlign: 'center',
+        color: "#000000"
+    },
+    input: {
+        marginBottom: 10,
+        alignSelf: 'stretch',
+        backgroundColor: '#FEFDF5',
+        borderColor: "#000000",
+        borderWidth: 1
+    }
 
 });
-}, 642, null, "DiabetesGroup/screens/createNewUser.js");
+}, 644, null, "DiabetesGroup/screens/createNewUser.js");
 __d(/* DiabetesGroup/screens/patientHome.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -77771,8 +77967,6 @@ var _reactNative = require(12            ); // 12 = react-native
 var _FireBaseApp = require(492            ); // 492 = ./FireBaseApp
 
 var _FireBaseApp2 = _interopRequireDefault(_FireBaseApp);
-
-var _reactNativeTableComponent = require(644                           ); // 644 = react-native-table-component
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -77802,8 +77996,9 @@ function _wrapComponent(id) {
 }
 
 var SeafoamButton = require(490                          ); // 490 = ../components/SeafoamButton
-var GlucoseCircle = require(649                          ); // 649 = ../components/GlucoseCircle
-var MessengerButton = require(650                            ); // 650 = ../components/MessengerButton
+var GlucoseCircle = require(646                          ); // 646 = ../components/GlucoseCircle
+var MessengerButton = require(639                            ); // 639 = ../components/MessengerButton
+var GlucoseLogTable = require(647                            ); // 647 = ../components/GlucoseLogTable
 
 var patientHome = _wrapComponent('patientHome')((_temp = _class = function (_React$Component) {
     _inherits(patientHome, _React$Component);
@@ -77811,33 +78006,54 @@ var patientHome = _wrapComponent('patientHome')((_temp = _class = function (_Rea
     function patientHome(props) {
         _classCallCheck(this, patientHome);
 
-        return _possibleConstructorReturn(this, (patientHome.__proto__ || Object.getPrototypeOf(patientHome)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (patientHome.__proto__ || Object.getPrototypeOf(patientHome)).call(this, props));
+
+        console.ignoredYellowBox = ['Setting a timer'];
+        var userID = _FireBaseApp2.default.auth().currentUser.uid;
+        _this.myRef = _FireBaseApp2.default.database().ref('Patients/' + userID);
+        _this.state = { nextAppt: '' };
+        return _this;
     }
 
     _createClass(patientHome, [{
+        key: 'updateItems',
+        value: function updateItems(myRef) {
+            var _this2 = this;
+
+            myRef.on('value', function (snapshot) {
+                var appt = snapshot.val().nextAppt;
+                _this2.setState({ nextAppt: appt });
+            });
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.updateItems(this.myRef);
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            this.myRef.off();
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var userId = _FireBaseApp2.default.auth().currentUser.uid;
-
-            var appt = '11/16/2017 -- 10:30';
             var val1 = 7.6;
             var navigate = this.props.navigation.navigate;
 
-            var tableHead = ['Glucose Level (mg/dL)', 'Type', 'Time Recorded'];
-            var tableData = [['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '11:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '5:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '11:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '5:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '11:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '5:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '11:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '5:30']];
             return _react3.default.createElement(
                 _reactNative.ScrollView,
                 {
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 49
+                        lineNumber: 44
                     }
                 },
                 _react3.default.createElement(
                     _reactNative.View,
                     { style: styles.container3, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 50
+                            lineNumber: 45
                         }
                     },
                     _react3.default.createElement(MessengerButton, {
@@ -77845,7 +78061,7 @@ var patientHome = _wrapComponent('patientHome')((_temp = _class = function (_Rea
                             return navigate('PHome');
                         }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 51
+                            lineNumber: 46
                         }
                     })
                 ),
@@ -77853,18 +78069,18 @@ var patientHome = _wrapComponent('patientHome')((_temp = _class = function (_Rea
                     _reactNative.View,
                     { style: styles.container, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 55
+                            lineNumber: 50
                         }
                     },
                     _react3.default.createElement(GlucoseCircle, { title: val1 + '      HgbA1c', __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 56
+                            lineNumber: 51
                         }
                     }),
                     _react3.default.createElement(_reactNative.Text, {
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 57
+                            lineNumber: 52
                         }
                     })
                 ),
@@ -77872,17 +78088,17 @@ var patientHome = _wrapComponent('patientHome')((_temp = _class = function (_Rea
                     _reactNative.View,
                     { style: styles.container2, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 60
+                            lineNumber: 55
                         }
                     },
                     _react3.default.createElement(GlucoseCircle, { title: '60' + '      FBG', __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 61
+                            lineNumber: 56
                         }
                     }),
                     _react3.default.createElement(GlucoseCircle, { title: '150' + '      PpBG', __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 62
+                            lineNumber: 57
                         }
                     })
                 ),
@@ -77890,30 +78106,30 @@ var patientHome = _wrapComponent('patientHome')((_temp = _class = function (_Rea
                     _reactNative.View,
                     { style: styles.container, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 65
+                            lineNumber: 60
                         }
                     },
                     _react3.default.createElement(
                         _reactNative.Text,
                         { style: styles.nText, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 66
+                                lineNumber: 61
                             }
                         },
-                        'Next Appointment: ' + userId
+                        'Next Appointment: ' + this.state.nextAppt
                     ),
                     _react3.default.createElement(SeafoamButton, { title: 'Input Glucose Reading',
                         onPress: function onPress() {
                             return navigate('GInput');
                         }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 70
+                            lineNumber: 65
                         }
                     }),
                     _react3.default.createElement(_reactNative.Text, {
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 72
+                            lineNumber: 67
                         }
                     }),
                     _react3.default.createElement(SeafoamButton, { title: 'My Diet',
@@ -77921,13 +78137,13 @@ var patientHome = _wrapComponent('patientHome')((_temp = _class = function (_Rea
                             return navigate('PDiet');
                         }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 74
+                            lineNumber: 69
                         }
                     }),
                     _react3.default.createElement(_reactNative.Text, {
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 76
+                            lineNumber: 71
                         }
                     }),
                     _react3.default.createElement(SeafoamButton, { title: 'Medications',
@@ -77935,44 +78151,30 @@ var patientHome = _wrapComponent('patientHome')((_temp = _class = function (_Rea
                             return navigate('PMed');
                         }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 77
+                            lineNumber: 72
                         }
                     }),
                     _react3.default.createElement(_reactNative.Text, {
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 79
+                            lineNumber: 74
                         }
                     })
                 ),
-                _react3.default.createElement(
-                    _reactNativeTableComponent.Table,
-                    {
-                        __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 82
-                        }
-                    },
-                    _react3.default.createElement(_reactNativeTableComponent.Row, { data: tableHead, style: styles.head, textStyle: styles.text, __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 83
-                        }
-                    }),
-                    tableData.map(function (data, i) {
-                        return _react3.default.createElement(_reactNativeTableComponent.Row, { key: i, data: data, style: [styles.row, i % 2 && { backgroundColor: 'orange' }], textStyle: styles.text, __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 85
-                            }
-                        });
-                    })
-                )
+                _react3.default.createElement(GlucoseLogTable, {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 77
+                    }
+                })
             );
         }
     }]);
 
     return patientHome;
 }(_react3.default.Component), _class.navigationOptions = {
-    title: 'Home Screen'
+    title: 'Home Screen',
+    headerStyle: { backgroundColor: "#FF6127" }
 }, _temp));
 
 exports.default = patientHome;
@@ -78010,19 +78212,274 @@ var styles = _reactNative.StyleSheet.create({
     row: { height: 30 }
 
 });
-}, 643, null, "DiabetesGroup/screens/patientHome.js");
+}, 645, null, "DiabetesGroup/screens/patientHome.js");
+__d(/* DiabetesGroup/components/GlucoseCircle.js */function(global, require, module, exports) {var _react2 = require(36     ); // 36 = react
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index = require(160                                                 ); // 160 = ./../node_modules/react-transform-hmr/lib/index.js
+
+var _index2 = _interopRequireDefault(_index);
+
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\components\\GlucoseCircle.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _reactNative = require(12            ); // 12 = react-native
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+    GlucoseCircle: {
+        displayName: 'GlucoseCircle'
+    }
+};
+
+var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+    filename: 'C:/Users/shark/Capstone/DiabetesGroup/components/GlucoseCircle.js',
+    components: _components,
+    locals: [module],
+    imports: [_react3.default]
+});
+
+function _wrapComponent(id) {
+    return function (Component) {
+        return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+    };
+}
+
+var GlucoseCircle = _wrapComponent('GlucoseCircle')(function (_Component) {
+    _inherits(GlucoseCircle, _Component);
+
+    function GlucoseCircle() {
+        _classCallCheck(this, GlucoseCircle);
+
+        return _possibleConstructorReturn(this, (GlucoseCircle.__proto__ || Object.getPrototypeOf(GlucoseCircle)).apply(this, arguments));
+    }
+
+    _createClass(GlucoseCircle, [{
+        key: 'render',
+        value: function render() {
+            return _react3.default.createElement(
+                _reactNative.View,
+                { style: styles.gCircle, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 13
+                    }
+                },
+                _react3.default.createElement(
+                    _reactNative.TouchableHighlight,
+                    {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 14
+                        }
+                    },
+                    _react3.default.createElement(
+                        _reactNative.Text,
+                        { style: styles.valText, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 16
+                            }
+                        },
+                        this.props.title
+                    )
+                )
+            );
+        }
+    }]);
+
+    return GlucoseCircle;
+}(_react2.Component));
+
+var styles = _reactNative.StyleSheet.create({
+    gCircle: {
+        backgroundColor: 'orange',
+        borderRadius: 60,
+        borderColor: '#000000',
+        borderWidth: 3,
+        overflow: 'hidden',
+        width: 120,
+        height: 120,
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 30,
+        paddingBottom: 30
+
+    },
+    valText: {
+        color: '#000000',
+        fontSize: 20,
+        textAlign: 'center'
+    }
+
+});
+
+module.exports = GlucoseCircle;
+}, 646, null, "DiabetesGroup/components/GlucoseCircle.js");
+__d(/* DiabetesGroup/components/GlucoseLogTable.js */function(global, require, module, exports) {var _react2 = require(36     ); // 36 = react
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index = require(160                                                 ); // 160 = ./../node_modules/react-transform-hmr/lib/index.js
+
+var _index2 = _interopRequireDefault(_index);
+
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\components\\GlucoseLogTable.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _reactNative = require(12            ); // 12 = react-native
+
+var _reactNativeTableComponent = require(648                           ); // 648 = react-native-table-component
+
+var _FireBaseApp = require(492                     ); // 492 = ../screens/FireBaseApp
+
+var _FireBaseApp2 = _interopRequireDefault(_FireBaseApp);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+    GlucoseLogTable: {
+        displayName: 'GlucoseLogTable'
+    }
+};
+
+var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+    filename: 'C:/Users/shark/Capstone/DiabetesGroup/components/GlucoseLogTable.js',
+    components: _components,
+    locals: [module],
+    imports: [_react3.default]
+});
+
+function _wrapComponent(id) {
+    return function (Component) {
+        return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+    };
+}
+
+var GlucoseLogTable = _wrapComponent('GlucoseLogTable')(function (_Component) {
+    _inherits(GlucoseLogTable, _Component);
+
+    function GlucoseLogTable(props) {
+        _classCallCheck(this, GlucoseLogTable);
+
+        var _this = _possibleConstructorReturn(this, (GlucoseLogTable.__proto__ || Object.getPrototypeOf(GlucoseLogTable)).call(this, props));
+
+        _this.keyExtractor = function (item) {
+            return item.id;
+        };
+
+        console.ignoredYellowBox = ['Setting a timer'];
+        var userID = _FireBaseApp2.default.auth().currentUser.uid;
+        _this.itemsRef = _FireBaseApp2.default.database().ref('Patients/' + userID + '/logs/');
+        _this.state = { logs: [], glucoseLevel: '', readingType: '', time: '' };
+        return _this;
+    }
+
+    _createClass(GlucoseLogTable, [{
+        key: 'listenForItems',
+        value: function listenForItems(itemsRef) {
+            var _this2 = this;
+
+            itemsRef.on('value', function (snap) {
+                var items = [];
+                snap.forEach(function (child) {
+                    items.push([child.val().glucoseLevel, child.val().readingType, child.val().time]);
+                });
+                _this2.setState({ logs: items });
+            });
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.listenForItems(this.itemsRef);
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            this.itemsRef.off();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var tableHead = ['Glucose Level (mg/dL)', 'Type', 'Time Recorded'];
+
+            return _react3.default.createElement(
+                _reactNative.View,
+                {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 48
+                    }
+                },
+                _react3.default.createElement(
+                    _reactNativeTableComponent.Table,
+                    {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 49
+                        }
+                    },
+                    _react3.default.createElement(_reactNativeTableComponent.Row, { data: tableHead, style: styles.head, textStyle: styles.text, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 51
+                        }
+                    }),
+                    this.state.logs.map(function (data, i) {
+                        return _react3.default.createElement(_reactNativeTableComponent.Row, { key: i, data: data, style: [styles.row, i % 2 && { backgroundColor: 'orange' }], textStyle: styles.text, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 54
+                            }
+                        });
+                    })
+                )
+            );
+        }
+    }]);
+
+    return GlucoseLogTable;
+}(_react2.Component));
+
+var styles = _reactNative.StyleSheet.create({
+    head: { height: 40, backgroundColor: 'orange' },
+    text: { textAlign: 'center', color: 'black' },
+    row: { height: 30 },
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F7F1D2'
+    }
+});
+
+module.exports = GlucoseLogTable;
+}, 647, null, "DiabetesGroup/components/GlucoseLogTable.js");
 __d(/* react-native-table-component/index.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Cell = exports.Cols = exports.Col = exports.Rows = exports.Row = exports.TableWrapper = exports.Table = undefined;
 
-var _rows = require(645                ); // 645 = ./components/rows
+var _rows = require(649                ); // 649 = ./components/rows
 
-var _cols = require(647                ); // 647 = ./components/cols
+var _cols = require(651                ); // 651 = ./components/cols
 
-var _table = require(648                 ); // 648 = ./components/table
+var _table = require(652                 ); // 652 = ./components/table
 
-var _cell = require(646                ); // 646 = ./components/cell
+var _cell = require(650                ); // 650 = ./components/cell
 
 var _cell2 = _interopRequireDefault(_cell);
 
@@ -78035,7 +78492,7 @@ exports.Rows = _rows.Rows;
 exports.Col = _cols.Col;
 exports.Cols = _cols.Cols;
 exports.Cell = _cell2.default;
-}, 644, null, "react-native-table-component/index.js");
+}, 648, null, "react-native-table-component/index.js");
 __d(/* react-native-table-component/components/rows.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -78063,7 +78520,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _cell = require(646     ); // 646 = ./cell
+var _cell = require(650     ); // 650 = ./cell
 
 var _cell2 = _interopRequireDefault(_cell);
 
@@ -78225,7 +78682,7 @@ var styles = _reactNative.StyleSheet.create({
 
 exports.Row = Row;
 exports.Rows = Rows;
-}, 645, null, "react-native-table-component/components/rows.js");
+}, 649, null, "react-native-table-component/components/rows.js");
 __d(/* react-native-table-component/components/cell.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -78348,7 +78805,7 @@ var styles = _reactNative.StyleSheet.create({
 });
 
 exports.default = Cell;
-}, 646, null, "react-native-table-component/components/cell.js");
+}, 650, null, "react-native-table-component/components/cell.js");
 __d(/* react-native-table-component/components/cols.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -78376,7 +78833,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _cell = require(646     ); // 646 = ./cell
+var _cell = require(650     ); // 650 = ./cell
 
 var _cell2 = _interopRequireDefault(_cell);
 
@@ -78527,7 +78984,7 @@ var styles = _reactNative.StyleSheet.create({
 
 exports.Col = Col;
 exports.Cols = Cols;
-}, 647, null, "react-native-table-component/components/cols.js");
+}, 651, null, "react-native-table-component/components/cols.js");
 __d(/* react-native-table-component/components/table.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -78687,214 +79144,7 @@ var TableWrapper = _wrapComponent('TableWrapper')((_temp2 = _class2 = function (
 
 exports.Table = Table;
 exports.TableWrapper = TableWrapper;
-}, 648, null, "react-native-table-component/components/table.js");
-__d(/* DiabetesGroup/components/GlucoseCircle.js */function(global, require, module, exports) {var _react2 = require(36     ); // 36 = react
-
-var _react3 = _interopRequireDefault(_react2);
-
-var _index = require(160                                                 ); // 160 = ./../node_modules/react-transform-hmr/lib/index.js
-
-var _index2 = _interopRequireDefault(_index);
-
-var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\components\\GlucoseCircle.js';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _reactNative = require(12            ); // 12 = react-native
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _components = {
-    GlucoseCircle: {
-        displayName: 'GlucoseCircle'
-    }
-};
-
-var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
-    filename: 'C:/Users/shark/Capstone/DiabetesGroup/components/GlucoseCircle.js',
-    components: _components,
-    locals: [module],
-    imports: [_react3.default]
-});
-
-function _wrapComponent(id) {
-    return function (Component) {
-        return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
-    };
-}
-
-var GlucoseCircle = _wrapComponent('GlucoseCircle')(function (_Component) {
-    _inherits(GlucoseCircle, _Component);
-
-    function GlucoseCircle() {
-        _classCallCheck(this, GlucoseCircle);
-
-        return _possibleConstructorReturn(this, (GlucoseCircle.__proto__ || Object.getPrototypeOf(GlucoseCircle)).apply(this, arguments));
-    }
-
-    _createClass(GlucoseCircle, [{
-        key: 'render',
-        value: function render() {
-            return _react3.default.createElement(
-                _reactNative.View,
-                { style: styles.gCircle, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 13
-                    }
-                },
-                _react3.default.createElement(
-                    _reactNative.TouchableHighlight,
-                    {
-                        __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 14
-                        }
-                    },
-                    _react3.default.createElement(
-                        _reactNative.Text,
-                        { style: styles.valText, __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 16
-                            }
-                        },
-                        this.props.title
-                    )
-                )
-            );
-        }
-    }]);
-
-    return GlucoseCircle;
-}(_react2.Component));
-
-var styles = _reactNative.StyleSheet.create({
-    gCircle: {
-        backgroundColor: 'orange',
-        borderRadius: 60,
-        borderColor: '#000000',
-        borderWidth: 3,
-        overflow: 'hidden',
-        width: 120,
-        height: 120,
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingTop: 30,
-        paddingBottom: 30
-
-    },
-    valText: {
-        color: '#000000',
-        fontSize: 20,
-        textAlign: 'center'
-    }
-
-});
-
-module.exports = GlucoseCircle;
-}, 649, null, "DiabetesGroup/components/GlucoseCircle.js");
-__d(/* DiabetesGroup/components/MessengerButton.js */function(global, require, module, exports) {var _react2 = require(36     ); // 36 = react
-
-var _react3 = _interopRequireDefault(_react2);
-
-var _index = require(160                                                 ); // 160 = ./../node_modules/react-transform-hmr/lib/index.js
-
-var _index2 = _interopRequireDefault(_index);
-
-var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\components\\MessengerButton.js';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _reactNative = require(12            ); // 12 = react-native
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _components = {
-    MessengerButton: {
-        displayName: 'MessengerButton'
-    }
-};
-
-var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
-    filename: 'C:/Users/shark/Capstone/DiabetesGroup/components/MessengerButton.js',
-    components: _components,
-    locals: [module],
-    imports: [_react3.default]
-});
-
-function _wrapComponent(id) {
-    return function (Component) {
-        return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
-    };
-}
-
-var MessengerButton = _wrapComponent('MessengerButton')(function (_Component) {
-    _inherits(MessengerButton, _Component);
-
-    function MessengerButton() {
-        _classCallCheck(this, MessengerButton);
-
-        return _possibleConstructorReturn(this, (MessengerButton.__proto__ || Object.getPrototypeOf(MessengerButton)).apply(this, arguments));
-    }
-
-    _createClass(MessengerButton, [{
-        key: 'render',
-        value: function render() {
-            return _react3.default.createElement(
-                _reactNative.View,
-                { style: styles.press, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 13
-                    }
-                },
-                _react3.default.createElement(
-                    _reactNative.TouchableHighlight,
-                    {
-                        onPress: this.props.onPress, __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 14
-                        }
-                    },
-                    _react3.default.createElement(_reactNative.Image, {
-                        style: styles.button,
-                        source: require(651               ), __source: { // 651 = ./MessengerB.png
-                            fileName: _jsxFileName,
-                            lineNumber: 16
-                        }
-                    })
-                )
-            );
-        }
-    }]);
-
-    return MessengerButton;
-}(_react2.Component));
-
-var styles = _reactNative.StyleSheet.create({
-    press: {
-        backgroundColor: '#F7F1D2',
-        overflow: 'hidden'
-    },
-    button: {
-        overlayColor: '#F7F1D2'
-    }
-});
-
-module.exports = MessengerButton;
-}, 650, null, "DiabetesGroup/components/MessengerButton.js");
-__d(/* DiabetesGroup/components/MessengerB.png */function(global, require, module, exports) {module.exports=require(324                                         ).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/components","width":40,"height":39,"scales":[1],"hash":"cc0cc66329dc1a75aef56544c43d16ef","name":"MessengerB","type":"png"}); // 324 = react-native/Libraries/Image/AssetRegistry
-}, 651, null, "DiabetesGroup/components/MessengerB.png");
+}, 652, null, "react-native-table-component/components/table.js");
 __d(/* DiabetesGroup/screens/glucoseInput.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -78975,7 +79225,7 @@ var glucoseInput = _wrapComponent('glucoseInput')((_temp = _class = function (_C
             } else if (readingType === "") {
                 alert('Please select a valid reading type.');
             } else {
-                _FireBaseApp2.default.database().ref('users/' + user.uid + '/logs/').push({
+                _FireBaseApp2.default.database().ref('Patients/' + user.uid + '/logs/').push({
                     time: time,
                     glucoseLevel: glucoseLevel,
                     readingType: readingType,
@@ -78995,41 +79245,42 @@ var glucoseInput = _wrapComponent('glucoseInput')((_temp = _class = function (_C
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 58
+                        lineNumber: 62
                     }
                 },
                 _react3.default.createElement(
                     _reactNative.View,
                     { style: styles.stretched, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 59
+                            lineNumber: 63
                         }
                     },
                     _react3.default.createElement(
                         _reactNative.Text,
                         { style: styles.title, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 60
+                                lineNumber: 64
                             }
                         },
                         'Enter the following fields:'
                     ),
                     _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Glucose Level',
                         underlineColorAndroid: 'transparent',
+                        placeholderTextColor: '#CFCFCF',
                         onChangeText: function onChangeText(text) {
                             return _this2.setState({ glucoseLevel: text });
                         },
                         value: this.state.glucoseLevel,
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 64
+                            lineNumber: 68
                         }
                     }),
                     _react3.default.createElement(
                         _reactNative.Text,
                         { style: styles.instructions, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 69
+                                lineNumber: 74
                             }
                         },
                         'mg/dL'
@@ -79042,39 +79293,40 @@ var glucoseInput = _wrapComponent('glucoseInput')((_temp = _class = function (_C
                                 return _this2.setState({ readingType: itemValue });
                             }, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 73
+                                lineNumber: 78
                             }
                         },
                         _react3.default.createElement(_reactNative.Picker.Item, { label: 'Reading Type', value: 'Reading Type', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 76
+                                lineNumber: 81
                             }
                         }),
                         _react3.default.createElement(_reactNative.Picker.Item, { label: 'Fasting', value: 'Fasting', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 77
+                                lineNumber: 82
                             }
                         }),
                         _react3.default.createElement(_reactNative.Picker.Item, { label: 'Post-Meal', value: 'Post-Meal', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 78
+                                lineNumber: 83
                             }
                         }),
                         _react3.default.createElement(_reactNative.Picker.Item, { label: 'Other', value: 'Other', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 79
+                                lineNumber: 84
                             }
                         })
                     ),
                     _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Additional Notes',
                         underlineColorAndroid: 'transparent',
+                        placeholderTextColor: '#CFCFCF',
                         onChangeText: function onChangeText(text) {
                             return _this2.setState({ notes: text });
                         },
                         value: this.state.notes,
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 82
+                            lineNumber: 87
                         }
                     })
                 ),
@@ -79084,7 +79336,7 @@ var glucoseInput = _wrapComponent('glucoseInput')((_temp = _class = function (_C
                     },
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 91
+                        lineNumber: 97
                     }
                 })
             );
@@ -79092,7 +79344,10 @@ var glucoseInput = _wrapComponent('glucoseInput')((_temp = _class = function (_C
     }]);
 
     return glucoseInput;
-}(_react2.Component), _class.navigationOptions = { title: 'Glucose Input' }, _temp));
+}(_react2.Component), _class.navigationOptions = {
+    title: 'Glucose Input',
+    headerStyle: { backgroundColor: "#FF6127" }
+}, _temp));
 
 exports.default = glucoseInput;
 
@@ -79122,11 +79377,9 @@ var styles = _reactNative.StyleSheet.create({
         marginTop: -20
     },
     input: {
-        height: 40,
+        fontSize: 16,
+        backgroundColor: '#FEFDF5',
         marginBottom: 20,
-        alignSelf: 'stretch',
-        color: "#000000",
-        borderColor: "#000000",
         borderWidth: 1
 
     },
@@ -79137,7 +79390,7 @@ var styles = _reactNative.StyleSheet.create({
         textAlign: 'center'
     }
 });
-}, 652, null, "DiabetesGroup/screens/glucoseInput.js");
+}, 653, null, "DiabetesGroup/screens/glucoseInput.js");
 __d(/* DiabetesGroup/screens/patientMedication.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -79209,14 +79462,14 @@ var NutritionistSignIn = _wrapComponent('NutritionistSignIn')((_temp = _class = 
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 20
+                        lineNumber: 23
                     }
                 },
                 _react3.default.createElement(
                     _reactNative.Text,
                     { style: styles.welcome, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 21
+                            lineNumber: 24
                         }
                     },
                     'This is where we put in the code'
@@ -79226,7 +79479,10 @@ var NutritionistSignIn = _wrapComponent('NutritionistSignIn')((_temp = _class = 
     }]);
 
     return NutritionistSignIn;
-}(_react2.Component), _class.navigationOptions = { title: 'My Medication' }, _temp));
+}(_react2.Component), _class.navigationOptions = {
+    title: 'My Medication',
+    headerStyle: { backgroundColor: "#FF6127" }
+}, _temp));
 
 exports.default = NutritionistSignIn;
 
@@ -79250,7 +79506,7 @@ var styles = _reactNative.StyleSheet.create({
         marginBottom: 5
     }
 });
-}, 653, null, "DiabetesGroup/screens/patientMedication.js");
+}, 654, null, "DiabetesGroup/screens/patientMedication.js");
 __d(/* DiabetesGroup/screens/patientDiet.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -79322,14 +79578,14 @@ var NutritionistSignIn = _wrapComponent('NutritionistSignIn')((_temp = _class = 
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 20
+                        lineNumber: 23
                     }
                 },
                 _react3.default.createElement(
                     _reactNative.Text,
                     { style: styles.welcome, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 21
+                            lineNumber: 24
                         }
                     },
                     'This is where we put in the code'
@@ -79339,7 +79595,10 @@ var NutritionistSignIn = _wrapComponent('NutritionistSignIn')((_temp = _class = 
     }]);
 
     return NutritionistSignIn;
-}(_react2.Component), _class.navigationOptions = { title: 'My Diet' }, _temp));
+}(_react2.Component), _class.navigationOptions = {
+    title: 'My Diet',
+    headerStyle: { backgroundColor: "#FF6127" }
+}, _temp));
 
 exports.default = NutritionistSignIn;
 
@@ -79363,91 +79622,91 @@ var styles = _reactNative.StyleSheet.create({
         marginBottom: 5
     }
 });
-}, 654, null, "DiabetesGroup/screens/patientDiet.js");
+}, 655, null, "DiabetesGroup/screens/patientDiet.js");
 __d(/* react-navigation/src/react-navigation.js */function(global, require, module, exports) {
 
 module.exports = {
   get createNavigationContainer() {
-    return require(656                          ).default; // 656 = ./createNavigationContainer
+    return require(657                          ).default; // 657 = ./createNavigationContainer
   },
   get StateUtils() {
-    return require(661           ).default; // 661 = ./StateUtils
+    return require(662           ).default; // 662 = ./StateUtils
   },
   get addNavigationHelpers() {
-    return require(659                     ).default; // 659 = ./addNavigationHelpers
+    return require(660                     ).default; // 660 = ./addNavigationHelpers
   },
   get NavigationActions() {
-    return require(658                  ).default; // 658 = ./NavigationActions
+    return require(659                  ).default; // 659 = ./NavigationActions
   },
 
   get createNavigator() {
-    return require(662                           ).default; // 662 = ./navigators/createNavigator
+    return require(663                           ).default; // 663 = ./navigators/createNavigator
   },
   get StackNavigator() {
-    return require(663                          ).default; // 663 = ./navigators/StackNavigator
+    return require(664                          ).default; // 664 = ./navigators/StackNavigator
   },
   get TabNavigator() {
-    return require(695                        ).default; // 695 = ./navigators/TabNavigator
+    return require(696                        ).default; // 696 = ./navigators/TabNavigator
   },
   get DrawerNavigator() {
-    return require(711                           ).default; // 711 = ./navigators/DrawerNavigator
+    return require(712                           ).default; // 712 = ./navigators/DrawerNavigator
   },
 
   get StackRouter() {
-    return require(686                    ).default; // 686 = ./routers/StackRouter
+    return require(687                    ).default; // 687 = ./routers/StackRouter
   },
   get TabRouter() {
-    return require(696                  ).default; // 696 = ./routers/TabRouter
+    return require(697                  ).default; // 697 = ./routers/TabRouter
   },
 
   get Transitioner() {
-    return require(683                   ).default; // 683 = ./views/Transitioner
+    return require(684                   ).default; // 684 = ./views/Transitioner
   },
   get CardStackTransitioner() {
-    return require(664                                      ).default; // 664 = ./views/CardStack/CardStackTransitioner
+    return require(665                                      ).default; // 665 = ./views/CardStack/CardStackTransitioner
   },
   get CardStack() {
-    return require(665                          ).default; // 665 = ./views/CardStack/CardStack
+    return require(666                          ).default; // 666 = ./views/CardStack/CardStack
   },
   get Card() {
-    return require(667                     ).default; // 667 = ./views/CardStack/Card
+    return require(668                     ).default; // 668 = ./views/CardStack/Card
   },
   get SafeAreaView() {
-    return require(677                   ).default; // 677 = ./views/SafeAreaView
+    return require(678                   ).default; // 678 = ./views/SafeAreaView
   },
 
   get Header() {
-    return require(670                    ).default; // 670 = ./views/Header/Header
+    return require(671                    ).default; // 671 = ./views/Header/Header
   },
   get HeaderTitle() {
-    return require(671                         ).default; // 671 = ./views/Header/HeaderTitle
+    return require(672                         ).default; // 672 = ./views/Header/HeaderTitle
   },
   get HeaderBackButton() {
-    return require(672                              ).default; // 672 = ./views/Header/HeaderBackButton
+    return require(673                              ).default; // 673 = ./views/Header/HeaderBackButton
   },
 
   get DrawerView() {
-    return require(713                        ).default; // 713 = ./views/Drawer/DrawerView
+    return require(714                        ).default; // 714 = ./views/Drawer/DrawerView
   },
   get DrawerItems() {
-    return require(716                                  ).default; // 716 = ./views/Drawer/DrawerNavigatorItems
+    return require(717                                  ).default; // 717 = ./views/Drawer/DrawerNavigatorItems
   },
 
   get TabView() {
-    return require(697                      ).default; // 697 = ./views/TabView/TabView
+    return require(698                      ).default; // 698 = ./views/TabView/TabView
   },
   get TabBarTop() {
-    return require(708                        ).default; // 708 = ./views/TabView/TabBarTop
+    return require(709                        ).default; // 709 = ./views/TabView/TabBarTop
   },
   get TabBarBottom() {
-    return require(710                           ).default; // 710 = ./views/TabView/TabBarBottom
+    return require(711                           ).default; // 711 = ./views/TabView/TabBarBottom
   },
 
   get withNavigation() {
-    return require(717                     ).default; // 717 = ./views/withNavigation
+    return require(718                     ).default; // 718 = ./views/withNavigation
   }
 };
-}, 655, null, "react-navigation/src/react-navigation.js");
+}, 656, null, "react-navigation/src/react-navigation.js");
 __d(/* react-navigation/src/createNavigationContainer.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -79468,17 +79727,17 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 exports.default = createNavigationContainer;
 
-var _PlatformHelpers = require(657                ); // 657 = ./PlatformHelpers
+var _PlatformHelpers = require(658                ); // 658 = ./PlatformHelpers
 
-var _NavigationActions = require(658                  ); // 658 = ./NavigationActions
+var _NavigationActions = require(659                  ); // 659 = ./NavigationActions
 
 var _NavigationActions2 = _interopRequireDefault(_NavigationActions);
 
-var _addNavigationHelpers = require(659                     ); // 659 = ./addNavigationHelpers
+var _addNavigationHelpers = require(660                     ); // 660 = ./addNavigationHelpers
 
 var _addNavigationHelpers2 = _interopRequireDefault(_addNavigationHelpers);
 
-var _invariant = require(660                ); // 660 = ./utils/invariant
+var _invariant = require(661                ); // 661 = ./utils/invariant
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -79694,7 +79953,7 @@ function createNavigationContainer(Component) {
 
   return NavigationContainer;
 }
-}, 656, null, "react-navigation/src/createNavigationContainer.js");
+}, 657, null, "react-navigation/src/createNavigationContainer.js");
 __d(/* react-navigation/src/PlatformHelpers.native.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -79706,7 +79965,7 @@ var BackHandler = _reactNative.BackHandler || _reactNative.BackAndroid;
 
 exports.BackHandler = BackHandler;
 exports.Linking = _reactNative.Linking;
-}, 657, null, "react-navigation/src/PlatformHelpers.native.js");
+}, 658, null, "react-navigation/src/PlatformHelpers.native.js");
 __d(/* react-navigation/src/NavigationActions.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -79839,7 +80098,7 @@ exports.default = {
 
   mapDeprecatedActionAndWarn: mapDeprecatedActionAndWarn
 };
-}, 658, null, "react-navigation/src/NavigationActions.js");
+}, 659, null, "react-navigation/src/NavigationActions.js");
 __d(/* react-navigation/src/addNavigationHelpers.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -79868,16 +80127,16 @@ exports.default = function (navigation) {
   });
 };
 
-var _NavigationActions = require(658                  ); // 658 = ./NavigationActions
+var _NavigationActions = require(659                  ); // 659 = ./NavigationActions
 
 var _NavigationActions2 = _interopRequireDefault(_NavigationActions);
 
-var _invariant = require(660                ); // 660 = ./utils/invariant
+var _invariant = require(661                ); // 661 = ./utils/invariant
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-}, 659, null, "react-navigation/src/addNavigationHelpers.js");
+}, 660, null, "react-navigation/src/addNavigationHelpers.js");
 __d(/* react-navigation/src/utils/invariant.js */function(global, require, module, exports) {
 
 'use strict';
@@ -79914,14 +80173,14 @@ function invariant(condition, format, a, b, c, d, e, f) {
 }
 
 module.exports = invariant;
-}, 660, null, "react-navigation/src/utils/invariant.js");
+}, 661, null, "react-navigation/src/utils/invariant.js");
 __d(/* react-navigation/src/StateUtils.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _invariant = require(660                ); // 660 = ./utils/invariant
+var _invariant = require(661                ); // 661 = ./utils/invariant
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -80032,7 +80291,7 @@ var StateUtils = {
 };
 
 exports.default = StateUtils;
-}, 661, null, "react-navigation/src/StateUtils.js");
+}, 662, null, "react-navigation/src/StateUtils.js");
 __d(/* react-navigation/src/navigators/createNavigator.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -80113,7 +80372,7 @@ function createNavigator(router, routeConfigs, navigatorConfig, navigatorType) {
     return Navigator;
   };
 }
-}, 662, null, "react-navigation/src/navigators/createNavigator.js");
+}, 663, null, "react-navigation/src/navigators/createNavigator.js");
 __d(/* react-navigation/src/navigators/StackNavigator.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -80126,23 +80385,23 @@ var _react = require(36     ); // 36 = react
 
 var React = _interopRequireWildcard(_react);
 
-var _createNavigationContainer = require(656                           ); // 656 = ../createNavigationContainer
+var _createNavigationContainer = require(657                           ); // 657 = ../createNavigationContainer
 
 var _createNavigationContainer2 = _interopRequireDefault(_createNavigationContainer);
 
-var _createNavigator = require(662                ); // 662 = ./createNavigator
+var _createNavigator = require(663                ); // 663 = ./createNavigator
 
 var _createNavigator2 = _interopRequireDefault(_createNavigator);
 
-var _CardStackTransitioner = require(664                                       ); // 664 = ../views/CardStack/CardStackTransitioner
+var _CardStackTransitioner = require(665                                       ); // 665 = ../views/CardStack/CardStackTransitioner
 
 var _CardStackTransitioner2 = _interopRequireDefault(_CardStackTransitioner);
 
-var _StackRouter = require(686                     ); // 686 = ../routers/StackRouter
+var _StackRouter = require(687                     ); // 687 = ../routers/StackRouter
 
 var _StackRouter2 = _interopRequireDefault(_StackRouter);
 
-var _NavigatorTypes = require(694               ); // 694 = ./NavigatorTypes
+var _NavigatorTypes = require(695               ); // 695 = ./NavigatorTypes
 
 var _NavigatorTypes2 = _interopRequireDefault(_NavigatorTypes);
 
@@ -80190,7 +80449,7 @@ exports.default = function (routeConfigMap) {
 
   return (0, _createNavigationContainer2.default)(navigator);
 };
-}, 663, null, "react-navigation/src/navigators/StackNavigator.js");
+}, 664, null, "react-navigation/src/navigators/StackNavigator.js");
 __d(/* react-navigation/src/views/CardStack/CardStackTransitioner.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -80213,19 +80472,19 @@ var _class,
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _CardStack = require(665          ); // 665 = ./CardStack
+var _CardStack = require(666          ); // 666 = ./CardStack
 
 var _CardStack2 = _interopRequireDefault(_CardStack);
 
-var _CardStackStyleInterpolator = require(682                           ); // 682 = ./CardStackStyleInterpolator
+var _CardStackStyleInterpolator = require(683                           ); // 683 = ./CardStackStyleInterpolator
 
 var _CardStackStyleInterpolator2 = _interopRequireDefault(_CardStackStyleInterpolator);
 
-var _Transitioner = require(683              ); // 683 = ../Transitioner
+var _Transitioner = require(684              ); // 684 = ../Transitioner
 
 var _Transitioner2 = _interopRequireDefault(_Transitioner);
 
-var _TransitionConfigs = require(681                  ); // 681 = ./TransitionConfigs
+var _TransitionConfigs = require(682                  ); // 682 = ./TransitionConfigs
 
 var _TransitionConfigs2 = _interopRequireDefault(_TransitionConfigs);
 
@@ -80330,7 +80589,7 @@ var CardStackTransitioner = _wrapComponent('CardStackTransitioner')((_temp2 = _c
 }, _temp2));
 
 exports.default = CardStackTransitioner;
-}, 664, null, "react-navigation/src/views/CardStack/CardStackTransitioner.js");
+}, 665, null, "react-navigation/src/views/CardStack/CardStackTransitioner.js");
 __d(/* react-navigation/src/views/CardStack/CardStack.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -80349,33 +80608,33 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _clamp = require(666    ); // 666 = clamp
+var _clamp = require(667    ); // 667 = clamp
 
 var _clamp2 = _interopRequireDefault(_clamp);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _Card = require(667     ); // 667 = ./Card
+var _Card = require(668     ); // 668 = ./Card
 
 var _Card2 = _interopRequireDefault(_Card);
 
-var _Header = require(670               ); // 670 = ../Header/Header
+var _Header = require(671               ); // 671 = ../Header/Header
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _NavigationActions = require(658                      ); // 658 = ../../NavigationActions
+var _NavigationActions = require(659                      ); // 659 = ../../NavigationActions
 
 var _NavigationActions2 = _interopRequireDefault(_NavigationActions);
 
-var _addNavigationHelpers = require(659                         ); // 659 = ../../addNavigationHelpers
+var _addNavigationHelpers = require(660                         ); // 660 = ../../addNavigationHelpers
 
 var _addNavigationHelpers2 = _interopRequireDefault(_addNavigationHelpers);
 
-var _SceneView = require(680           ); // 680 = ../SceneView
+var _SceneView = require(681           ); // 681 = ../SceneView
 
 var _SceneView2 = _interopRequireDefault(_SceneView);
 
-var _TransitionConfigs = require(681                  ); // 681 = ./TransitionConfigs
+var _TransitionConfigs = require(682                  ); // 682 = ./TransitionConfigs
 
 var _TransitionConfigs2 = _interopRequireDefault(_TransitionConfigs);
 
@@ -80789,13 +81048,13 @@ var styles = _reactNative.StyleSheet.create({
 });
 
 exports.default = CardStack;
-}, 665, null, "react-navigation/src/views/CardStack/CardStack.js");
+}, 666, null, "react-navigation/src/views/CardStack/CardStack.js");
 __d(/* clamp/index.js */function(global, require, module, exports) {module.exports = clamp;
 
 function clamp(value, min, max) {
   return min < max ? value < min ? min : value > max ? max : value : value < max ? max : value > min ? min : value;
 }
-}, 666, null, "clamp/index.js");
+}, 667, null, "clamp/index.js");
 __d(/* react-navigation/src/views/CardStack/Card.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -80814,7 +81073,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _PointerEventsContainer = require(668                       ); // 668 = ./PointerEventsContainer
+var _PointerEventsContainer = require(669                       ); // 669 = ./PointerEventsContainer
 
 var _PointerEventsContainer2 = _interopRequireDefault(_PointerEventsContainer);
 
@@ -80901,7 +81160,7 @@ var styles = _reactNative.StyleSheet.create({
 Card = (0, _PointerEventsContainer2.default)(Card);
 
 exports.default = Card;
-}, 667, null, "react-navigation/src/views/CardStack/Card.js");
+}, 668, null, "react-navigation/src/views/CardStack/Card.js");
 __d(/* react-navigation/src/views/CardStack/PointerEventsContainer.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -80922,11 +81181,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 exports.default = create;
 
-var _invariant = require(660                    ); // 660 = ../../utils/invariant
+var _invariant = require(661                    ); // 661 = ../../utils/invariant
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
-var _AnimatedValueSubscription = require(669                           ); // 669 = ../AnimatedValueSubscription
+var _AnimatedValueSubscription = require(670                           ); // 670 = ../AnimatedValueSubscription
 
 var _AnimatedValueSubscription2 = _interopRequireDefault(_AnimatedValueSubscription);
 
@@ -81061,7 +81320,7 @@ function create(Component) {
 
   return Container;
 }
-}, 668, null, "react-navigation/src/views/CardStack/PointerEventsContainer.js");
+}, 669, null, "react-navigation/src/views/CardStack/PointerEventsContainer.js");
 __d(/* react-navigation/src/views/AnimatedValueSubscription.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -81091,7 +81350,7 @@ var AnimatedValueSubscription = function () {
 }();
 
 exports.default = AnimatedValueSubscription;
-}, 669, null, "react-navigation/src/views/AnimatedValueSubscription.js");
+}, 670, null, "react-navigation/src/views/AnimatedValueSubscription.js");
 __d(/* react-navigation/src/views/Header/Header.js */function(global, require, module, exports) {
 
 'no babel-plugin-flow-react-proptypes';
@@ -81111,23 +81370,23 @@ var React = _interopRequireWildcard(_react);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _HeaderTitle = require(671            ); // 671 = ./HeaderTitle
+var _HeaderTitle = require(672            ); // 672 = ./HeaderTitle
 
 var _HeaderTitle2 = _interopRequireDefault(_HeaderTitle);
 
-var _HeaderBackButton = require(672                 ); // 672 = ./HeaderBackButton
+var _HeaderBackButton = require(673                 ); // 673 = ./HeaderBackButton
 
 var _HeaderBackButton2 = _interopRequireDefault(_HeaderBackButton);
 
-var _HeaderStyleInterpolator = require(675                        ); // 675 = ./HeaderStyleInterpolator
+var _HeaderStyleInterpolator = require(676                        ); // 676 = ./HeaderStyleInterpolator
 
 var _HeaderStyleInterpolator2 = _interopRequireDefault(_HeaderStyleInterpolator);
 
-var _SafeAreaView = require(677              ); // 677 = ../SafeAreaView
+var _SafeAreaView = require(678              ); // 678 = ../SafeAreaView
 
 var _SafeAreaView2 = _interopRequireDefault(_SafeAreaView);
 
-var _withOrientation = require(678                 ); // 678 = ../withOrientation
+var _withOrientation = require(679                 ); // 679 = ../withOrientation
 
 var _withOrientation2 = _interopRequireDefault(_withOrientation);
 
@@ -81504,7 +81763,7 @@ var styles = _reactNative.StyleSheet.create({
 });
 
 exports.default = (0, _withOrientation2.default)(Header);
-}, 670, null, "react-navigation/src/views/Header/Header.js");
+}, 671, null, "react-navigation/src/views/Header/Header.js");
 __d(/* react-navigation/src/views/Header/HeaderTitle.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -81552,7 +81811,7 @@ var styles = _reactNative.StyleSheet.create({
 });
 
 exports.default = HeaderTitle;
-}, 671, null, "react-navigation/src/views/Header/HeaderTitle.js");
+}, 672, null, "react-navigation/src/views/Header/HeaderTitle.js");
 __d(/* react-navigation/src/views/Header/HeaderBackButton.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -81566,7 +81825,7 @@ var React = _interopRequireWildcard(_react);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _TouchableItem = require(673               ); // 673 = ../TouchableItem
+var _TouchableItem = require(674               ); // 674 = ../TouchableItem
 
 var _TouchableItem2 = _interopRequireDefault(_TouchableItem);
 
@@ -81621,7 +81880,7 @@ var HeaderBackButton = function (_React$PureComponent) {
 
       var backButtonTitle = renderTruncated ? truncatedTitle : title;
 
-      var asset = require(674                      ); // 674 = ../assets/back-icon.png
+      var asset = require(675                      ); // 675 = ../assets/back-icon.png
 
       return React.createElement(
         _TouchableItem2.default,
@@ -81716,7 +81975,7 @@ var styles = _reactNative.StyleSheet.create({
 });
 
 exports.default = HeaderBackButton;
-}, 672, null, "react-navigation/src/views/Header/HeaderBackButton.js");
+}, 673, null, "react-navigation/src/views/Header/HeaderBackButton.js");
 __d(/* react-navigation/src/views/TouchableItem.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -81831,16 +82090,16 @@ var TouchableItem = _wrapComponent('TouchableItem')((_temp = _class = function (
 }, _temp));
 
 exports.default = TouchableItem;
-}, 673, null, "react-navigation/src/views/TouchableItem.js");
+}, 674, null, "react-navigation/src/views/TouchableItem.js");
 __d(/* react-navigation/src/views/assets/back-icon.png */function(global, require, module, exports) {module.exports=require(324                                         ).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/node_modules/react-navigation/src/views/assets","width":24,"height":24,"scales":[1,1.5,2,3,4],"hash":"a364dc7a784101f7c8f6791c7b4514ce","name":"back-icon","type":"png"}); // 324 = react-native/Libraries/Image/AssetRegistry
-}, 674, null, "react-navigation/src/views/assets/back-icon.png");
+}, 675, null, "react-navigation/src/views/assets/back-icon.png");
 __d(/* react-navigation/src/views/Header/HeaderStyleInterpolator.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _getSceneIndicesForInterpolationInputRange = require(676                                                    ); // 676 = ../../utils/getSceneIndicesForInterpolationInputRange
+var _getSceneIndicesForInterpolationInputRange = require(677                                                    ); // 677 = ../../utils/getSceneIndicesForInterpolationInputRange
 
 var _getSceneIndicesForInterpolationInputRange2 = _interopRequireDefault(_getSceneIndicesForInterpolationInputRange);
 
@@ -81921,7 +82180,7 @@ exports.default = {
   forCenter: forCenter,
   forRight: forRight
 };
-}, 675, null, "react-navigation/src/views/Header/HeaderStyleInterpolator.js");
+}, 676, null, "react-navigation/src/views/Header/HeaderStyleInterpolator.js");
 __d(/* react-navigation/src/utils/getSceneIndicesForInterpolationInputRange.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -81966,7 +82225,7 @@ function getSceneIndicesForInterpolationInputRange(props) {
 }
 
 exports.default = getSceneIndicesForInterpolationInputRange;
-}, 676, null, "react-navigation/src/utils/getSceneIndicesForInterpolationInputRange.js");
+}, 677, null, "react-navigation/src/utils/getSceneIndicesForInterpolationInputRange.js");
 __d(/* react-navigation/src/views/SafeAreaView.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -81987,7 +82246,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _withOrientation = require(678                ); // 678 = ./withOrientation
+var _withOrientation = require(679                ); // 679 = ./withOrientation
 
 var _withOrientation2 = _interopRequireDefault(_withOrientation);
 
@@ -82356,7 +82615,7 @@ var SafeView = _wrapComponent('SafeView')(function (_Component) {
 }(_react2.Component));
 
 exports.default = (0, _withOrientation2.default)(SafeView);
-}, 677, null, "react-navigation/src/views/SafeAreaView.js");
+}, 678, null, "react-navigation/src/views/SafeAreaView.js");
 __d(/* react-navigation/src/views/withOrientation.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -82433,7 +82692,7 @@ exports.default = function (WrappedComponent) {
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _hoistNonReactStatics = require(679                      ); // 679 = hoist-non-react-statics
+var _hoistNonReactStatics = require(680                      ); // 680 = hoist-non-react-statics
 
 var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 
@@ -82472,7 +82731,7 @@ var isOrientationLandscape = exports.isOrientationLandscape = function isOrienta
       height = _ref.height;
   return width > height;
 };
-}, 678, null, "react-navigation/src/views/withOrientation.js");
+}, 679, null, "react-navigation/src/views/withOrientation.js");
 __d(/* hoist-non-react-statics/index.js */function(global, require, module, exports) {
 'use strict';
 
@@ -82535,7 +82794,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 
     return targetComponent;
 };
-}, 679, null, "hoist-non-react-statics/index.js");
+}, 680, null, "hoist-non-react-statics/index.js");
 __d(/* react-navigation/src/views/SceneView.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -82600,7 +82859,7 @@ SceneView.childContextTypes = {
   navigation: _propTypes2.default.object.isRequired
 };
 exports.default = SceneView;
-}, 680, null, "react-navigation/src/views/SceneView.js");
+}, 681, null, "react-navigation/src/views/SceneView.js");
 __d(/* react-navigation/src/views/CardStack/TransitionConfigs.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -82609,7 +82868,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _CardStackStyleInterpolator = require(682                           ); // 682 = ./CardStackStyleInterpolator
+var _CardStackStyleInterpolator = require(683                           ); // 683 = ./CardStackStyleInterpolator
 
 var _CardStackStyleInterpolator2 = _interopRequireDefault(_CardStackStyleInterpolator);
 
@@ -82681,14 +82940,14 @@ exports.default = {
   defaultTransitionConfig: defaultTransitionConfig,
   getTransitionConfig: getTransitionConfig
 };
-}, 681, null, "react-navigation/src/views/CardStack/TransitionConfigs.js");
+}, 682, null, "react-navigation/src/views/CardStack/TransitionConfigs.js");
 __d(/* react-navigation/src/views/CardStack/CardStackStyleInterpolator.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _getSceneIndicesForInterpolationInputRange = require(676                                                    ); // 676 = ../../utils/getSceneIndicesForInterpolationInputRange
+var _getSceneIndicesForInterpolationInputRange = require(677                                                    ); // 677 = ../../utils/getSceneIndicesForInterpolationInputRange
 
 var _getSceneIndicesForInterpolationInputRange2 = _interopRequireDefault(_getSceneIndicesForInterpolationInputRange);
 
@@ -82853,7 +83112,7 @@ exports.default = {
   forFade: forFade,
   canUseNativeDriver: canUseNativeDriver
 };
-}, 682, null, "react-navigation/src/views/CardStack/CardStackStyleInterpolator.js");
+}, 683, null, "react-navigation/src/views/CardStack/CardStackStyleInterpolator.js");
 __d(/* react-navigation/src/views/Transitioner.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -82874,11 +83133,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _invariant = require(660                 ); // 660 = ../utils/invariant
+var _invariant = require(661                 ); // 661 = ../utils/invariant
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
-var _ScenesReducer = require(684              ); // 684 = ./ScenesReducer
+var _ScenesReducer = require(685              ); // 685 = ./ScenesReducer
 
 var _ScenesReducer2 = _interopRequireDefault(_ScenesReducer);
 
@@ -83131,7 +83390,7 @@ var styles = _reactNative.StyleSheet.create({
 });
 
 exports.default = Transitioner;
-}, 683, null, "react-navigation/src/views/Transitioner.js");
+}, 684, null, "react-navigation/src/views/Transitioner.js");
 __d(/* react-navigation/src/views/ScenesReducer.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -83140,11 +83399,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.default = ScenesReducer;
 
-var _invariant = require(660                 ); // 660 = ../utils/invariant
+var _invariant = require(661                 ); // 661 = ../utils/invariant
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
-var _shallowEqual = require(685                    ); // 685 = ../utils/shallowEqual
+var _shallowEqual = require(686                    ); // 686 = ../utils/shallowEqual
 
 var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
@@ -83288,7 +83547,7 @@ function ScenesReducer(scenes, nextState, prevState) {
 
   return scenes;
 }
-}, 684, null, "react-navigation/src/views/ScenesReducer.js");
+}, 685, null, "react-navigation/src/views/ScenesReducer.js");
 __d(/* react-navigation/src/utils/shallowEqual.js */function(global, require, module, exports) {
 
 'use strict';
@@ -83328,7 +83587,7 @@ function shallowEqual(objA, objB) {
 }
 
 module.exports = shallowEqual;
-}, 685, null, "react-navigation/src/utils/shallowEqual.js");
+}, 686, null, "react-navigation/src/utils/shallowEqual.js");
 __d(/* react-navigation/src/routers/StackRouter.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -83337,35 +83596,35 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _pathToRegexp = require(687             ); // 687 = path-to-regexp
+var _pathToRegexp = require(688             ); // 688 = path-to-regexp
 
 var _pathToRegexp2 = _interopRequireDefault(_pathToRegexp);
 
-var _NavigationActions = require(658                   ); // 658 = ../NavigationActions
+var _NavigationActions = require(659                   ); // 659 = ../NavigationActions
 
 var _NavigationActions2 = _interopRequireDefault(_NavigationActions);
 
-var _createConfigGetter = require(689                   ); // 689 = ./createConfigGetter
+var _createConfigGetter = require(690                   ); // 690 = ./createConfigGetter
 
 var _createConfigGetter2 = _interopRequireDefault(_createConfigGetter);
 
-var _getScreenForRouteName = require(690                      ); // 690 = ./getScreenForRouteName
+var _getScreenForRouteName = require(691                      ); // 691 = ./getScreenForRouteName
 
 var _getScreenForRouteName2 = _interopRequireDefault(_getScreenForRouteName);
 
-var _StateUtils = require(661            ); // 661 = ../StateUtils
+var _StateUtils = require(662            ); // 662 = ../StateUtils
 
 var _StateUtils2 = _interopRequireDefault(_StateUtils);
 
-var _validateRouteConfigMap = require(692                       ); // 692 = ./validateRouteConfigMap
+var _validateRouteConfigMap = require(693                       ); // 693 = ./validateRouteConfigMap
 
 var _validateRouteConfigMap2 = _interopRequireDefault(_validateRouteConfigMap);
 
-var _getScreenConfigDeprecated = require(693                          ); // 693 = ./getScreenConfigDeprecated
+var _getScreenConfigDeprecated = require(694                          ); // 694 = ./getScreenConfigDeprecated
 
 var _getScreenConfigDeprecated2 = _interopRequireDefault(_getScreenConfigDeprecated);
 
-var _invariant = require(660                 ); // 660 = ../utils/invariant
+var _invariant = require(661                 ); // 661 = ../utils/invariant
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -83707,8 +83966,8 @@ exports.default = function (routeConfigs) {
     getScreenConfig: _getScreenConfigDeprecated2.default
   };
 };
-}, 686, null, "react-navigation/src/routers/StackRouter.js");
-__d(/* path-to-regexp/index.js */function(global, require, module, exports) {var isarray = require(688      ); // 688 = isarray
+}, 687, null, "react-navigation/src/routers/StackRouter.js");
+__d(/* path-to-regexp/index.js */function(global, require, module, exports) {var isarray = require(689      ); // 689 = isarray
 
 module.exports = pathToRegexp;
 module.exports.parse = parse;
@@ -84003,30 +84262,30 @@ function pathToRegexp(path, keys, options) {
 
   return stringToRegexp(path, keys, options);
 }
-}, 687, null, "path-to-regexp/index.js");
+}, 688, null, "path-to-regexp/index.js");
 __d(/* isarray/index.js */function(global, require, module, exports) {module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
-}, 688, null, "isarray/index.js");
+}, 689, null, "isarray/index.js");
 __d(/* react-navigation/src/routers/createConfigGetter.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _invariant = require(660                 ); // 660 = ../utils/invariant
+var _invariant = require(661                 ); // 661 = ../utils/invariant
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
-var _getScreenForRouteName = require(690                      ); // 690 = ./getScreenForRouteName
+var _getScreenForRouteName = require(691                      ); // 691 = ./getScreenForRouteName
 
 var _getScreenForRouteName2 = _interopRequireDefault(_getScreenForRouteName);
 
-var _addNavigationHelpers = require(659                      ); // 659 = ../addNavigationHelpers
+var _addNavigationHelpers = require(660                      ); // 660 = ../addNavigationHelpers
 
 var _addNavigationHelpers2 = _interopRequireDefault(_addNavigationHelpers);
 
-var _validateScreenOptions = require(691                      ); // 691 = ./validateScreenOptions
+var _validateScreenOptions = require(692                      ); // 692 = ./validateScreenOptions
 
 var _validateScreenOptions2 = _interopRequireDefault(_validateScreenOptions);
 
@@ -84090,13 +84349,13 @@ exports.default = function (routeConfigs, navigatorScreenConfig) {
     return outputConfig;
   };
 };
-}, 689, null, "react-navigation/src/routers/createConfigGetter.js");
+}, 690, null, "react-navigation/src/routers/createConfigGetter.js");
 __d(/* react-navigation/src/routers/getScreenForRouteName.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = getScreenForRouteName;
 
-var _invariant = require(660                 ); // 660 = ../utils/invariant
+var _invariant = require(661                 ); // 661 = ../utils/invariant
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -84123,7 +84382,7 @@ function getScreenForRouteName(routeConfigs, routeName) {
 
   throw new Error('Route ' + routeName + ' must define a screen or a getScreen.');
 }
-}, 690, null, "react-navigation/src/routers/getScreenForRouteName.js");
+}, 691, null, "react-navigation/src/routers/getScreenForRouteName.js");
 __d(/* react-navigation/src/routers/validateScreenOptions.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -84155,12 +84414,12 @@ exports.default = function (screenOptions, route) {
     })), ['}']).join('\n'));
   }
 };
-}, 691, null, "react-navigation/src/routers/validateScreenOptions.js");
+}, 692, null, "react-navigation/src/routers/validateScreenOptions.js");
 __d(/* react-navigation/src/routers/validateRouteConfigMap.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _invariant = require(660                 ); // 660 = ../utils/invariant
+var _invariant = require(661                 ); // 661 = ../utils/invariant
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -84186,12 +84445,12 @@ function validateRouteConfigMap(routeConfigs) {
 }
 
 exports.default = validateRouteConfigMap;
-}, 692, null, "react-navigation/src/routers/validateRouteConfigMap.js");
+}, 693, null, "react-navigation/src/routers/validateRouteConfigMap.js");
 __d(/* react-navigation/src/routers/getScreenConfigDeprecated.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _invariant = require(660                 ); // 660 = ../utils/invariant
+var _invariant = require(661                 ); // 661 = ../utils/invariant
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -84200,7 +84459,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = function () {
   return (0, _invariant2.default)(false, '`getScreenConfig` has been replaced with `getScreenOptions`');
 };
-}, 693, null, "react-navigation/src/routers/getScreenConfigDeprecated.js");
+}, 694, null, "react-navigation/src/routers/getScreenConfigDeprecated.js");
 __d(/* react-navigation/src/navigators/NavigatorTypes.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -84215,7 +84474,7 @@ exports.default = {
   TABS: TABS,
   DRAWER: DRAWER
 };
-}, 694, null, "react-navigation/src/navigators/NavigatorTypes.js");
+}, 695, null, "react-navigation/src/navigators/NavigatorTypes.js");
 __d(/* react-navigation/src/navigators/TabNavigator.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -84229,31 +84488,31 @@ var React = _interopRequireWildcard(_react);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _createNavigator = require(662                ); // 662 = ./createNavigator
+var _createNavigator = require(663                ); // 663 = ./createNavigator
 
 var _createNavigator2 = _interopRequireDefault(_createNavigator);
 
-var _createNavigationContainer = require(656                           ); // 656 = ../createNavigationContainer
+var _createNavigationContainer = require(657                           ); // 657 = ../createNavigationContainer
 
 var _createNavigationContainer2 = _interopRequireDefault(_createNavigationContainer);
 
-var _TabRouter = require(696                   ); // 696 = ../routers/TabRouter
+var _TabRouter = require(697                   ); // 697 = ../routers/TabRouter
 
 var _TabRouter2 = _interopRequireDefault(_TabRouter);
 
-var _TabView = require(697                       ); // 697 = ../views/TabView/TabView
+var _TabView = require(698                       ); // 698 = ../views/TabView/TabView
 
 var _TabView2 = _interopRequireDefault(_TabView);
 
-var _TabBarTop = require(708                         ); // 708 = ../views/TabView/TabBarTop
+var _TabBarTop = require(709                         ); // 709 = ../views/TabView/TabBarTop
 
 var _TabBarTop2 = _interopRequireDefault(_TabBarTop);
 
-var _TabBarBottom = require(710                            ); // 710 = ../views/TabView/TabBarBottom
+var _TabBarBottom = require(711                            ); // 711 = ../views/TabView/TabBarBottom
 
 var _TabBarBottom2 = _interopRequireDefault(_TabBarBottom);
 
-var _NavigatorTypes = require(694               ); // 694 = ./NavigatorTypes
+var _NavigatorTypes = require(695               ); // 695 = ./NavigatorTypes
 
 var _NavigatorTypes2 = _interopRequireDefault(_NavigatorTypes);
 
@@ -84326,34 +84585,34 @@ TabNavigator.Presets = {
 };
 
 exports.default = TabNavigator;
-}, 695, null, "react-navigation/src/navigators/TabNavigator.js");
+}, 696, null, "react-navigation/src/navigators/TabNavigator.js");
 __d(/* react-navigation/src/routers/TabRouter.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _invariant = require(660                 ); // 660 = ../utils/invariant
+var _invariant = require(661                 ); // 661 = ../utils/invariant
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
-var _getScreenForRouteName = require(690                      ); // 690 = ./getScreenForRouteName
+var _getScreenForRouteName = require(691                      ); // 691 = ./getScreenForRouteName
 
 var _getScreenForRouteName2 = _interopRequireDefault(_getScreenForRouteName);
 
-var _createConfigGetter = require(689                   ); // 689 = ./createConfigGetter
+var _createConfigGetter = require(690                   ); // 690 = ./createConfigGetter
 
 var _createConfigGetter2 = _interopRequireDefault(_createConfigGetter);
 
-var _NavigationActions = require(658                   ); // 658 = ../NavigationActions
+var _NavigationActions = require(659                   ); // 659 = ../NavigationActions
 
 var _NavigationActions2 = _interopRequireDefault(_NavigationActions);
 
-var _validateRouteConfigMap = require(692                       ); // 692 = ./validateRouteConfigMap
+var _validateRouteConfigMap = require(693                       ); // 693 = ./validateRouteConfigMap
 
 var _validateRouteConfigMap2 = _interopRequireDefault(_validateRouteConfigMap);
 
-var _getScreenConfigDeprecated = require(693                          ); // 693 = ./getScreenConfigDeprecated
+var _getScreenConfigDeprecated = require(694                          ); // 694 = ./getScreenConfigDeprecated
 
 var _getScreenConfigDeprecated2 = _interopRequireDefault(_getScreenConfigDeprecated);
 
@@ -84602,7 +84861,7 @@ exports.default = function (routeConfigs) {
     getScreenConfig: _getScreenConfigDeprecated2.default
   };
 };
-}, 696, null, "react-navigation/src/routers/TabRouter.js");
+}, 697, null, "react-navigation/src/routers/TabRouter.js");
 __d(/* react-navigation/src/views/TabView/TabView.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -84619,17 +84878,17 @@ var React = _interopRequireWildcard(_react);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _reactNativeTabView = require(698                    ); // 698 = react-native-tab-view
+var _reactNativeTabView = require(699                    ); // 699 = react-native-tab-view
 
-var _SceneView = require(680           ); // 680 = ../SceneView
+var _SceneView = require(681           ); // 681 = ../SceneView
 
 var _SceneView2 = _interopRequireDefault(_SceneView);
 
-var _withCachedChildNavigation = require(707                              ); // 707 = ../../withCachedChildNavigation
+var _withCachedChildNavigation = require(708                              ); // 708 = ../../withCachedChildNavigation
 
 var _withCachedChildNavigation2 = _interopRequireDefault(_withCachedChildNavigation);
 
-var _SafeAreaView = require(677              ); // 677 = ../SafeAreaView
+var _SafeAreaView = require(678              ); // 678 = ../SafeAreaView
 
 var _SafeAreaView2 = _interopRequireDefault(_SafeAreaView);
 
@@ -84837,30 +85096,30 @@ var styles = _reactNative.StyleSheet.create({
     overflow: 'hidden'
   }
 });
-}, 697, null, "react-navigation/src/views/TabView/TabView.js");
+}, 698, null, "react-navigation/src/views/TabView/TabView.js");
 __d(/* react-native-tab-view/src/index.js */function(global, require, module, exports) {
 
 module.exports = {
   get TabViewAnimated() {
-    return require(699                ).default; // 699 = ./TabViewAnimated
+    return require(700                ).default; // 700 = ./TabViewAnimated
   },
   get TabViewPagerPan() {
-    return require(703                ).default; // 703 = ./TabViewPagerPan
+    return require(704                ).default; // 704 = ./TabViewPagerPan
   },
   get TabViewPagerScroll() {
-    return require(702                   ).default; // 702 = ./TabViewPagerScroll
+    return require(703                   ).default; // 703 = ./TabViewPagerScroll
   },
   get TabViewPagerAndroid() {
-    return require(701                    ).default; // 701 = ./TabViewPagerAndroid
+    return require(702                    ).default; // 702 = ./TabViewPagerAndroid
   },
   get TabBar() {
-    return require(704       ).default; // 704 = ./TabBar
+    return require(705       ).default; // 705 = ./TabBar
   },
   get SceneMap() {
-    return require(706         ).default; // 706 = ./SceneMap
+    return require(707         ).default; // 707 = ./SceneMap
   }
 };
-}, 698, null, "react-native-tab-view/src/index.js");
+}, 699, null, "react-native-tab-view/src/index.js");
 __d(/* react-native-tab-view/src/TabViewAnimated.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -84888,7 +85147,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _TabViewPropTypes = require(700                 ); // 700 = ./TabViewPropTypes
+var _TabViewPropTypes = require(701                 ); // 701 = ./TabViewPropTypes
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -84927,13 +85186,13 @@ var TabViewPager = void 0;
 
 switch (_reactNative.Platform.OS) {
   case 'android':
-    TabViewPager = require(701                    ).default; // 701 = ./TabViewPagerAndroid
+    TabViewPager = require(702                    ).default; // 702 = ./TabViewPagerAndroid
     break;
   case 'ios':
-    TabViewPager = require(702                   ).default; // 702 = ./TabViewPagerScroll
+    TabViewPager = require(703                   ).default; // 703 = ./TabViewPagerScroll
     break;
   default:
-    TabViewPager = require(703                ).default; // 703 = ./TabViewPagerPan
+    TabViewPager = require(704                ).default; // 704 = ./TabViewPagerPan
     break;
 }
 
@@ -85187,7 +85446,7 @@ var styles = _reactNative.StyleSheet.create({
     overflow: 'hidden'
   }
 });
-}, 699, null, "react-native-tab-view/src/TabViewAnimated.js");
+}, 700, null, "react-native-tab-view/src/TabViewAnimated.js");
 __d(/* react-native-tab-view/src/TabViewPropTypes.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -85223,7 +85482,7 @@ var SceneRendererPropType = exports.SceneRendererPropType = {
   getLastPosition: _propTypes2.default.func.isRequired,
   subscribe: _propTypes2.default.func.isRequired
 };
-}, 700, null, "react-native-tab-view/src/TabViewPropTypes.js");
+}, 701, null, "react-native-tab-view/src/TabViewPropTypes.js");
 __d(/* react-native-tab-view/src/TabViewPagerAndroid.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -85250,7 +85509,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _TabViewPropTypes = require(700                 ); // 700 = ./TabViewPropTypes
+var _TabViewPropTypes = require(701                 ); // 701 = ./TabViewPropTypes
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -85456,7 +85715,7 @@ var styles = _reactNative.StyleSheet.create({
     overflow: 'hidden'
   }
 });
-}, 701, null, "react-native-tab-view/src/TabViewPagerAndroid.js");
+}, 702, null, "react-native-tab-view/src/TabViewPagerAndroid.js");
 __d(/* react-native-tab-view/src/TabViewPagerScroll.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -85483,7 +85742,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _TabViewPropTypes = require(700                 ); // 700 = ./TabViewPropTypes
+var _TabViewPropTypes = require(701                 ); // 701 = ./TabViewPropTypes
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -85662,7 +85921,7 @@ var styles = _reactNative.StyleSheet.create({
     overflow: 'hidden'
   }
 });
-}, 702, null, "react-native-tab-view/src/TabViewPagerScroll.js");
+}, 703, null, "react-native-tab-view/src/TabViewPagerScroll.js");
 __d(/* react-native-tab-view/src/TabViewPagerPan.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -85689,7 +85948,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _TabViewPropTypes = require(700                 ); // 700 = ./TabViewPropTypes
+var _TabViewPropTypes = require(701                 ); // 701 = ./TabViewPropTypes
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -85971,7 +86230,7 @@ var styles = _reactNative.StyleSheet.create({
     alignItems: 'stretch'
   }
 });
-}, 703, null, "react-native-tab-view/src/TabViewPagerPan.js");
+}, 704, null, "react-native-tab-view/src/TabViewPagerPan.js");
 __d(/* react-native-tab-view/src/TabBar.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -85992,11 +86251,11 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _TouchableItem = require(705              ); // 705 = ./TouchableItem
+var _TouchableItem = require(706              ); // 706 = ./TouchableItem
 
 var _TouchableItem2 = _interopRequireDefault(_TouchableItem);
 
-var _TabViewPropTypes = require(700                 ); // 700 = ./TabViewPropTypes
+var _TabViewPropTypes = require(701                 ); // 701 = ./TabViewPropTypes
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -86534,7 +86793,7 @@ var styles = _reactNative.StyleSheet.create({
     height: 2
   }
 });
-}, 704, null, "react-native-tab-view/src/TabBar.js");
+}, 705, null, "react-native-tab-view/src/TabBar.js");
 __d(/* react-native-tab-view/src/TouchableItem.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -86675,7 +86934,7 @@ var TouchableItem = _wrapComponent('TouchableItem')((_temp2 = _class = function 
 }, _temp2));
 
 exports.default = TouchableItem;
-}, 705, null, "react-native-tab-view/src/TouchableItem.js");
+}, 706, null, "react-native-tab-view/src/TouchableItem.js");
 __d(/* react-native-tab-view/src/SceneMap.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -86726,7 +86985,7 @@ function SceneMap(scenes) {
     });
   };
 }
-}, 706, null, "react-native-tab-view/src/SceneMap.js");
+}, 707, null, "react-native-tab-view/src/SceneMap.js");
 __d(/* react-navigation/src/withCachedChildNavigation.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -86743,7 +87002,7 @@ var _react = require(36     ); // 36 = react
 
 var React = _interopRequireWildcard(_react);
 
-var _addNavigationHelpers = require(659                     ); // 659 = ./addNavigationHelpers
+var _addNavigationHelpers = require(660                     ); // 660 = ./addNavigationHelpers
 
 var _addNavigationHelpers2 = _interopRequireDefault(_addNavigationHelpers);
 
@@ -86818,7 +87077,7 @@ function withCachedChildNavigation(Comp) {
     return _class;
   }(React.PureComponent), _class.displayName = 'withCachedChildNavigation(' + displayName + ')', _temp2;
 }
-}, 707, null, "react-navigation/src/withCachedChildNavigation.js");
+}, 708, null, "react-navigation/src/withCachedChildNavigation.js");
 __d(/* react-navigation/src/views/TabView/TabBarTop.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -86834,9 +87093,9 @@ var React = _interopRequireWildcard(_react);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _reactNativeTabView = require(698                    ); // 698 = react-native-tab-view
+var _reactNativeTabView = require(699                    ); // 699 = react-native-tab-view
 
-var _TabBarIcon = require(709           ); // 709 = ./TabBarIcon
+var _TabBarIcon = require(710           ); // 710 = ./TabBarIcon
 
 var _TabBarIcon2 = _interopRequireDefault(_TabBarIcon);
 
@@ -87002,7 +87261,7 @@ var styles = _reactNative.StyleSheet.create({
     backgroundColor: 'transparent'
   }
 });
-}, 708, null, "react-navigation/src/views/TabView/TabBarTop.js");
+}, 709, null, "react-navigation/src/views/TabView/TabBarTop.js");
 __d(/* react-navigation/src/views/TabView/TabBarIcon.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -87121,7 +87380,7 @@ var styles = _reactNative.StyleSheet.create({
     justifyContent: 'center'
   }
 });
-}, 709, null, "react-navigation/src/views/TabView/TabBarIcon.js");
+}, 710, null, "react-navigation/src/views/TabView/TabBarIcon.js");
 __d(/* react-navigation/src/views/TabView/TabBarBottom.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -87137,15 +87396,15 @@ var React = _interopRequireWildcard(_react);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _TabBarIcon = require(709           ); // 709 = ./TabBarIcon
+var _TabBarIcon = require(710           ); // 710 = ./TabBarIcon
 
 var _TabBarIcon2 = _interopRequireDefault(_TabBarIcon);
 
-var _SafeAreaView = require(677              ); // 677 = ../SafeAreaView
+var _SafeAreaView = require(678              ); // 678 = ../SafeAreaView
 
 var _SafeAreaView2 = _interopRequireDefault(_SafeAreaView);
 
-var _withOrientation = require(678                 ); // 678 = ../withOrientation
+var _withOrientation = require(679                 ); // 679 = ../withOrientation
 
 var _withOrientation2 = _interopRequireDefault(_withOrientation);
 
@@ -87420,7 +87679,7 @@ var styles = _reactNative.StyleSheet.create({
 });
 
 exports.default = (0, _withOrientation2.default)(TabBarBottom);
-}, 710, null, "react-navigation/src/views/TabView/TabBarBottom.js");
+}, 711, null, "react-navigation/src/views/TabView/TabBarBottom.js");
 __d(/* react-navigation/src/navigators/DrawerNavigator.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -87435,35 +87694,35 @@ var React = _interopRequireWildcard(_react);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _createNavigator = require(662                ); // 662 = ./createNavigator
+var _createNavigator = require(663                ); // 663 = ./createNavigator
 
 var _createNavigator2 = _interopRequireDefault(_createNavigator);
 
-var _createNavigationContainer = require(656                           ); // 656 = ../createNavigationContainer
+var _createNavigationContainer = require(657                           ); // 657 = ../createNavigationContainer
 
 var _createNavigationContainer2 = _interopRequireDefault(_createNavigationContainer);
 
-var _TabRouter = require(696                   ); // 696 = ../routers/TabRouter
+var _TabRouter = require(697                   ); // 697 = ../routers/TabRouter
 
 var _TabRouter2 = _interopRequireDefault(_TabRouter);
 
-var _DrawerScreen = require(712                           ); // 712 = ../views/Drawer/DrawerScreen
+var _DrawerScreen = require(713                           ); // 713 = ../views/Drawer/DrawerScreen
 
 var _DrawerScreen2 = _interopRequireDefault(_DrawerScreen);
 
-var _DrawerView = require(713                         ); // 713 = ../views/Drawer/DrawerView
+var _DrawerView = require(714                         ); // 714 = ../views/Drawer/DrawerView
 
 var _DrawerView2 = _interopRequireDefault(_DrawerView);
 
-var _DrawerNavigatorItems = require(716                                   ); // 716 = ../views/Drawer/DrawerNavigatorItems
+var _DrawerNavigatorItems = require(717                                   ); // 717 = ../views/Drawer/DrawerNavigatorItems
 
 var _DrawerNavigatorItems2 = _interopRequireDefault(_DrawerNavigatorItems);
 
-var _SafeAreaView = require(677                    ); // 677 = ../views/SafeAreaView
+var _SafeAreaView = require(678                    ); // 678 = ../views/SafeAreaView
 
 var _SafeAreaView2 = _interopRequireDefault(_SafeAreaView);
 
-var _NavigatorTypes = require(694               ); // 694 = ./NavigatorTypes
+var _NavigatorTypes = require(695               ); // 695 = ./NavigatorTypes
 
 var _NavigatorTypes2 = _interopRequireDefault(_NavigatorTypes);
 
@@ -87580,7 +87839,7 @@ var DrawerNavigator = function DrawerNavigator(routeConfigs) {
 };
 
 exports.default = DrawerNavigator;
-}, 711, null, "react-navigation/src/navigators/DrawerNavigator.js");
+}, 712, null, "react-navigation/src/navigators/DrawerNavigator.js");
 __d(/* react-navigation/src/views/Drawer/DrawerScreen.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -87592,11 +87851,11 @@ var _react = require(36     ); // 36 = react
 
 var React = _interopRequireWildcard(_react);
 
-var _SceneView = require(680           ); // 680 = ../SceneView
+var _SceneView = require(681           ); // 681 = ../SceneView
 
 var _SceneView2 = _interopRequireDefault(_SceneView);
 
-var _withCachedChildNavigation = require(707                              ); // 707 = ../../withCachedChildNavigation
+var _withCachedChildNavigation = require(708                              ); // 708 = ../../withCachedChildNavigation
 
 var _withCachedChildNavigation2 = _interopRequireDefault(_withCachedChildNavigation);
 
@@ -87649,7 +87908,7 @@ var DrawerScreen = function (_React$PureComponent) {
 }(React.PureComponent);
 
 exports.default = (0, _withCachedChildNavigation2.default)(DrawerScreen);
-}, 712, null, "react-navigation/src/views/Drawer/DrawerScreen.js");
+}, 713, null, "react-navigation/src/views/Drawer/DrawerScreen.js");
 __d(/* react-navigation/src/views/Drawer/DrawerView.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -87663,15 +87922,15 @@ var React = _interopRequireWildcard(_react);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _reactNativeDrawerLayoutPolyfill = require(714                                  ); // 714 = react-native-drawer-layout-polyfill
+var _reactNativeDrawerLayoutPolyfill = require(715                                  ); // 715 = react-native-drawer-layout-polyfill
 
 var _reactNativeDrawerLayoutPolyfill2 = _interopRequireDefault(_reactNativeDrawerLayoutPolyfill);
 
-var _addNavigationHelpers = require(659                         ); // 659 = ../../addNavigationHelpers
+var _addNavigationHelpers = require(660                         ); // 660 = ../../addNavigationHelpers
 
 var _addNavigationHelpers2 = _interopRequireDefault(_addNavigationHelpers);
 
-var _DrawerSidebar = require(715              ); // 715 = ./DrawerSidebar
+var _DrawerSidebar = require(716              ); // 716 = ./DrawerSidebar
 
 var _DrawerSidebar2 = _interopRequireDefault(_DrawerSidebar);
 
@@ -87841,9 +88100,9 @@ var DrawerView = function (_React$PureComponent) {
 }(React.PureComponent);
 
 exports.default = DrawerView;
-}, 713, null, "react-navigation/src/views/Drawer/DrawerView.js");
+}, 714, null, "react-navigation/src/views/Drawer/DrawerView.js");
 __d(/* react-native-drawer-layout-polyfill/dist/index.android.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", { value: true });var _reactNative = require(12            );exports.default = _reactNative.DrawerLayoutAndroid; // 12 = react-native
-}, 714, null, "react-native-drawer-layout-polyfill/dist/index.android.js");
+}, 715, null, "react-native-drawer-layout-polyfill/dist/index.android.js");
 __d(/* react-navigation/src/views/Drawer/DrawerSidebar.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -87859,19 +88118,19 @@ var React = _interopRequireWildcard(_react);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _withCachedChildNavigation = require(707                              ); // 707 = ../../withCachedChildNavigation
+var _withCachedChildNavigation = require(708                              ); // 708 = ../../withCachedChildNavigation
 
 var _withCachedChildNavigation2 = _interopRequireDefault(_withCachedChildNavigation);
 
-var _NavigationActions = require(658                      ); // 658 = ../../NavigationActions
+var _NavigationActions = require(659                      ); // 659 = ../../NavigationActions
 
 var _NavigationActions2 = _interopRequireDefault(_NavigationActions);
 
-var _invariant = require(660                    ); // 660 = ../../utils/invariant
+var _invariant = require(661                    ); // 661 = ../../utils/invariant
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
-var _SafeAreaView = require(677              ); // 677 = ../SafeAreaView
+var _SafeAreaView = require(678              ); // 678 = ../SafeAreaView
 
 var _SafeAreaView2 = _interopRequireDefault(_SafeAreaView);
 
@@ -88003,7 +88262,7 @@ var styles = _reactNative.StyleSheet.create({
     flex: 1
   }
 });
-}, 715, null, "react-navigation/src/views/Drawer/DrawerSidebar.js");
+}, 716, null, "react-navigation/src/views/Drawer/DrawerSidebar.js");
 __d(/* react-navigation/src/views/Drawer/DrawerNavigatorItems.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -88015,11 +88274,11 @@ var React = _interopRequireWildcard(_react);
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _SafeAreaView = require(677              ); // 677 = ../SafeAreaView
+var _SafeAreaView = require(678              ); // 678 = ../SafeAreaView
 
 var _SafeAreaView2 = _interopRequireDefault(_SafeAreaView);
 
-var _TouchableItem = require(673               ); // 673 = ../TouchableItem
+var _TouchableItem = require(674               ); // 674 = ../TouchableItem
 
 var _TouchableItem2 = _interopRequireDefault(_TouchableItem);
 
@@ -88150,7 +88409,7 @@ var styles = _reactNative.StyleSheet.create({
 });
 
 exports.default = DrawerNavigatorItems;
-}, 716, null, "react-navigation/src/views/Drawer/DrawerNavigatorItems.js");
+}, 717, null, "react-navigation/src/views/Drawer/DrawerNavigatorItems.js");
 __d(/* react-navigation/src/views/withNavigation.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -88168,7 +88427,7 @@ var _propTypes = require(126         ); // 126 = prop-types
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _hoistNonReactStatics = require(679                      ); // 679 = hoist-non-react-statics
+var _hoistNonReactStatics = require(680                      ); // 680 = hoist-non-react-statics
 
 var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 
@@ -88195,7 +88454,268 @@ function withNavigation(Component) {
 
   return (0, _hoistNonReactStatics2.default)(componentWithNavigation, Component);
 }
-}, 717, null, "react-navigation/src/views/withNavigation.js");
+}, 718, null, "react-navigation/src/views/withNavigation.js");
+__d(/* DiabetesGroup/screens/NewPatientInfo.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react2 = require(36     ); // 36 = react
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index = require(160                                                 ); // 160 = ./../node_modules/react-transform-hmr/lib/index.js
+
+var _index2 = _interopRequireDefault(_index);
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _class,
+    _temp,
+    _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\screens\\NewPatientInfo.js';
+
+var _FireBaseApp = require(492            ); // 492 = ./FireBaseApp
+
+var _FireBaseApp2 = _interopRequireDefault(_FireBaseApp);
+
+var _reactNative = require(12            ); // 12 = react-native
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+    NewPatientInfo: {
+        displayName: 'NewPatientInfo'
+    }
+};
+
+var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+    filename: 'C:/Users/shark/Capstone/DiabetesGroup/screens/NewPatientInfo.js',
+    components: _components,
+    locals: [module],
+    imports: [_react3.default]
+});
+
+function _wrapComponent(id) {
+    return function (Component) {
+        return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+    };
+}
+
+var SeafoamButton = require(490                          ); // 490 = ../components/SeafoamButton
+
+var NewPatientInfo = _wrapComponent('NewPatientInfo')((_temp = _class = function (_Component) {
+    _inherits(NewPatientInfo, _Component);
+
+    function NewPatientInfo(props) {
+        _classCallCheck(this, NewPatientInfo);
+
+        var _this = _possibleConstructorReturn(this, (NewPatientInfo.__proto__ || Object.getPrototypeOf(NewPatientInfo)).call(this, props));
+
+        _this.state = { Age: '', Sex: '', Weight: '', Height: '', DType: '' };
+        return _this;
+    }
+
+    _createClass(NewPatientInfo, [{
+        key: '_submitInfo',
+        value: function _submitInfo() {
+            var navigate = this.props.navigation.navigate;
+
+
+            var Age = this.state.Age;
+            var Sex = this.state.Sex;
+            var Weight = this.state.Weight;
+            var Height = this.state.Height;
+            var DType = this.state.DType;
+
+            var user = _FireBaseApp2.default.auth().currentUser;
+            var database = _FireBaseApp2.default.database();
+
+            _FireBaseApp2.default.database().ref('Patients/' + user.uid).set({
+                Age: Age,
+                Sex: Sex,
+                Weight: Weight,
+                Height: Height,
+                DType: DType
+            });
+
+            navigate('User');
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react3.default.createElement(
+                _reactNative.View,
+                { style: styles.container, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 55
+                    }
+                },
+                _react3.default.createElement(
+                    _reactNative.View,
+                    { style: styles.stretched, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 56
+                        }
+                    },
+                    _react3.default.createElement(
+                        _reactNative.Text,
+                        { style: styles.title, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 58
+                            }
+                        },
+                        'Enter your information below:'
+                    ),
+                    _react3.default.createElement(
+                        _reactNative.View,
+                        { style: { flexDirection: 'row' }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 62
+                            }
+                        },
+                        _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Age',
+                            underlineColorAndroid: 'transparent',
+                            placeholderTextColor: '#CFCFCF',
+                            onChangeText: function onChangeText(text) {
+                                return _this2.setState({ Age: text });
+                            },
+                            value: this.state.Age,
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 63
+                            }
+                        }),
+                        _react3.default.createElement(_reactNative.TextInput, { style: styles.inputRight, placeholder: 'Sex',
+                            underlineColorAndroid: 'transparent',
+                            placeholderTextColor: '#CFCFCF',
+                            onChangeText: function onChangeText(text) {
+                                return _this2.setState({ Sex: text });
+                            },
+                            value: this.state.Sex,
+
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 70
+                            }
+                        })
+                    ),
+                    _react3.default.createElement(
+                        _reactNative.View,
+                        { style: { flexDirection: 'row' }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 79
+                            }
+                        },
+                        _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Weight',
+                            underlineColorAndroid: 'transparent',
+                            placeholderTextColor: '#CFCFCF',
+                            onChangeText: function onChangeText(text) {
+                                return _this2.setState({ Weight: text });
+                            },
+                            value: this.state.Weight,
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 80
+                            }
+                        }),
+                        _react3.default.createElement(_reactNative.TextInput, { style: styles.inputRight, placeholder: 'Height',
+                            underlineColorAndroid: 'transparent',
+                            placeholderTextColor: '#CFCFCF',
+                            onChangeText: function onChangeText(text) {
+                                return _this2.setState({ Height: text });
+                            },
+                            value: this.state.Height,
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 87
+                            }
+                        })
+                    ),
+                    _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Diabetes Type',
+                        underlineColorAndroid: 'transparent',
+                        placeholderTextColor: '#CFCFCF',
+                        onChangeText: function onChangeText(text) {
+                            return _this2.setState({ DType: text });
+                        },
+                        value: this.state.DType,
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 95
+                        }
+                    }),
+                    _react3.default.createElement(SeafoamButton, {
+                        title: 'Submit',
+                        onPress: function onPress() {
+                            return _this2._submitInfo();
+                        },
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 102
+                        }
+                    })
+                )
+            );
+        }
+    }]);
+
+    return NewPatientInfo;
+}(_react2.Component), _class.navigationOptions = {
+    title: 'New Account',
+    headerStyle: { backgroundColor: "#FF6127" }
+}, _temp));
+
+exports.default = NewPatientInfo;
+
+
+var styles = _reactNative.StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingLeft: 55,
+        paddingRight: 55,
+        backgroundColor: '#F7F1D2'
+    },
+    submitbutton: {
+        alignItems: 'center',
+        alignSelf: 'stretch',
+        backgroundColor: '#1FC97C'
+    },
+    submittext: {
+        fontWeight: 'bold'
+    },
+    stretched: {
+        alignSelf: 'stretch'
+    },
+    title: {
+        fontSize: 20,
+        textAlign: 'center',
+        color: "#000000"
+    },
+    input: {
+        marginBottom: 10,
+        alignSelf: 'stretch',
+        backgroundColor: '#FEFDF5',
+        borderColor: "#000000",
+        borderWidth: 1
+    },
+    inputRight: {
+        marginBottom: 10,
+        marginLeft: 30,
+        alignSelf: 'stretch',
+        backgroundColor: '#FEFDF5',
+        borderColor: "#000000",
+        borderWidth: 1
+    }
+
+});
+}, 719, null, "DiabetesGroup/screens/NewPatientInfo.js");
 ;require(55);
 ;require(0);
 //# sourceMappingURL=index.map

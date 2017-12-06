@@ -12,7 +12,10 @@ import {
 
 export default class NutritionistSignIn extends Component<{}> {
 
-    static navigationOptions = {title: 'My Diet',};
+    static navigationOptions = {
+        title: 'My Diet',
+        headerStyle: {backgroundColor: "#FF6127"}
+    };
 
     render() {
         const {navigate} = this.props.navigation;

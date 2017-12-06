@@ -12,8 +12,8 @@ class GlucoseLogTable extends Component {
         console.ignoredYellowBox = [
             'Setting a timer'
         ];
-        this.user = firebaseApp.auth().currentUser.uid;
-        this.itemsRef = firebaseApp.database().ref('users/logs/');
+        var userID = firebaseApp.auth().currentUser.uid;
+        this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/logs/');
         this.state = { logs: [], glucoseLevel: '', readingType: '', time: '',};
     }
 
@@ -21,12 +21,10 @@ class GlucoseLogTable extends Component {
         itemsRef.on('value', (snap) => {
             var items = [];
             snap.forEach((child) => {
-                items.push({
-                    id: child.key,
-                    glucoseLevel: child.val().glucoseLevel,
-                    readingType: child.val().readingType,
-                    time: child.val().time,
-                });
+                items.push(
+                    [child.val().glucoseLevel,
+                     child.val().readingType,
+                     child.val().time,])
             });
             this.setState({logs: items});
         });
@@ -44,33 +42,17 @@ class GlucoseLogTable extends Component {
 
 
     render() {
-        var logss  = this.state.logs;
         const tableHead = ['Glucose Level (mg/dL)', 'Type', 'Time Recorded'];
-        const tableData = [
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '11:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '5:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '11:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '5:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '11:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '5:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '11:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '5:30'],
-        ];
+
         return (
             <View>
                 <Table>
+
                     <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
 
                     {this.state.logs.map((data, i) => (
                         <Row key = {i} data={data} style={[styles.row, i%2 && {backgroundColor: 'orange'}]} textStyle={styles.text}/> ))}
+
                 </Table>
 
             </View>

@@ -10,24 +10,36 @@ const GlucoseLogTable = require('../components/GlucoseLogTable');
 export default class patientHome extends React.Component {
     static navigationOptions = {
         title: 'Home Screen',
+        headerStyle: {backgroundColor: "#FF6127"}
     };
     constructor(props) {
         super(props);
         console.ignoredYellowBox = [
             'Setting a timer'
         ];
+        var userID = firebaseApp.auth().currentUser.uid;
+        this.myRef = firebaseApp.database().ref('Patients/' + userID);
         this.state = {nextAppt: ''};
-        this.user = firebaseApp.auth().currentUser.uid;
-        this.nextAppt = firebaseApp.database().ref(this.user + '/users/nextAppt');
     }
 
+    updateItems(myRef) {
+        myRef.on('value', (snapshot) => {
+            var appt = snapshot.val().nextAppt;
+            this.setState({nextAppt: appt});
+        });
+    }
+
+    componentDidMount() {
+        this.updateItems(this.myRef);
+    }
+
+    componentWillUnmount(){
+        this.myRef.off();
+    }
 
     render(){
-
-        const appt = '11/16/2017 -- 10:30';
         const val1 = 7.6;
         const {navigate} = this.props.navigation;
-
         return (
             <ScrollView>
                 <View style={styles.container3}>
@@ -47,7 +59,7 @@ export default class patientHome extends React.Component {
 
                 <View style={styles.container}>
                     <Text style={styles.nText}>
-                        {'Next Appointment: ' + this.nextAppt}
+                        {'Next Appointment: ' + this.state.nextAppt}
                     </Text>
 
                     <SeafoamButton title="Input Glucose Reading"
