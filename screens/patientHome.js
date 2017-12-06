@@ -2,10 +2,10 @@ import React from 'react';
 import {View, Text, BackHandler, StyleSheet, ScrollView, FlatList} from 'react-native';
 import firebaseApp from './FireBaseApp';
 //import Graph from 'react-native-line-plot';
-import {Table, TableWrapper, Row, Rows, Col, Cols, Cell} from 'react-native-table-component';
 const SeafoamButton = require('../components/SeafoamButton');
 const GlucoseCircle = require('../components/GlucoseCircle');
 const MessengerButton = require('../components/MessengerButton');
+const GlucoseLogTable = require('../components/GlucoseLogTable');
 
 export default class patientHome extends React.Component {
     static navigationOptions = {
@@ -13,38 +13,21 @@ export default class patientHome extends React.Component {
     };
     constructor(props) {
         super(props);
-
-
-
+        console.ignoredYellowBox = [
+            'Setting a timer'
+        ];
+        this.state = {nextAppt: ''};
+        this.user = firebaseApp.auth().currentUser.uid;
+        this.nextAppt = firebaseApp.database().ref(this.user + '/users/nextAppt');
     }
 
 
-
     render(){
-        var userId = firebaseApp.auth().currentUser.uid;
 
         const appt = '11/16/2017 -- 10:30';
         const val1 = 7.6;
         const {navigate} = this.props.navigation;
-        const tableHead = ['Glucose Level (mg/dL)', 'Type', 'Time Recorded'];
-        const tableData = [
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '11:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '5:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '11:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '5:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '11:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '5:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '11:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '5:30'],
-        ];
+
         return (
             <ScrollView>
                 <View style={styles.container3}>
@@ -64,7 +47,7 @@ export default class patientHome extends React.Component {
 
                 <View style={styles.container}>
                     <Text style={styles.nText}>
-                        {'Next Appointment: ' + userId}
+                        {'Next Appointment: ' + this.nextAppt}
                     </Text>
 
                     <SeafoamButton title="Input Glucose Reading"
@@ -79,11 +62,9 @@ export default class patientHome extends React.Component {
                     <Text></Text>
 
                 </View>
-                <Table>
-                    <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-                    {tableData.map((data, i) => (
-                        <Row key = {i} data={data} style={[styles.row, i%2 && {backgroundColor: 'orange'}]} textStyle={styles.text}/> ))}
-                </Table>
+                <GlucoseLogTable>
+
+                </GlucoseLogTable>
             </ScrollView>
         );
     }
