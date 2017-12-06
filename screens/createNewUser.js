@@ -16,14 +16,18 @@ import {
 
 export default class createNewUser extends Component<{}> {
 
-	static navigationOptions = {title: 'Create a new account',};
+	static navigationOptions = {
+	    title: 'New Account',
+        headerStyle: {backgroundColor: "#FF6127"}
+    };
 
 	constructor(props) {
 	    super(props);
-	    this.state = {email: '', password: '', userName: '', userType: ''};
+	    this.state = {email: '', password: '', userName: '', userType: '', Age: ''};
     }
 
     _signUp() {
+        const {navigate} = this.props.navigation;
 
         var email = this.state.email;
         var password = this.state.password;
@@ -40,48 +44,46 @@ export default class createNewUser extends Component<{}> {
 
         //Sign in with email and password.
         //Creating the email
-        firebaseApp.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-            //Hendle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // [START_EXCLUDE]
-            if (errorCode === 'auth/weak-password') {
-                alert('The password is too weak.');
-            } else {
-                alert(errorMessage);
-            }
-            console.log(error);
-        });
-
-		var user = firebaseApp.auth().currentUser;
-		var database = firebaseApp.database();
-
-		if(userType === "Nutritionist")
-        {
-            firebaseApp.database().ref('Nutritionists/' + user.uid).set({
-                userName: userName,
-                email: email,
-                password: password
+        firebaseApp.auth().createUserWithEmailAndPassword(email, password)
+            .catch(function (error) {
+                //Hendle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // [START_EXCLUDE]
+                if (errorCode === 'auth/weak-password') {
+                    alert('The password is too weak.');
+                } else {
+                    alert(errorMessage);
+                }
+                console.log(error);
+            })
+            .then(function (user) {
+                if(userType === "Nutritionist")
+                {
+                    firebaseApp.database().ref('Nutritionists/' + user.uid).set({
+                        userName: userName,
+                        email: email,
+                        password: password
+                    });
+                    navigate('User')
+                }
+                else if(userType === "Patient")
+                {
+                    //added this random num line to generate a random age for the patient since the patient info screen isn't fully implemented yet.
+                    var Age = Math.floor((Math.random() * 99));
+                    firebaseApp.database().ref('Patients/' + user.uid).set({
+                        userName: userName,
+                        email: email,
+                        password: password,
+                        Age: Age,
+                    });
+                    navigate('User')
+                }
+                else
+                {
+                    alert('Please select a user type!')
+                }
             });
-        }
-
-        else if(userType === "Patient")
-        {
-            firebaseApp.database().ref('Patients/' + user.uid).set({
-                userName: userName,
-                email: email,
-                password: password
-
-            });
-        }
-        else
-        {
-            alert('Please select a user type!')
-        }
-		
-        // [END createwitheamil
-        const {navigate} = this.props.navigation;
-        navigate('User')
     }
 
 	render() {
@@ -95,24 +97,27 @@ export default class createNewUser extends Component<{}> {
 
 					<TextInput style={styles.input} placeholder="Name"
                      underlineColorAndroid ={'transparent'}
+                     placeholderTextColor= "#CFCFCF"
                      onChangeText={(text) => this.setState({userName: text})}
                      value={this.state.userName}
                     />
 
                     <TextInput style={styles.input} placeholder="Email"
                      underlineColorAndroid ={'transparent'}
+                     placeholderTextColor= "#CFCFCF"
                      onChangeText={(text) => this.setState({email: text})}
                      value={this.state.email}
                     />
 
                     <TextInput style={styles.input} placeholder="Password"
                      underlineColorAndroid ={'transparent'}
+                     placeholderTextColor= "#CFCFCF"
                      secureTextEntry={true}
                      onChangeText={(text) => this.setState({password: text})}
                      value={this.state.password}
                     />
                     <Picker
-                        style={{marginBottom: 25}}
+                        style={{marginBottom: 15}}
                         selectedValue={this.state.userType}
                         onValueChange={(itemValue) => this.setState({userType: itemValue})}>
                         <Picker.Item label="User Type" value="User Type"/>
@@ -122,7 +127,6 @@ export default class createNewUser extends Component<{}> {
                     <SeafoamButton
                       title="Submit"
                       onPress = {() => this._signUp()}
-                      //onPress connect values to firebase
                     />
                 </View>
       		</View> 	
@@ -139,8 +143,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F7F1D2',
   },
   submitbutton:{
-    padding: 20,
-    marginTop: 30,
     alignItems: 'center',
     alignSelf: 'stretch',
     backgroundColor: '#1FC97C'
@@ -148,30 +150,20 @@ const styles = StyleSheet.create({
   submittext:{
       fontWeight: 'bold',
   },
-  welcome: {
-    fontSize: 25,
-    textAlign: 'center',
-    margin: 15,
-    height: 70,
-  },
   stretched: {
           alignSelf: 'stretch',
   },
   title: {
     fontSize: 20,
-    marginBottom: 35,
-    paddingBottom: 10,
     textAlign: 'center',
     color: "#000000",
   },
   input:{
-      height: 40,
-      marginBottom: 30,
+      marginBottom: 10,
       alignSelf: 'stretch',
-      color: "#000000",
+      backgroundColor: '#FEFDF5',
       borderColor: "#000000",
       borderWidth: 1,
-
   },
 
 });

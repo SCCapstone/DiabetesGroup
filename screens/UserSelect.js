@@ -12,7 +12,10 @@ import {
 
 export default class UserSelect extends Component<{}> {
 
-	static navigationOptions = {title: 'What kind of user are you?',};
+	static navigationOptions = {
+	    title: 'What kind of user are you?',
+        header: null,
+    };
 
 	render() {
 		const {navigate} = this.props.navigation;
@@ -26,13 +29,13 @@ export default class UserSelect extends Component<{}> {
                         title="Sign into a patient account"
                         onPress={() => navigate('PSign')}
                     />
-                    <Text style={{marginBottom: 30}}>
+                    <Text style={{marginBottom: 20}}>
                     </Text>
                     <SeafoamButton
                         title="Sign into a nutritionist account"
                         onPress={() => navigate('NSign')}
                     />
-                    <Text style={{marginBottom: 30}}>
+                    <Text style={{marginBottom: 20}}>
                     </Text>
                     <SeafoamButton
                         title="Create new user"
@@ -47,12 +50,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        paddingLeft: 20,
-        paddingRight: 20,
+        paddingLeft: 10,
+        paddingRight: 10,
         backgroundColor: '#F7F1D2',
 },
     input:{
-        fontSize: 40,
+        fontSize: 28,
         fontWeight: 'bold',
         marginBottom: 30,
         textAlign: 'center',

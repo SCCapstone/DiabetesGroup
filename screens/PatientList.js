@@ -6,6 +6,7 @@ const PatientListButton = require('../components/PatientListButton');
 export default class PatientList extends React.Component {
     static navigationOptions = {
         title: 'Patient List',
+        headerStyle: {backgroundColor: "#FF6127"}
     };
 
     constructor(props) {
@@ -13,25 +14,31 @@ export default class PatientList extends React.Component {
         console.ignoredYellowBox = [
             'Setting a timer'
         ];
-        this.itemsRef = firebaseApp.database().ref('Patients');
-        this.state = { Name: '', Patients: [], Age: '',};
+        this.itemsRef = firebaseApp.database().ref('Patients/');
+        this.state = { userName: '', Patients: [], Age: '',};
     }
 
     listenForItems(itemsRef) {
         itemsRef.on('value', (snap) => {
             var items = [];
+            console.log("Printing out the the full snapshot!!!");
+            console.log(snap.val());
             snap.forEach((child) => {
                 items.push({
                     id: child.key,
-                    Name: child.val().Name,
+                    userName: child.val().userName,
                     Age: child.val().Age,
                 });
+                console.log("Printing out the child!!!");
+                console.log(child.val());
+
             });
             this.setState({Patients: items});
         });
     }
 
     componentDidMount() {
+        console.log("Mounting!!!");
         this.listenForItems(this.itemsRef);
     }
 
@@ -50,8 +57,7 @@ export default class PatientList extends React.Component {
                     keyExtractor = {this.keyExtractor}
                     renderItem ={({item}) =>
                         <PatientListButton
-                            title = {item.Name + ', ' + item.Age}
-                            //TODO: Need onPress event to take Nutritionist User to HomeScreen
+                            title = {item.userName + ', ' + item.Age}
                             onPress={() => navigate('User')}
                         />
                     }

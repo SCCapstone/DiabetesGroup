@@ -12,6 +12,7 @@ import patientDiet from './screens/patientDiet';
 
 
 import {StackNavigator,} from 'react-navigation';
+import NewPatientInfo from "./screens/NewPatientInfo";
 
 //This is going to be the apps main navigator
 const AppNavigator = StackNavigator({
@@ -23,7 +24,7 @@ const AppNavigator = StackNavigator({
         PHome: {screen: patientHome},
         GInput: {screen: glucoseInput},
         PMed: {screen: patientMedication},
-        PDiet: {screen: patientDiet}
+        PDiet: {screen: patientDiet},
     },
     {
 

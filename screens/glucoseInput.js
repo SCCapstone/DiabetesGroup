@@ -16,7 +16,11 @@ import {
 
 export default class glucoseInput extends Component<{}> {
 
-    static navigationOptions = {title: 'Glucose Input',};
+    static navigationOptions = {
+        title: 'Glucose Input',
+        headerStyle: {backgroundColor: "#FF6127"}
+    };
+
     constructor(props) {
         super(props);
         this.state = {time: '', glucoseLevel: '', readingType:'', notes:''};
@@ -40,7 +44,7 @@ export default class glucoseInput extends Component<{}> {
             alert('Please select a valid reading type.');
         }else
         {
-            firebaseApp.database().ref('users/' + user.uid + '/logs/').push({
+            firebaseApp.database().ref('Patients/' + user.uid + '/logs/').push({
                 time: time,
                 glucoseLevel: glucoseLevel,
                 readingType: readingType,
@@ -63,6 +67,7 @@ export default class glucoseInput extends Component<{}> {
 
                         <TextInput style={styles.input} placeholder="Glucose Level"
                                    underlineColorAndroid ={'transparent'}
+                                   placeholderTextColor="#CFCFCF"
                                    onChangeText={(text) => this.setState({glucoseLevel: text})}
                                    value={this.state.glucoseLevel}
                         />
@@ -81,6 +86,7 @@ export default class glucoseInput extends Component<{}> {
 
                         <TextInput style={styles.input} placeholder="Additional Notes"
                                    underlineColorAndroid ={'transparent'}
+                                   placeholderTextColor="#CFCFCF"
                                    onChangeText={(text) => this.setState({notes: text})}
                                    value={this.state.notes}
                         />
@@ -123,11 +129,9 @@ const styles = StyleSheet.create({
         marginTop: -20,
     },
     input:{
-        height: 40,
+        fontSize: 16,
+        backgroundColor: '#FEFDF5',
         marginBottom: 20,
-        alignSelf: 'stretch',
-        color: "#000000",
-        borderColor: "#000000",
         borderWidth: 1,
 
     },

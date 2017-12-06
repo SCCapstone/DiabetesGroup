@@ -13,7 +13,10 @@ import {
 
 export default class NutritionistSignIn extends Component<{}> {
 
-	static navigationOptions = {title: 'Please input your login credentials',};
+	static navigationOptions = {
+	    title: 'Please input your login credentials',
+        headerStyle: {backgroundColor: "#FF6127"}
+    };
 
 	constructor(props){
 	    super(props);
@@ -68,20 +71,22 @@ export default class NutritionistSignIn extends Component<{}> {
                             Nutritionist Login
                         </Text>
                     <TextInput
-                        placeholder={"Enter Username or Email"}
-                        placeholderTextColor="#000000"
+                        placeholder={"Enter Email"}
+                        placeholderTextColor="#CFCFCF"
                         onSubmitEditing={() => this.passwordInput.focus()}
                         keyboardType = "email-address"
                         autoCapitalize = "none"
                         autoCorrect = {false}
+                        underlineColorAndroid ={'transparent'}
                         style={styles.input}
                         onChangeText={(text) => this.setState({email: text})}
                         value={this.state.email}
                     />
                     <TextInput
                         placeholder={"Enter Password"}
-                        placeholderTextColor="#000000"
+                        placeholderTextColor="#CFCFCF"
                         secureTextEntry
+                        underlineColorAndroid ={'transparent'}
                         style={styles.input}
                         ref={(input) => this.passwordInput = input}
                         onChangeText={(text) => this.setState({password: text})}
@@ -107,16 +112,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     input: {
-        height: 55,
         fontSize: 16,
-        backgroundColor: 'rgba(255,255,255,0.8)',
+        backgroundColor: '#FEFDF5',
         marginBottom: 20,
-        marginTop: 30,
-        color: '#000000',
-        paddingHorizontal: 20
+        borderWidth: 1,
     },
     title: {
-        fontSize: 40,
+        fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 30,
         textAlign: 'center',
@@ -124,11 +126,11 @@ const styles = StyleSheet.create({
         color: "#000000",
     },
     login: {
-        fontWeight: 'bold',
-        fontSize: 20,
-        color: "#000000",
         textAlign: 'center',
         alignSelf: 'stretch',
+        fontWeight: 'bold',
+        fontSize: 14,
+        color: "#000000",
     }
 
 });
