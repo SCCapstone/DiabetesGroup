@@ -1292,23 +1292,23 @@ var _PatientList = require(491                    ); // 491 = ./screens/PatientL
 
 var _PatientList2 = _interopRequireDefault(_PatientList);
 
-var _UserSelect = require(639                   ); // 639 = ./screens/UserSelect
+var _UserSelect = require(641                   ); // 641 = ./screens/UserSelect
 
 var _UserSelect2 = _interopRequireDefault(_UserSelect);
 
-var _PatientSignIn = require(640                      ); // 640 = ./screens/PatientSignIn
+var _PatientSignIn = require(642                      ); // 642 = ./screens/PatientSignIn
 
 var _PatientSignIn2 = _interopRequireDefault(_PatientSignIn);
 
-var _NutritionistSignIn = require(641                           ); // 641 = ./screens/NutritionistSignIn
+var _NutritionistSignIn = require(643                           ); // 643 = ./screens/NutritionistSignIn
 
 var _NutritionistSignIn2 = _interopRequireDefault(_NutritionistSignIn);
 
-var _createNewUser = require(642                      ); // 642 = ./screens/createNewUser
+var _createNewUser = require(644                      ); // 644 = ./screens/createNewUser
 
 var _createNewUser2 = _interopRequireDefault(_createNewUser);
 
-var _patientHome = require(643                    ); // 643 = ./screens/patientHome
+var _patientHome = require(645                    ); // 645 = ./screens/patientHome
 
 var _patientHome2 = _interopRequireDefault(_patientHome);
 
@@ -58103,6 +58103,7 @@ function _wrapComponent(id) {
 }
 
 var PatientListButton = require(638                              ); // 638 = ../components/PatientListButton
+var MessengerButton = require(639                            ); // 639 = ../components/MessengerButton
 
 var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_React$Component) {
     _inherits(PatientList, _React$Component);
@@ -58129,16 +58130,12 @@ var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_Rea
 
             itemsRef.on('value', function (snap) {
                 var items = [];
-                console.log("Printing out the the full snapshot!!!");
-                console.log(snap.val());
                 snap.forEach(function (child) {
                     items.push({
                         id: child.key,
                         userName: child.val().userName,
                         Age: child.val().Age
                     });
-                    console.log("Printing out the child!!!");
-                    console.log(child.val());
                 });
                 _this2.setState({ Patients: items });
             });
@@ -58146,7 +58143,6 @@ var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_Rea
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            console.log("Mounting!!!");
             this.listenForItems(this.itemsRef);
         }
     }, {
@@ -58163,7 +58159,7 @@ var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_Rea
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 54
+                        lineNumber: 49
                     }
                 },
                 _react3.default.createElement(_reactNative.FlatList, {
@@ -58178,14 +58174,14 @@ var PatientList = _wrapComponent('PatientList')((_temp = _class = function (_Rea
                             },
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 59
+                                lineNumber: 54
                             }
                         });
                     },
                     style: { marginTop: 20, marginLeft: 20 },
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 55
+                        lineNumber: 50
                     }
                 })
             );
@@ -76958,6 +76954,103 @@ var styles = _reactNative.StyleSheet.create({
 
 module.exports = PatientListButton;
 }, 638, null, "DiabetesGroup/components/PatientListButton.js");
+__d(/* DiabetesGroup/components/MessengerButton.js */function(global, require, module, exports) {var _react2 = require(36     ); // 36 = react
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index = require(160                                                 ); // 160 = ./../node_modules/react-transform-hmr/lib/index.js
+
+var _index2 = _interopRequireDefault(_index);
+
+var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\components\\MessengerButton.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _reactNative = require(12            ); // 12 = react-native
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+    MessengerButton: {
+        displayName: 'MessengerButton'
+    }
+};
+
+var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+    filename: 'C:/Users/shark/Capstone/DiabetesGroup/components/MessengerButton.js',
+    components: _components,
+    locals: [module],
+    imports: [_react3.default]
+});
+
+function _wrapComponent(id) {
+    return function (Component) {
+        return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+    };
+}
+
+var MessengerButton = _wrapComponent('MessengerButton')(function (_Component) {
+    _inherits(MessengerButton, _Component);
+
+    function MessengerButton() {
+        _classCallCheck(this, MessengerButton);
+
+        return _possibleConstructorReturn(this, (MessengerButton.__proto__ || Object.getPrototypeOf(MessengerButton)).apply(this, arguments));
+    }
+
+    _createClass(MessengerButton, [{
+        key: 'render',
+        value: function render() {
+            return _react3.default.createElement(
+                _reactNative.View,
+                { style: styles.press, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 13
+                    }
+                },
+                _react3.default.createElement(
+                    _reactNative.TouchableHighlight,
+                    {
+                        onPress: this.props.onPress, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 14
+                        }
+                    },
+                    _react3.default.createElement(_reactNative.Image, {
+                        style: styles.button,
+                        source: require(640               ), __source: { // 640 = ./MessengerB.png
+                            fileName: _jsxFileName,
+                            lineNumber: 16
+                        }
+                    })
+                )
+            );
+        }
+    }]);
+
+    return MessengerButton;
+}(_react2.Component));
+
+var styles = _reactNative.StyleSheet.create({
+    press: {
+        backgroundColor: '#F7F1D2',
+        overflow: 'hidden'
+    },
+    button: {
+        overlayColor: '#F7F1D2'
+    }
+});
+
+module.exports = MessengerButton;
+}, 639, null, "DiabetesGroup/components/MessengerButton.js");
+__d(/* DiabetesGroup/components/MessengerB.png */function(global, require, module, exports) {module.exports=require(324                                         ).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/components","width":40,"height":39,"scales":[1],"hash":"cc0cc66329dc1a75aef56544c43d16ef","name":"MessengerB","type":"png"}); // 324 = react-native/Libraries/Image/AssetRegistry
+}, 640, null, "DiabetesGroup/components/MessengerB.png");
 __d(/* DiabetesGroup/screens/UserSelect.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -77114,7 +77207,7 @@ var styles = _reactNative.StyleSheet.create({
         color: "#000000"
     }
 });
-}, 639, null, "DiabetesGroup/screens/UserSelect.js");
+}, 641, null, "DiabetesGroup/screens/UserSelect.js");
 __d(/* DiabetesGroup/screens/PatientSignIn.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -77348,7 +77441,7 @@ var styles = _reactNative.StyleSheet.create({
     }
 
 });
-}, 640, null, "DiabetesGroup/screens/PatientSignIn.js");
+}, 642, null, "DiabetesGroup/screens/PatientSignIn.js");
 __d(/* DiabetesGroup/screens/NutritionistSignIn.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -77583,7 +77676,7 @@ var styles = _reactNative.StyleSheet.create({
     }
 
 });
-}, 641, null, "DiabetesGroup/screens/NutritionistSignIn.js");
+}, 643, null, "DiabetesGroup/screens/NutritionistSignIn.js");
 __d(/* DiabetesGroup/screens/createNewUser.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -77691,7 +77784,8 @@ var createNewUser = _wrapComponent('createNewUser')((_temp = _class = function (
                         userName: userName,
                         email: email,
                         password: password,
-                        Age: Age
+                        Age: Age,
+                        nextAppt: "12/21/17, 12:20 PM"
                     });
                     navigate('User');
                 } else {
@@ -77708,21 +77802,21 @@ var createNewUser = _wrapComponent('createNewUser')((_temp = _class = function (
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 92
+                        lineNumber: 93
                     }
                 },
                 _react3.default.createElement(
                     _reactNative.View,
                     { style: styles.stretched, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 93
+                            lineNumber: 94
                         }
                     },
                     _react3.default.createElement(
                         _reactNative.Text,
                         { style: styles.title, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 94
+                                lineNumber: 95
                             }
                         },
                         'Enter your information below:'
@@ -77736,7 +77830,7 @@ var createNewUser = _wrapComponent('createNewUser')((_temp = _class = function (
                         value: this.state.userName,
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 98
+                            lineNumber: 99
                         }
                     }),
                     _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Email',
@@ -77748,7 +77842,7 @@ var createNewUser = _wrapComponent('createNewUser')((_temp = _class = function (
                         value: this.state.email,
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 105
+                            lineNumber: 106
                         }
                     }),
                     _react3.default.createElement(_reactNative.TextInput, { style: styles.input, placeholder: 'Password',
@@ -77761,7 +77855,7 @@ var createNewUser = _wrapComponent('createNewUser')((_temp = _class = function (
                         value: this.state.password,
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 112
+                            lineNumber: 113
                         }
                     }),
                     _react3.default.createElement(
@@ -77773,22 +77867,22 @@ var createNewUser = _wrapComponent('createNewUser')((_temp = _class = function (
                                 return _this2.setState({ userType: itemValue });
                             }, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 119
+                                lineNumber: 120
                             }
                         },
                         _react3.default.createElement(_reactNative.Picker.Item, { label: 'User Type', value: 'User Type', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 123
+                                lineNumber: 124
                             }
                         }),
                         _react3.default.createElement(_reactNative.Picker.Item, { label: 'Nutritionist', value: 'Nutritionist', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 124
+                                lineNumber: 125
                             }
                         }),
                         _react3.default.createElement(_reactNative.Picker.Item, { label: 'Patient', value: 'Patient', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 125
+                                lineNumber: 126
                             }
                         })
                     ),
@@ -77799,7 +77893,7 @@ var createNewUser = _wrapComponent('createNewUser')((_temp = _class = function (
                         },
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 127
+                            lineNumber: 128
                         }
                     })
                 )
@@ -77849,7 +77943,7 @@ var styles = _reactNative.StyleSheet.create({
     }
 
 });
-}, 642, null, "DiabetesGroup/screens/createNewUser.js");
+}, 644, null, "DiabetesGroup/screens/createNewUser.js");
 __d(/* DiabetesGroup/screens/patientHome.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -77902,8 +77996,8 @@ function _wrapComponent(id) {
 }
 
 var SeafoamButton = require(490                          ); // 490 = ../components/SeafoamButton
-var GlucoseCircle = require(644                          ); // 644 = ../components/GlucoseCircle
-var MessengerButton = require(645                            ); // 645 = ../components/MessengerButton
+var GlucoseCircle = require(646                          ); // 646 = ../components/GlucoseCircle
+var MessengerButton = require(639                            ); // 639 = ../components/MessengerButton
 var GlucoseLogTable = require(647                            ); // 647 = ../components/GlucoseLogTable
 
 var patientHome = _wrapComponent('patientHome')((_temp = _class = function (_React$Component) {
@@ -78118,7 +78212,7 @@ var styles = _reactNative.StyleSheet.create({
     row: { height: 30 }
 
 });
-}, 643, null, "DiabetesGroup/screens/patientHome.js");
+}, 645, null, "DiabetesGroup/screens/patientHome.js");
 __d(/* DiabetesGroup/components/GlucoseCircle.js */function(global, require, module, exports) {var _react2 = require(36     ); // 36 = react
 
 var _react3 = _interopRequireDefault(_react2);
@@ -78228,104 +78322,7 @@ var styles = _reactNative.StyleSheet.create({
 });
 
 module.exports = GlucoseCircle;
-}, 644, null, "DiabetesGroup/components/GlucoseCircle.js");
-__d(/* DiabetesGroup/components/MessengerButton.js */function(global, require, module, exports) {var _react2 = require(36     ); // 36 = react
-
-var _react3 = _interopRequireDefault(_react2);
-
-var _index = require(160                                                 ); // 160 = ./../node_modules/react-transform-hmr/lib/index.js
-
-var _index2 = _interopRequireDefault(_index);
-
-var _jsxFileName = 'C:\\Users\\shark\\Capstone\\DiabetesGroup\\components\\MessengerButton.js';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _reactNative = require(12            ); // 12 = react-native
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _components = {
-    MessengerButton: {
-        displayName: 'MessengerButton'
-    }
-};
-
-var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
-    filename: 'C:/Users/shark/Capstone/DiabetesGroup/components/MessengerButton.js',
-    components: _components,
-    locals: [module],
-    imports: [_react3.default]
-});
-
-function _wrapComponent(id) {
-    return function (Component) {
-        return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
-    };
-}
-
-var MessengerButton = _wrapComponent('MessengerButton')(function (_Component) {
-    _inherits(MessengerButton, _Component);
-
-    function MessengerButton() {
-        _classCallCheck(this, MessengerButton);
-
-        return _possibleConstructorReturn(this, (MessengerButton.__proto__ || Object.getPrototypeOf(MessengerButton)).apply(this, arguments));
-    }
-
-    _createClass(MessengerButton, [{
-        key: 'render',
-        value: function render() {
-            return _react3.default.createElement(
-                _reactNative.View,
-                { style: styles.press, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 13
-                    }
-                },
-                _react3.default.createElement(
-                    _reactNative.TouchableHighlight,
-                    {
-                        onPress: this.props.onPress, __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 14
-                        }
-                    },
-                    _react3.default.createElement(_reactNative.Image, {
-                        style: styles.button,
-                        source: require(646               ), __source: { // 646 = ./MessengerB.png
-                            fileName: _jsxFileName,
-                            lineNumber: 16
-                        }
-                    })
-                )
-            );
-        }
-    }]);
-
-    return MessengerButton;
-}(_react2.Component));
-
-var styles = _reactNative.StyleSheet.create({
-    press: {
-        backgroundColor: '#F7F1D2',
-        overflow: 'hidden'
-    },
-    button: {
-        overlayColor: '#F7F1D2'
-    }
-});
-
-module.exports = MessengerButton;
-}, 645, null, "DiabetesGroup/components/MessengerButton.js");
-__d(/* DiabetesGroup/components/MessengerB.png */function(global, require, module, exports) {module.exports=require(324                                         ).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/components","width":40,"height":39,"scales":[1],"hash":"cc0cc66329dc1a75aef56544c43d16ef","name":"MessengerB","type":"png"}); // 324 = react-native/Libraries/Image/AssetRegistry
-}, 646, null, "DiabetesGroup/components/MessengerB.png");
+}, 646, null, "DiabetesGroup/components/GlucoseCircle.js");
 __d(/* DiabetesGroup/components/GlucoseLogTable.js */function(global, require, module, exports) {var _react2 = require(36     ); // 36 = react
 
 var _react3 = _interopRequireDefault(_react2);
@@ -78398,9 +78395,6 @@ var GlucoseLogTable = _wrapComponent('GlucoseLogTable')(function (_Component) {
             var _this2 = this;
 
             itemsRef.on('value', function (snap) {
-                var GL = [];
-                var RT = [];
-                var Date = [];
                 var items = [];
                 snap.forEach(function (child) {
                     items.push([child.val().glucoseLevel, child.val().readingType, child.val().time]);
@@ -78421,17 +78415,14 @@ var GlucoseLogTable = _wrapComponent('GlucoseLogTable')(function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            console.log("Printing out logs!!");
-            console.log(this.state.logs);
-            var logss = this.state.logs;
             var tableHead = ['Glucose Level (mg/dL)', 'Type', 'Time Recorded'];
-            var tableData = [['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '11:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '5:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '11:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '5:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '11:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '5:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '11:30'], ['112', 'Fasting', '7:30'], ['112', 'Post-Meal', '5:30']];
+
             return _react3.default.createElement(
                 _reactNative.View,
                 {
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 84
+                        lineNumber: 48
                     }
                 },
                 _react3.default.createElement(
@@ -78439,18 +78430,18 @@ var GlucoseLogTable = _wrapComponent('GlucoseLogTable')(function (_Component) {
                     {
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 85
+                            lineNumber: 49
                         }
                     },
                     _react3.default.createElement(_reactNativeTableComponent.Row, { data: tableHead, style: styles.head, textStyle: styles.text, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 87
+                            lineNumber: 51
                         }
                     }),
                     this.state.logs.map(function (data, i) {
                         return _react3.default.createElement(_reactNativeTableComponent.Row, { key: i, data: data, style: [styles.row, i % 2 && { backgroundColor: 'orange' }], textStyle: styles.text, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 90
+                                lineNumber: 54
                             }
                         });
                     })

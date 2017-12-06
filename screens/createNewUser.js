@@ -76,6 +76,7 @@ export default class createNewUser extends Component<{}> {
                         email: email,
                         password: password,
                         Age: Age,
+                        nextAppt: "12/21/17, 12:20 PM"
                     });
                     navigate('User')
                 }

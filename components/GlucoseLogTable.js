@@ -43,24 +43,7 @@ class GlucoseLogTable extends Component {
 
     render() {
         const tableHead = ['Glucose Level (mg/dL)', 'Type', 'Time Recorded'];
-        const tableData = [
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '11:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '5:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '11:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '5:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '11:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '5:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '11:30'],
-            ['112', 'Fasting', '7:30'],
-            ['112', 'Post-Meal', '5:30'],
-        ];
+
         return (
             <View>
                 <Table>

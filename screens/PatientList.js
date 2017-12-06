@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, BackHandler, StyleSheet, FlatList} from 'react-native';
 import firebaseApp from './FireBaseApp';
 const PatientListButton = require('../components/PatientListButton');
+const MessengerButton = require('../components/MessengerButton');
 
 export default class PatientList extends React.Component {
     static navigationOptions = {
@@ -21,24 +22,18 @@ export default class PatientList extends React.Component {
     listenForItems(itemsRef) {
         itemsRef.on('value', (snap) => {
             var items = [];
-            console.log("Printing out the the full snapshot!!!");
-            console.log(snap.val());
             snap.forEach((child) => {
                 items.push({
                     id: child.key,
                     userName: child.val().userName,
                     Age: child.val().Age,
                 });
-                console.log("Printing out the child!!!");
-                console.log(child.val());
-
             });
             this.setState({Patients: items});
         });
     }
 
     componentDidMount() {
-        console.log("Mounting!!!");
         this.listenForItems(this.itemsRef);
     }
 
@@ -57,7 +52,7 @@ export default class PatientList extends React.Component {
                     keyExtractor = {this.keyExtractor}
                     renderItem ={({item}) =>
                         <PatientListButton
-                            title = {item.userName + ', ' + item.Age}
+                            title={item.userName + ', ' + item.Age}
                             onPress={() => navigate('User')}
                         />
                     }
