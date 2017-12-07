@@ -65,7 +65,7 @@ export default class NutritionistSignIn extends Component<{}> {
             <View style={styles.container}>
                 <View style={styles.container}>
                     <Text style={styles.title}>
-                        AahaRX{"\n"}For{"\n"}Diabetes{"\n"}Management
+                        AahaRx{"\n"}For{"\n"}Diabetes{"\n"}Management
                     </Text>
                         <Text style={styles.login}>
                             Nutritionist Login
