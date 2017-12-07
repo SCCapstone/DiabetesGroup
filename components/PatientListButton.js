@@ -31,11 +31,11 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingRight: 5,
         marginBottom: 20,
-
+        height: 40,
     },
     pressText: {
         color: '#000000',
-        fontSize: 16,
+        fontSize: 25,
         textAlign: 'center',
     },
 });

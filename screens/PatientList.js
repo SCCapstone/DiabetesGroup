@@ -56,7 +56,7 @@ export default class PatientList extends React.Component {
                             onPress={() => navigate('User')}
                         />
                     }
-                    style={{marginTop: 20, marginLeft: 20,}}
+                    style={{marginTop: 20, marginLeft: 20, marginRight: 20}}
                 />
             </View>
         );
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'space-between',
-        alignItems: 'flex-start',
+        //alignItems: 'center',
         backgroundColor: '#F7F1D2',
     },
     namelistview: {
