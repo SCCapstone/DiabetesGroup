@@ -22,7 +22,7 @@ export default class UserSelect extends Component<{}> {
 		return (
         	<View style={styles.container}>
                 <Text style={styles.input}>
-                    AahaRX{"\n"}For{"\n"}Diabetes{"\n"}Management  
+                    AahaRx{"\n"}For{"\n"}Diabetes{"\n"}Management
                 </Text>
                     <SeafoamButton
                         style={styles.button}
