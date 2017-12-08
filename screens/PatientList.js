@@ -53,7 +53,7 @@ export default class PatientList extends React.Component {
                     renderItem ={({item}) =>
                         <PatientListButton
                             title={item.userName + ', ' + item.Age}
-                            onPress={() => navigate('User')}
+                            onPress={() => navigate('PList')}
                         />
                     }
                     style={{marginTop: 20, marginLeft: 20, marginRight: 20}}

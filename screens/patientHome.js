@@ -17,9 +17,14 @@ export default class patientHome extends React.Component {
         console.ignoredYellowBox = [
             'Setting a timer'
         ];
+
         var userID = firebaseApp.auth().currentUser.uid;
         this.myRef = firebaseApp.database().ref('Patients/' + userID);
-        this.state = {nextAppt: ''};
+        //this.ref = firebaseApp.database().ref('Patients/' + userID + '/logs').child('glucoseLevel');
+        this.state = {nextAppt: '', glucoseLevel: ''};
+
+
+
     }
 
     updateItems(myRef) {
@@ -29,12 +34,25 @@ export default class patientHome extends React.Component {
         });
     }
 
+    //upItems(ref) {
+     //   ref.on('value', (snapshot) => {
+     //       var rLog = snapshot.val().glucoseLevel;
+     //       this.setState({glucoseLevel: rLog});
+     //   });
+   // }
+
+
+
     componentDidMount() {
         this.updateItems(this.myRef);
+        //this.upItems(this.ref);
+
     }
 
     componentWillUnmount(){
         this.myRef.off();
+        //this.ref.off();
+
     }
 
     render(){
@@ -48,13 +66,13 @@ export default class patientHome extends React.Component {
                 </View>
 
                 <View style={styles.container}>
-                    <GlucoseCircle title={val1 + '      HgbA1c'}/>
+                    <GlucoseCircle title={  'HgbA1c'}/>
                     <Text></Text>
                 </View>
 
                 <View style = {styles.container2}>
-                    <GlucoseCircle title={'60' + '      FBG'}/>
-                    <GlucoseCircle title={'150' + '      PpBG'}/>
+                    <GlucoseCircle title={  'FBG'}/>
+                    <GlucoseCircle title={  ' PpBG'}/>
                 </View>
 
                 <View style={styles.container}>
