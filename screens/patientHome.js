@@ -66,13 +66,13 @@ export default class patientHome extends React.Component {
                 </View>
 
                 <View style={styles.container}>
-                    <GlucoseCircle title={  'HgbA1c'}/>
+                    <GlucoseCircle title={val1 + '\nHgbA1c'}/>
                     <Text></Text>
                 </View>
 
                 <View style = {styles.container2}>
-                    <GlucoseCircle title={  'FBG'}/>
-                    <GlucoseCircle title={  ' PpBG'}/>
+                    <GlucoseCircle title={60 + '\nFBG'}/>
+                    <GlucoseCircle title={154 + '\nPpBG'}/>
                 </View>
 
                 <View style={styles.container}>
