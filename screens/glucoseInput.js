@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';
+import moment from 'moment';
 import {
     Platform,
     StyleSheet,
@@ -28,8 +29,7 @@ export default class glucoseInput extends Component<{}> {
 
 
     _patientValues() {
-        var options = {hour: 'numeric', minute: '2-digit', month: 'numeric', day: 'numeric', year: 'numeric'};
-        var time = new Date().toLocaleString('en-US', options);
+        var time = moment().format("MM/DD/YYYY, LT");
         var glucoseLevel = this.state.glucoseLevel;
         var readingType = this.state.readingType;
         var notes = this.state.notes;
