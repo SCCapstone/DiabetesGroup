@@ -12,7 +12,7 @@ DiabetesGroup is working on an app for Diabetes patients as well as their doctor
  7. The application should now be open running on your emulator or USB device 
  
  ### To run Unit-Testing with Jest:
- 1. Navigate to directory DiabetesGroup/__tests__/test in command line
+ 1. Navigate to directory DiabetesGroup/\__tests\__/test in command line
  2. In the command line run the command "npm test jest.js"
  
  
