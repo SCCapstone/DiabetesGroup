@@ -5,7 +5,6 @@ import {View,  StyleSheet} from 'react-native';
 
 import {Table, TableWrapper, Row, Rows, Col, Cols, Cell} from 'react-native-table-component';
 import firebaseApp from "../screens/FireBaseApp";
-
 class GlucoseLogTable extends Component {
     constructor(props) {
         super(props);
