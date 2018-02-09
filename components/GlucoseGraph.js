@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import {View,  StyleSheet} from 'react-native';
-import {Table, TableWrapper, Row, Rows, Col, Cols, Cell} from 'react-native-table-component';
-import firebaseApp from "../screens/FireBaseApp";
-class GlucoseLogTable extends Component {
+import Svg from "react-native-svg";
+import { VictoryChart, VictoryLine } from 'victory-native';
+import {View, Text, StyleSheet} from 'react-native';
+import firebaseApp from "../screens/FireBaseApp"
+
+class GlucoseGraph extends Component {
     constructor(props) {
         super(props);
         console.ignoredYellowBox = [
@@ -10,7 +12,7 @@ class GlucoseLogTable extends Component {
         ];
         var userID = firebaseApp.auth().currentUser.uid;
         this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/logs/');
-        this.state = { logs: [], glucoseLevel: '', readingType: '', time: '',};
+        this.state = { logs: [], glucoseLevel: '', time: '',};
     }
 
     listenForItems(itemsRef) {
@@ -18,9 +20,7 @@ class GlucoseLogTable extends Component {
             var items = [];
             snap.forEach((child) => {
                 items.push(
-                    [child.val().glucoseLevel,
-                     child.val().readingType,
-                     child.val().time,])
+                    {x: child.val().time, y: child.val().glucoseLevel})
             });
             this.setState({logs: items});
         });
@@ -38,23 +38,31 @@ class GlucoseLogTable extends Component {
 
 
     render() {
-        const tableHead = ['Glucose Level (mg/dL)', 'Type', 'Time Recorded'];
         return (
-            <View>
-                <Table>
-
-                    <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-
-                    {this.state.logs.map((data, i) => (
-                        <Row key = {i} data={data} style={[styles.row, i%2 > 0 && {backgroundColor: 'orange'}, i%2 === 0 && {backgroundColor: 'white'}]} textStyle={styles.text}/> ))}
-
-                </Table>
-
-            </View>
+            <VictoryChart
+                //theme={VictoryTheme.material}
+            >
+                <VictoryLine
+                    style={{
+                        data: { stroke: "#c43a31" },
+                        parent: { border: "1px solid #ccc"}
+                    }}
+                    data={this.state.logs}
+                    //x= time
+                    //y= glucoseLevel
+                    /**data={[
+                        { x: 1, y: 2 },
+                        { x: 2, y: 3 },
+                        { x: 3, y: 5 },
+                        { x: 4, y: 4 },
+                        { x: 5, y: 7 }
+                    ]}**/
+                />
+            </VictoryChart>
         );
     }
-}
 
+}
 
 const styles = StyleSheet.create({
     head: { height: 40, backgroundColor: 'orange' },
@@ -69,4 +77,4 @@ const styles = StyleSheet.create({
     },
 });
 
-module.exports = GlucoseLogTable;
+module.exports = GlucoseGraph;
