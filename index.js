@@ -12,6 +12,7 @@ import glucoseInput from './screens/glucoseInput';
 import patientMedication from './screens/patientMedication';
 import patientDiet from './screens/patientDiet';
 import SignOut from './screens/SignOut';
+import Settin
 
 
 import {StackNavigator,} from 'react-navigation';
