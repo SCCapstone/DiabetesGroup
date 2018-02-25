@@ -11,6 +11,11 @@ DiabetesGroup is working on an app for Diabetes patients as well as their doctor
  6. After the previous command is done, run the command "react-native run-android"
  7. The application should now be open running on your emulator or USB device 
  
+ ### To run Unit-Testing with Jest:
+ 1. Navigate to directory DiabetesGroup/\_\_tests\_\_/test in command line
+ 2. In the command line run the command "npm test jest.js"
+ 
+ 
 
 
 
