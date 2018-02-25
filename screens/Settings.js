@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';
@@ -14,16 +13,23 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-export default class NewPatientInfo extends Component<{}> {
+export default class Settings extends Component<{}> {
 
     static navigationOptions = {
-        title: 'New Account',
+        title: 'Settings',
         headerStyle: {backgroundColor: "#FF6127"}
     };
 
     constructor(props) {
         super(props);
         this.state = {Age: '', Sex: '', Weight: '', Height: '', DType: ''};
+
+        var userID = firebaseApp.auth().currentUser.uid;
+        var userRef = firebaseApp.database().ref('Patients/' + userID + '/Pinfo/');
+        userRef.once('value', (snapshot) => {
+            this.state ={Age: snapshot.val().Age, Sex: snapshot.val().Sex, Weight: snapshot.val().Weight,
+                Height: snapshot.val().Height, DType: snapshot.val().DType};
+        });
     }
 
     _submitInfo() {
@@ -38,7 +44,7 @@ export default class NewPatientInfo extends Component<{}> {
         var user = firebaseApp.auth().currentUser;
         var database = firebaseApp.database();
 
-        firebaseApp.database().ref('Patients/' + user.uid +'/Pinfo/').set({
+        firebaseApp.database().ref('Patients/' + user.uid + '/Pinfo/').set({
             Age: Age,
             Sex: Sex,
             Weight: Weight,
@@ -46,7 +52,7 @@ export default class NewPatientInfo extends Component<{}> {
             DType: DType,
         });
 
-        navigate('PHome')
+        navigate('User')
     }
 
     render() {
@@ -56,43 +62,41 @@ export default class NewPatientInfo extends Component<{}> {
                 <View style={styles.stretched}>
 
                     <Text style={styles.title}>
-                        Enter your information below:
+                        Your Information:
                     </Text>
-
-                    <View style={{flexDirection: 'row'}}>
-                        <TextInput style={styles.input} placeholder="Age"
+                        <Text>Age:</Text>
+                        <TextInput style={styles.input} defaultValue= {this.state.Age}
                                    underlineColorAndroid ={'transparent'}
                                    placeholderTextColor= "#CFCFCF"
                                    onChangeText={(text) => this.setState({Age: text})}
                                    value={this.state.Age}
                         />
-
-                        <TextInput style={styles.inputRight} placeholder="Sex"
+                        <Text>Sex:</Text>
+                        <TextInput style={styles.input} defaultValue={this.state.Sex}
                                    underlineColorAndroid ={'transparent'}
                                    placeholderTextColor= "#CFCFCF"
                                    onChangeText={(text) => this.setState({Sex: text})}
                                    value={this.state.Sex}
 
                         />
-                    </View>
 
-                    <View style={{flexDirection: 'row'}}>
-                        <TextInput style={styles.input} placeholder="Weight"
+                        <Text>Weight:</Text>
+                        <TextInput style={styles.input} defaultValue= {this.state.Weight}
                                    underlineColorAndroid ={'transparent'}
                                    placeholderTextColor= "#CFCFCF"
                                    onChangeText={(text) => this.setState({Weight: text})}
                                    value={this.state.Weight}
                         />
-
-                        <TextInput style={styles.inputRight} placeholder="Height"
+                        <Text>Height:</Text>
+                        <TextInput style={styles.input} defaultValue= {this.state.Height}
                                    underlineColorAndroid ={'transparent'}
                                    placeholderTextColor= "#CFCFCF"
                                    onChangeText={(text) => this.setState({Height: text})}
                                    value={this.state.Height}
                         />
-                    </View>
 
-                    <TextInput style={styles.input} placeholder="Diabetes Type"
+                    <Text>DType:</Text>
+                    <TextInput style={styles.input} defaultValue= {this.state.DType}
                                underlineColorAndroid ={'transparent'}
                                placeholderTextColor= "#CFCFCF"
                                onChangeText={(text) => this.setState({DType: text})}
@@ -100,7 +104,7 @@ export default class NewPatientInfo extends Component<{}> {
                     />
 
                     <SeafoamButton
-                        title="Submit"
+                        title="Update"
                         onPress = {() => this._submitInfo()}
                     />
                 </View>
@@ -139,6 +143,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FEFDF5',
         borderColor: "#000000",
         borderWidth: 1,
+        padding: 10,
     },
     inputRight:{
         marginBottom: 10,
