@@ -5,7 +5,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import firebaseApp from "../screens/FireBaseApp"
 
 class GlucoseGraph extends Component {
-    constructor(props) {
+/**    constructor(props) {
         super(props);
         console.ignoredYellowBox = [
             'Setting a timer'
@@ -36,7 +36,7 @@ class GlucoseGraph extends Component {
 
     keyExtractor = (item) => item.id;
 
-
+**/
     render() {
         return (
             <VictoryChart
@@ -47,16 +47,16 @@ class GlucoseGraph extends Component {
                         data: { stroke: "#c43a31" },
                         parent: { border: "1px solid #ccc"}
                     }}
-                    data={this.state.logs}
+                    //data={this.state.logs}
                     //x= time
                     //y= glucoseLevel
-                    /**data={[
+                    data={[
                         { x: 1, y: 2 },
                         { x: 2, y: 3 },
                         { x: 3, y: 5 },
                         { x: 4, y: 4 },
                         { x: 5, y: 7 }
-                    ]}**/
+                    ]}
                 />
             </VictoryChart>
         );
