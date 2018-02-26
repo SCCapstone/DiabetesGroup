@@ -13,12 +13,7 @@ class GlucoseGraph extends Component {
         ];
         var userID = firebaseApp.auth().currentUser.uid;
         this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/logs/');
-        this.state = { logs: [
-            { x: 1, y: 2 },
-            { x: 2, y: 3 },
-            { x: 3, y: 5 },
-            { x: 4, y: 4 },
-            { x: 5, y: 7 }], dates: [], glogs: [], glucoseLevel: '', time: '',};
+        this.state = { logs: [], dates: [], glogs: [], glucoseLevel: '', time: '',};
     }
 
     listenForItems(itemsRef) {
@@ -80,14 +75,12 @@ class GlucoseGraph extends Component {
                 });
             }
         }
-        //console.log(items);
         return items;
     };
 
     render() {
-        console.log(this.state.logs);
         return (
-            <VictoryChart
+            this.state.logs.length == 0 ? null : <VictoryChart
                 //theme={VictoryTheme.material}
             >
                 <VictoryLine
@@ -96,17 +89,10 @@ class GlucoseGraph extends Component {
                         parent: { border: "1px solid #ccc"}
                     }}
                     keyExtractor = {this.keyExtractor}
-                    data={this.state.logs}
+                    data= {this.state.logs}
                     x= "Time"
                     y= "GlucoseLevel"
-         /*           data={[
-                        { x: 1, y: 2 },
-                        { x: 2, y: 3 },
-                        { x: 3, y: 5 },
-                        { x: 4, y: 4 },
-                        { x: 5, y: 7 }
-                   ]}
-        */        />
+                 />
             </VictoryChart>
         );
     }
