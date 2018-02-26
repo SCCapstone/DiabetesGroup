@@ -3,25 +3,34 @@ import Svg from "react-native-svg";
 import { VictoryChart, VictoryLine } from 'victory-native';
 import {View, Text, StyleSheet} from 'react-native';
 import firebaseApp from "../screens/FireBaseApp"
+import moment from 'moment';
 
 class GlucoseGraph extends Component {
-/**    constructor(props) {
+    constructor(props) {
         super(props);
         console.ignoredYellowBox = [
             'Setting a timer'
         ];
         var userID = firebaseApp.auth().currentUser.uid;
         this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/logs/');
-        this.state = { logs: [], glucoseLevel: '', time: '',};
+        this.state = { logs: [
+            { x: 1, y: 2 },
+            { x: 2, y: 3 },
+            { x: 3, y: 5 },
+            { x: 4, y: 4 },
+            { x: 5, y: 7 }], dates: [], glogs: [], glucoseLevel: '', time: '',};
     }
 
     listenForItems(itemsRef) {
         itemsRef.on('value', (snap) => {
-            var items = [];
+            var lDates = [];
+            var lLogs = [];
             snap.forEach((child) => {
-                items.push(
-                    {x: child.val().time, y: child.val().glucoseLevel})
+                lDates.push(child.val().time);
+                lLogs.push(parseInt(child.val().glucoseLevel));
             });
+            this.setState({dates: lDates, glogs: lLogs});
+            var items = this.averageDates();
             this.setState({logs: items});
         });
     }
@@ -36,8 +45,47 @@ class GlucoseGraph extends Component {
 
     keyExtractor = (item) => item.id;
 
-**/
+    averageDates = () => {
+        lDates = this.state.dates;
+        lLogs = this.state.glogs;
+        var items = [];
+        var  avg = 0;
+        var dCount = 0;
+
+        for(i = 0; i < lDates.length; i++){
+            if(i == 0){
+                dCount = 1;
+                avg += lLogs[i];
+            }else if(moment(lDates[i], 'MM/DD/YYYY').format('MM/DD/YYYY') == moment(lDates[i-1], 'MM/DD/YYYY').format('MM/DD/YYYY')){
+                dCount++;
+                avg += lLogs[i];
+            }else{
+                var lastDate = moment(lDates[i-1], 'MM/DD/YYYY');
+                var lastDateString = lastDate.format('MM/DD/YYYY');
+                avg = avg/dCount;
+                items.push({
+                    Time: lastDateString,
+                    GlucoseLevel: avg,
+                });
+                dCount = 1;
+                avg = lLogs[i];
+            }
+            if((i+1) == lDates.length){
+                var currDate = moment(lDates[i], 'MM/DD/YYYY');
+                var currDateString = currDate.format('MM/DD/YYYY');
+                avg = avg/dCount;
+                items.push({
+                    Time: currDateString,
+                    GlucoseLevel: avg,
+                });
+            }
+        }
+        //console.log(items);
+        return items;
+    };
+
     render() {
+        console.log(this.state.logs);
         return (
             <VictoryChart
                 //theme={VictoryTheme.material}
@@ -47,17 +95,18 @@ class GlucoseGraph extends Component {
                         data: { stroke: "#c43a31" },
                         parent: { border: "1px solid #ccc"}
                     }}
-                    //data={this.state.logs}
-                    //x= time
-                    //y= glucoseLevel
-                    data={[
+                    keyExtractor = {this.keyExtractor}
+                    data={this.state.logs}
+                    x= "Time"
+                    y= "GlucoseLevel"
+         /*           data={[
                         { x: 1, y: 2 },
                         { x: 2, y: 3 },
                         { x: 3, y: 5 },
                         { x: 4, y: 4 },
                         { x: 5, y: 7 }
-                    ]}
-                />
+                   ]}
+        */        />
             </VictoryChart>
         );
     }

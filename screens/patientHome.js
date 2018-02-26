@@ -34,25 +34,12 @@ export default class patientHome extends React.Component {
         });
     }
 
-    //upItems(ref) {
-     //   ref.on('value', (snapshot) => {
-     //       var rLog = snapshot.val().glucoseLevel;
-     //       this.setState({glucoseLevel: rLog});
-     //   });
-   // }
-
-
-
     componentDidMount() {
         this.updateItems(this.myRef);
-        //this.upItems(this.ref);
-
     }
 
     componentWillUnmount(){
         this.myRef.off();
-        //this.ref.off();
-
     }
 
     render(){
@@ -134,7 +121,7 @@ const styles = StyleSheet.create({
     nText: {
         color: '#000000',
         textAlign: 'center',
-        fontSize: 12,
+        fontSize: 16,
         padding:15,
     },
     dataPage: {
