@@ -38,7 +38,7 @@ export default class NewPatientInfo extends Component<{}> {
         var user = firebaseApp.auth().currentUser;
         var database = firebaseApp.database();
 
-        firebaseApp.database().ref('Patients/' + user.uid).set({
+        firebaseApp.database().ref('Patients/' + user.uid +'/Pinfo/').set({
             Age: Age,
             Sex: Sex,
             Weight: Weight,
@@ -46,7 +46,7 @@ export default class NewPatientInfo extends Component<{}> {
             DType: DType,
         });
 
-        navigate('User')
+        navigate('PHome')
     }
 
     render() {
@@ -59,40 +59,39 @@ export default class NewPatientInfo extends Component<{}> {
                         Enter your information below:
                     </Text>
 
-                    <View style={{flexDirection: 'row'}}>
-                        <TextInput style={styles.input} placeholder="Age"
-                                   underlineColorAndroid ={'transparent'}
-                                   placeholderTextColor= "#CFCFCF"
-                                   onChangeText={(text) => this.setState({Age: text})}
-                                   value={this.state.Age}
-                        />
+                    <Text>Age:</Text>
+                    <TextInput style={styles.input} placeholder="Age"
+                               underlineColorAndroid ={'transparent'}
+                               placeholderTextColor= "#CFCFCF"
+                               onChangeText={(text) => this.setState({Age: text})}
+                               value={this.state.Age}
+                    />
+                    <Text>Sex:</Text>
+                    <TextInput style={styles.input} placeholder="Sex"
+                               underlineColorAndroid ={'transparent'}
+                               placeholderTextColor= "#CFCFCF"
+                               onChangeText={(text) => this.setState({Sex: text})}
+                               value={this.state.Sex}
 
-                        <TextInput style={styles.inputRight} placeholder="Sex"
-                                   underlineColorAndroid ={'transparent'}
-                                   placeholderTextColor= "#CFCFCF"
-                                   onChangeText={(text) => this.setState({Sex: text})}
-                                   value={this.state.Sex}
+                    />
 
-                        />
-                    </View>
+                    <Text>Weight:</Text>
+                    <TextInput style={styles.input} placeholder = "Weight"
+                               underlineColorAndroid ={'transparent'}
+                               placeholderTextColor= "#CFCFCF"
+                               onChangeText={(text) => this.setState({Weight: text})}
+                               value={this.state.Weight}
+                    />
+                    <Text>Height:</Text>
+                    <TextInput style={styles.input} placeholder="Height"
+                               underlineColorAndroid ={'transparent'}
+                               placeholderTextColor= "#CFCFCF"
+                               onChangeText={(text) => this.setState({Height: text})}
+                               value={this.state.Height}
+                    />
 
-                    <View style={{flexDirection: 'row'}}>
-                        <TextInput style={styles.input} placeholder="Weight"
-                                   underlineColorAndroid ={'transparent'}
-                                   placeholderTextColor= "#CFCFCF"
-                                   onChangeText={(text) => this.setState({Weight: text})}
-                                   value={this.state.Weight}
-                        />
-
-                        <TextInput style={styles.inputRight} placeholder="Height"
-                                   underlineColorAndroid ={'transparent'}
-                                   placeholderTextColor= "#CFCFCF"
-                                   onChangeText={(text) => this.setState({Height: text})}
-                                   value={this.state.Height}
-                        />
-                    </View>
-
-                    <TextInput style={styles.input} placeholder="Diabetes Type"
+                    <Text>Diabetes Type:</Text>
+                    <TextInput style={styles.input} placeholder = "Diabetes Type"
                                underlineColorAndroid ={'transparent'}
                                placeholderTextColor= "#CFCFCF"
                                onChangeText={(text) => this.setState({DType: text})}

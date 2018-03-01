@@ -70,15 +70,14 @@ export default class createNewUser extends Component<{}> {
                 else if(userType === "Patient")
                 {
                     //added this random num line to generate a random age for the patient since the patient info screen isn't fully implemented yet.
-                    var Age = Math.floor((Math.random() * 99));
+                    //var Age = Math.floor((Math.random() * 99));
                     firebaseApp.database().ref('Patients/' + user.uid).set({
                         userName: userName,
                         email: email,
                         password: password,
-                        Age: Age,
                         nextAppt: "12/21/17, 12:20 PM"
                     });
-                    navigate('User')
+                    navigate('NewPatient')
                 }
                 else
                 {

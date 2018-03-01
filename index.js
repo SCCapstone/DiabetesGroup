@@ -12,7 +12,12 @@ import glucoseInput from './screens/glucoseInput';
 import patientMedication from './screens/patientMedication';
 import patientDiet from './screens/patientDiet';
 import SignOut from './screens/SignOut';
+import todaysDietPatient from './screens/todaysDietPatient';
+import dietInput from './screens/dietInput';
+import NPHome from './screens/NutritionistPHome';
+
 import Settings from './screens/Settings';
+
 
 
 import {StackNavigator,} from 'react-navigation';
@@ -23,6 +28,8 @@ import NewPatientInfo from "./screens/NewPatientInfo";
 const AppNavigator = StackNavigator({
         User: {screen: UserSelect},
         PSign: {screen: PatientSignIn},
+        NewPatient: {screen: NewPatientInfo},
+        Setting: {screen: Settings},
         NSign: {screen: NutritionistSignIn},
         NewUser: {screen: createNewUser},
         PList: {
@@ -45,6 +52,9 @@ const AppNavigator = StackNavigator({
         PMed: {screen: patientMedication},
         PDiet: {screen: patientDiet},
         Sign: {screen: SignOut},
+        TDiet: {screen: todaysDietPatient},
+        DInput: {screen: dietInput},
+        NPHome: {screen: NPHome},
     },
     {
 
@@ -56,6 +66,7 @@ const AppNavigator = StackNavigator({
 const DrawerStack = DrawerNavigator({
         GInput: {screen: glucoseInput},
         PMed: {screen: patientMedication},
+        Setting:{screen: Settings},
         Plist: {screen: PatientList},
         Sign: {screen: SignOut},
         Stack: {

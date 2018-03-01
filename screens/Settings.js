@@ -7,6 +7,7 @@ import {
     Text,
     TextInput,
     View,
+    ScrollView,
     Button,
     Picker,
     AppRegistry,
@@ -22,8 +23,24 @@ export default class Settings extends Component<{}> {
 
     constructor(props) {
         super(props);
-        var user = firebaseApp.auth().currentUser.Age;
-        this.state = {Age: user.Age, Sex: user.Sex, Weight: user.Weight, Height: user.Height, DType: user.DType};
+        this.state = {Age: '', Sex: '', Weight: '', Height: '', DType: '', email: ''};
+
+        var userID = firebaseApp.auth().currentUser.uid;
+        var userRef = firebaseApp.database().ref('Patients/' + userID + '/Pinfo/');
+        userRef.once('value', (snapshot) => {
+            this.state ={Age: snapshot.val().Age, Sex: snapshot.val().Sex, Weight: snapshot.val().Weight,
+                Height: snapshot.val().Height, DType: snapshot.val().DType, email: ''};
+        });
+    }
+
+    _resetPassword(){
+        const {navigate} = this.props.navigation;
+        var user = firebaseApp.auth().currentUser;
+        var email =this.state.email;
+        firebaseApp.auth().sendPasswordResetEmail(email);
+        firebaseApp.auth().signOut();
+        navigate('User');
+
     }
 
     _submitInfo() {
@@ -38,7 +55,7 @@ export default class Settings extends Component<{}> {
         var user = firebaseApp.auth().currentUser;
         var database = firebaseApp.database();
 
-        firebaseApp.database().ref('Patients/' + user.uid).set({
+        firebaseApp.database().ref('Patients/' + user.uid + '/Pinfo/').set({
             Age: Age,
             Sex: Sex,
             Weight: Weight,
@@ -46,53 +63,51 @@ export default class Settings extends Component<{}> {
             DType: DType,
         });
 
-        navigate('User')
+        //navigate('User')
     }
 
     render() {
         return (
+            <ScrollView>
 
             <View style={styles.container}>
                 <View style={styles.stretched}>
-
                     <Text style={styles.title}>
-                        Enter your information below:
+                        Change Your Information:
                     </Text>
-
-                    <View style={{flexDirection: 'row'}}>
-                        <TextInput style={styles.input} placeholder= {this.state.Age}
+                        <Text>Age:</Text>
+                        <TextInput style={styles.input} defaultValue= {this.state.Age}
                                    underlineColorAndroid ={'transparent'}
                                    placeholderTextColor= "#CFCFCF"
                                    onChangeText={(text) => this.setState({Age: text})}
                                    value={this.state.Age}
                         />
-
-                        <TextInput style={styles.inputRight} placeholder={this.state.Sex}
+                        <Text>Sex:</Text>
+                        <TextInput style={styles.input} defaultValue={this.state.Sex}
                                    underlineColorAndroid ={'transparent'}
                                    placeholderTextColor= "#CFCFCF"
                                    onChangeText={(text) => this.setState({Sex: text})}
                                    value={this.state.Sex}
 
                         />
-                    </View>
 
-                    <View style={{flexDirection: 'row'}}>
-                        <TextInput style={styles.input} placeholder= {this.state.Weight}
+                        <Text>Weight:</Text>
+                        <TextInput style={styles.input} defaultValue= {this.state.Weight}
                                    underlineColorAndroid ={'transparent'}
                                    placeholderTextColor= "#CFCFCF"
                                    onChangeText={(text) => this.setState({Weight: text})}
                                    value={this.state.Weight}
                         />
-
-                        <TextInput style={styles.inputRight} placeholder= {this.state.Height}
+                        <Text>Height:</Text>
+                        <TextInput style={styles.input} defaultValue= {this.state.Height}
                                    underlineColorAndroid ={'transparent'}
                                    placeholderTextColor= "#CFCFCF"
                                    onChangeText={(text) => this.setState({Height: text})}
                                    value={this.state.Height}
                         />
-                    </View>
 
-                    <TextInput style={styles.input} placeholder= {this.state.DType}
+                    <Text>Diabetes Type:</Text>
+                    <TextInput style={styles.input} defaultValue= {this.state.DType}
                                underlineColorAndroid ={'transparent'}
                                placeholderTextColor= "#CFCFCF"
                                onChangeText={(text) => this.setState({DType: text})}
@@ -103,8 +118,23 @@ export default class Settings extends Component<{}> {
                         title="Update"
                         onPress = {() => this._submitInfo()}
                     />
+
+                    <Text>Send a Reset Password Email</Text>
+                    <TextInput style={styles.input} placeholder="Re-enter your email"
+                               underlineColorAndroid={'transparent'}
+                               placeholderTextColor= "#CFCFCF"
+                               onChangeText={(text) => this.setState({email: text})}
+                               value={this.state.email}
+                               />
+
+                    <SeafoamButton
+                        title="Reset Password"
+                        onPress = {() => this._resetPassword()}
+                        />
+
                 </View>
             </View>
+    </ScrollView>
         );
     }
 }
@@ -139,6 +169,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FEFDF5',
         borderColor: "#000000",
         borderWidth: 1,
+        padding: 10,
     },
     inputRight:{
         marginBottom: 10,
