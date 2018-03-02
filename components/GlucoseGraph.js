@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Svg from "react-native-svg";
-import { VictoryChart, VictoryLine } from 'victory-native';
+import { VictoryChart, VictoryLine, VictoryZoomContainer } from 'victory-native';
 import {View, Text, StyleSheet} from 'react-native';
 import firebaseApp from "../screens/FireBaseApp"
 import moment from 'moment';
@@ -13,7 +12,7 @@ class GlucoseGraph extends Component {
         ];
         var userID = firebaseApp.auth().currentUser.uid;
         this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/logs/');
-        this.state = { logs: [], dates: [], glogs: [], glucoseLevel: '', time: '',};
+        this.state = { logs: [{Time: '00/00/0000', GlucoseLevel: 0}, {Time: '00/00/0000', GlucoseLevel: 0}], dates: [], glogs: [], glucoseLevel: '', time: '',};
     }
 
     listenForItems(itemsRef) {
@@ -31,6 +30,10 @@ class GlucoseGraph extends Component {
     }
 
     componentDidMount() {
+        this.listenForItems(this.itemsRef);
+    }
+
+    componentWillMount() {
         this.listenForItems(this.itemsRef);
     }
 
@@ -56,10 +59,11 @@ class GlucoseGraph extends Component {
                 avg += lLogs[i];
             }else{
                 var lastDate = moment(lDates[i-1], 'MM/DD/YYYY');
-                var lastDateString = lastDate.format('MM/DD/YYYY');
+                //var currDateString = currDate.format('MM/DD/YYYY');
+                var lDate = lastDate.toDate();
                 avg = avg/dCount;
                 items.push({
-                    Time: lastDateString,
+                    Time: lDate,
                     GlucoseLevel: avg,
                 });
                 dCount = 1;
@@ -67,10 +71,11 @@ class GlucoseGraph extends Component {
             }
             if((i+1) == lDates.length){
                 var currDate = moment(lDates[i], 'MM/DD/YYYY');
-                var currDateString = currDate.format('MM/DD/YYYY');
+                //var currDateString = currDate.format('MM/DD/YYYY');
+                var cDate = currDate.toDate();
                 avg = avg/dCount;
                 items.push({
-                    Time: currDateString,
+                    Time: cDate,
                     GlucoseLevel: avg,
                 });
             }
@@ -81,7 +86,8 @@ class GlucoseGraph extends Component {
     render() {
         return (
             this.state.logs.length == 0 ? null : <VictoryChart
-                //theme={VictoryTheme.material}
+                scale={{ x: 'time'}}
+                containerComponent={<VictoryZoomContainer zoomDimension='x'/>}
             >
                 <VictoryLine
                     style={{
