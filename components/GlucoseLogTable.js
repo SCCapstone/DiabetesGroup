@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import {View,  StyleSheet} from 'react-native';
-//import firebaseApp from './FireBaseApp';
-//import Graph from 'react-native-line-plot';
-
 import {Table, TableWrapper, Row, Rows, Col, Cols, Cell} from 'react-native-table-component';
 import firebaseApp from "../screens/FireBaseApp";
 class GlucoseLogTable extends Component {
@@ -42,7 +39,6 @@ class GlucoseLogTable extends Component {
 
     render() {
         const tableHead = ['Glucose Level (mg/dL)', 'Type', 'Time Recorded'];
-
         return (
             <View>
                 <Table>
@@ -50,7 +46,7 @@ class GlucoseLogTable extends Component {
                     <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
 
                     {this.state.logs.map((data, i) => (
-                        <Row key = {i} data={data} style={[styles.row, i%2 && {backgroundColor: 'orange'}]} textStyle={styles.text}/> ))}
+                        <Row key = {i} data={data} style={[styles.row, i%2 > 0 && {backgroundColor: 'orange'}, i%2 === 0 && {backgroundColor: 'white'}]} textStyle={styles.text}/> ))}
 
                 </Table>
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, Text, BackHandler, StyleSheet, ScrollView, FlatList} from 'react-native';
 import firebaseApp from './FireBaseApp';
-//import Graph from 'react-native-line-plot';
 const SeafoamButton = require('../components/SeafoamButton');
 const GlucoseCircle = require('../components/GlucoseCircle');
 const MessengerButton = require('../components/MessengerButton');
 const GlucoseLogTable = require('../components/GlucoseLogTable');
+const GlucoseGraph = require('../components/GlucoseGraph');
 
 export default class patientHome extends React.Component {
     static navigationOptions = {
@@ -34,25 +34,12 @@ export default class patientHome extends React.Component {
         });
     }
 
-    //upItems(ref) {
-     //   ref.on('value', (snapshot) => {
-     //       var rLog = snapshot.val().glucoseLevel;
-     //       this.setState({glucoseLevel: rLog});
-     //   });
-   // }
-
-
-
     componentDidMount() {
         this.updateItems(this.myRef);
-        //this.upItems(this.ref);
-
     }
 
     componentWillUnmount(){
         this.myRef.off();
-        //this.ref.off();
-
     }
 
     render(){
@@ -89,12 +76,18 @@ export default class patientHome extends React.Component {
                     <Text></Text>
                     <SeafoamButton title="Medications"
                                    onPress={() => navigate('PMed')}/>
-                    <Text></Text>
+                    <Text style={{paddingBottom: 80}}></Text>
 
                 </View>
-                <GlucoseLogTable>
 
-                </GlucoseLogTable>
+                <View style={styles.dataPage}>
+                    <GlucoseGraph>
+                    </GlucoseGraph>
+
+                    <GlucoseLogTable>
+
+                    </GlucoseLogTable>
+                </View>
             </ScrollView>
         );
     }
@@ -114,6 +107,7 @@ const styles = StyleSheet.create({
     },
     container2:{
         flex:1,
+        paddingBottom: 50,
         flexDirection: 'row',
         justifyContent:'space-around',
         backgroundColor: '#F7F1D2',
@@ -124,12 +118,17 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         backgroundColor: '#F7F1D2',
     },
-
     nText: {
         color: '#000000',
         textAlign: 'center',
-        fontSize: 12,
+        fontSize: 16,
         padding:15,
+    },
+    dataPage: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        backgroundColor: '#F7F1D2',
     },
     head: { height: 40, backgroundColor: 'orange' },
     text: { textAlign:'center', color:'black' },

@@ -1,8 +1,7 @@
 import React from 'react';
-import {View, Text, BackHandler, StyleSheet, FlatList} from 'react-native';
+import {View, Text, BackHandler, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight} from 'react-native';
 import firebaseApp from './FireBaseApp';
-const PatientListButton = require('../components/PatientListButton');
-const MessengerButton = require('../components/MessengerButton');
+import { SwipeListView } from 'react-native-swipe-list-view';
 
 export default class PatientList extends React.Component {
     static navigationOptions = {
@@ -16,7 +15,7 @@ export default class PatientList extends React.Component {
             'Setting a timer'
         ];
         this.itemsRef = firebaseApp.database().ref('Patients/');
-        this.state = { userName: '', Patients: [], Age: '',};
+        this.state = {listType: 'FlatList', userName: '', Patients: [], Age: '',};
     }
 
     listenForItems(itemsRef) {
@@ -43,41 +42,110 @@ export default class PatientList extends React.Component {
 
     keyExtractor = (item) => item.id;
 
+    closeRow(rowMap, item) {
+        if (rowMap[item]) {
+            rowMap[item].closeRow();
+        }
+    }
+
+    deleteRow(rowMap, item) {
+        //TODO: Need to add delete patient from list functionality(this will use an "Are you Sure" alert before deletiong from list.
+    }
+
+    onRowDidOpen = (item, rowMap) => {
+        console.log('This row opened', item);
+        setTimeout(() => {
+            this.closeRow(rowMap, item);
+        }, 2000);
+    };
+
     render() {
         const {navigate} = this.props.navigation;
         return (
-            <View style={styles.container}>
-                <FlatList
-                    data = {this.state.Patients}
-                    keyExtractor = {this.keyExtractor}
-                    renderItem ={({item}) =>
-                        <PatientListButton
-                            title={item.userName + ', ' + item.Age}
-                            onPress={() => navigate('NPHome')}
-                        />
-                    }
-                    style={{marginTop: 20, marginLeft: 20, marginRight: 20}}
-                />
-            </View>
+             <SwipeListView
+                useFlatList={true}
+                data={this.state.Patients}
+                keyExtractor = {this.keyExtractor}
+                renderItem ={({item}) =>
+                    <TouchableHighlight
+                        onPress={ _ => console.log('You touched me') }
+                        style={styles.rowFront}
+                        underlayColor={'#AAA'}
+                    >
+                        <Text style ={styles.rowText}>{item.userName}, {item.Age}</Text>
+                    </TouchableHighlight>
+                }
+                 /*TODO: The Messenger Button needs to take the nutritionist to the messenger between them and this specific patient of theirs*/
+                renderHiddenItem={ (item, rowMap) => (
+                    <View style={styles.rowBack}>
+                        <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ _ => this.closeRow(rowMap, item.id) }>
+                            <Text style={styles.backTextWhite}>Messenger</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ _ => this.deleteRow(rowMap, item.id) }>
+                            <Text style={styles.backTextWhite}>Delete</Text>
+                        </TouchableOpacity>
+                    </View>
+                )}
+                leftOpenValue={85}
+                rightOpenValue={-75}
+                onRowDidOpen={this.onRowDidOpen}
+            />
         );
     }
+
 }
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        //alignItems: 'center',
-        backgroundColor: '#F7F1D2',
-    },
-    namelistview: {
-        flex: 1,
-    },
-    nText: {
-        color: '#000000',
-        textAlign: 'center',
+    backTextWhite: {
+        color: '#ffffff',
         fontSize: 16,
+        fontWeight: 'bold',
+    },
+    rowText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: 'black',
+    },
+    rowFront: {
+        alignItems: 'center',
+        backgroundColor: '#f7f1d2',
+        borderBottomColor: 'orange',
+        borderBottomWidth: 1,
+       // borderTopColor: 'orange',
+       // borderTopWidth: 1,
+        paddingTop: 20,
+        height: 60,
+    },
+    rowBack: {
+        alignItems: 'center',
+        backgroundColor: '#f7f1d2',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 15,
+    },
+    backLeftBtn: {
+        alignItems: 'center',
+        bottom: 0,
+        justifyContent: 'center',
+        position: 'absolute',
+        top: 0,
+        width: 85
+    },
+    backLeftBtnLeft: {
+        backgroundColor: 'blue',
+    },
+    backRightBtn: {
+        alignItems: 'center',
+        bottom: 0,
+        justifyContent: 'center',
+        position: 'absolute',
+        top: 0,
+        width: 75
+    },
+    backRightBtnRight: {
+        backgroundColor: 'red',
+        right: 0
     },
 });
