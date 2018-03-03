@@ -15,6 +15,9 @@ import SignOut from './screens/SignOut';
 import todaysDietPatient from './screens/todaysDietPatient';
 import dietInput from './screens/dietInput';
 import NPHome from './screens/NutritionistPHome';
+import ClinicianPHome from './screens/ClinicianPHome';
+import ClinicianSignIn from './screens/ClinicianSignIn';
+import ClinicianPList from './screens/ClinicianPList';
 
 import Settings from './screens/Settings';
 
@@ -55,6 +58,16 @@ const AppNavigator = StackNavigator({
         TDiet: {screen: todaysDietPatient},
         DInput: {screen: dietInput},
         NPHome: {screen: NPHome},
+		CSign: {screen: ClinicianSignIn},
+		CPHome: {screen: ClinicianPHome},
+		CPList: {
+            screen: ClinicianPList,
+            navigationOptions: ({navigation}) => ({
+                headerStyle: {backgroundColor: '#FF6127'},
+                title: 'Clinician Home Screen',
+                headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
+            })
+        },
     },
     {
 

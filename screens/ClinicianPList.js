@@ -3,7 +3,7 @@ import {View, Text, BackHandler, StyleSheet, FlatList, TouchableOpacity, Touchab
 import firebaseApp from './FireBaseApp';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
-export default class PatientList extends React.Component {
+export default class ClinicianPList extends React.Component {
     static navigationOptions = {
         title: 'Patient List',
         headerStyle: {backgroundColor: "#FF6127"}
