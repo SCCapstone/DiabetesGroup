@@ -20,10 +20,7 @@ export default class patientHome extends React.Component {
 
         var userID = firebaseApp.auth().currentUser.uid;
         this.myRef = firebaseApp.database().ref('Patients/' + userID);
-        //this.ref = firebaseApp.database().ref('Patients/' + userID + '/logs').child('glucoseLevel');
         this.state = {nextAppt: '', glucoseLevel: ''};
-
-
 
     }
 
