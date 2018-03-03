@@ -37,7 +37,7 @@ export default class NutritionistSignIn extends Component<{}> {
         //Log in user if correct credentials are entered
         firebaseApp.auth().signInWithEmailAndPassword(email,password)
             .then(function(user){
-            navigate('NPHome')
+            navigate('PList')
         }).catch(function(error){
             var errorCode = error.code;
             var errorMessage = error.message;
