@@ -20,7 +20,6 @@ export default class NutritionistPHome extends React.Component {
 
 		var userID = props.navigation.state.params.ID;
         this.myRef = firebaseApp.database().ref('Patients/' + userID);
-        //this.ref = firebaseApp.database().ref('Patients/' + userID + '/logs').child('glucoseLevel');
         this.state = {nextAppt: '', glucoseLevel: ''};
 
 

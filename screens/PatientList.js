@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, BackHandler, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight, DrawerLayoutAndroid} from 'react-native';
 import firebaseApp from './FireBaseApp';
 import { SwipeListView } from 'react-native-swipe-list-view';
+const SeafoamButton = require('../components/SeafoamButton');
 
 export default class PatientList extends React.Component {
     static navigationOptions = {
