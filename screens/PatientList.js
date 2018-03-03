@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, BackHandler, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight} from 'react-native';
+import {View, Text, BackHandler, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight, DrawerLayoutAndroid} from 'react-native';
 import firebaseApp from './FireBaseApp';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
@@ -61,7 +61,30 @@ export default class PatientList extends React.Component {
 
     render() {
         const {navigate} = this.props.navigation;
+        var navigationView = (
+            <View style={{flex: 1, backgroundColor: '#F7F1D2'}}>
+                <SeafoamButton title="Patient List Home Screen"
+                               onPress={() => navigate('PList')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="Settings"
+                               onPress={() => navigate('Setting')}/>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="Sign Out"
+                               onPress={() => navigate('Sign')}/>
+            </View>
+        );
         return (
+            <DrawerLayoutAndroid
+                drawerWidth={300}
+                drawerPosition={DrawerLayoutAndroid.positions.Left}
+                renderNavigationView={() => navigationView}>
+
              <SwipeListView
                 useFlatList={true}
                 data={this.state.Patients}
@@ -90,6 +113,7 @@ export default class PatientList extends React.Component {
                 rightOpenValue={-75}
                 onRowDidOpen={this.onRowDidOpen}
             />
+            </DrawerLayoutAndroid>
         );
     }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, BackHandler, StyleSheet, ScrollView, FlatList} from 'react-native';
+import {View, Text, BackHandler, StyleSheet, ScrollView, FlatList,DrawerLayoutAndroid} from 'react-native';
 import firebaseApp from './FireBaseApp';
 //import Graph from 'react-native-line-plot';
 const SeafoamButton = require('../components/SeafoamButton');
@@ -58,7 +58,30 @@ export default class ClinicianPHomeHome extends React.Component {
     render(){
         const val1 = 7.6;
         const {navigate} = this.props.navigation;
+        var navigationView = (
+            <View style={{flex: 1, backgroundColor: '#F7F1D2'}}>
+                <SeafoamButton title="Patient List Home Screen"
+                               onPress={() => navigate('PList')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="Settings"
+                               onPress={() => navigate('Setting')}/>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="Sign Out"
+                               onPress={() => navigate('Sign')}/>
+            </View>
+        );
         return (
+            <DrawerLayoutAndroid
+                drawerWidth={300}
+                drawerPosition={DrawerLayoutAndroid.positions.Left}
+                renderNavigationView={() => navigationView}>
+
             <ScrollView>
                 <View style={styles.container3}>
                     <MessengerButton
@@ -96,6 +119,7 @@ export default class ClinicianPHomeHome extends React.Component {
 
                 </GlucoseLogTable>
             </ScrollView>
+            </DrawerLayoutAndroid>
         );
     }
 }

@@ -24,7 +24,6 @@ import Settings from './screens/Settings';
 
 
 import {StackNavigator,} from 'react-navigation';
-import {DrawerNavigator,} from 'react-navigation';
 import NewPatientInfo from "./screens/NewPatientInfo";
 
 //This is going to be the apps main navigator
@@ -76,26 +75,5 @@ const AppNavigator = StackNavigator({
     }
 );
 
-const DrawerStack = DrawerNavigator({
-        GInput: {screen: glucoseInput},
-        PMed: {screen: patientMedication},
-        Setting:{screen: Settings},
-        Plist: {screen: PatientList},
-        Sign: {screen: SignOut},
-        Stack: {
-            screen: AppNavigator,
-            navigationOptions: ({navigation}) => ({
-                drawerLockMode: 'locked-closed',
-                drawerLabel: () => null
-            })
-        },
-    },
-    {
-        drawerPosition: 'left',
-        initialRouteName: 'Stack'
 
-    }
-);
-
-
-AppRegistry.registerComponent('DiabetesGroup', () => DrawerStack);
+AppRegistry.registerComponent('DiabetesGroup', () => AppNavigator);
