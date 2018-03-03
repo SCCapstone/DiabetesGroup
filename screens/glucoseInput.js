@@ -35,7 +35,7 @@ export default class glucoseInput extends Component<{}> {
         var notes = this.state.notes;
         var user = firebaseApp.auth().currentUser;
 
-        if(glucoseLevel < 50 || glucoseLevel > 3500)
+        if(glucoseLevel < 30 || glucoseLevel > 600)
         {
             alert('Please enter a valid glucose level.');
         }

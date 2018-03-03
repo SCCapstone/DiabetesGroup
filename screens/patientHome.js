@@ -20,7 +20,7 @@ export default class patientHome extends React.Component {
 
         var userID = firebaseApp.auth().currentUser.uid;
         this.myRef = firebaseApp.database().ref('Patients/' + userID);
-        this.state = {nextAppt: '', glucoseLevel: ''};
+        this.state = {nextAppt: '',};
 
     }
 
@@ -40,7 +40,6 @@ export default class patientHome extends React.Component {
     }
 
     render(){
-        const val1 = 7.6;
         const {navigate} = this.props.navigation;
         return (
             <ScrollView>
@@ -50,13 +49,13 @@ export default class patientHome extends React.Component {
                 </View>
 
                 <View style={styles.container}>
-                    <GlucoseCircle title={val1 + '\nHgbA1c'}/>
+                    <GlucoseCircle name={'HgbA1c'}/>
                     <Text></Text>
                 </View>
 
                 <View style = {styles.container2}>
-                    <GlucoseCircle title={60 + '\nFBG'}/>
-                    <GlucoseCircle title={154 + '\nPpBG'}/>
+                    <GlucoseCircle name={'FBG'}/>
+                    <GlucoseCircle name={'PpBG'}/>
                 </View>
 
                 <View style={styles.container}>
