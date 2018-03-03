@@ -68,7 +68,7 @@ export default class PatientList extends React.Component {
                 keyExtractor = {this.keyExtractor}
                 renderItem ={({item}) =>
                     <TouchableHighlight
-                        onPress={ _ => console.log('You touched me') }
+						onPress = {() => navigate("NPHome", {ID: item.id})}
                         style={styles.rowFront}
                         underlayColor={'#AAA'}
                     >

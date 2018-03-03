@@ -1,13 +1,13 @@
 import React from 'react';
 import {View, Text, BackHandler, StyleSheet, ScrollView, FlatList} from 'react-native';
 import firebaseApp from './FireBaseApp';
-//import Graph from 'react-native-line-plot';
 const SeafoamButton = require('../components/SeafoamButton');
 const GlucoseCircle = require('../components/GlucoseCircle');
 const MessengerButton = require('../components/MessengerButton');
 const GlucoseLogTable = require('../components/GlucoseLogTable');
+const GlucoseGraph = require('../components/GlucoseGraph');
 
-export default class ClinicianPHomeHome extends React.Component {
+export default class ClinicianPHome extends React.Component {
     static navigationOptions = {
         title: 'Home Screen',
         headerStyle: {backgroundColor: "#FF6127"}
@@ -18,10 +18,10 @@ export default class ClinicianPHomeHome extends React.Component {
             'Setting a timer'
         ];
 
-        var userID = firebaseApp.auth().currentUser.uid;
+		var userID = props.navigation.state.params.ID;
         this.myRef = firebaseApp.database().ref('Patients/' + userID);
         //this.ref = firebaseApp.database().ref('Patients/' + userID + '/logs').child('glucoseLevel');
-        this.state = {nextAppt: '', glucoseLevel: ''};
+        this.state = {nextAppt: '', glucoseLevel: '', PID: ''};
 
 
 
@@ -31,28 +31,16 @@ export default class ClinicianPHomeHome extends React.Component {
         myRef.on('value', (snapshot) => {
             var appt = snapshot.val().nextAppt;
             this.setState({nextAppt: appt});
+			this.setState({PID: this.props.navigation.state.params.ID});
         });
     }
 
-    //upItems(ref) {
-    //   ref.on('value', (snapshot) => {
-    //       var rLog = snapshot.val().glucoseLevel;
-    //       this.setState({glucoseLevel: rLog});
-    //   });
-    // }
-
-
-
     componentDidMount() {
         this.updateItems(this.myRef);
-        //this.upItems(this.ref);
-
     }
 
     componentWillUnmount(){
         this.myRef.off();
-        //this.ref.off();
-
     }
 
     render(){
@@ -62,7 +50,7 @@ export default class ClinicianPHomeHome extends React.Component {
             <ScrollView>
                 <View style={styles.container3}>
                     <MessengerButton
-                        onPress={() => navigate('CPHome')}/>
+                        onPress={() => navigate('PHome')}/>
                 </View>
 
                 <View style={styles.container}>
@@ -83,18 +71,24 @@ export default class ClinicianPHomeHome extends React.Component {
                     <SeafoamButton title="Input Glucose Reading"
                                    onPress={() => navigate('GInput')}/>
                     <Text></Text>
-
                     <SeafoamButton title="My Diet"
                                    onPress={() => navigate('PDiet')}/>
                     <Text></Text>
                     <SeafoamButton title="Medications"
                                    onPress={() => navigate('PMed')}/>
-                    <Text></Text>
+                    <Text style={{paddingBottom: 80}}></Text>
 
                 </View>
-                <GlucoseLogTable>
 
-                </GlucoseLogTable>
+                <View style={styles.dataPage}>
+                    <GlucoseGraph>
+						PID=this.props.navigation.state.params.ID
+                    </GlucoseGraph>
+
+                    <GlucoseLogTable>
+						PID=this.props.navigation.state.params.ID
+                    </GlucoseLogTable>
+                </View>
             </ScrollView>
         );
     }
@@ -114,6 +108,7 @@ const styles = StyleSheet.create({
     },
     container2:{
         flex:1,
+        paddingBottom: 50,
         flexDirection: 'row',
         justifyContent:'space-around',
         backgroundColor: '#F7F1D2',
@@ -124,12 +119,17 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         backgroundColor: '#F7F1D2',
     },
-
     nText: {
         color: '#000000',
         textAlign: 'center',
-        fontSize: 12,
+        fontSize: 16,
         padding:15,
+    },
+    dataPage: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        backgroundColor: '#F7F1D2',
     },
     head: { height: 40, backgroundColor: 'orange' },
     text: { textAlign:'center', color:'black' },
