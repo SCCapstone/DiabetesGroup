@@ -67,6 +67,15 @@ export default class createNewUser extends Component<{}> {
                     });
                     navigate('User')
                 }
+				else if(userType === "Clinician")
+                {
+                    firebaseApp.database().ref('Clinician/' + user.uid).set({
+                        userName: userName,
+                        email: email,
+                        password: password
+                    });
+                    navigate('User')
+                }
                 else if(userType === "Patient")
                 {
                     //added this random num line to generate a random age for the patient since the patient info screen isn't fully implemented yet.
@@ -123,6 +132,7 @@ export default class createNewUser extends Component<{}> {
                         <Picker.Item label="User Type" value="User Type"/>
                         <Picker.Item label="Nutritionist" value="Nutritionist" />
                         <Picker.Item label="Patient" value="Patient" />
+						<Picker.Item label="Clinician" value="Clinician" />
                     </Picker>
                     <SeafoamButton
                       title="Submit"
