@@ -25,15 +25,15 @@ export default class patientDiet extends Component<{}> {
         ];
         var userID = firebaseApp.auth().currentUser.uid;
         this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/diet/');
-        this.state = {diet: [{f: '0', v:'0', g:'0', p:'0', d:'0', w:'0', s:'0', c:'0'}], fruits1: [], veges1: [], graStar1: [], prot1: [], dsrt1: [], water1: [], sugBev1: [], cofTea1: [],
-            fruits: '', veges: '', graStar: '', prot: '', dsrt: '', water: '', sugBev:'', cofTea: '',};
+        this.state = {diet: [{name:'f', value: '0'}, {name:'v', value:'0'},{ name:
+'g', value:'0'}, {name:'p', value:'0'}, {name:'d', value:'0'}, {name:'w', value:'0'},{ name:'s', value:'0'}, {name:'c', value:'0'}], fruits1: [], veges1: [], graStar1: [], prot1: [], dsrt1: [], water1: [], sugBev1: [], cofTea1: [],
+            fruits: '', veges: '', graStar: '', prot: '', dsrt: '', water: '', sugBev:'', cofTea: '',nSuggestions: ''};
 
         this.myRef = firebaseApp.database().ref('Patients/' + userID);
-        this.state = {nSuggestions: ''};
+        //this.state = {nSuggestions: ''};
 
 
     }
-
 
 
     listenForItems(itemsRef) {
@@ -57,7 +57,7 @@ export default class patientDiet extends Component<{}> {
                 acofTea.push(parseInt(child.val().cofTea));
 
             });
-            this.setState({fruits1: afruits, veges1: aveges, graStar1: agraStar, prot1: aprot, dsrt1: adsrt, water1: awater, sugBev: asugBev, cofTea1: acofTea });
+            this.setState({fruits1: afruits, veges1: aveges, graStar1: agraStar, prot1: aprot, dsrt1: adsrt, water1: awater, sugBev1: asugBev, cofTea1: acofTea });
             var items = this.averageDiet();
             this.setState({diet: items});
         });
@@ -72,7 +72,6 @@ export default class patientDiet extends Component<{}> {
 
     componentDidMount() {
         this.listenForItems(this.itemsRef);
-        this.updateItems(this.myRef);
     }
 
     componentWillMount() {
@@ -81,12 +80,12 @@ export default class patientDiet extends Component<{}> {
 
     componentWillUnmount(){
         this.itemsRef.off();
-        this.myRef.off();
     }
 
     keyExtractor = (item) => item.id;
 
     averageDiet = () => {
+		console.log(this.state.fruits1.length);
         afruits = this.state.fruits1;
          aveges = this.state.veges1;
          agraStar = this.state.graStar1;
@@ -95,7 +94,7 @@ export default class patientDiet extends Component<{}> {
         awater = this.state.water1;
          asugBev = this.state.sugBev1;
          acofTea = this.state.cofTea1;
-        var items = [{f: '0', v:'0', g:'0', p:'0', d:'0', w:'0', s:'0', c:'0'}];
+        var items = [];
         var  favg = 0;
         var  vavg = 0;
         var  gavg = 0;
@@ -106,6 +105,7 @@ export default class patientDiet extends Component<{}> {
         var  cavg = 0;
 
         var dCount = 0;
+
         if (afruits.length > 7){
             dCount = 7;
         }
@@ -114,6 +114,7 @@ export default class patientDiet extends Component<{}> {
             dCount = 0;}
         else{
             dCount = afruits.length;}
+
 
         for(i = 0; i < dCount; i++) {
             favg += afruits[i];
@@ -125,6 +126,7 @@ export default class patientDiet extends Component<{}> {
             savg += asugBev[i];
             cavg += acofTea[i];
         }
+
         favg = favg/dCount;
         vavg = vavg/dCount;
         gavg = gavg/dCount;
@@ -134,16 +136,18 @@ export default class patientDiet extends Component<{}> {
         savg = savg/dCount;
         cavg = cavg/dCount;
 
-        items.push({
-            f: favg,
-            v: vavg,
-            g: gavg,
-            p: pavg,
-            d: davg,
-            w: wavg,
-            s: savg,
-            c: cavg,
-        });
+
+        items.push(
+            {name:'f', value: favg},
+			{name:'v', value: vavg},
+			{name:'g', value: gavg},
+			{name:'p', value: pavg},
+			{name:'d', value: davg},
+			{name:'w', value: wavg},
+			{name:'s', value: savg},
+			{name:'c', value: cavg},
+			
+        );
 
 
         return items;
@@ -170,24 +174,24 @@ export default class patientDiet extends Component<{}> {
 
 
                     <View style={styles.line}>
-                        <Text style={styles.text}> {"Fruits:   " + this.diet.valueOf().f + "  serving(s)" } </Text>
+                        <Text style={styles.text}> {"Fruits:   " + this.state.diet.find(o => o.name === "f").value + "  serving(s)" } </Text>
                     </View>
 
                     <View style={styles.line}>
-                        <Text style={styles.text}> {"Vegetables:   " + 2 + "  serving(s)" } </Text>
+                        <Text style={styles.text}> {"Vegetables:   " + this.state.diet.find(o => o.name === "v").value + "  serving(s)" } </Text>
                     </View>
 
                     <View style={styles.line}>
-                        <Text style={styles.text}> {"Grains/Starches:   " + 2 + "  serving(s)" } </Text>
+                        <Text style={styles.text}> {"Grains/Starches:   " + this.state.diet.find(o => o.name === "g").value + "  serving(s)" } </Text>
 
                     </View>
                     <View style={styles.line}>
-                        <Text style={styles.text}> {"Protein:   " + 2 + "  serving(s)" } </Text>
+                        <Text style={styles.text}> {"Protein:   " + this.state.diet.find(o => o.name === "p").value + "  serving(s)" } </Text>
 
                     </View>
 
                     <View style={styles.line}>
-                        <Text style={styles.text}> {"Desserts:   " + 2 + "  serving(s)" } </Text>
+                        <Text style={styles.text}> {"Desserts:   " + this.state.diet.find(o => o.name === "d").value + "  serving(s)" } </Text>
 
                     </View>
 
@@ -197,17 +201,17 @@ export default class patientDiet extends Component<{}> {
                     </View>
 
                     <View style={styles.line}>
-                        <Text style={styles.text}> {"   Water:   " + 2 + "  serving(s)" } </Text>
+                        <Text style={styles.text}> {"   Water:   " + this.state.diet.find(o => o.name === "w").value + "  serving(s)" } </Text>
 
                     </View>
 
                     <View style={styles.line}>
-                        <Text style={styles.text}> {"   Sugary:   " + 2 + "  serving(s)" } </Text>
+                        <Text style={styles.text}> {"   Sugary:   " + this.state.diet.find(o => o.name === "s").value + "  serving(s)" } </Text>
 
                     </View>
 
                     <View style={styles.line}>
-                        <Text style={styles.text}> {"   Coffee/Tea:   " + 2 + "  serving(s)" } </Text>
+                        <Text style={styles.text}> {"   Coffee/Tea:   " + this.state.diet.find(o => o.name === "c").value + "  serving(s)" } </Text>
 
                     </View>
 
