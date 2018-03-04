@@ -29,13 +29,19 @@ export default class todaysDietPatient extends Component<{}> {
 
                 <Text/>
                 <Text/>
+                <Text> *KEY* </Text>
+                <Text>{'Fru: Fruits     Veg: Vegetables'} </Text>
+                <Text>{'G/S: Grains/Starches    Pro: Protein'}</Text>
+                <Text>{'Des: Desserts   Wat: Water'}</Text>
+                <Text>{'Sug: Sugary Beverages   C/T: Coffee/Tea'}</Text>
+
 
 
                 <DietTable>
 
                 </DietTable>
 
-    </ScrollView>
+            </ScrollView>
 
         );
     }
@@ -51,9 +57,9 @@ const styles = StyleSheet.create({
     },
 
     text:{
-      color: 'black',
-      fontWeight: 'bold',
-      fontSize: 15,
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 15,
     },
 
     container2: {
