@@ -136,10 +136,10 @@ export default class NutritionistPHome extends React.Component {
                     </Text>
 
                     <SeafoamButton title="Patient's Diet"
-                                   onPress={() => navigate('PDiet')}/>
+                                   onPress={() => navigate("NPDiet", {ID: this.state.user})}/>
                     <Text></Text>
                     <SeafoamButton title="Medications"
-                                   onPress={() => navigate('PMed')}/>
+                                   onPress={() => navigate("NPMed", {ID: this.state.user})}/>
                     <Text style={{paddingBottom: 80}}></Text>
 
                 </View>
