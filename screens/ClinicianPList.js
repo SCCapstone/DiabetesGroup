@@ -16,7 +16,7 @@ export default class ClinicianPList extends React.Component {
             'Setting a timer'
         ];
         this.itemsRef = firebaseApp.database().ref('Patients/');
-        this.state = {listType: 'FlatList', userName: '', Patients: [], password: '', email: '',};
+        this.state = {listType: 'FlatList', userName: '', Patients: []};
     }
 
     listenForItems(itemsRef) {
@@ -26,39 +26,12 @@ export default class ClinicianPList extends React.Component {
                 items.push({
                     id: child.key,
                     userName: child.val().userName,
-					password: child.val().password,
-					email: child.val().email,
                 });
             });
             this.setState({Patients: items});
         });
     }
-	
-/*
-	_checkPatient(email, password) {
-		const {navigate} = this.props.navigation;
-		firebaseApp.auth().signInWithEmailAndPassword(email, password).then(function(user) {
-            navigate('NPHome')
-        }).catch(function (error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            if (errorCode === 'auth/user-not-found') {
-                alert('User not found.');
-            }
-            else if (errorCode === 'auth/wrong-password') {
-                alert('Wrong Password.');
-            }
-            else if (errorCode === 'auth/invalid-email') {
-                alert('Invalid Email.');
-            }
-            else {
-                alert(errorMessage);
-            }
-            console.log(error);
-		});
-	
-	}
-*/
+
 
     componentDidMount() {
         this.listenForItems(this.itemsRef);
