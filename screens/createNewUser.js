@@ -84,7 +84,8 @@ export default class createNewUser extends Component<{}> {
                         userName: userName,
                         email: email,
                         password: password,
-                        nextAppt: "12/21/17, 12:20 PM"
+                        nextAppt: "05/18/18, 12:20 PM",
+                        nSuggestions: "Nutritionist suggestions pull here!",
                     });
                     navigate('NewPatient')
                 }

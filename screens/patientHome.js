@@ -7,6 +7,7 @@ const MessengerButton = require('../components/MessengerButton');
 const GlucoseLogTable = require('../components/GlucoseLogTable');
 const GlucoseGraph = require('../components/GlucoseGraph');
 
+
 export default class patientHome extends React.Component {
     static navigationOptions = {
         title: 'Home Screen',

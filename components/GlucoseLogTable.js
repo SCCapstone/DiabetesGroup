@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
-import {View,  StyleSheet} from 'react-native';
+import {Alert, View,  StyleSheet, TouchableOpacity, Text} from 'react-native';
 import {Table, TableWrapper, Row, Rows, Col, Cols, Cell} from 'react-native-table-component';
 import firebaseApp from "../screens/FireBaseApp";
-class GlucoseLogTable extends Component {
+const EditButton = require('../components/EditButton');
+
+ class GlucoseLogTable extends Component {
+    static navigationOptions = {
+        title: 'Home Screen',
+        headerStyle: {backgroundColor: "#FF6127"}
+    };
     constructor(props) {
         super(props);
         console.ignoredYellowBox = [
             'Setting a timer'
         ];
+
         var userID;
         if(this.props.user == firebaseApp.auth().currentUser.uid){
             userID = firebaseApp.auth().currentUser.uid;
@@ -15,7 +22,8 @@ class GlucoseLogTable extends Component {
             userID = this.props.user;
         }
         this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/logs/');
-        this.state = { logs: [], glucoseLevel: '', readingType: '', time: '',};
+        this.state = { logs: [], glucoseLevel: '', readingType: '', time: ''};
+
     }
 
     listenForItems(itemsRef) {
@@ -25,7 +33,8 @@ class GlucoseLogTable extends Component {
                 items.push(
                     [child.val().glucoseLevel,
                      child.val().readingType,
-                     child.val().time,])
+                     child.val().time,
+                    ])
             });
             this.setState({logs: items});
         });
@@ -72,6 +81,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#F7F1D2',
     },
+    btn: { width: 58, height: 18, backgroundColor: '#ccc', marginLeft: 15 },
+    btnText: { textAlign: 'center', color: '#fff' }
 });
 
 module.exports = GlucoseLogTable;

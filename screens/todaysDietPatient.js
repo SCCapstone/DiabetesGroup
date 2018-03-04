@@ -29,13 +29,19 @@ export default class todaysDietPatient extends Component<{}> {
 
                 <Text/>
                 <Text/>
+                <Text style={styles.login}> *KEY* </Text>
+                <Text style={styles.login}>{'Fru: Fruits               Veg: Vegetables'} </Text>
+                <Text style={styles.login}>{'G/S: Grains/Starches      Pro: Protein'}</Text>
+                <Text style={styles.login}>{'Des: Desserts             Wat: Water'}</Text>
+                <Text style={styles.login}>{'Sug: Sugary Beverages     C/T: Coffee/Tea'}</Text>
+
 
 
                 <DietTable>
 
                 </DietTable>
 
-    </ScrollView>
+            </ScrollView>
 
         );
     }
@@ -51,9 +57,9 @@ const styles = StyleSheet.create({
     },
 
     text:{
-      color: 'black',
-      fontWeight: 'bold',
-      fontSize: 15,
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 15,
     },
 
     container2: {
@@ -83,5 +89,12 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         paddingBottom: 5,
         textAlign: 'center',
+    },
+    login: {
+        textAlign: 'left',
+        alignSelf: 'stretch',
+        fontWeight: 'bold',
+        fontSize: 14,
+        color: "#000000",
     }
 });

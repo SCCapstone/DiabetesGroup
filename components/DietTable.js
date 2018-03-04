@@ -47,7 +47,7 @@ class DietTable extends Component {
 
 
     render() {
-        const tableHead = ['Date', 'Fruits', 'Vegetables', 'Grains/Starches', 'Protein', 'Desserts', 'Water', 'SugaryBev', 'Coffee/Tea' ];
+        const tableHead = ['Date', 'Fru', 'Veg', 'G/S', 'Pro', 'Des', 'Wat', 'Sug', 'C/T' ];
 
         return (
             <View>
