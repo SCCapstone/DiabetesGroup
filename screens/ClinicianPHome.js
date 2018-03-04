@@ -9,7 +9,7 @@ const GlucoseGraph = require('../components/GlucoseGraph');
 
 export default class ClinicianPHome extends React.Component {
     static navigationOptions = {
-        title: 'Home Screen',
+        title: 'Patient Information',
         headerStyle: {backgroundColor: "#FF6127"}
     };
     constructor(props) {
@@ -19,27 +19,34 @@ export default class ClinicianPHome extends React.Component {
         ];
 
 		var userID = props.navigation.state.params.ID;
-        this.myRef = firebaseApp.database().ref('Patients/' + userID);
-        this.state = {nextAppt: '', glucoseLevel: '', PID: ''};
-
-
+        this.apptRef = firebaseApp.database().ref('Patients/' + userID);
+        this.infoRef = firebaseApp.database().ref('Patients/' + userID + '/Pinfo/');
+        this.state = {nextAppt: '', Age: '', Sex: '', Weight: '', Height: '', DType: '', user: userID};
 
     }
 
-    updateItems(myRef) {
-        myRef.on('value', (snapshot) => {
+    updateItems(apptRef, infoRef) {
+        apptRef.on('value', (snapshot) => {
             var appt = snapshot.val().nextAppt;
             this.setState({nextAppt: appt});
-			this.setState({PID: this.props.navigation.state.params.ID});
+        });
+        infoRef.on('value', (snapshot) => {
+            var age = snapshot.val().Age;
+            var dtype = snapshot.val().DType;
+            var height = snapshot.val().Height;
+            var sex = snapshot.val().Sex;
+            var weight = snapshot.val().Weight;
+            this.setState({Age: age, Sex: sex, Weight: weight, Height: height, DType: dtype});
         });
     }
 
     componentDidMount() {
-        this.updateItems(this.myRef);
+        this.updateItems(this.apptRef, this.infoRef);
     }
 
     componentWillUnmount(){
-        this.myRef.off();
+        this.apptRef.off();
+        this.infoRef.off();
     }
 
     render(){
@@ -76,24 +83,58 @@ export default class ClinicianPHome extends React.Component {
                 </View>
 
                 <View style={styles.container}>
-                    <GlucoseCircle title={val1 + '\nHgbA1c'}/>
+                    <GlucoseCircle name={'HgbA1c'} user = {this.state.user}/>
                     <Text></Text>
                 </View>
 
                 <View style = {styles.container2}>
-                    <GlucoseCircle title={60 + '\nFBG'}/>
-                    <GlucoseCircle title={154 + '\nPpBG'}/>
+                    <GlucoseCircle name={'FBG'} user = {this.state.user}/>
+                    <GlucoseCircle name={'PpBG'} user = {this.state.user}/>
                 </View>
 
                 <View style={styles.container}>
-                    <Text style={styles.nText}>
-                        {'Next Appointment: ' + this.state.nextAppt}
+                    <Text style={styles.nameText}>
+                        {this.state.Name}
                     </Text>
 
-                    <SeafoamButton title="Input Glucose Reading"
-                                   onPress={() => navigate('GInput')}/>
-                    <Text></Text>
-                    <SeafoamButton title="My Diet"
+                    <View style={styles.textContainer} >
+                        <Text style={styles.nText}>
+                            <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                {'Sex: '}
+                            </Text>
+                            {this.state.Sex}
+                        </Text>
+                        <Text style={styles.nTextRight}>
+                            <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                {'Age: '}
+                            </Text>
+                            {this.state.Age}
+                        </Text>
+                    </View>
+
+                    <View style={styles.textContainer} >
+                        <Text style={styles.nText}>
+                            <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                {'Weight: '}
+                            </Text>
+                            {this.state.Weight}
+                        </Text>
+                        <Text style={styles.nTextRight}>
+                            <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                {'Height: '}
+                            </Text>
+                            {this.state.Height}
+                        </Text>
+                    </View>
+
+                    <Text style={styles.nText}>
+                        <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                            {'Next Appointment: '}
+                        </Text>
+                        {this.state.nextAppt}
+                    </Text>
+
+                    <SeafoamButton title="Patient's Diet"
                                    onPress={() => navigate('PDiet')}/>
                     <Text></Text>
                     <SeafoamButton title="Medications"
@@ -103,12 +144,10 @@ export default class ClinicianPHome extends React.Component {
                 </View>
 
                 <View style={styles.dataPage}>
-                    <GlucoseGraph>
-						PID=this.props.navigation.state.params.ID
+                    <GlucoseGraph user = {this.state.user}>
                     </GlucoseGraph>
 
-                    <GlucoseLogTable>
-						PID=this.props.navigation.state.params.ID
+                    <GlucoseLogTable user = {this.state.user}>
                     </GlucoseLogTable>
                 </View>
             </ScrollView>
@@ -142,11 +181,30 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         backgroundColor: '#F7F1D2',
     },
+    nameText: {
+        color: '#000000',
+        textAlign: 'left',
+        fontSize: 38,
+        fontWeight: 'bold',
+        textDecorationLine: 'underline',
+    },
     nText: {
         color: '#000000',
-        textAlign: 'center',
+        textAlign: 'left',
         fontSize: 16,
-        padding:15,
+        padding:10,
+    },
+    nTextRight: {
+        color: '#000000',
+        textAlign: 'right',
+        fontSize: 16,
+        padding:10,
+    },
+    textContainer: {
+        flex:1,
+        flexDirection: 'row',
+        justifyContent:'space-around',
+        backgroundColor: '#F7F1D2',
     },
     dataPage: {
         flex: 1,

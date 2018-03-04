@@ -20,7 +20,7 @@ export default class patientHome extends React.Component {
 
         var userID = firebaseApp.auth().currentUser.uid;
         this.myRef = firebaseApp.database().ref('Patients/' + userID);
-        this.state = {nextAppt: '',};
+        this.state = {nextAppt: '', user: userID};
 
     }
 
@@ -79,13 +79,13 @@ export default class patientHome extends React.Component {
                 </View>
 
                 <View style={styles.container}>
-                    <GlucoseCircle name={'HgbA1c'}/>
+                    <GlucoseCircle name={'HgbA1c'} user = {this.state.user}/>
                     <Text></Text>
                 </View>
 
                 <View style = {styles.container2}>
-                    <GlucoseCircle name={'FBG'}/>
-                    <GlucoseCircle name={'PpBG'}/>
+                    <GlucoseCircle name={'FBG'} user = {this.state.user}/>
+                    <GlucoseCircle name={'PpBG'} user = {this.state.user}/>
                 </View>
 
                 <View style={styles.container}>
@@ -107,10 +107,10 @@ export default class patientHome extends React.Component {
                 </View>
 
                 <View style={styles.dataPage}>
-                    <GlucoseGraph>
+                    <GlucoseGraph user = {this.state.user}>
                     </GlucoseGraph>
 
-                    <GlucoseLogTable>
+                    <GlucoseLogTable user = {this.state.user}>
 
                     </GlucoseLogTable>
                 </View>

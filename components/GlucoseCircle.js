@@ -15,7 +15,12 @@ class GlucoseCircle extends Component {
         console.ignoredYellowBox = [
             'Setting a timer'
         ];
-        var userID = firebaseApp.auth().currentUser.uid;
+        var userID;
+        if(this.props.user == firebaseApp.auth().currentUser.uid){
+            userID = firebaseApp.auth().currentUser.uid;
+        }else{
+            userID = this.props.user;
+        }
         this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/logs/');
         this.state = {gLevel: 0};
     }
@@ -67,6 +72,11 @@ class GlucoseCircle extends Component {
             avg = avg + log[i];
         }
         avg = avg/log.length;
+
+        if(isNaN(avg) == true){
+            avg = 0;
+            return avg;
+        }
         return Math.round(10*avg)/10;
     };
 
@@ -90,7 +100,7 @@ class GlucoseCircle extends Component {
             }else if(level > 180 && level <=220){       //okay meal
                 color = '#f7e606';
             }else{                                      //bad  meal
-                color =  '#f4000b';
+                color = '#f4000b';
             }
         }
 
