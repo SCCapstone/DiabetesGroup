@@ -1,30 +1,37 @@
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';
+const MedicationLogTable = require('../components/MedicationLogTable');
+
 import {
     Platform,
     StyleSheet,
     Text,
     View,
+    ScrollView,
     Button,
     AppRegistry
 } from 'react-native';
 
-export default class NutritionistSignIn extends Component<{}> {
+export default class patientMedication extends Component<{}> {
 
     static navigationOptions = {
-        title: 'My Medication',
+        title: 'Medication',
         headerStyle: {backgroundColor: "#FF6127"}
     };
 
     render() {
         const {navigate} = this.props.navigation;
         return (
-            <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    This is where we put in the code
-                </Text>
-            </View>
+            <ScrollView>
+                <MedicationLogTable>
+
+                </MedicationLogTable>
+                <SeafoamButton
+                    title="Add new medication"
+                    onPress = { () => navigate('MInput')}
+                />
+            </ScrollView>
         );
     }
 }

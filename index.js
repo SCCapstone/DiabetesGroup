@@ -15,6 +15,7 @@ import SignOut from './screens/SignOut';
 import todaysDietPatient from './screens/todaysDietPatient';
 import dietInput from './screens/dietInput';
 import NPHome from './screens/NutritionistPHome';
+import medicationInput from './screens/medicationInput';
 
 import Settings from './screens/Settings';
 
@@ -49,6 +50,7 @@ const AppNavigator = StackNavigator({
             })
         },
         GInput: {screen: glucoseInput},
+        MInput: {screen: medicationInput},
         PMed: {screen: patientMedication},
         PDiet: {screen: patientDiet},
         Sign: {screen: SignOut},
