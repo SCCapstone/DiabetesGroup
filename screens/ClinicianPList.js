@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, Text, BackHandler, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight} from 'react-native';
+import {View, Text, BackHandler, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight,DrawerLayoutAndroid} from 'react-native';
 import firebaseApp from './FireBaseApp';
 import { SwipeListView } from 'react-native-swipe-list-view';
+const SeafoamButton = require('../components/SeafoamButton');
 
 export default class ClinicianPList extends React.Component {
     static navigationOptions = {
@@ -15,7 +16,7 @@ export default class ClinicianPList extends React.Component {
             'Setting a timer'
         ];
         this.itemsRef = firebaseApp.database().ref('Patients/');
-        this.state = {listType: 'FlatList', userName: '', Patients: [], Age: '',};
+        this.state = {listType: 'FlatList', userName: '', Patients: [], password: '', email: '',};
     }
 
     listenForItems(itemsRef) {
@@ -25,12 +26,39 @@ export default class ClinicianPList extends React.Component {
                 items.push({
                     id: child.key,
                     userName: child.val().userName,
-                    Age: child.val().Age,
+					password: child.val().password,
+					email: child.val().email,
                 });
             });
             this.setState({Patients: items});
         });
     }
+	
+/*
+	_checkPatient(email, password) {
+		const {navigate} = this.props.navigation;
+		firebaseApp.auth().signInWithEmailAndPassword(email, password).then(function(user) {
+            navigate('NPHome')
+        }).catch(function (error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode === 'auth/user-not-found') {
+                alert('User not found.');
+            }
+            else if (errorCode === 'auth/wrong-password') {
+                alert('Wrong Password.');
+            }
+            else if (errorCode === 'auth/invalid-email') {
+                alert('Invalid Email.');
+            }
+            else {
+                alert(errorMessage);
+            }
+            console.log(error);
+		});
+	
+	}
+*/
 
     componentDidMount() {
         this.listenForItems(this.itemsRef);
@@ -61,18 +89,41 @@ export default class ClinicianPList extends React.Component {
 
     render() {
         const {navigate} = this.props.navigation;
+        var navigationView = (
+            <View style={{flex: 1, backgroundColor: '#F7F1D2'}}>
+                <SeafoamButton title="Patient List Home Screen"
+                               onPress={() => navigate('PList')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="Settings"
+                               onPress={() => navigate('Setting')}/>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="Sign Out"
+                               onPress={() => navigate('Sign')}/>
+            </View>
+        );
         return (
-             <SwipeListView
+            <DrawerLayoutAndroid
+                drawerWidth={300}
+                drawerPosition={DrawerLayoutAndroid.positions.Left}
+                renderNavigationView={() => navigationView}>
+
+             <SwipeListView style={styles.backGrnd}
                 useFlatList={true}
                 data={this.state.Patients}
                 keyExtractor = {this.keyExtractor}
                 renderItem ={({item}) =>
                     <TouchableHighlight
-                        onPress={ _ => console.log('You touched me') }
+                        onPress = {() => navigate("CPHome", {ID: item.id})}
                         style={styles.rowFront}
                         underlayColor={'#AAA'}
                     >
-                        <Text style ={styles.rowText}>{item.userName}, {item.Age}</Text>
+                        <Text style ={styles.rowText}>{item.userName}</Text>
                     </TouchableHighlight>
                 }
                  /*TODO: The Messenger Button needs to take the nutritionist to the messenger between them and this specific patient of theirs*/
@@ -90,6 +141,7 @@ export default class ClinicianPList extends React.Component {
                 rightOpenValue={-75}
                 onRowDidOpen={this.onRowDidOpen}
             />
+            </DrawerLayoutAndroid>
         );
     }
 
@@ -112,8 +164,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#f7f1d2',
         borderBottomColor: 'orange',
         borderBottomWidth: 1,
-       // borderTopColor: 'orange',
-       // borderTopWidth: 1,
         paddingTop: 20,
         height: 60,
     },
@@ -147,5 +197,8 @@ const styles = StyleSheet.create({
     backRightBtnRight: {
         backgroundColor: 'red',
         right: 0
+    },
+    backGrnd: {
+        backgroundColor: '#f7f1d2'
     },
 });

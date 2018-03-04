@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, BackHandler, StyleSheet, ScrollView, FlatList} from 'react-native';
+import {View, Text, BackHandler, StyleSheet, ScrollView, FlatList, DrawerLayoutAndroid} from 'react-native';
 import firebaseApp from './FireBaseApp';
 const SeafoamButton = require('../components/SeafoamButton');
 const GlucoseCircle = require('../components/GlucoseCircle');
@@ -41,7 +41,37 @@ export default class patientHome extends React.Component {
 
     render(){
         const {navigate} = this.props.navigation;
+        var navigationView = (
+            <View style={{flex: 1, backgroundColor: '#F7F1D2'}}>
+                <SeafoamButton title="My Home Screen"
+                               onPress={() => navigate('PHome')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="My Diet"
+                               onPress={() => navigate('PDiet')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="My Medication"
+                               onPress={() => navigate('PMed')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="Settings"
+                            onPress={() => navigate('Setting')}/>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="Sign Out"
+                               onPress={() => navigate('Sign')}/>
+            </View>
+        );
         return (
+            <DrawerLayoutAndroid
+                drawerWidth={300}
+                drawerPosition={DrawerLayoutAndroid.positions.Left}
+                renderNavigationView={() => navigationView}>
             <ScrollView>
                 <View style={styles.container3}>
                     <MessengerButton
@@ -85,6 +115,7 @@ export default class patientHome extends React.Component {
                     </GlucoseLogTable>
                 </View>
             </ScrollView>
+            </DrawerLayoutAndroid>
         );
     }
 }
