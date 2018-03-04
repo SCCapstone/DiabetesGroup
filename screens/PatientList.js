@@ -16,7 +16,7 @@ export default class PatientList extends React.Component {
             'Setting a timer'
         ];
         this.itemsRef = firebaseApp.database().ref('Patients/');
-        this.state = {listType: 'FlatList', userName: '', Patients: [], Age: '',};
+        this.state = {listType: 'FlatList', userName: '', Patients: []};
     }
 
     listenForItems(itemsRef) {
@@ -26,7 +26,6 @@ export default class PatientList extends React.Component {
                 items.push({
                     id: child.key,
                     userName: child.val().userName,
-                    Age: child.val().Age,
                 });
             });
             this.setState({Patients: items});
@@ -86,7 +85,7 @@ export default class PatientList extends React.Component {
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
                 renderNavigationView={() => navigationView}>
 
-             <SwipeListView
+             <SwipeListView style={styles.backGrnd}
                 useFlatList={true}
                 data={this.state.Patients}
                 keyExtractor = {this.keyExtractor}
@@ -96,7 +95,7 @@ export default class PatientList extends React.Component {
                         style={styles.rowFront}
                         underlayColor={'#AAA'}
                     >
-                        <Text style ={styles.rowText}>{item.userName}, {item.Age}</Text>
+                        <Text style ={styles.rowText}>{item.userName}</Text>
                     </TouchableHighlight>
                 }
                  /*TODO: The Messenger Button needs to take the nutritionist to the messenger between them and this specific patient of theirs*/
@@ -137,8 +136,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#f7f1d2',
         borderBottomColor: 'orange',
         borderBottomWidth: 1,
-       // borderTopColor: 'orange',
-       // borderTopWidth: 1,
         paddingTop: 20,
         height: 60,
     },
@@ -172,5 +169,8 @@ const styles = StyleSheet.create({
     backRightBtnRight: {
         backgroundColor: 'red',
         right: 0
+    },
+    backGrnd: {
+        backgroundColor: '#f7f1d2'
     },
 });
