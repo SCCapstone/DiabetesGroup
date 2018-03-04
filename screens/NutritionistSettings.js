@@ -17,13 +17,13 @@ import {
 export default class NutritionistSettings extends Component<{}> {
 
     static navigationOptions = {
-        title: 'NutritionistSettings',
+        title: 'Settings',
         headerStyle: {backgroundColor: "#FF6127"}
     };
 
     constructor(props) {
         super(props);
-        this.state.email = '';
+        this.state ={email: ''};
 
     }
 
@@ -40,7 +40,7 @@ export default class NutritionistSettings extends Component<{}> {
     render() {
 
         return (
-            <ScrollView>
+            <ScrollView style={{backgroundColor: '#F7F1D2'}}>
 
                 <View style={styles.container}>
                     <View style={styles.stretched}>
@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     },
     stretched: {
         alignSelf: 'stretch',
+        backgroundColor: '#F7F1D2',
     },
     title: {
         fontSize: 20,
