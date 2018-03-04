@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, BackHandler, StyleSheet, ScrollView, FlatList} from 'react-native';
+import {View, Text, BackHandler, StyleSheet, ScrollView, FlatList, DrawerLayoutAndroid} from 'react-native';
 import firebaseApp from './FireBaseApp';
 const SeafoamButton = require('../components/SeafoamButton');
 const GlucoseCircle = require('../components/GlucoseCircle');
@@ -20,10 +20,7 @@ export default class patientHome extends React.Component {
 
         var userID = firebaseApp.auth().currentUser.uid;
         this.myRef = firebaseApp.database().ref('Patients/' + userID);
-        //this.ref = firebaseApp.database().ref('Patients/' + userID + '/logs').child('glucoseLevel');
-        this.state = {nextAppt: '', glucoseLevel: ''};
-
-
+        this.state = {nextAppt: '', user: userID};
 
     }
 
@@ -43,9 +40,38 @@ export default class patientHome extends React.Component {
     }
 
     render(){
-        const val1 = 7.6;
         const {navigate} = this.props.navigation;
+        var navigationView = (
+            <View style={{flex: 1, backgroundColor: '#F7F1D2'}}>
+                <SeafoamButton title="My Home Screen"
+                               onPress={() => navigate('PHome')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="My Diet"
+                               onPress={() => navigate('PDiet')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="My Medication"
+                               onPress={() => navigate('PMed')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="Settings"
+                            onPress={() => navigate('Setting')}/>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="Sign Out"
+                               onPress={() => navigate('Sign')}/>
+            </View>
+        );
         return (
+            <DrawerLayoutAndroid
+                drawerWidth={300}
+                drawerPosition={DrawerLayoutAndroid.positions.Left}
+                renderNavigationView={() => navigationView}>
             <ScrollView>
                 <View style={styles.container3}>
                     <MessengerButton
@@ -53,13 +79,13 @@ export default class patientHome extends React.Component {
                 </View>
 
                 <View style={styles.container}>
-                    <GlucoseCircle title={val1 + '\nHgbA1c'}/>
+                    <GlucoseCircle name={'HgbA1c'} user = {this.state.user}/>
                     <Text></Text>
                 </View>
 
                 <View style = {styles.container2}>
-                    <GlucoseCircle title={60 + '\nFBG'}/>
-                    <GlucoseCircle title={154 + '\nPpBG'}/>
+                    <GlucoseCircle name={'FBG'} user = {this.state.user}/>
+                    <GlucoseCircle name={'PpBG'} user = {this.state.user}/>
                 </View>
 
                 <View style={styles.container}>
@@ -81,14 +107,15 @@ export default class patientHome extends React.Component {
                 </View>
 
                 <View style={styles.dataPage}>
-                    <GlucoseGraph>
+                    <GlucoseGraph user = {this.state.user}>
                     </GlucoseGraph>
 
-                    <GlucoseLogTable>
+                    <GlucoseLogTable user = {this.state.user}>
 
                     </GlucoseLogTable>
                 </View>
             </ScrollView>
+            </DrawerLayoutAndroid>
         );
     }
 }

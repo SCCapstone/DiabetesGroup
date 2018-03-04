@@ -15,14 +15,16 @@ import SignOut from './screens/SignOut';
 import todaysDietPatient from './screens/todaysDietPatient';
 import dietInput from './screens/dietInput';
 import NPHome from './screens/NutritionistPHome';
-import medicationInput from './screens/medicationInput';
 
+import medicationInput from './screens/medicationInput';
+import ClinicianPHome from './screens/ClinicianPHome';
+import ClinicianSignIn from './screens/ClinicianSignIn';
+import ClinicianPList from './screens/ClinicianPList';
 import Settings from './screens/Settings';
 
 
 
 import {StackNavigator,} from 'react-navigation';
-import {DrawerNavigator,} from 'react-navigation';
 import NewPatientInfo from "./screens/NewPatientInfo";
 
 //This is going to be the apps main navigator
@@ -57,6 +59,16 @@ const AppNavigator = StackNavigator({
         TDiet: {screen: todaysDietPatient},
         DInput: {screen: dietInput},
         NPHome: {screen: NPHome},
+		CSign: {screen: ClinicianSignIn},
+		CPHome: {screen: ClinicianPHome},
+		CPList: {
+            screen: ClinicianPList,
+            navigationOptions: ({navigation}) => ({
+                headerStyle: {backgroundColor: '#FF6127'},
+                title: 'Clinician Home Screen',
+                headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
+            })
+        },
     },
     {
 
@@ -65,26 +77,5 @@ const AppNavigator = StackNavigator({
     }
 );
 
-const DrawerStack = DrawerNavigator({
-        GInput: {screen: glucoseInput},
-        PMed: {screen: patientMedication},
-        Setting:{screen: Settings},
-        Plist: {screen: PatientList},
-        Sign: {screen: SignOut},
-        Stack: {
-            screen: AppNavigator,
-            navigationOptions: ({navigation}) => ({
-                drawerLockMode: 'locked-closed',
-                drawerLabel: () => null
-            })
-        },
-    },
-    {
-        drawerPosition: 'left',
-        initialRouteName: 'Stack'
 
-    }
-);
-
-
-AppRegistry.registerComponent('DiabetesGroup', () => DrawerStack);
+AppRegistry.registerComponent('DiabetesGroup', () => AppNavigator);

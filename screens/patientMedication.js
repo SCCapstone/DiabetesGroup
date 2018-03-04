@@ -10,7 +10,8 @@ import {
     View,
     ScrollView,
     Button,
-    AppRegistry
+    AppRegistry,
+    DrawerLayoutAndroid
 } from 'react-native';
 
 export default class patientMedication extends Component<{}> {
@@ -22,7 +23,37 @@ export default class patientMedication extends Component<{}> {
 
     render() {
         const {navigate} = this.props.navigation;
+        var navigationView = (
+            <View style={{flex: 1, backgroundColor: '#F7F1D2'}}>
+                <SeafoamButton title="My Home Screen"
+                               onPress={() => navigate('PHome')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="My Diet"
+                               onPress={() => navigate('PDiet')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="My Medication"
+                               onPress={() => navigate('PMed')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="Settings"
+                               onPress={() => navigate('Setting')}/>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="Sign Out"
+                               onPress={() => navigate('Sign')}/>
+            </View>
+        );
         return (
+<DrawerLayoutAndroid
+    drawerWidth={300}
+    drawerPosition={DrawerLayoutAndroid.positions.Left}
+    renderNavigationView={() => navigationView}>
             <ScrollView>
                 <MedicationLogTable>
 
@@ -32,6 +63,7 @@ export default class patientMedication extends Component<{}> {
                     onPress = { () => navigate('MInput')}
                 />
             </ScrollView>
+</DrawerLayoutAndroid>
         );
     }
 }

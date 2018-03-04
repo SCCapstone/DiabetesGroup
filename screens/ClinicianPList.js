@@ -1,10 +1,10 @@
 import React from 'react';
-import {View, Text, BackHandler, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight, DrawerLayoutAndroid} from 'react-native';
+import {View, Text, BackHandler, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight,DrawerLayoutAndroid} from 'react-native';
 import firebaseApp from './FireBaseApp';
 import { SwipeListView } from 'react-native-swipe-list-view';
 const SeafoamButton = require('../components/SeafoamButton');
 
-export default class PatientList extends React.Component {
+export default class ClinicianPList extends React.Component {
     static navigationOptions = {
         title: 'Patient List',
         headerStyle: {backgroundColor: "#FF6127"}
@@ -31,6 +31,7 @@ export default class PatientList extends React.Component {
             this.setState({Patients: items});
         });
     }
+
 
     componentDidMount() {
         this.listenForItems(this.itemsRef);
@@ -91,7 +92,7 @@ export default class PatientList extends React.Component {
                 keyExtractor = {this.keyExtractor}
                 renderItem ={({item}) =>
                     <TouchableHighlight
-						onPress = {() => navigate("NPHome", {ID: item.id})}
+                        onPress = {() => navigate("CPHome", {ID: item.id})}
                         style={styles.rowFront}
                         underlayColor={'#AAA'}
                     >

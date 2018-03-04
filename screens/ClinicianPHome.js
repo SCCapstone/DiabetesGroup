@@ -7,7 +7,7 @@ const MessengerButton = require('../components/MessengerButton');
 const GlucoseLogTable = require('../components/GlucoseLogTable');
 const GlucoseGraph = require('../components/GlucoseGraph');
 
-export default class NutritionistPHome extends React.Component {
+export default class ClinicianPHome extends React.Component {
     static navigationOptions = {
         title: 'Patient Information',
         headerStyle: {backgroundColor: "#FF6127"}
@@ -21,15 +21,14 @@ export default class NutritionistPHome extends React.Component {
 		var userID = props.navigation.state.params.ID;
         this.apptRef = firebaseApp.database().ref('Patients/' + userID);
         this.infoRef = firebaseApp.database().ref('Patients/' + userID + '/Pinfo/');
-        this.state = {nextAppt: '', Age: '', Sex: '', Weight: '', Height: '', DType: '', user: userID, Name: ''};
+        this.state = {nextAppt: '', Age: '', Sex: '', Weight: '', Height: '', DType: '', user: userID};
 
     }
 
     updateItems(apptRef, infoRef) {
         apptRef.on('value', (snapshot) => {
             var appt = snapshot.val().nextAppt;
-            var name = snapshot.val().userName;
-            this.setState({nextAppt: appt, Name: name});
+            this.setState({nextAppt: appt});
         });
         infoRef.on('value', (snapshot) => {
             var age = snapshot.val().Age;
@@ -171,7 +170,7 @@ const styles = StyleSheet.create({
     },
     container2:{
         flex:1,
-        paddingBottom: 20,
+        paddingBottom: 50,
         flexDirection: 'row',
         justifyContent:'space-around',
         backgroundColor: '#F7F1D2',

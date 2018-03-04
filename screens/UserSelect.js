@@ -35,6 +35,13 @@ export default class UserSelect extends Component<{}> {
                         title="Sign into a nutritionist account"
                         onPress={() => navigate('NSign')}
                     />
+					<Text style={{marginBottom: 20}}>
+					</Text>
+					<SeafoamButton
+                        style={styles.button}
+                        title="Sign into a clinician account"
+                        onPress={() => navigate('CSign')}
+                    />
                     <Text style={{marginBottom: 20}}>
                     </Text>
                     <SeafoamButton
