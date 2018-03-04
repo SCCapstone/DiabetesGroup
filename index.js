@@ -17,8 +17,11 @@ import dietInput from './screens/dietInput';
 import NPHome from './screens/NutritionistPHome';
 import NPDiet from './screens/NutritionistPDiet';
 import NPMed from './screens/NPMedications';
+import CPMed from './screens/CPMedications';
 
 import medicationInput from './screens/medicationInput';
+import NmedicationInput from './screens/NmedicationInput';
+import CmedicationInput from './screens/CmedicationInput';
 import ClinicianPHome from './screens/ClinicianPHome';
 import ClinicianSignIn from './screens/ClinicianSignIn';
 import ClinicianPList from './screens/ClinicianPList';
@@ -57,6 +60,8 @@ const AppNavigator = StackNavigator({
         },
         GInput: {screen: glucoseInput},
         MInput: {screen: medicationInput},
+        NMInput: {screen: NmedicationInput},
+        CMInput: {screen: CmedicationInput},
         PMed: {screen: patientMedication},
         PDiet: {screen: patientDiet},
         Sign: {screen: SignOut},
@@ -67,6 +72,7 @@ const AppNavigator = StackNavigator({
         NPMed: {screen: NPMed},
 		CSign: {screen: ClinicianSignIn},
 		CPHome: {screen: ClinicianPHome},
+        CPMed: {screen: CPMed},
 		CPList: {
             screen: ClinicianPList,
             navigationOptions: ({navigation}) => ({
