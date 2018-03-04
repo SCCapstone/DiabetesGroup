@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {View,  StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {Alert, View,  StyleSheet, TouchableOpacity, Text} from 'react-native';
 import {Table, TableWrapper, Row, Rows, Col, Cols, Cell} from 'react-native-table-component';
 import firebaseApp from "../screens/FireBaseApp";
 const EditButton = require('../components/EditButton');
 
-class GlucoseLogTable extends Component {
+ class GlucoseLogTable extends Component {
     static navigationOptions = {
         title: 'Home Screen',
         headerStyle: {backgroundColor: "#FF6127"}
@@ -17,7 +17,7 @@ class GlucoseLogTable extends Component {
 
         var userID = firebaseApp.auth().currentUser.uid;
         this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/logs/');
-        this.state = { logs: [], glucoseLevel: '', readingType: '', time: '', edit:'' };
+        this.state = { logs: [], glucoseLevel: '', readingType: '', time: ''};
 
     }
 
@@ -29,8 +29,7 @@ class GlucoseLogTable extends Component {
                     [child.val().glucoseLevel,
                      child.val().readingType,
                      child.val().time,
-                    child.val().edit=(<EditButton title="Edit"
-                    />)])
+                    ])
             });
             this.setState({logs: items});
         });
@@ -48,7 +47,7 @@ class GlucoseLogTable extends Component {
 
 
     render() {
-        const tableHead = ['Glucose Level (mg/dL)', 'Type', 'Time Recorded', ''];
+        const tableHead = ['Glucose Level (mg/dL)', 'Type', 'Time Recorded'];
         return (
             <View>
                 <Table>
