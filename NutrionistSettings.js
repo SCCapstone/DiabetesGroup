@@ -17,7 +17,7 @@ import {
 export default class NutritionistSettings extends Component<{}> {
 
     static navigationOptions = {
-        title: 'NutrionistSettings',
+        title: 'NutritionistSettings',
         headerStyle: {backgroundColor: "#FF6127"}
     };
 

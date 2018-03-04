@@ -21,6 +21,7 @@ import ClinicianPHome from './screens/ClinicianPHome';
 import ClinicianSignIn from './screens/ClinicianSignIn';
 import ClinicianPList from './screens/ClinicianPList';
 import Settings from './screens/Settings';
+import NutritionistSettings from './screens/NutritionistSettings';
 
 
 
@@ -33,6 +34,7 @@ const AppNavigator = StackNavigator({
         PSign: {screen: PatientSignIn},
         NewPatient: {screen: NewPatientInfo},
         Setting: {screen: Settings},
+        NutritionistSetting: {screen: NutritionistSettings},
         NSign: {screen: NutritionistSignIn},
         NewUser: {screen: createNewUser},
         PList: {
