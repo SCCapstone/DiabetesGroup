@@ -15,7 +15,12 @@ const EditButton = require('../components/EditButton');
             'Setting a timer'
         ];
 
-        var userID = firebaseApp.auth().currentUser.uid;
+        var userID;
+        if(this.props.user == firebaseApp.auth().currentUser.uid){
+            userID = firebaseApp.auth().currentUser.uid;
+        }else{
+            userID = this.props.user;
+        }
         this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/logs/');
         this.state = { logs: [], glucoseLevel: '', readingType: '', time: ''};
 

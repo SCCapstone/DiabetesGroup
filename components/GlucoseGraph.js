@@ -10,9 +10,14 @@ class GlucoseGraph extends Component {
         console.ignoredYellowBox = [
             'Setting a timer'
         ];
-        var userID = firebaseApp.auth().currentUser.uid;
+        var userID;
+        if(this.props.user == firebaseApp.auth().currentUser.uid){
+            userID = firebaseApp.auth().currentUser.uid;
+        }else{
+            userID = this.props.user;
+        }
         this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/logs/');
-        this.state = { logs: [{Time: '00/00/0000', GlucoseLevel: 0}, {Time: '00/00/0000', GlucoseLevel: 0}], dates: [], glogs: [], glucoseLevel: '', time: '',};
+        this.state = { logs: [{Time: '00/00/0000', GlucoseLevel: 0}, {Time: '00/00/0000', GlucoseLevel: 0}], dates: [], glogs: []};
     }
 
     listenForItems(itemsRef) {
@@ -59,7 +64,6 @@ class GlucoseGraph extends Component {
                 avg += lLogs[i];
             }else{
                 var lastDate = moment(lDates[i-1], 'MM/DD/YYYY');
-                //var currDateString = currDate.format('MM/DD/YYYY');
                 var lDate = lastDate.toDate();
                 avg = avg/dCount;
                 items.push({
@@ -71,7 +75,6 @@ class GlucoseGraph extends Component {
             }
             if((i+1) == lDates.length){
                 var currDate = moment(lDates[i], 'MM/DD/YYYY');
-                //var currDateString = currDate.format('MM/DD/YYYY');
                 var cDate = currDate.toDate();
                 avg = avg/dCount;
                 items.push({
@@ -85,7 +88,7 @@ class GlucoseGraph extends Component {
 
     render() {
         return (
-            this.state.logs.length == 0 ? null : <VictoryChart
+            this.state.logs.length < 2 ? null : <VictoryChart
                 scale={{ x: 'time'}}
                 containerComponent={<VictoryZoomContainer zoomDimension='x'/>}
             >
