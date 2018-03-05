@@ -15,7 +15,7 @@ import {
     DrawerLayoutAndroid
 } from 'react-native';
 
-export default class MedicationInput extends Component<{}> {
+export default class NmedicationInput extends Component<{}> {
 
     static navigationOptions = {
         title: 'Medication Input',
@@ -24,8 +24,9 @@ export default class MedicationInput extends Component<{}> {
 
     constructor(props) {
         super(props);
-        const {navigate} = this.props.navigation;
-        this.state = {medicine: '', dosage: '', time:''};
+        var userID = props.navigation.state.params.ID;
+        this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/medications/');
+        this.state = { medications: [], medicine: '', dosage: '', time: '', user: userID,};
     }
 
 
@@ -33,37 +34,29 @@ export default class MedicationInput extends Component<{}> {
         var time = this.state.time;
         var medicine = this.state.medicine;
         var dosage = this.state.dosage;
-        var user = firebaseApp.auth().currentUser;
+        var userID = this.state.user;
 
 
-            firebaseApp.database().ref('Patients/' + user.uid + '/medications/').push({
-                time: time,
-                medicine: medicine,
-                dosage: dosage,
-            });
-            const {navigate} = this.props.navigation;
-            navigate('PMed')
-        }
+        firebaseApp.database().ref('Patients/' + userID + '/medications/').push({
+            time: time,
+            medicine: medicine,
+            dosage: dosage,
+        });
+        const {navigate} = this.props.navigation;
+        navigate("NPMed" , {ID: this.state.user})
+    }
 
 
     render() {
         const {navigate} = this.props.navigation;
         var navigationView = (
             <View style={{flex: 1, backgroundColor: '#F7F1D2'}}>
-                <SeafoamButton title="My Home Screen"
-                               onPress={() => navigate('PHome')}/>
-                <Text></Text>
-                <Text></Text>
-                <SeafoamButton title="My Diet"
-                               onPress={() => navigate('PDiet')}/>
-                <Text></Text>
-                <Text></Text>
-                <SeafoamButton title="My Medication"
-                               onPress={() => navigate('PMed')}/>
+                <SeafoamButton title="Patient List Home Screen"
+                               onPress={() => navigate('PList')}/>
                 <Text></Text>
                 <Text></Text>
                 <SeafoamButton title="Settings"
-                               onPress={() => navigate('Setting')}/>
+                               onPress={() => navigate('NutritionistSetting')}/>
                 <Text></Text>
                 <Text></Text>
                 <Text></Text>
@@ -79,6 +72,7 @@ export default class MedicationInput extends Component<{}> {
                 drawerWidth={300}
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
                 renderNavigationView={() => navigationView}>
+
             <View style={styles.container}>
                 <View style={styles.stretched}>
                     <Text style={styles.title}>
@@ -109,7 +103,7 @@ export default class MedicationInput extends Component<{}> {
 
 
                 </View>
-                <SeafoamButton title="Submit"
+                <SeafoamButton title="Submit Medication for Patient"
                                onPress = { () => this._medicationValues()}
                 />
 
@@ -157,4 +151,3 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     }
 });
-

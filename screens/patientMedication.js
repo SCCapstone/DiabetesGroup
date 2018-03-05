@@ -54,7 +54,7 @@ export default class patientMedication extends Component<{}> {
     drawerWidth={300}
     drawerPosition={DrawerLayoutAndroid.positions.Left}
     renderNavigationView={() => navigationView}>
-            <ScrollView>
+            <ScrollView style={styles.container}>
                 <MedicationLogTable>
 
                 </MedicationLogTable>
@@ -71,10 +71,9 @@ export default class patientMedication extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //justifyContent: 'center',
-        height:80,
-        //alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        paddingBottom: 20,
+        flexDirection: 'column',
+        backgroundColor: '#F7F1D2',
     },
     welcome: {
         fontSize: 20,

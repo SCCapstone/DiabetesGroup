@@ -61,7 +61,7 @@ export default class ClinicianPHome extends React.Component {
                 <Text></Text>
                 <Text></Text>
                 <SeafoamButton title="Settings"
-                               onPress={() => navigate('Setting')}/>
+                               onPress={() => navigate('NutritionistSetting')}/>
                 <Text></Text>
                 <Text></Text>
                 <Text></Text>

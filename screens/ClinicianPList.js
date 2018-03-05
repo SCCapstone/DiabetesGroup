@@ -69,7 +69,7 @@ export default class ClinicianPList extends React.Component {
                 <Text></Text>
                 <Text></Text>
                 <SeafoamButton title="Settings"
-                               onPress={() => navigate('Setting')}/>
+                               onPress={() => navigate('NutritionistSetting')}/>
                 <Text></Text>
                 <Text></Text>
                 <Text></Text>

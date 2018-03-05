@@ -13,7 +13,7 @@ import {
     DrawerLayoutAndroid
 } from 'react-native';
 
-export default class patientMedication extends Component<{}> {
+export default class CPMedications extends Component<{}> {
 
     static navigationOptions = {
         title: 'Patient Medications',
@@ -64,7 +64,7 @@ export default class patientMedication extends Component<{}> {
                 <Text></Text>
                 <Text></Text>
                 <SeafoamButton title="Settings"
-                               onPress={() => navigate('Setting')}/>
+                               onPress={() => navigate('NutritionistSetting')}/>
                 <Text></Text>
                 <Text></Text>
                 <Text></Text>
@@ -95,7 +95,7 @@ export default class patientMedication extends Component<{}> {
                     </View>
                     <SeafoamButton
                         title="Add new medication for patient"
-                        onPress = { () => navigate("NMInput", {ID: this.state.user})}
+                        onPress = { () => navigate("CMInput", {ID: this.state.user})}
                     />
                 </ScrollView>
             </DrawerLayoutAndroid>
