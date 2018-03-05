@@ -12,6 +12,7 @@ import {
     TouchableOpacity,
     ScrollView,
     Picker,
+    DrawerLayoutAndroid
 } from 'react-native';
 
 export default class MedicationInput extends Component<{}> {
@@ -46,8 +47,38 @@ export default class MedicationInput extends Component<{}> {
 
 
     render() {
+        const {navigate} = this.props.navigation;
+        var navigationView = (
+            <View style={{flex: 1, backgroundColor: '#F7F1D2'}}>
+                <SeafoamButton title="My Home Screen"
+                               onPress={() => navigate('PHome')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="My Diet"
+                               onPress={() => navigate('PDiet')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="My Medication"
+                               onPress={() => navigate('PMed')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="Settings"
+                               onPress={() => navigate('Setting')}/>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="Sign Out"
+                               onPress={() => navigate('Sign')}/>
+            </View>
+        );
         return (
-
+            <DrawerLayoutAndroid
+                drawerWidth={300}
+                drawerPosition={DrawerLayoutAndroid.positions.Left}
+                renderNavigationView={() => navigationView}>
             <View style={styles.container}>
                 <View style={styles.stretched}>
                     <Text style={styles.title}>
@@ -83,7 +114,7 @@ export default class MedicationInput extends Component<{}> {
                 />
 
             </View>
-
+            </DrawerLayoutAndroid>
         );
     }
 }

@@ -12,6 +12,7 @@ import {
     TouchableOpacity,
     ScrollView,
     Picker,
+    DrawerLayoutAndroid
 } from 'react-native';
 
 export default class NmedicationInput extends Component<{}> {
@@ -47,7 +48,30 @@ export default class NmedicationInput extends Component<{}> {
 
 
     render() {
+        const {navigate} = this.props.navigation;
+        var navigationView = (
+            <View style={{flex: 1, backgroundColor: '#F7F1D2'}}>
+                <SeafoamButton title="Patient List Home Screen"
+                               onPress={() => navigate('PList')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="Settings"
+                               onPress={() => navigate('NutritionistSetting')}/>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="Sign Out"
+                               onPress={() => navigate('Sign')}/>
+            </View>
+        );
         return (
+            <DrawerLayoutAndroid
+                drawerWidth={300}
+                drawerPosition={DrawerLayoutAndroid.positions.Left}
+                renderNavigationView={() => navigationView}>
 
             <View style={styles.container}>
                 <View style={styles.stretched}>
@@ -84,7 +108,7 @@ export default class NmedicationInput extends Component<{}> {
                 />
 
             </View>
-
+            </DrawerLayoutAndroid>
         );
     }
 }
