@@ -7,13 +7,12 @@ import {
     StyleSheet,
     Text,
     View,
-    TextInput,
     Button,
     AppRegistry,
     DrawerLayoutAndroid
 } from 'react-native';
 
-export default class NutritionistPDiet extends Component<{}> {
+export default class ClinicianPDiet extends Component<{}> {
 
     static navigationOptions = {
         title: 'Patient Diet',
@@ -99,29 +98,28 @@ export default class NutritionistPDiet extends Component<{}> {
         asugBev = this.state.sugBev1;
         acofTea = this.state.cofTea1;
         var items = [];
-        var favg = 0;
-        var vavg = 0;
-        var gavg = 0;
-        var pavg = 0;
-        var davg = 0;
-        var wavg = 0;
-        var savg = 0;
-        var cavg = 0;
+        var  favg = 0;
+        var  vavg = 0;
+        var  gavg = 0;
+        var  pavg = 0;
+        var  davg = 0;
+        var  wavg = 0;
+        var  savg = 0;
+        var  cavg = 0;
 
         var dCount = 0;
 
-        if (afruits.length > 7) {
+        if (afruits.length > 7){
             dCount = 7;
         }
-        else if (afruits.length == 0) {
-            dCount = 0;
-        }
-        else {
-            dCount = afruits.length;
-        }
+        else if (afruits.length == 0)
+        {
+            dCount = 0;}
+        else{
+            dCount = afruits.length;}
 
 
-        for (i = 0; i < dCount; i++) {
+        for(i = 0; i < dCount; i++) {
             favg += afruits[i];
             vavg += aveges[i];
             gavg += agraStar[i];
@@ -132,40 +130,33 @@ export default class NutritionistPDiet extends Component<{}> {
             cavg += acofTea[i];
         }
 
-        favg = favg / dCount;
-        vavg = vavg / dCount;
-        gavg = gavg / dCount;
-        pavg = pavg / dCount;
-        davg = davg / dCount;
-        wavg = wavg / dCount;
-        savg = savg / dCount;
-        cavg = cavg / dCount;
+        favg = favg/dCount;
+        vavg = vavg/dCount;
+        gavg = gavg/dCount;
+        pavg = pavg/dCount;
+        davg = davg/dCount;
+        wavg = wavg/dCount;
+        savg = savg/dCount;
+        cavg = cavg/dCount;
 
 
         items.push(
-            {name: 'f', value: favg},
-            {name: 'v', value: vavg},
-            {name: 'g', value: gavg},
-            {name: 'p', value: pavg},
-            {name: 'd', value: davg},
-            {name: 'w', value: wavg},
-            {name: 's', value: savg},
-            {name: 'c', value: cavg},
+            {name:'f', value: favg},
+            {name:'v', value: vavg},
+            {name:'g', value: gavg},
+            {name:'p', value: pavg},
+            {name:'d', value: davg},
+            {name:'w', value: wavg},
+            {name:'s', value: savg},
+            {name:'c', value: cavg},
+
         );
 
 
         return items;
-    }
+    };
 
-    _dietUpdates() {
-        var userid = this.state.user;
-        var nSuggestions = this.state.nSuggestions;
-        var NSuggRef = firebaseApp.database().ref('Patients/' + userid  );
 
-        NSuggRef.update({"nSuggestions": nSuggestions})
-            const {navigate} = this.props.navigation;
-            navigate("NPHome", {ID: this.state.user})
-        }
 
 
     render() {
@@ -254,6 +245,7 @@ export default class NutritionistPDiet extends Component<{}> {
                             <Text/>
 
 
+
                         </View>
                         <Text/>
 
@@ -262,26 +254,11 @@ export default class NutritionistPDiet extends Component<{}> {
                     </View>
                     <View style={styles.footer}>
                         <Text style={styles.title}>
-                           Your Suggestions
+                            Nutritionist's Suggestions
                         </Text>
                         <View style={styles.box}>
                             <Text style={styles.text}>{this.state.nSuggestions} </Text>
-                            <Text/>
-
                         </View>
-                        <Text/>
-                        <Text/>
-                        <TextInput style={styles.input} placeholder="Your Suggestions"
-                                   underlineColorAndroid ={'transparent'}
-                                   placeholderTextColor="#CFCFCF"
-                                   onChangeText={(text) => this.setState({nSuggestions: text})}
-                                   value={this.nSuggestions}
-                        />
-                        <Text/>
-                        <SeafoamButton title="Submit"
-                                       onPress = { () => this._dietUpdates()}
-                        />
-
                     </View>
                 </View>
 
@@ -324,7 +301,7 @@ const styles = StyleSheet.create({
     input:{
         fontSize: 16,
         backgroundColor: '#FEFDF5',
-        marginBottom: 50,
+        marginBottom: 20,
         borderWidth: 1,
     },
     title: {
