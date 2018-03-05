@@ -26,6 +26,22 @@ export default class dietInput extends Component<{}> {
         this.state = {date: '', fruits: '0', veges:'0', graStar:'0', prot:'0', dsrt:'0', water:'0', sugBev:'0', cofTea:'0'};
     }
 
+    /*onChanged(food, text){
+        let newText = '';
+        let numbers = '0123456789';
+
+        for (var i=0; i < text.length; i++) {
+            if(numbers.indexOf(text[i]) > -1 ) {
+                newText = newText + text[i];
+            }
+            else {
+                // your call back function
+                alert("please enter numbers only");
+            }
+        }
+        this.setState({ food: newText });
+    }*/
+
 
     _dietValues() {
         var date = this.state.date;

@@ -21,14 +21,16 @@ export default class ClinicianPHome extends React.Component {
 		var userID = props.navigation.state.params.ID;
         this.apptRef = firebaseApp.database().ref('Patients/' + userID);
         this.infoRef = firebaseApp.database().ref('Patients/' + userID + '/Pinfo/');
-        this.state = {nextAppt: '', Age: '', Sex: '', Weight: '', Height: '', DType: '', user: userID};
+        this.state = {nextAppt: '', Age: '', Sex: '', Weight: '', Height: '', DType: '', user: userID, Name: ''};
 
     }
 
     updateItems(apptRef, infoRef) {
         apptRef.on('value', (snapshot) => {
             var appt = snapshot.val().nextAppt;
-            this.setState({nextAppt: appt});
+            var name = snapshot.val().userName;
+            this.setState({nextAppt: appt, Name: name});
+
         });
         infoRef.on('value', (snapshot) => {
             var age = snapshot.val().Age;
@@ -135,7 +137,7 @@ export default class ClinicianPHome extends React.Component {
                     </Text>
 
                     <SeafoamButton title="Patient's Diet"
-                                   onPress={() => navigate('PDiet')}/>
+                                   onPress={() => navigate("CPDiet", {ID: this.state.user})}/>
                     <Text></Text>
                     <SeafoamButton title="Medications"
                                    onPress={() => navigate("CPMed", {ID: this.state.user})}/>
