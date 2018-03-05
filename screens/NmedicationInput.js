@@ -36,14 +36,21 @@ export default class NmedicationInput extends Component<{}> {
         var dosage = this.state.dosage;
         var userID = this.state.user;
 
+        if(time === "" || medicine === "" || dosage === "")
+        {
+            alert('Please enter a value for all fields');
+        }
+        else {
 
-        firebaseApp.database().ref('Patients/' + userID + '/medications/').push({
-            time: time,
-            medicine: medicine,
-            dosage: dosage,
-        });
-        const {navigate} = this.props.navigation;
-        navigate("NPMed" , {ID: this.state.user})
+
+            firebaseApp.database().ref('Patients/' + userID + '/medications/').push({
+                time: time,
+                medicine: medicine,
+                dosage: dosage,
+            });
+            const {navigate} = this.props.navigation;
+            navigate("NPMed", {ID: this.state.user})
+        }
     }
 
 

@@ -35,6 +35,11 @@ export default class MedicationInput extends Component<{}> {
         var dosage = this.state.dosage;
         var user = firebaseApp.auth().currentUser;
 
+        if(time === "" || medicine === "" || dosage === "")
+        {
+            alert('Please enter a value for all fields');
+        }
+        else {
 
             firebaseApp.database().ref('Patients/' + user.uid + '/medications/').push({
                 time: time,
@@ -43,6 +48,7 @@ export default class MedicationInput extends Component<{}> {
             });
             const {navigate} = this.props.navigation;
             navigate('PMed')
+        }
         }
 
 

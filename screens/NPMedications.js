@@ -80,8 +80,7 @@ export default class patientMedication extends Component<{}> {
                 drawerWidth={300}
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
                 renderNavigationView={() => navigationView}>
-                <ScrollView>
-                    <View>
+                <ScrollView style={styles.container}>
                         <Table>
 
                             <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
@@ -90,9 +89,7 @@ export default class patientMedication extends Component<{}> {
                                 <Row key = {i} data={data} style={[styles.row, i%2 && {backgroundColor: 'orange'}]} textStyle={styles.text}/> ))}
 
                         </Table>
-
                         <Text/>
-                    </View>
                     <SeafoamButton
                         title="Add new medication for patient"
                         onPress = { () => navigate("NMInput", {ID: this.state.user})}
@@ -104,31 +101,23 @@ export default class patientMedication extends Component<{}> {
 }
 
 const styles = StyleSheet.create({
+        welcome: {
+            fontSize: 20,
+            textAlign: 'center',
+            margin: 10,
+        },
+        instructions: {
+            textAlign: 'center',
+            color: '#333333',
+            marginBottom: 5,
+        },
+        head: { height: 40, backgroundColor: 'orange' },
+        text: { textAlign:'center', color:'black' },
+        row: { height: 30 },
     container: {
         flex: 1,
-        //justifyContent: 'center',
-        height:80,
-        //alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-    },
-    head: { height: 40, backgroundColor: 'orange' },
-    text: { textAlign:'center', color:'black' },
-    row: { height: 30 },
-    container: {
-        flex: 1,
+        paddingBottom: 20,
         flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#F7F1D2',
     },
 });
