@@ -33,67 +33,62 @@ export default class createNewUser extends Component<{}> {
         var password = this.state.password;
 		var userName = this.state.userName;
         var userType = this.state.userType;
+        var errorthrew= false;
 
 
         if(email.length < 4){
             alert('Please enter an email address.');
-        }
-        if(password.length < 4) {
+        }else if(password.length < 4) {
             alert('Please enter a password.');
-        }
-
-        //Sign in with email and password.
-        //Creating the email
-        firebaseApp.auth().createUserWithEmailAndPassword(email, password)
-            .catch(function (error) {
-                //Hendle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                // [START_EXCLUDE]
-                if (errorCode === 'auth/weak-password') {
-                    alert('The password is too weak.');
-                } else {
-                    alert(errorMessage);
-                }
-                console.log(error);
+        }else if(userName == ''){
+            alert('Please input your name.');
+        }else if(userType != "Nutritionist" && userType != "Clinician" && userType != "Patient"){
+            alert('Please select a user type!');
+        }else {
+            //Sign in with email and password.
+            //Creating the email
+            firebaseApp.auth().createUserWithEmailAndPassword(email, password)
+                .then(function(user) {
+                    if (userType === "Nutritionist") {
+                        firebaseApp.database().ref('Nutritionists/' + user.uid).set({
+                            userName: userName,
+                            email: email,
+                            password: password
+                        });
+                        navigate('User')
+                    }
+                    else if (userType === "Clinician") {
+                        firebaseApp.database().ref('Clinician/' + user.uid).set({
+                            userName: userName,
+                            email: email,
+                            password: password
+                        });
+                        navigate('User')
+                    }
+                    else if (userType === "Patient") {
+                        firebaseApp.database().ref('Patients/' + user.uid).set({
+                            userName: userName,
+                            email: email,
+                            password: password,
+                            nextAppt: "05/18/18, 12:20 PM",
+                            nSuggestions: "Nutritionist suggestions pull here!",
+                        });
+                        navigate('NewPatient')
+                    }
+                }).catch(function(error){
+                    //Hendle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // [START_EXCLUDE]
+                    if (errorCode === 'auth/weak-password') {
+                        alert('The password is too weak.');
+                    } else {
+                        alert(errorMessage);
+                    }
+                    console.log(error);
+                    errorthrew = true;
             })
-            .then(function (user) {
-                if(userType === "Nutritionist")
-                {
-                    firebaseApp.database().ref('Nutritionists/' + user.uid).set({
-                        userName: userName,
-                        email: email,
-                        password: password
-                    });
-                    navigate('User')
-                }
-				else if(userType === "Clinician")
-                {
-                    firebaseApp.database().ref('Clinician/' + user.uid).set({
-                        userName: userName,
-                        email: email,
-                        password: password
-                    });
-                    navigate('User')
-                }
-                else if(userType === "Patient")
-                {
-                    //added this random num line to generate a random age for the patient since the patient info screen isn't fully implemented yet.
-                    //var Age = Math.floor((Math.random() * 99));
-                    firebaseApp.database().ref('Patients/' + user.uid).set({
-                        userName: userName,
-                        email: email,
-                        password: password,
-                        nextAppt: "05/18/18, 12:20 PM",
-                        nSuggestions: "Nutritionist suggestions pull here!",
-                    });
-                    navigate('NewPatient')
-                }
-                else
-                {
-                    alert('Please select a user type!')
-                }
-            });
+        }
     }
 
 	render() {

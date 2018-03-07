@@ -36,7 +36,16 @@ export default class PatientSignIn extends Component<{}> {
         }
         //Log in user if correct credentials are entered
         firebaseApp.auth().signInWithEmailAndPassword(email, password).then(function(user) {
-            navigate('PHome')
+            //checking to see if the patient entered in their info or not. This is to make sure the the info exists in the database, if not- then it will take the user to the new info screen.
+            var infoRef =  firebaseApp.database().ref('Patients/' + user.uid);
+            infoRef.child('/Pinfo').once('value', function (snapshot) {
+                if(snapshot.exists()) {
+                    navigate('PHome')
+                }else{
+                    alert('Missing some info from your account creation');
+                    navigate('NewPatient')
+                }
+            });
         }).catch(function (error) {
             var errorCode = error.code;
             var errorMessage = error.message;
