@@ -56,9 +56,6 @@ class GlucoseCircle extends Component {
         this.listenForItems(this.itemsRef);
     }
 
-    componentWillMount() {
-        this.listenForItems(this.itemsRef);
-    }
 
     componentWillUnmount(){
         this.itemsRef.off();

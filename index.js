@@ -9,6 +9,7 @@ import NutritionistSignIn from './screens/NutritionistSignIn';
 import createNewUser from './screens/createNewUser';
 import patientHome from './screens/patientHome';
 import glucoseInput from './screens/glucoseInput';
+import GlucoseEdit from './screens/GlucoseEdit';
 import patientMedication from './screens/patientMedication';
 import patientDiet from './screens/patientDiet';
 import SignOut from './screens/SignOut';
@@ -61,6 +62,7 @@ const AppNavigator = StackNavigator({
             })
         },
         GInput: {screen: glucoseInput},
+        GEdit: {screen: GlucoseEdit},
         MInput: {screen: medicationInput},
         NMInput: {screen: NmedicationInput},
         CMInput: {screen: CmedicationInput},

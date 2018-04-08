@@ -15,9 +15,7 @@ export default class patientHome extends React.Component {
     };
     constructor(props) {
         super(props);
-        console.ignoredYellowBox = [
-            'Setting a timer'
-        ];
+        console.disableYellowBox = true;
 
         var userID = firebaseApp.auth().currentUser.uid;
         this.myRef = firebaseApp.database().ref('Patients/' + userID);
