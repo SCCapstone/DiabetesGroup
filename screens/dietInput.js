@@ -134,20 +134,17 @@ export default class dietInput extends Component<{}> {
                                 mode="date"
                                 placeholder="Date"
                                 format="YYYY-MM-DD"
-                                minDate="2017-01-01"
+                                minDate="2018-01-01"
                                 maxDate="2050-01-01"
-                                confirmBtnText="Confirm"
-                                cancelBtnText="Cancel"
                                 showIcon={false}
                                 customStyles={{
                                     placeholderText:{
                                         color: '#000000',
                                         fontSize: 16,
                                     },
-                                    dateTouchBody: {
-                                        color: '#000000',
 
-                                    }}}
+
+                                }}
 
 
                                 onDateChange={(date) => {this.setState({date: date})}}
@@ -314,7 +311,7 @@ const styles = StyleSheet.create({
         width: '60%',
 
     },
-    title: {
+     title: {
         fontSize: 15,
         marginBottom: 10,
         paddingBottom: 5,
