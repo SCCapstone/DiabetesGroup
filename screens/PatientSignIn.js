@@ -7,16 +7,21 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
   Button,
   AppRegistry,
-    TextInput
+    TextInput,
+    KeyboardAvoidingView
 } from 'react-native';
 
 export default class PatientSignIn extends Component<{}> {
 
 	static navigationOptions = {
-	    title: 'Please input your login credentials',
-        headerStyle: {backgroundColor: "#FF6127"}
+	    title: 'Patient Login',
+        headerStyle: {backgroundColor: "#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerTintColor: "#FFFFFF",
+        headerRight: (<View />)
     };
 
     constructor(props){
@@ -72,13 +77,18 @@ export default class PatientSignIn extends Component<{}> {
     render() {
         const {navigate} = this.props.navigation;
         return (
+            <View style={{padding:0, paddingTop: 10, flex: 1, justifyContent: 'center', backgroundColor:'#FEFBEA'}}>
+            <Image
+                style={{width: 360, height: 100}}
+
+                source={{uri: 'https://i.imgur.com/H8jJNzu.png'}}
+            >
+            </Image>
+
             <View style={styles.container}>
                 <View style={styles.container}>
-                    <Text style={styles.title}>
-                        AahaRx{"\n"}For{"\n"}Diabetes{"\n"}Management
-                    </Text>
 
-                    <Text style={styles.login}>Patient Login</Text>
+                    <Text style={styles.login}>Please Input Your Login Credentials</Text>
 
                     <TextInput
                         placeholder={"Enter Email"}
@@ -110,6 +120,7 @@ export default class PatientSignIn extends Component<{}> {
 
                 </View>
             </View>
+                </View>
         );
     }
 }
@@ -117,8 +128,9 @@ export default class PatientSignIn extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F7F1D2',
-        padding: 20,
+        backgroundColor: '#FEFBEA',
+        padding: 5,
+        paddingTop: 1,
         justifyContent: 'center'
     },
     input: {
@@ -132,15 +144,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 30,
         textAlign: 'center',
-        alignSelf: 'stretch',
-        color: "#000000",
+        alignSelf: 'center',
+        color: "#FFFFFF",
     },
     login: {
         textAlign: 'center',
         alignSelf: 'stretch',
         fontWeight: 'bold',
         fontSize: 14,
-        color: "#000000",
+        color: "#112471",
+        paddingTop: 5
     }
 
 });
