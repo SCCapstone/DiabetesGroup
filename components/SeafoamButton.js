@@ -23,7 +23,7 @@ class SeafoamButton extends Component {
 
 const styles = StyleSheet.create({
     press: {
-        backgroundColor: '#1FC97C',
+        backgroundColor: '#112471',
         borderRadius: 12,
         borderColor: '#000000',
         overflow: 'hidden',
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 
     },
     pressText: {
-        color: '#000000',
+        color: '#FFFFFF',
         fontSize: 16,
         textAlign: 'center',
     },
