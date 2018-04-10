@@ -9,20 +9,13 @@ const GlucoseGraph = require('../components/GlucoseGraph');
 
 
 export default class patientHome extends React.Component {
-    static navigationOptions = {
-        title: 'Home Screen',
-        headerStyle: {backgroundColor: "#FF6127"}
-    };
     constructor(props) {
         super(props);
-        console.ignoredYellowBox = [
-            'Setting a timer'
-        ];
+        console.disableYellowBox = true;
 
         var userID = firebaseApp.auth().currentUser.uid;
         this.myRef = firebaseApp.database().ref('Patients/' + userID);
         this.state = {nextAppt: '', user: userID};
-
     }
 
     updateItems(myRef) {
@@ -50,7 +43,7 @@ export default class patientHome extends React.Component {
     render(){
         const {navigate} = this.props.navigation;
         var navigationView = (
-            <View style={{flex: 1, backgroundColor: '#F7F1D2'}}>
+            <View style={{flex: 1, backgroundColor: '#fefbea'}}>
                 <SeafoamButton title="My Home Screen"
                                onPress={() => navigate('PHome')}/>
                 <Text></Text>
@@ -138,20 +131,20 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fefbea',
     },
     container2:{
         flex:1,
         paddingBottom: 50,
         flexDirection: 'row',
         justifyContent:'space-around',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fefbea',
     },
     container3: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fefbea',
     },
     nText: {
         color: '#000000',
@@ -163,7 +156,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fefbea',
     },
     head: { height: 40, backgroundColor: 'orange' },
     text: { textAlign:'center', color:'black' },

@@ -9,6 +9,7 @@ import NutritionistSignIn from './screens/NutritionistSignIn';
 import createNewUser from './screens/createNewUser';
 import patientHome from './screens/patientHome';
 import glucoseInput from './screens/glucoseInput';
+import GlucoseEdit from './screens/GlucoseEdit';
 import patientMedication from './screens/patientMedication';
 import patientDiet from './screens/patientDiet';
 import SignOut from './screens/SignOut';
@@ -56,12 +57,15 @@ const AppNavigator = StackNavigator({
         PHome: {
             screen: patientHome,
             navigationOptions: ({navigation}) => ({
-                headerStyle: {backgroundColor: '#FF6127'},
+                headerStyle: {backgroundColor: '#112471'},
+                headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+                headerTintColor: "#FFFFFF",
                 title: 'Home Screen',
-                headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
+                headerLeft: <Text style={{color:'#FFFFFF'}} onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
             })
         },
         GInput: {screen: glucoseInput},
+        GEdit: {screen: GlucoseEdit},
         MInput: {screen: medicationInput},
         NMInput: {screen: NmedicationInput},
         CMInput: {screen: CmedicationInput},

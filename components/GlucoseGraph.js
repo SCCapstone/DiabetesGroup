@@ -38,10 +38,6 @@ class GlucoseGraph extends Component {
         this.listenForItems(this.itemsRef);
     }
 
-    componentWillMount() {
-        this.listenForItems(this.itemsRef);
-    }
-
     componentWillUnmount(){
         this.itemsRef.off();
     }
@@ -117,7 +113,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fefbea',
     },
 });
 
