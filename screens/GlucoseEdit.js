@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';
-import DatePicker from 'react-native-datepicker';
-import moment from "moment/moment";
 import {
     Platform,
     StyleSheet,
@@ -13,23 +11,32 @@ import {
     TextInput,
     ScrollView,
     Picker,
+    Alert,
 } from 'react-native';
 
 export default class GlucoseEdit extends Component<{}> {
 
     static navigationOptions = {
         title: 'Glucose Edit',
-        headerStyle: {backgroundColor: "#FF6127"}
+        headerStyle: {backgroundColor: "#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerTintColor: "#FFFFFF",
     };
 
     constructor(props) {
         super(props);
-        this.state = {time: '', glucoseLevel: '', readingType:'', notes:''};
+
+        //Getting data to pre fill text inputs and picker with the current data.
+        this.key = props.navigation.state.params.gKey;
+        var note = props.navigation.state.params.gNotes;
+        var OGdata = props.navigation.state.params.gData;
+        var level = OGdata.splice(0, 1).toString();
+        var rType = OGdata.splice(0, 1).toString();
+
+        this.state = {time: '', glucoseLevel: level, readingType: rType, notes: note};
     }
 
-
     _patientValues() {
-        var time = moment().format("MM/DD/YYYY, LT");
         var glucoseLevel = this.state.glucoseLevel;
         var readingType = this.state.readingType;
         var notes = this.state.notes;
@@ -44,17 +51,34 @@ export default class GlucoseEdit extends Component<{}> {
             alert('Please select a valid reading type.');
         }else
         {
-            firebaseApp.database().ref('Patients/' + user.uid + '/logs/').push({
-                time: time,
+            firebaseApp.database().ref('Patients/' + user.uid + '/logs/' + this.key).update({
                 glucoseLevel: glucoseLevel,
                 readingType: readingType,
                 notes: notes,
-            });
-            const {navigate} = this.props.navigation;
-            navigate('PHome')
+            }, this.onComplete());
         }
     }
 
+    onComplete() {
+        this.props.navigation.goBack();
+    }
+
+    _deleteButtonEvent() {
+        Alert.alert(
+            'Log Deletion',
+            'Are you sure you want to delete this glucose log?',
+            [
+                {text: 'Cancel'},
+                {text: 'Yes', onPress: () => this.deleteLog()},
+            ]
+        )
+    }
+
+    deleteLog() {
+        var userID = firebaseApp.auth().currentUser.uid;
+        var ref = firebaseApp.database().ref('Patients/' + userID + '/logs/' + this.key);
+        ref.remove(this.onComplete());
+    }
 
     render() {
         return (
@@ -65,7 +89,8 @@ export default class GlucoseEdit extends Component<{}> {
                         Enter the following fields:
                     </Text>
 
-                    <TextInput style={styles.input} placeholder="Glucose Level"
+                    <TextInput style={styles.input}
+                               placeholder= {this.state.glucoseLevel}
                                underlineColorAndroid ={'transparent'}
                                placeholderTextColor="#CFCFCF"
                                onChangeText={(text) => this.setState({glucoseLevel: text})}
@@ -84,7 +109,8 @@ export default class GlucoseEdit extends Component<{}> {
                         <Picker.Item label="Other" value="Other" />
                     </Picker>
 
-                    <TextInput style={styles.input} placeholder="Additional Notes"
+                    <TextInput style={styles.input}
+                               placeholder= {this.state.notes === '' ? 'Additional Notes' : this.state.notes}
                                underlineColorAndroid ={'transparent'}
                                placeholderTextColor="#CFCFCF"
                                onChangeText={(text) => this.setState({notes: text})}
@@ -94,8 +120,14 @@ export default class GlucoseEdit extends Component<{}> {
 
 
                 </View>
-                <SeafoamButton title="Submit"
-                               onPress = { () => this._patientValues()}
+
+                <SeafoamButton title="Update"
+                    onPress = { () => this._patientValues()}
+                />
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton style={{marginTop: 40}} title="Delete"
+                    onPress = { () => this._deleteButtonEvent()}
                 />
 
             </View>
@@ -106,22 +138,16 @@ export default class GlucoseEdit extends Component<{}> {
 
 const styles = StyleSheet.create({
     container: {
-    flex: 1,
+        flex: 1,
         justifyContent: 'center',
         paddingLeft: 55,
         paddingRight: 55,
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fefbea',
     },
     line:{
         flex:1,
         flexDirection: 'row',
         justifyContent: 'center',
-    },
-
-    container2: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
     },
     stretched: {
         alignSelf: 'stretch',

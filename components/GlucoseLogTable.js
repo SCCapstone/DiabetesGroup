@@ -3,15 +3,13 @@ import React, { Component } from 'react';
 import {Alert, View,  StyleSheet, TouchableOpacity, Text} from 'react-native';
 import {Table, TableWrapper, Row, Rows, Col, Cols, Cell} from 'react-native-table-component';
 import firebaseApp from "../screens/FireBaseApp";
-const EditButton = require('../components/EditButton');
+import { withNavigation } from 'react-navigation';
 
 class GlucoseLogTable extends Component {
     static navigationOptions = {
         title: 'Home Screen',
-        headerStyle: {backgroundColor: "#FF6127"}
+        headerStyle: {backgroundColor: "#112471"}
     };
-
-    isPatient;
 
     constructor(props) {
         super(props);
@@ -28,27 +26,34 @@ class GlucoseLogTable extends Component {
             userID = this.props.user;
         }
         this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/logs/');
-        this.state = { logs: [], glucoseLevel: '', readingType: '', time: '',};
+
+        this.state = { logs: [], glucoseLevel: '', readingType: '', time: '', notes: []}
+
     }
 
     listenForItems(itemsRef) {
-        itemsRef.on('value', (snap) => {
+       itemsRef.on('value', (snap) => {
+
             var items = [];
+            var gNotes = [];
             snap.forEach((child) => {
+                var key = child.key;
                 this.isPatient === true ?
                 items.push(
                     [child.val().glucoseLevel,
                         child.val().readingType,
                         child.val().time,
-                        'index4',
+                        key,
                     ]) :
-                    items.push(
-                        [child.val().glucoseLevel,
-                            child.val().readingType,
-                            child.val().time,
+                items.push(
+                    [child.val().glucoseLevel,
+                        child.val().readingType,
+                        child.val().time,
                     ])
+
+                gNotes.push(child.val().notes)
             });
-            this.setState({logs: items});
+            this.setState({logs: items, notes: gNotes});
         });
     }
 
@@ -64,15 +69,20 @@ class GlucoseLogTable extends Component {
 
 
     render() {
-        //const {navigate} = this.props.navigation;
+        const {navigate} = this.props.navigation;
+
         const tableHead = this.isPatient === true ? ['Glucose Level (mg/dL)', 'Type', 'Time Recorded', 'Edit'] : ['Glucose Level (mg/dL)', 'Type', 'Time Recorded'];
-        const gBut = (data, index) => (
-            <TouchableOpacity onPress={() => alert('WHAT IS UP YO')}>
+
+        const gBut = (key, data, index) => (
+            <TouchableOpacity
+                onPress={() => navigate('GEdit', {gKey: key, gData: data, gNotes: this.state.notes[index]})}>
+
                 <View style={styles.btn}>
                     <Text style={styles.btnText}>Edit</Text>
                 </View>
             </TouchableOpacity>
         );
+
         return (
             <View>
                 <Table borderStyle={{borderColor: 'transparent'}}>
@@ -81,10 +91,10 @@ class GlucoseLogTable extends Component {
 
                     {
                         this.state.logs.map((rowData, index) => (
-                            <TableWrapper key={index} style={[styles.row, index%2 > 0 && {backgroundColor: 'orange'}, index%2 === 0 && {backgroundColor: 'white'}]}>
+                            <TableWrapper key={index} style={[styles.row, index%2 > 0 && {backgroundColor: '#bcf7ff'}, index%2 === 0 && {backgroundColor: 'white'}]}>
                                 {
                                     rowData.map((cellData, cellIndex) => (
-                                        <Cell key={cellIndex} data={this.isPatient === false ? cellData : (cellIndex === 3 ? gBut(cellData, index) : cellData)} textStyle={this.isPatient === false ? styles.text : (cellIndex === 2 ? styles.date : styles.text)}/>
+                                        <Cell key={cellIndex} data={this.isPatient === false ? cellData : (cellIndex === 3 ? gBut(cellData, rowData, index) : cellData)} textStyle={this.isPatient === false ? styles.text : (cellIndex === 2 ? styles.date : styles.text)}/>
                                     ))
                                 }
                             </TableWrapper>
@@ -98,9 +108,8 @@ class GlucoseLogTable extends Component {
     }
 }
 
-
 const styles = StyleSheet.create({
-    head: { height: 40, backgroundColor: 'orange' },
+    head: { height: 40, backgroundColor: '#bcf7ff' },
     text: { textAlign:'center', color:'black' },
     date: { textAlign:'center', color:'black', fontSize: 12},
     row: { height: 35, flexDirection: 'row',},
@@ -109,12 +118,12 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fefbea',
     },
     btn: {
         width: 70,
         height: 20,
-        backgroundColor: '#1bcc39',
+        backgroundColor: '#112471',
         borderRadius: 2,
         alignContent: 'center',
         marginLeft: 17,
@@ -124,4 +133,4 @@ const styles = StyleSheet.create({
         color: '#fff'
     }
 });
-module.exports = GlucoseLogTable;
+module.exports = withNavigation(GlucoseLogTable);

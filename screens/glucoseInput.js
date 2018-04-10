@@ -19,7 +19,9 @@ export default class glucoseInput extends Component<{}> {
 
     static navigationOptions = {
         title: 'Glucose Input',
-        headerStyle: {backgroundColor: "#FF6127"}
+        headerStyle: {backgroundColor:"#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerTintColor: "#FFFFFF",
     };
 
     constructor(props) {
@@ -50,8 +52,7 @@ export default class glucoseInput extends Component<{}> {
                 readingType: readingType,
                 notes: notes,
             });
-            const {navigate} = this.props.navigation;
-            navigate('PHome')
+            this.props.navigation.goBack();
         }
     }
 
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: 55,
         paddingRight: 55,
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fefbea',
     },
 
     container2: {

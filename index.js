@@ -56,9 +56,11 @@ const AppNavigator = StackNavigator({
         PHome: {
             screen: patientHome,
             navigationOptions: ({navigation}) => ({
-                headerStyle: {backgroundColor: '#FF6127'},
+                headerStyle: {backgroundColor: '#112471'},
+                headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+                headerTintColor: "#FFFFFF",
                 title: 'Home Screen',
-                headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
+                headerLeft: <Text style={{color:'#FFFFFF'}} onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
             })
         },
         GInput: {screen: glucoseInput},
