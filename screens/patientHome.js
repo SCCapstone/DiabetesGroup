@@ -25,12 +25,19 @@ export default class patientHome extends React.Component {
         });
     }
 
+    //Commented lines below along with function handleBackButton are used to disable the hardware back button
     componentDidMount() {
         this.updateItems(this.myRef);
+        //BackHandler.addEventListener('backPress', this.handleBackButton);
     }
 
     componentWillUnmount(){
         this.myRef.off();
+        //BackHandler.removeEventListener('backPress', this.handleBackButton);
+    }
+
+    handleBackButton(){
+        return true;
     }
 
     render(){
