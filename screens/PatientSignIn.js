@@ -77,7 +77,7 @@ export default class PatientSignIn extends Component<{}> {
     render() {
         const {navigate} = this.props.navigation;
         return (
-            <View style={{padding:0, paddingTop: 10, flex: 1, justifyContent: 'center', backgroundColor:'#FEFBEA'}}>
+            <View style={{padding:0, paddingTop: 10, flex: 1, justifyContent: 'center', backgroundColor:'#fffcf6'}}>
             <Image
                 style={{width: 360, height: 100}}
 
@@ -128,14 +128,14 @@ export default class PatientSignIn extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FEFBEA',
+        backgroundColor: '#fffcf6',
         padding: 5,
         paddingTop: 1,
         justifyContent: 'center'
     },
     input: {
         fontSize: 16,
-        backgroundColor: '#FEFDF5',
+        backgroundColor: '#ffffff',
         marginBottom: 20,
         borderWidth: 1,
     },

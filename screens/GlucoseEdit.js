@@ -93,6 +93,7 @@ export default class GlucoseEdit extends Component<{}> {
                                placeholder= {this.state.glucoseLevel}
                                underlineColorAndroid ={'transparent'}
                                placeholderTextColor="#CFCFCF"
+                               keyboardType = 'numeric'
                                onChangeText={(text) => this.setState({glucoseLevel: text})}
                                value={this.state.glucoseLevel}
                     />
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: 55,
         paddingRight: 55,
-        backgroundColor: '#fefbea',
+        backgroundColor: '#fffcf6',
     },
     line:{
         flex:1,
@@ -161,7 +162,7 @@ const styles = StyleSheet.create({
     },
     input:{
         fontSize: 16,
-        backgroundColor: '#FEFDF5',
+        backgroundColor: '#ffffff',
         marginBottom: 20,
         borderWidth: 1,
 
