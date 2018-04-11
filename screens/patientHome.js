@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, BackHandler, StyleSheet, ScrollView, FlatList, DrawerLayoutAndroid} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, DrawerLayoutAndroid, TouchableHighlight} from 'react-native';
 import firebaseApp from './FireBaseApp';
 const SeafoamButton = require('../components/SeafoamButton');
 const GlucoseCircle = require('../components/GlucoseCircle');
@@ -25,19 +25,12 @@ export default class patientHome extends React.Component {
         });
     }
 
-    //Commented lines below along with function handleBackButton are used to disable the hardware back button
     componentDidMount() {
         this.updateItems(this.myRef);
-        //BackHandler.addEventListener('backPress', this.handleBackButton);
     }
 
     componentWillUnmount(){
         this.myRef.off();
-        //BackHandler.removeEventListener('backPress', this.handleBackButton);
-    }
-
-    handleBackButton(){
-        return true;
     }
 
     render(){
@@ -74,9 +67,18 @@ export default class patientHome extends React.Component {
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
                 renderNavigationView={() => navigationView}>
             <ScrollView>
-                <View style={styles.container3}>
-                    <MessengerButton
-                        onPress={() => navigate('PHome')}/>
+                <View style={styles.topContainer}>
+                    <View style={styles.helpView}>
+                        <TouchableHighlight
+                            onPress={() => navigate('HHelp')}>
+                            <Text style={styles.helpText}>Need Help?</Text>
+                        </TouchableHighlight>
+                    </View>
+
+                    <View style={styles.messageView}>
+                        <MessengerButton
+                            onPress={() => navigate('PHome')}/>
+                    </View>
                 </View>
 
                 <View style={styles.container}>
@@ -131,20 +133,35 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fefbea',
+        backgroundColor: '#fffcf6',
     },
     container2:{
         flex:1,
         paddingBottom: 50,
         flexDirection: 'row',
         justifyContent:'space-around',
-        backgroundColor: '#fefbea',
+        backgroundColor: '#fffcf6',
     },
-    container3: {
+    topContainer: {
         flex: 1,
         flexDirection: 'row',
+        backgroundColor: '#fffcf6',
+    },
+    messageView: {
+        flex: 1,
+        marginRight: 5,
+        marginTop: 3,
+        flexDirection: 'row',
         justifyContent: 'flex-end',
-        backgroundColor: '#fefbea',
+        backgroundColor: '#fffcf6',
+    },
+    helpView: {
+        flex: 1,
+        marginLeft: 5,
+        marginTop: 3,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        backgroundColor: '#fffcf6',
     },
     nText: {
         color: '#000000',
@@ -156,7 +173,13 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        backgroundColor: '#fefbea',
+        backgroundColor: '#fffcf6',
+    },
+    helpText: {
+        textAlign:'center',
+        color:'#0000EE',
+        textDecorationLine: 'underline',
+        fontSize: 16
     },
     head: { height: 40, backgroundColor: 'orange' },
     text: { textAlign:'center', color:'black' },

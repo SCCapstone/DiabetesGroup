@@ -71,7 +71,7 @@ class GlucoseLogTable extends Component {
     render() {
         const {navigate} = this.props.navigation;
 
-        const tableHead = this.isPatient === true ? ['Glucose Level (mg/dL)', 'Type', 'Time Recorded', 'Edit'] : ['Glucose Level (mg/dL)', 'Type', 'Time Recorded'];
+        const tableHead = this.isPatient === true ? ['Glucose Level (mg/dL)', 'Type', 'Time Recorded', 'Edit/Delete'] : ['Glucose Level (mg/dL)', 'Type', 'Time Recorded'];
 
         const gBut = (key, data, index) => (
             <TouchableOpacity
@@ -87,7 +87,7 @@ class GlucoseLogTable extends Component {
             <View>
                 <Table borderStyle={{borderColor: 'transparent'}}>
 
-                    <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
+                    <Row data={tableHead} style={styles.head} textStyle={styles.headText}/>
 
                     {
                         this.state.logs.map((rowData, index) => (
@@ -109,10 +109,11 @@ class GlucoseLogTable extends Component {
 }
 
 const styles = StyleSheet.create({
-    head: { height: 40, backgroundColor: '#bcf7ff' },
+    head: { height: 40, backgroundColor: '#bcf7ff'},
+    headText: { textAlign:'center', color:'black', fontWeight: 'bold'},
     text: { textAlign:'center', color:'black' },
     date: { textAlign:'center', color:'black', fontSize: 12},
-    row: { height: 35, flexDirection: 'row',},
+    row: { height: 35, flexDirection: 'row', justifyContent: 'center'},
     container: {
         flex: 1,
         flexDirection: 'column',
@@ -122,11 +123,12 @@ const styles = StyleSheet.create({
     },
     btn: {
         width: 70,
-        height: 20,
+        height: 27,
+        marginLeft: 10,
         backgroundColor: '#112471',
         borderRadius: 2,
         alignContent: 'center',
-        marginLeft: 17,
+        justifyContent: 'center',
     },
     btnText: {
         textAlign: 'center',
