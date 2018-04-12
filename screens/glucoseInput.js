@@ -26,7 +26,8 @@ export default class glucoseInput extends Component<{}> {
 
     constructor(props) {
         super(props);
-        this.state = {time: '', glucoseLevel: '', readingType:'', notes:''};
+        this.isInputValid = false;
+        this.state = {time: '', glucoseLevel: '', readingType:'', notes:'',};
     }
 
 
@@ -56,6 +57,21 @@ export default class glucoseInput extends Component<{}> {
         }
     }
 
+    checkNumberInput(text) {
+        var newText = '';
+        var numbers = '0123456789';
+        if(text.length < 1){
+            this.setState({ glucoseLevel: '' });
+        }
+        for (var i=0; i < text.length; i++) {
+            if(numbers.indexOf(text[i]) > -1 ) {
+                newText = newText + text[i];
+            }else {
+                alert('Please only enter in numbers')
+            }
+            this.setState({ glucoseLevel: newText });
+        }
+    }
 
     render() {
         return (
@@ -70,7 +86,8 @@ export default class glucoseInput extends Component<{}> {
                                    underlineColorAndroid ={'transparent'}
                                    placeholderTextColor="#CFCFCF"
                                    keyboardType = 'numeric'
-                                   onChangeText={(text) => this.setState({glucoseLevel: text})}
+                                   onChangeText={(text) => this.checkNumberInput(text)}
+                                   maxLength={3}
                                    value={this.state.glucoseLevel}
                         />
                         <Text style={styles.instructions}>

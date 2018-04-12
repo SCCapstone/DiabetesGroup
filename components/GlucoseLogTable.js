@@ -1,9 +1,11 @@
 
 import React, { Component } from 'react';
-import {Alert, View,  StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {Alert, View,  StyleSheet, TouchableOpacity, Text, TouchableHighlight} from 'react-native';
 import {Table, TableWrapper, Row, Rows, Col, Cols, Cell} from 'react-native-table-component';
+import {SwipeListView, SwipeRow} from 'react-native-swipe-list-view';
 import firebaseApp from "../screens/FireBaseApp";
 import { withNavigation } from 'react-navigation';
+
 
 class GlucoseLogTable extends Component {
     static navigationOptions = {
@@ -27,33 +29,27 @@ class GlucoseLogTable extends Component {
         }
         this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/logs/');
 
-        this.state = { logs: [], glucoseLevel: '', readingType: '', time: '', notes: []}
+        this.state = { logs: [], glucoseLevel: '', readingType: '', time: ''}
 
     }
 
     listenForItems(itemsRef) {
-       itemsRef.on('value', (snap) => {
+        itemsRef.on('value', (snap) => {
 
             var items = [];
-            var gNotes = [];
+            var i = 0;
             snap.forEach((child) => {
                 var key = child.key;
-                this.isPatient === true ?
-                items.push(
-                    [child.val().glucoseLevel,
-                        child.val().readingType,
-                        child.val().time,
-                        key,
-                    ]) :
-                items.push(
-                    [child.val().glucoseLevel,
-                        child.val().readingType,
-                        child.val().time,
-                    ])
-
-                gNotes.push(child.val().notes)
+                items.push({
+                    gLevel: child.val().glucoseLevel,
+                    rType: child.val().readingType,
+                    lDate: child.val().time,
+                    lKey: key,
+                    note: child.val().notes,
+                    count: i++,
+                });
             });
-            this.setState({logs: items, notes: gNotes});
+            this.setState({logs: items});
         });
     }
 
@@ -65,74 +61,142 @@ class GlucoseLogTable extends Component {
         this.itemsRef.off();
     }
 
+    onRowDidOpen = (item, rowMap) => {
+        console.log('This row opened', item);
+        setTimeout(() => {
+            this.closeRow(rowMap, item);
+        }, 2000);
+    };
+
+    closeRow(rowMap, item) {
+        if (rowMap[item]) {
+            rowMap[item].closeRow();
+        }
+    }
+
+    editLevels(key, gLevel, rType, note) {
+        const {navigate} = this.props.navigation;
+        navigate('GEdit', {gKey: key, gLevel: gLevel, rType: rType, gNotes: note})
+    }
+
+    deleteEvent(key) {
+        Alert.alert(
+            'Log Deletion',
+            'Are you sure you want to delete this glucose log?',
+            [
+                {text: 'Cancel'},
+                {text: 'Yes', onPress: () => this.deleteLog(key)},
+            ]
+        )
+    }
+
+    deleteLog(key) {
+        var userID = firebaseApp.auth().currentUser.uid;
+        var ref = firebaseApp.database().ref('Patients/' + userID + '/logs/' + key);
+        ref.remove();
+    }
+
     keyExtractor = (item) => item.id;
 
-
     render() {
-        const {navigate} = this.props.navigation;
-
-        const tableHead = this.isPatient === true ? ['Glucose Level (mg/dL)', 'Type', 'Time Recorded', 'Edit/Delete'] : ['Glucose Level (mg/dL)', 'Type', 'Time Recorded'];
-
-        const gBut = (key, data, index) => (
-            <TouchableOpacity
-                onPress={() => navigate('GEdit', {gKey: key, gData: data, gNotes: this.state.notes[index]})}>
-
-                <View style={styles.btn}>
-                    <Text style={styles.btnText}>Edit</Text>
-                </View>
-            </TouchableOpacity>
-        );
+        const tableHead = ['Glucose Level (mg/dL)', 'Type', 'Time Recorded'];
 
         return (
             <View>
                 <Table borderStyle={{borderColor: 'transparent'}}>
-
-                    <Row data={tableHead} style={styles.head} textStyle={styles.headText}/>
-
-                    {
-                        this.state.logs.map((rowData, index) => (
-                            <TableWrapper key={index} style={[styles.row, index%2 > 0 && {backgroundColor: '#bcf7ff'}, index%2 === 0 && {backgroundColor: 'white'}]}>
-                                {
-                                    rowData.map((cellData, cellIndex) => (
-                                        <Cell key={cellIndex} data={this.isPatient === false ? cellData : (cellIndex === 3 ? gBut(cellData, rowData, index) : cellData)} textStyle={this.isPatient === false ? styles.text : (cellIndex === 2 ? styles.date : styles.text)}/>
-                                    ))
-                                }
-                            </TableWrapper>
-                        ))
-                    }
-
+                    <Row data={tableHead} style={[styles.row, {backgroundColor: '#BCF7FF'}]} textStyle={styles.headText}/>
                 </Table>
+                <SwipeListView
+                   style={styles.backGrnd}
+                   useFlatList={true}
+                   data={this.state.logs}
+                   keyExtractor = {this.keyExtractor}
+                   disableRightSwipe={(this.isPatient == true) ? false : true}
+                   disableLeftSwipe={(this.isPatient == true) ? false : true}
+                   renderItem ={({item}) =>
+                       <TouchableHighlight>
+                           <Table borderStyle={{borderColor: 'transparent'}}>
+                               <Row data={[item.gLevel, item.rType, item.lDate,]} style={[styles.row, item.count%2 > 0 && {backgroundColor: '#bcf7ff'}, item.count%2 === 0 && {backgroundColor: 'white'}]} textStyle={styles.text}/>
+                           </Table>
+                       </TouchableHighlight>
+                   }
+                   renderHiddenItem={ ({item}, {rowMap}) => (
+                       <View style={[styles.rowBack, item.count%2 > 0 && {backgroundColor: '#bcf7ff'}, item.count%2 === 0 && {backgroundColor: 'white'}]}>
+                           <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ () => this.deleteEvent(item.lKey) }>
+                               <Text style={styles.backTextWhite}>Delete</Text>
+                           </TouchableOpacity>
 
+                           <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ () => this.editLevels(item.lKey, item.gLevel, item.rType, item.note)}>
+                               <Text style={styles.backTextWhite}>Edit</Text>
+                           </TouchableOpacity>
+                       </View>
+                   )}
+                   leftOpenValue={75}
+                   rightOpenValue={-75}
+                   onRowDidOpen={this.onRowDidOpen}
+                />
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    head: { height: 40, backgroundColor: '#bcf7ff'},
     headText: { textAlign:'center', color:'black', fontWeight: 'bold'},
     text: { textAlign:'center', color:'black' },
-    date: { textAlign:'center', color:'black', fontSize: 12},
-    row: { height: 35, flexDirection: 'row', justifyContent: 'center'},
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
+    row: {
+        marginLeft: -0.5,
+        height: 45,
+        borderTopColor: '#6c6c6c',
+        borderTopWidth: 0.75,
+    },
+    backTextWhite: {
+        color: '#ffffff',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    rowText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        justifyContent: 'space-between',
+        color: 'black',
+    },
+    rowFront: {
+        justifyContent: 'space-between',
+        backgroundColor: '#f7f1d2',
+        paddingTop: 20,
+        height: 60,
+    },
+    backLeftBtn: {
         alignItems: 'center',
-        backgroundColor: '#fefbea',
-    },
-    btn: {
-        width: 70,
-        height: 27,
-        marginLeft: 10,
-        backgroundColor: '#112471',
-        borderRadius: 2,
-        alignContent: 'center',
+        bottom: 0.72,
         justifyContent: 'center',
+        position: 'absolute',
+        top: 0.72,
+        width: 75
     },
-    btnText: {
-        textAlign: 'center',
-        color: '#fff'
-    }
+    backLeftBtnLeft: {
+        backgroundColor: 'red',
+    },
+    rowBack: {
+        alignItems: 'center',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    backRightBtn: {
+        alignItems: 'center',
+        bottom: 0.72,
+        justifyContent: 'center',
+        position: 'absolute',
+        top: 0.72,
+        width: 75
+    },
+    backRightBtnRight: {
+        backgroundColor: '#112471',
+        right: 0
+    },
+    backGrnd: {
+        backgroundColor: 'white'
+    },
 });
 module.exports = withNavigation(GlucoseLogTable);
