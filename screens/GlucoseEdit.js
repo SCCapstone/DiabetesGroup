@@ -29,9 +29,8 @@ export default class GlucoseEdit extends Component<{}> {
         //Getting data to pre fill text inputs and picker with the current data.
         this.key = props.navigation.state.params.gKey;
         var note = props.navigation.state.params.gNotes;
-        var OGdata = props.navigation.state.params.gData;
-        var level = OGdata.splice(0, 1).toString();
-        var rType = OGdata.splice(0, 1).toString();
+        var level = props.navigation.state.params.gLevel;
+        var rType = props.navigation.state.params.rType;
 
         this.state = {time: '', glucoseLevel: level, readingType: rType, notes: note};
     }
@@ -63,21 +62,20 @@ export default class GlucoseEdit extends Component<{}> {
         this.props.navigation.goBack();
     }
 
-    _deleteButtonEvent() {
-        Alert.alert(
-            'Log Deletion',
-            'Are you sure you want to delete this glucose log?',
-            [
-                {text: 'Cancel'},
-                {text: 'Yes', onPress: () => this.deleteLog()},
-            ]
-        )
-    }
-
-    deleteLog() {
-        var userID = firebaseApp.auth().currentUser.uid;
-        var ref = firebaseApp.database().ref('Patients/' + userID + '/logs/' + this.key);
-        ref.remove(this.onComplete());
+    checkNumberInput(text) {
+        var newText = '';
+        var numbers = '0123456789';
+        if(text.length < 1){
+            this.setState({ glucoseLevel: '' });
+        }
+        for (var i=0; i < text.length; i++) {
+            if(numbers.indexOf(text[i]) > -1 ) {
+                newText = newText + text[i];
+            }else {
+                alert('Please only enter in numbers')
+            }
+            this.setState({ glucoseLevel: newText });
+        }
     }
 
     render() {
@@ -94,7 +92,8 @@ export default class GlucoseEdit extends Component<{}> {
                                underlineColorAndroid ={'transparent'}
                                placeholderTextColor="#CFCFCF"
                                keyboardType = 'numeric'
-                               onChangeText={(text) => this.setState({glucoseLevel: text})}
+                               onChangeText={(text) => this.checkNumberInput(text)}
+                               maxLength={3}
                                value={this.state.glucoseLevel}
                     />
                     <Text style={styles.instructions}>
@@ -124,11 +123,6 @@ export default class GlucoseEdit extends Component<{}> {
 
                 <SeafoamButton title="Update"
                     onPress = { () => this._patientValues()}
-                />
-                <Text></Text>
-                <Text></Text>
-                <SeafoamButton style={{marginTop: 40}} title="Delete"
-                    onPress = { () => this._deleteButtonEvent()}
                 />
 
             </View>
