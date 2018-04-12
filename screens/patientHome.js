@@ -67,11 +67,10 @@ export default class patientHome extends React.Component {
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
                 renderNavigationView={() => navigationView}>
             <ScrollView>
-<<<<<<< HEAD
-                <View style={styles.container3}>
+                <View style={styles.messageView}>
                     <MessengerButton
                         onPress={() => navigate('PMess')}/>
-=======
+				</View>
                 <View style={styles.topContainer}>
                     <View style={styles.helpView}>
                         <TouchableHighlight
@@ -79,12 +78,6 @@ export default class patientHome extends React.Component {
                             <Text style={styles.helpText}>Need Help?</Text>
                         </TouchableHighlight>
                     </View>
-
-                    <View style={styles.messageView}>
-                        <MessengerButton
-                            onPress={() => navigate('PHome')}/>
-                    </View>
->>>>>>> master
                 </View>
 
                 <View style={styles.container}>
