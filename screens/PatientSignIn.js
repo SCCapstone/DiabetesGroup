@@ -81,7 +81,7 @@ export default class PatientSignIn extends Component<{}> {
             <Image
                 style={{width: 360, height: 100}}
 
-                source={{uri: 'https://i.imgur.com/H8jJNzu.png'}}
+                source = {require('../components/homeLogo.png')}
             >
             </Image>
 
