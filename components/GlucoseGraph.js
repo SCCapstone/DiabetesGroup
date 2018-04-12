@@ -28,17 +28,14 @@ class GlucoseGraph extends Component {
                 lDates.push(child.val().time);
                 lLogs.push(parseInt(child.val().glucoseLevel));
             });
-            this.setState({dates: lDates, glogs: lLogs});
-            var items = this.averageDates();
-            this.setState({logs: items});
+            this.setState({dates: lDates, glogs: lLogs}, () => {
+                var items = this.averageDates();
+                this.setState({logs: items});
+            });
         });
     }
 
     componentDidMount() {
-        this.listenForItems(this.itemsRef);
-    }
-
-    componentWillMount() {
         this.listenForItems(this.itemsRef);
     }
 
@@ -87,6 +84,7 @@ class GlucoseGraph extends Component {
     };
 
     render() {
+        console.log(this.state.logs);
         return (
             this.state.logs.length < 2 ? null : <VictoryChart
                 scale={{ x: 'time'}}
@@ -117,7 +115,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
 });
 

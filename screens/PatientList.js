@@ -59,6 +59,17 @@ export default class PatientList extends React.Component {
         }, 2000);
     };
 
+    _pDataCheck(item) {
+        const {navigate} = this.props.navigation;
+        this.itemsRef.child('/Pinfo').once('value', function (snapshot) {
+            if(snapshot.exists()) {
+                alert("Patient hasn't finished account creation. Once they complete account initialization you can view their info.")
+            }else{
+                navigate("NPHome", {ID: item.id});
+            }
+        });
+    }
+
     render() {
         const {navigate} = this.props.navigation;
         var navigationView = (
@@ -91,7 +102,7 @@ export default class PatientList extends React.Component {
                 keyExtractor = {this.keyExtractor}
                 renderItem ={({item}) =>
                     <TouchableHighlight
-						onPress = {() => navigate("NPHome", {ID: item.id})}
+						onPress = {() => this._pDataCheck(item)}
                         style={styles.rowFront}
                         underlayColor={'#AAA'}
                     >
@@ -104,6 +115,7 @@ export default class PatientList extends React.Component {
                         <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ () => navigate("NMess", {ID: item.id})}>
                             <Text style={styles.backTextWhite}>Messenger</Text>
                         </TouchableOpacity>
+
                         <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ _ => this.deleteRow(rowMap, item.id) }>
                             <Text style={styles.backTextWhite}>Delete</Text>
                         </TouchableOpacity>

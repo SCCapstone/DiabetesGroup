@@ -173,6 +173,10 @@ export default class ClinicianPDiet extends Component<{}> {
                                onPress={() => navigate('Setting')}/>
                 <Text></Text>
                 <Text></Text>
+                <SeafoamButton title="Diet Help"
+                               onPress={() => navigate('DHelp')}/>
+                <Text></Text>
+                <Text></Text>
                 <Text></Text>
                 <Text></Text>
                 <Text></Text>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
+const DietPicker = require('../components/DietPicker');
 import firebaseApp from './FireBaseApp';
 import DatePicker from 'react-native-datepicker'
 import {
@@ -9,9 +10,34 @@ import {
     View,
     Button,
     AppRegistry,
+    Picker,
     TextInput,
     ScrollView,
 } from 'react-native';
+
+const pickerValues = [
+    {label: "0", value: "0"},
+    {label: "1", value: "1"},
+    {label: "2", value: "2"},
+    {label: "3", value: "3"},
+    {label: "4", value: "4"},
+    {label: "5", value: "5"},
+    {label: "6", value: "6"},
+    {label: "7", value: "7"},
+    {label: "8", value: "8"},
+    {label: "9", value: "9"},
+    {label: "10", value: "10"},
+    {label: "11", value: "11"},
+    {label: "12", value: "12"},
+    {label: "13", value: "13"},
+    {label: "14", value: "14"},
+    {label: "15", value: "15"},
+    {label: "16", value: "16"},
+    {label: "17", value: "17"},
+    {label: "18", value: "18"},
+    {label: "19", value: "19"},
+    {label: "20", value: "20"},
+];
 
 
 export default class dietInput extends Component<{}> {
@@ -84,6 +110,7 @@ export default class dietInput extends Component<{}> {
 
 
     render() {
+        const readingType = this.state.readingType;
         const {navigate} = this.props.navigation;
         return (
             <ScrollView>
@@ -107,20 +134,17 @@ export default class dietInput extends Component<{}> {
                                 mode="date"
                                 placeholder="Date"
                                 format="YYYY-MM-DD"
-                                minDate="2010-01-01"
+                                minDate="2018-01-01"
                                 maxDate="2050-01-01"
-                                confirmBtnText="Confirm"
-                                cancelBtnText="Cancel"
                                 showIcon={false}
                                 customStyles={{
                                     placeholderText:{
                                         color: '#000000',
                                         fontSize: 16,
                                     },
-                                    dateTouchBody: {
-                                        color: '#000000',
 
-                                    }}}
+
+                                }}
 
 
                                 onDateChange={(date) => {this.setState({date: date})}}
@@ -130,92 +154,117 @@ export default class dietInput extends Component<{}> {
 
                         <Text/>
 
+                        <View style={styles.container3}>
+                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                <View style={{flex:.5}}>
+                                    <Text> Fruits: </Text>
+                                </View>
+                                <View style={{flex:.5}}>
+                                    <DietPicker
+                                        items={pickerValues}
+                                        value={this.state.fruits}
+                                        onValueChange={(itemValue, itemIndex) =>
+                                            this.setState({ fruits: itemValue })}/>
+                                </View>
+                            </View>
 
-                        <View style={styles.line}>
-                            <Text> Fruits: </Text>
-                            <TextInput type="number" keyboardType={"numeric"} style={styles.input} placeholder="0"
-                                       underlineColorAndroid ={'transparent'}
-                                       placeholderTextColor="#000000"
-                                       onChangeText={(text) => this.setState({fruits: text})}
-                                       value={this.state.fruits}
-                            />
+                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                <View style={{flex:.5}}>
+                                    <Text> Vegetables: </Text>
+                                </View>
+                                <View style={{flex:.5}}>
+                                    <DietPicker
+                                        items={pickerValues}
+                                        value={this.state.veges}
+                                        onValueChange={(itemValue, itemIndex) =>
+                                            this.setState({ veges: itemValue })}/>
+                                </View>
+                            </View>
+
+                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                <View style={{flex:.5}}>
+                                    <Text> Grains/Starches: </Text>
+                                </View>
+                                <View style={{flex:.5}}>
+                                    <DietPicker
+                                        items={pickerValues}
+                                        value={this.state.graStar}
+                                        onValueChange={(itemValue, itemIndex) =>
+                                            this.setState({ graStar: itemValue })}/>
+                                </View>
+                            </View>
+
+                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                <View style={{flex:.5}}>
+                                    <Text> Protein: </Text>
+                                </View>
+                                <View style={{flex:.5}}>
+                                    <DietPicker
+                                        items={pickerValues}
+                                        value={this.state.prot}
+                                        onValueChange={(itemValue, itemIndex) =>
+                                            this.setState({ prot: itemValue })}/>
+                                </View>
+                            </View>
+
+                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                <View style={{flex:.5}}>
+                                    <Text> Desserts: </Text>
+                                </View>
+                                <View style={{flex:.5}}>
+                                    <DietPicker
+                                        items={pickerValues}
+                                        value={this.state.dsrt}
+                                        onValueChange={(itemValue, itemIndex) =>
+                                            this.setState({ dsrt: itemValue })}/>
+                                </View>
+                            </View>
+
+                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                <View style={{flex:.5}}>
+                                    <Text> Water: </Text>
+                                </View>
+                                <View style={{flex:.5}}>
+                                    <DietPicker
+                                        items={pickerValues}
+                                        value={this.state.water}
+                                        onValueChange={(itemValue, itemIndex) =>
+                                            this.setState({ water: itemValue })}/>
+                                </View>
+                            </View>
+
+                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                <View style={{flex:.5}}>
+                                    <Text> Sugary Beverages: </Text>
+                                </View>
+                                <View style={{flex:.5}}>
+                                    <DietPicker
+                                        items={pickerValues}
+                                        value={this.state.sugBev}
+                                        onValueChange={(itemValue, itemIndex) =>
+                                            this.setState({ sugBev: itemValue })}/>
+                                </View>
+                            </View>
+
+                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                <View style={{flex:.5}}>
+                                    <Text> Coffee/Tea: </Text>
+                                </View>
+                                <View style={{flex:.5}}>
+                                    <DietPicker
+                                        items={pickerValues}
+                                        value={this.state.cofTea}
+                                        onValueChange={(itemValue, itemIndex) =>
+                                            this.setState({ cofTea: itemValue })}/>
+                                </View>
+                            </View>
+
                         </View>
-                        <View style={styles.line}>
-                            <Text> Vegetables: </Text>
-                            <TextInput type="number" keyboardType={"numeric"} style={styles.input} placeholder="0"
-                                       underlineColorAndroid ={'transparent'}
-                                       placeholderTextColor="#000000"
-                                       onChangeText={(text) => this.setState({veges: text})}
-                                       value={this.state.veges}
-                            />
-                        </View>
-                        <View style={styles.line}>
-                            <Text> Grains/Starches: </Text>
-                            <TextInput type="number" keyboardType={"numeric"} style={styles.input} placeholder="0"
-                                       underlineColorAndroid ={'transparent'}
-                                       placeholderTextColor="#000000"
-                                       onChangeText={(text) => this.setState({graStar: text})}
-                                       value={this.state.graStar}
-                            />
-                        </View>
-                        <View style={styles.line}>
-                            <Text> Protein: </Text>
-                            <TextInput type="number" keyboardType={"numeric"} style={styles.input} placeholder="0"
-                                       underlineColorAndroid ={'transparent'}
-                                       placeholderTextColor="#000000"
-                                       onChangeText={(text) => this.setState({prot: text})}
-                                       value={this.state.prot}
-                            />
-                        </View>
-
-                        <View style={styles.line}>
-                            <Text> Desserts: </Text>
-                            <TextInput type="number" keyboardType={"numeric"} style={styles.input} placeholder="0"
-                                       underlineColorAndroid ={'transparent'}
-                                       placeholderTextColor="#000000"
-                                       onChangeText={(text) => this.setState({dsrt: text})}
-                                       value={this.state.dsrt}
-                            />
-                        </View>
-
-                        <View style={styles.line}>
-                            <Text> Water: </Text>
-                            <TextInput type="number" keyboardType={"numeric"} style={styles.input} placeholder="0"
-                                       underlineColorAndroid ={'transparent'}
-                                       placeholderTextColor="#000000"
-                                       onChangeText={(text) => this.setState({water: text})}
-                                       value={this.state.water}
-                            />
-                        </View>
-
-                        <View style={styles.line}>
-                            <Text> Sugary Beverages: </Text>
-                            <TextInput type="number" keyboardType={"numeric"} style={styles.input} placeholder="0"
-                                       underlineColorAndroid ={'transparent'}
-                                       placeholderTextColor="#000000"
-                                       onChangeText={(text) => this.setState({sugBev: text})}
-                                       value={this.state.sugBev}
-                            />
-                        </View>
-
-                        <View style={styles.line}>
-                            <Text> Coffee/Tea: </Text>
-                            <TextInput type="number" keyboardType={"numeric"} style={styles.input} placeholder="0"
-                                       underlineColorAndroid ={'transparent'}
-                                       placeholderTextColor="#000000"
-                                       onChangeText={(text) => this.setState({cofTea: text})}
-                                       value={this.state.cofTea}
-                            />
-                        </View>
-
-
-
-
-
                     </View>
                     <SeafoamButton title="Submit"
                                    onPress = { () => this._dietValues()}
                     />
+
 
                 </View>
             </ScrollView>
@@ -236,6 +285,7 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
     },
 
     container2: {
@@ -261,10 +311,13 @@ const styles = StyleSheet.create({
         width: '60%',
 
     },
-    title: {
+     title: {
         fontSize: 15,
         marginBottom: 10,
         paddingBottom: 5,
         textAlign: 'center',
-    }
+    },
+    container3: {
+      flex:1,
+    },
 });

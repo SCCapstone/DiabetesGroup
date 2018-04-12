@@ -19,7 +19,9 @@ export default class glucoseInput extends Component<{}> {
 
     static navigationOptions = {
         title: 'Glucose Input',
-        headerStyle: {backgroundColor: "#FF6127"}
+        headerStyle: {backgroundColor:"#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerTintColor: "#FFFFFF",
     };
 
     constructor(props) {
@@ -50,8 +52,7 @@ export default class glucoseInput extends Component<{}> {
                 readingType: readingType,
                 notes: notes,
             });
-            const {navigate} = this.props.navigation;
-            navigate('PHome')
+            this.props.navigation.goBack();
         }
     }
 
@@ -68,6 +69,7 @@ export default class glucoseInput extends Component<{}> {
                         <TextInput style={styles.input} placeholder="Glucose Level"
                                    underlineColorAndroid ={'transparent'}
                                    placeholderTextColor="#CFCFCF"
+                                   keyboardType = 'numeric'
                                    onChangeText={(text) => this.setState({glucoseLevel: text})}
                                    value={this.state.glucoseLevel}
                         />
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: 55,
         paddingRight: 55,
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
 
     container2: {
@@ -130,7 +132,7 @@ const styles = StyleSheet.create({
     },
     input:{
         fontSize: 16,
-        backgroundColor: '#FEFDF5',
+        backgroundColor: '#ffffff',
         marginBottom: 20,
         borderWidth: 1,
 

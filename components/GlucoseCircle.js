@@ -56,9 +56,6 @@ class GlucoseCircle extends Component {
         this.listenForItems(this.itemsRef);
     }
 
-    componentWillMount() {
-        this.listenForItems(this.itemsRef);
-    }
 
     componentWillUnmount(){
         this.itemsRef.off();
@@ -88,7 +85,7 @@ class GlucoseCircle extends Component {
             if(level >=70 && level <= 130){              //good fast
                 color = '#1ce04c';
             }else if(level > 130 && level <= 160){       //okay fast
-                color = '#f7e606';
+                color = '#ffda22';
             }else{                                       //bad  fast
                 color = '#f4000b';
             }
@@ -98,7 +95,7 @@ class GlucoseCircle extends Component {
             if(level > 70 && level <= 180){             //good meal
                 color = '#1ce04c';
             }else if(level > 180 && level <=220){       //okay meal
-                color = '#f7e606';
+                color = '#ffda22';
             }else{                                      //bad  meal
                 color = '#f4000b';
             }
@@ -108,7 +105,7 @@ class GlucoseCircle extends Component {
             if(level >= 5 && level <= 7){               //good a1c
                 color = '#1ce04c';
             }else if(level > 7 && level <= 8){          //okay a1c
-                color = '#f7e606';
+                color = '#ffda22';
             }else{                                      //bad  a1c
                 color = '#f4000b';
             }
@@ -118,10 +115,12 @@ class GlucoseCircle extends Component {
 
     render() {
         return (
-            <View style={[styles.gCircle, {backgroundColor: this.colorLevels()}]}>
+            <View style={[styles.gCircle, {borderColor: this.colorLevels(), backgroundColor: '#fffcf6'}]}>
                 <TouchableHighlight>
 
-                    <Text style={styles.valText}>{this.state.gLevel + '\n' + this.props.name}</Text>
+                    <Text style={[styles.valText, {color: this.colorLevels()}]}>
+                        {this.state.gLevel + '\n' + this.props.name}
+                    </Text>
 
                 </TouchableHighlight>
 
