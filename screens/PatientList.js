@@ -110,7 +110,7 @@ export default class PatientList extends React.Component {
                     </TouchableHighlight>
                 }
                  /*TODO: The Messenger Button needs to take the nutritionist to the messenger between them and this specific patient of theirs*/
-                renderHiddenItem={ (item, rowMap) => (
+                renderHiddenItem={ ({item}, rowMap) => (
                     <View style={styles.rowBack}>
                         <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ () => navigate("NMess", {ID: item.id})}>
                             <Text style={styles.backTextWhite}>Messenger</Text>
