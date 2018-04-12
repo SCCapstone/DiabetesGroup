@@ -76,7 +76,7 @@ export default class patientHome extends React.Component {
             <ScrollView>
                 <View style={styles.container3}>
                     <MessengerButton
-                        onPress={() => navigate('PHome')}/>
+                        onPress={() => navigate('PMess')}/>
                 </View>
 
                 <View style={styles.container}>

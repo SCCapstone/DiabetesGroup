@@ -80,7 +80,7 @@ export default class NutritionistPHome extends React.Component {
             <ScrollView>
                 <View style={styles.container3}>
                     <MessengerButton
-                        onPress={() => navigate('PHome')}/>
+                        onPress={() => navigate("NMess", {ID: this.props.navigation.state.params.ID})}/>
                 </View>
 
                 <View style={styles.container}>
