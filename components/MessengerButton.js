@@ -25,11 +25,9 @@ class MessengerButton extends Component {
 
 const styles = StyleSheet.create({
     press: {
-        backgroundColor: '#fffcf6',
         overflow: 'hidden',
     },
     button: {
-        overlayColor: '#fffcf6'
     },
 });
 

@@ -66,7 +66,7 @@ export default class ClinicianPList extends React.Component {
             if(snapshot.exists()) {
                 alert("Patient hasn't finished account creation. Once they complete account initialization you can view their info.")
             }else{
-                navigate("NPHome", {ID: item.id});
+                navigate("CPHome", {ID: item.id});
             }
         });
     }
@@ -101,6 +101,7 @@ export default class ClinicianPList extends React.Component {
                 useFlatList={true}
                 data={this.state.Patients}
                 keyExtractor = {this.keyExtractor}
+				disableRightSwipe = {true}
                 renderItem ={({item}) =>
                     <TouchableHighlight
                         onPress = {() => this._pDataCheck(item)}
@@ -110,7 +111,6 @@ export default class ClinicianPList extends React.Component {
                         <Text style ={styles.rowText}>{item.userName}</Text>
                     </TouchableHighlight>
                 }
-                 /*TODO: The Messenger Button needs to take the nutritionist to the messenger between them and this specific patient of theirs*/
                 renderHiddenItem={ (item, rowMap) => (
                     <View style={styles.rowBack}>
                         <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ _ => this.closeRow(rowMap, item.id) }>

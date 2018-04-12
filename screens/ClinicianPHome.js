@@ -78,13 +78,10 @@ export default class ClinicianPHome extends React.Component {
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
                 renderNavigationView={() => navigationView}>
 
-            <ScrollView>
-                <View style={styles.container3}>
-                    <MessengerButton
-                        onPress={() => navigate('PHome')}/>
-                </View>
+            <ScrollView style = {{backgroundColor: '#F7F1D2' }}>
 
-                <View style={styles.container}>
+				
+                <View style={[styles.container, {marginTop: 50}]}>
                     <GlucoseCircle name={'HgbA1c'} user = {this.state.user}/>
                     <Text></Text>
                 </View>
