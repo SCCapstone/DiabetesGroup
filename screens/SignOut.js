@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: 10,
         paddingRight: 10,
-        backgroundColor: '#fefbea',
+        backgroundColor: '#fffcf6',
     },
     input:{
         fontSize: 28,

@@ -3,14 +3,11 @@ import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';
 import {
-  Platform,
   StyleSheet,
   Text,
   View,
   Image,
-  Button,
-  AppRegistry,
-    TextInput,
+  TextInput,
     KeyboardAvoidingView
 } from 'react-native';
 
@@ -69,7 +66,6 @@ export default class PatientSignIn extends Component<{}> {
             }
             console.log(error);
         });
-        //after sign in, navigate to patient home screen
     }
 
 
@@ -78,49 +74,48 @@ export default class PatientSignIn extends Component<{}> {
         const {navigate} = this.props.navigation;
         return (
             <View style={{padding:0, paddingTop: 10, flex: 1, justifyContent: 'center', backgroundColor:'#fffcf6'}}>
-            <Image
-                style={{width: 360, height: 100}}
+                <Image
+                    style={{width: 360, height: 100}}
 
-                source = {require('../components/homeLogo.png')}
-            >
-            </Image>
+                    source = {require('../components/homeLogo.png')}
+                />
 
-            <View style={styles.container}>
                 <View style={styles.container}>
+                    <View style={styles.container}>
 
-                    <Text style={styles.login}>Please Input Your Login Credentials</Text>
+                        <Text style={styles.login}>Please Input Your Login Credentials</Text>
 
-                    <TextInput
-                        placeholder={"Enter Email"}
-                        placeholderTextColor="#CFCFCF"
-                        onSubmitEditing={() => this.passwordInput.focus()}
-                        keyboardType = "email-address"
-                        autoCapitalize = "none"
-                        autoCorrect = {false}
-                        underlineColorAndroid ={'transparent'}
-                        style={styles.input}
-                        onChangeText={(text) => this.setState({email: text})}
-                        value={this.state.email}
-                    />
-                    <TextInput
-                        placeholder={"Enter Password"}
-                        placeholderTextColor= "#CFCFCF"
-                        secureTextEntry
-                        underlineColorAndroid ={'transparent'}
-                        style={styles.input}
-                        ref={(input) => this.passwordInput = input}
-                        onChangeText={(text) => this.setState({password: text})}
-                        value={this.state.password}
-                    />
+                        <TextInput
+                            placeholder={"Enter Email"}
+                            placeholderTextColor="#CFCFCF"
+                            onSubmitEditing={() => this.passwordInput.focus()}
+                            keyboardType = "email-address"
+                            autoCapitalize = "none"
+                            autoCorrect = {false}
+                            underlineColorAndroid ={'transparent'}
+                            style={styles.input}
+                            onChangeText={(text) => this.setState({email: text})}
+                            value={this.state.email}
+                        />
+                        <TextInput
+                            placeholder={"Enter Password"}
+                            placeholderTextColor= "#CFCFCF"
+                            secureTextEntry
+                            underlineColorAndroid ={'transparent'}
+                            style={styles.input}
+                            ref={(input) => this.passwordInput = input}
+                            onChangeText={(text) => this.setState({password: text})}
+                            value={this.state.password}
+                        />
 
-                    <SeafoamButton
-                        title="LOGIN"
-                        onPress = {() => this._signIn()}
-                    />
+                        <SeafoamButton
+                            title="LOGIN"
+                            onPress = {() => this._signIn()}
+                        />
 
+                    </View>
                 </View>
             </View>
-                </View>
         );
     }
 }

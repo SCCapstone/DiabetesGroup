@@ -54,9 +54,7 @@ export default class patientMessaging extends React.Component {
 		itemsRef.on('value', (snap) => {
 		
 		var fireMessages = [];
-
 		snap.forEach((child) => {
-		console.log(child.child("user").val()._id);
 			fireMessages.push(
 				{_id: child.val()._id,
 				 text: child.val().text,
@@ -64,15 +62,13 @@ export default class patientMessaging extends React.Component {
 							_id: child.child("user").val()._id
 					   }
 				}
-			)
+			);
+            backwardsMess = [];
+            for(var i = fireMessages.length - 1;i >= 0; i--)
 
-		backwardsMess = [];
-		for(var i = fireMessages.length - 1;i >= 0; i--)
-		
-		{
-			backwardsMess.push(fireMessages[i]);
-		}
-		
+            {
+                backwardsMess.push(fireMessages[i]);
+            }
 		});
 			this.setState({messages: backwardsMess});
     });

@@ -36,7 +36,7 @@ export default class patientHome extends React.Component {
     render(){
         const {navigate} = this.props.navigation;
         var navigationView = (
-            <View style={{flex: 1, backgroundColor: '#fefbea'}}>
+            <View style={{flex: 1, backgroundColor: '#fffcf6'}}>
                 <SeafoamButton title="My Home Screen"
                                onPress={() => navigate('PHome')}/>
                 <Text></Text>
@@ -51,6 +51,10 @@ export default class patientHome extends React.Component {
                 <Text></Text>
                 <SeafoamButton title="Settings"
                             onPress={() => navigate('Setting')}/>
+                <Text></Text>
+                <Text></Text>
+                <SeafoamButton title="HomeScreen Help"
+                               onPress={() => navigate('HHelp')}/>
                 <Text></Text>
                 <Text></Text>
                 <Text></Text>
@@ -71,14 +75,6 @@ export default class patientHome extends React.Component {
                     <MessengerButton
                         onPress={() => navigate('PMess')}/>
 				</View>
-                <View style={styles.topContainer}>
-                    <View style={styles.helpView}>
-                        <TouchableHighlight
-                            onPress={() => navigate('HHelp')}>
-                            <Text style={styles.helpText}>Need Help?</Text>
-                        </TouchableHighlight>
-                    </View>
-                </View>
 
                 <View style={styles.container}>
                     <GlucoseCircle name={'HgbA1c'} user = {this.state.user}/>
