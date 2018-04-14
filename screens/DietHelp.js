@@ -18,7 +18,9 @@ export default class DietHelp extends Component<{}> {
 
     static navigationOptions = {
         title: 'Diet Help',
-        headerStyle: {backgroundColor: "#FF6127"}
+        headerStyle: {backgroundColor: "#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerTintColor: "#FFFFFF",
     };
 
     constructor(props) {
@@ -34,7 +36,7 @@ export default class DietHelp extends Component<{}> {
 
         const {navigate} = this.props.navigation;
         var navigationView = (
-            <View style={{flex: 1, backgroundColor: '#F7F1D2'}}>
+            <View style={{flex: 1, backgroundColor: '#fffcf6'}}>
                 <SeafoamButton title="My Home Screen"
                                onPress={() => navigate('PHome')}/>
                 <Text></Text>
@@ -136,11 +138,11 @@ export default class DietHelp extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     container3: {
         alignItems: 'center',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     box:{
         backgroundColor:'white',
@@ -148,7 +150,7 @@ const styles = StyleSheet.create({
     footer:{
         flex: 2,
         height : 100,
-        backgroundColor:'#f1cba2',
+        backgroundColor:'#fffcf6',
     },
     text:{
         color: 'black',
@@ -185,7 +187,7 @@ const styles = StyleSheet.create({
     },
     input:{
         fontSize: 16,
-        backgroundColor: '#FEFDF5',
+        backgroundColor: '#fffcf6',
         marginBottom: 20,
         borderWidth: 1,
     },
