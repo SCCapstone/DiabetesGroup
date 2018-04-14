@@ -61,7 +61,7 @@ class MedicationLogTable extends Component {
 
 
 const styles = StyleSheet.create({
-    head: { height: 40, backgroundColor: 'orange' },
+    head: { height: 40, backgroundColor: '#F7F1D2' },
     text: { textAlign:'center', color:'black' },
     row: { height: 30 },
     container: {

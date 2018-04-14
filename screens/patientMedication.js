@@ -11,42 +11,61 @@ import {
     ScrollView,
     Button,
     AppRegistry,
-    DrawerLayoutAndroid
+    DrawerLayoutAndroid,
+    TouchableOpacity,
 } from 'react-native';
 
 export default class patientMedication extends Component<{}> {
 
     static navigationOptions = {
         title: 'Medication',
-        headerStyle: {backgroundColor: "#FF6127"}
+        headerStyle: {backgroundColor: '#112471'},
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center', alignSelf: 'center'},
+        headerTintColor: "#FFFFFF",
     };
 
     render() {
         const {navigate} = this.props.navigation;
         var navigationView = (
-            <View style={{flex: 1, backgroundColor: '#F7F1D2'}}>
-                <SeafoamButton title="My Home Screen"
-                               onPress={() => navigate('PHome')}/>
-                <Text></Text>
-                <Text></Text>
-                <SeafoamButton title="My Diet"
-                               onPress={() => navigate('PDiet')}/>
-                <Text></Text>
-                <Text></Text>
-                <SeafoamButton title="My Medication"
-                               onPress={() => navigate('PMed')}/>
-                <Text></Text>
-                <Text></Text>
-                <SeafoamButton title="Settings"
-                               onPress={() => navigate('Setting')}/>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <SeafoamButton title="Sign Out"
-                               onPress={() => navigate('Sign')}/>
+            <View style={{flex: 1, backgroundColor: '#fefbea'}}>
+                <View style={{height: 50, width: 300, backgroundColor: '#112471'}}>
+                    <Text style={{alignSelf: "center", fontSize: 30, color: '#FFFFFF'}}>Hello Patient!
+                    </Text>
+                </View>
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('PHome')}>
+                    <Text style={styles.sideText}>Home</Text>
+                </TouchableOpacity>
+
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('PDiet')}>
+                    <Text style={styles.sideText}>My Diet</Text>
+                </TouchableOpacity>
+
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('PMed')}>
+                    <Text style={styles.sideText}>My Medication</Text>
+                </TouchableOpacity>
+
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('Setting')}>
+                    <Text style={styles.sideText}>Settings</Text>
+                </TouchableOpacity>
+
+                <View style={{height: 190, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('Sign')}>
+                    <Text style={styles.sideText}>Sign Out</Text>
+                </TouchableOpacity>
             </View>
         );
         return (
@@ -73,7 +92,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingBottom: 20,
         flexDirection: 'column',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fefbea',
     },
     welcome: {
         fontSize: 20,
@@ -84,5 +103,19 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#333333',
         marginBottom: 5,
+    },
+    sideButton: {
+        width: 280,
+        height: 40,
+        backgroundColor: '#112471',
+        alignSelf: 'center',
+        borderWidth: 3,
+        borderColor: '#000000'
+    },
+
+    sideText: {
+        fontSize: 25,
+        color: '#fefbea',
+        alignSelf: 'center'
     },
 });
