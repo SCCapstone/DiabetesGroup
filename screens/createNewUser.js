@@ -18,7 +18,9 @@ export default class createNewUser extends Component<{}> {
 
 	static navigationOptions = {
 	    title: 'New Account',
-        headerStyle: {backgroundColor: "#FF6127"}
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerStyle: {backgroundColor: "#112471"},
+        headerTintColor: "#FFFFFF"
     };
 
 	constructor(props) {
