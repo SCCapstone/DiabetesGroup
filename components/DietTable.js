@@ -56,7 +56,7 @@ class DietTable extends Component {
                     <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
 
                     {this.state.diet.map((data, i) => (
-                        <Row key = {i} data={data} style={[styles.row, i%2 && {backgroundColor: 'orange'}]} textStyle={styles.text}/> ))}
+                        <Row key = {i} data={data} style={[styles.row, i%2 && {backgroundColor: '#bcf7ff'}]} textStyle={styles.text}/> ))}
 
                 </Table>
 
@@ -67,15 +67,16 @@ class DietTable extends Component {
 
 
 const styles = StyleSheet.create({
-    head: { height: 40, backgroundColor: 'orange' },
+    head: { height: 40, backgroundColor: '#BCF7FF' },
     text: { textAlign:'center', color:'black' },
-    row: { height: 30 },
+    row: { height: 30, borderTopColor: '#6c6c6c',
+    },
     container: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
 });
 
