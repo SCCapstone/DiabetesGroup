@@ -28,30 +28,37 @@ export default class NAddPatient extends Component<{}> {
     }
 
     addPatient () {
-        var user = firebase.auth().currentUser;
-
-        var pRef = firebaseApp.database.ref('Patients/');
+		var that = this;
+		var added = false;
+        var user = firebaseApp.auth().currentUser;
+        var pRef = firebaseApp.database().ref('Patients/');
         pRef.once('value', function (snapshot) {
             snapshot.forEach((child) => {
                 var pID = child.key;
-
-                if(child.val().email === this.state.pEmail) {
-                    if(child.val().Nutritionist === '' || child.val() === 'undefined') {
+				//console.log(child.val().email);
+				//console.log(that.state.pEmail);
+                if(child.val().email === that.state.pEmail) {
+					console.log(child.val().Nutritionist);
+                    if(child.val().Nutritionist === '' || typeof child.val().Nutritionist == 'undefined') {
                         firebaseApp.database().ref('Nutritionists/' + user.uid + '/patients').push({
                             pID: pID,
                             pEmail: child.val().email,
                         });
-                        firebaseApp.database().ref('Patients/' + key).set({
+						added = true;
+                        firebaseApp.database().ref('Patients/' + pID).update({
                             Nutritionist: user.email,
                         });
-                        this.props.navigation.goBack();
+                        that.props.navigation.goBack();
                     }else {
                         alert('This patient already has a nutritionist')
                     }
                 }
             })
         });
+		if(added === false)
+		{
         alert('Please enter in a valid patient email.')
+		}
     }
 
     render() {

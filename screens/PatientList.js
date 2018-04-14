@@ -19,21 +19,50 @@ export default class PatientList extends React.Component {
             'Setting a timer'
         ];
         this.itemsRef = firebaseApp.database().ref('Patients/');
-        this.state = {listType: 'FlatList', userName: '', Patients: []};
+		this.patientRef = firebaseApp.database().ref('Nutritionists/');
+        this.state = {listType: 'FlatList', userName: '', Patients: [], listOfP: []};
     }
-
+	containsP(obj, list) {
+		console.log("something happens in contains");
+		var i;
+			for (i in list) {
+				if (list.hasOwnProperty(i) && list[i] === obj) {
+					console.log(list[i]);
+					console.log(obj);
+					return true;
+				}
+			}
+		return false;
+	}
     listenForItems(itemsRef) {
+		this.listenForItems2(this.patientRef);
         itemsRef.on('value', (snap) => {
             var items = [];
             snap.forEach((child) => {
-                items.push({
-                    id: child.key,
-                    userName: child.val().userName,
-                });
+				if(this.containsP(child.val().email, this.state.listOfP))
+				{
+		            items.push({
+		                id: child.key,
+		                userName: child.val().userName,
+		            });
+				}
             });
             this.setState({Patients: items});
         });
     }
+	
+	listenForItems2(patientRef) {
+		var tempList = [];
+		console.log(firebaseApp.auth().currentUser.uid);
+		patientRef.on('value', (snap) => {
+			snap.forEach((child) => {
+				console.log("nothing");
+				tempList.push(child.val().pEmail);
+			
+			});
+		});
+		this.setState({listOfP: tempList});
+	}
 
     componentDidMount() {
         this.listenForItems(this.itemsRef);
@@ -41,6 +70,7 @@ export default class PatientList extends React.Component {
 
     componentWillUnmount(){
         this.itemsRef.off();
+		this.patientRef.off();
     }
 
     keyExtractor = (item) => item.id;
@@ -50,7 +80,6 @@ export default class PatientList extends React.Component {
             rowMap[item].closeRow();
         }
     }
-
     deleteRow(rowMap, item) {
         //TODO: Need to add delete patient from list functionality(this will use an "Are you Sure" alert before deletiong from list.
     }
@@ -79,6 +108,10 @@ export default class PatientList extends React.Component {
             <View style={{flex: 1, backgroundColor: '#fffcf6'}}>
                 <SeafoamButton title="Patient List Home Screen"
                                onPress={() => navigate('PList')}/>
+                <Text></Text>
+                <Text></Text>
+				<SeafoamButton title="Add a patient"
+                               onPress={() => navigate('NAddP')}/>
                 <Text></Text>
                 <Text></Text>
                 <SeafoamButton title="Settings"
