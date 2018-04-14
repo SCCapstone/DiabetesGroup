@@ -3,23 +3,27 @@ import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';
 import {
-  Platform,
   StyleSheet,
   Text,
   View,
-  AppRegistry,
-    TextInput
+  Image,
+  TextInput
 } from 'react-native';
 
 export default class NutritionistSignIn extends Component<{}> {
 
-	static navigationOptions = {
-	    title: 'Please input your login credentials',
-        headerStyle: {backgroundColor: "#FF6127"}
+    static navigationOptions = {
+        title: 'Nutritionist Login',
+        headerStyle: {backgroundColor: "#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerTintColor: "#FFFFFF",
+        headerRight: (<View />)
     };
 
-	constructor(props){
+
+    constructor(props){
 	    super(props);
+        console.disableYellowBox = true;
 	    this.state =  {email: '', password: ''};
     }
 
@@ -34,10 +38,20 @@ export default class NutritionistSignIn extends Component<{}> {
         if(password.length < 4){
 	        alert('Please enter a valid password');
         }
-        //Log in user if correct credentials are entered
-        firebaseApp.auth().signInWithEmailAndPassword(email,password)
-            .then(function(user){
-            navigate('PList')
+    //Log in user if correct credentials are entered
+        firebaseApp.auth().signInWithEmailAndPassword(email,password).then(function(user){
+        //Checking whether the user that signed in is the correct user type
+            var userRef =  firebaseApp.database().ref('Nutritionists/' + user.uid);
+            userRef.once('value', function (snapshot) {
+                if(snapshot.exists()) {
+                    navigate('PList');
+                }else{
+                    alert("You're not an authorized Nutritionist. Please sign in using a Nutritionist account.");
+                    firebaseApp.auth().signOut().then(function(){
+                        console.log('Signed Out');
+                    });
+                }
+            });
         }).catch(function(error){
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -62,14 +76,16 @@ export default class NutritionistSignIn extends Component<{}> {
 	render() {
 		const {navigate} = this.props.navigation;
 		return (
-            <View style={styles.container}>
+            <View style={{padding:0, paddingTop: 10, flex: 1, justifyContent: 'center', backgroundColor:'#fffcf6'}}>
+                <Image
+                    style={{width: 360, height: 100, alignSelf: 'center'}}
+
+                    source = {require('../components/homeLogo.png')}
+                />
                 <View style={styles.container}>
-                    <Text style={styles.title}>
-                        AahaRx{"\n"}For{"\n"}Diabetes{"\n"}Management
-                    </Text>
-                        <Text style={styles.login}>
-                            Nutritionist Login
-                        </Text>
+                    <View style={styles.container}>
+
+                        <Text style={styles.login}>Please Input Your Login Credentials</Text>
                     <TextInput
                         placeholder={"Enter Email"}
                         placeholderTextColor="#CFCFCF"
@@ -98,6 +114,7 @@ export default class NutritionistSignIn extends Component<{}> {
                         onPress = {() => this._signIn()}
                     />
 
+                    </View>
                 </View>
             </View>
         );
@@ -107,13 +124,13 @@ export default class NutritionistSignIn extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
         padding: 20,
         justifyContent: 'center'
     },
     input: {
         fontSize: 16,
-        backgroundColor: '#FEFDF5',
+        backgroundColor: '#ffffff',
         marginBottom: 20,
         borderWidth: 1,
     },
@@ -123,14 +140,14 @@ const styles = StyleSheet.create({
         marginBottom: 30,
         textAlign: 'center',
         alignSelf: 'stretch',
-        color: "#000000",
+        color: "#ffffff",
     },
     login: {
         textAlign: 'center',
         alignSelf: 'stretch',
         fontWeight: 'bold',
         fontSize: 14,
-        color: "#000000",
+        color: "#112471",
     }
 
 });

@@ -17,7 +17,9 @@ export default class todaysDietPatient extends Component<{}> {
 
     static navigationOptions = {
         title: "Diet Logs",
-        headerStyle: {backgroundColor: "#FF6127"}
+        headerStyle: {backgroundColor: "#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerTintColor: "#FFFFFF",
     };
 
 
@@ -25,7 +27,7 @@ export default class todaysDietPatient extends Component<{}> {
     render() {
         const {navigate} = this.props.navigation;
         return (
-            <ScrollView style={{backgroundColor:'#F7F1D2'}}>
+            <ScrollView style={{backgroundColor:'#fffcf6'}}>
 
                 <Text/>
                 <Text/>
@@ -35,8 +37,8 @@ export default class todaysDietPatient extends Component<{}> {
                 <Text style={styles.login}>{'Des: Desserts             Wat: Water'}</Text>
                 <Text style={styles.login}>{'Sug: Sugary Beverages     C/T: Coffee/Tea'}</Text>
 
-
-
+                <Text/>
+                <Text/>
                 <DietTable>
 
                 </DietTable>
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
 
     text:{

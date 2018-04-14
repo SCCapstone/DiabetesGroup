@@ -3,23 +3,26 @@ import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';
 import {
-  Platform,
   StyleSheet,
   Text,
   View,
-  AppRegistry,
-    TextInput
+  Image,
+  TextInput
 } from 'react-native';
 
 export default class ClinicianSignIn extends Component<{}> {
 
-	static navigationOptions = {
-	    title: 'Please input your login credentials',
-        headerStyle: {backgroundColor: "#FF6127"}
+    static navigationOptions = {
+        title: 'Clinician Login',
+        headerStyle: {backgroundColor: "#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerTintColor: "#FFFFFF",
+        headerRight: (<View />)
     };
 
 	constructor(props){
 	    super(props);
+        console.disableYellowBox = true;
 	    this.state =  {email: '', password: ''};
     }
 
@@ -34,10 +37,20 @@ export default class ClinicianSignIn extends Component<{}> {
         if(password.length < 4){
 	        alert('Please enter a valid password');
         }
-        //Log in user if correct credentials are entered
-        firebaseApp.auth().signInWithEmailAndPassword(email,password)
-            .then(function(user){
-            navigate('CPList')
+    //Log in user if correct credentials are entered
+        firebaseApp.auth().signInWithEmailAndPassword(email,password).then(function(user){
+            //Checking whether the user that signed in is the correct user type
+            var userRef =  firebaseApp.database().ref('Clinician/' + user.uid);
+            userRef.once('value', function (snapshot) {
+                if(snapshot.exists()) {
+                    navigate('CPList');
+                }else{
+                    alert("You're not an authorized Clinician. Please sign in using a Clinician account.");
+                    firebaseApp.auth().signOut().then(function(){
+                        console.log('Signed Out');
+                    });
+                }
+            });
         }).catch(function(error){
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -62,42 +75,46 @@ export default class ClinicianSignIn extends Component<{}> {
 	render() {
 		const {navigate} = this.props.navigation;
 		return (
-            <View style={styles.container}>
+            <View style={{padding:0, paddingTop: 10, flex: 1, justifyContent: 'center', backgroundColor:'#fffcf6'}}>
+                <Image
+                    style={{width: 360, height: 100, alignSelf: 'center'}}
+
+                    source = {require('../components/homeLogo.png')}
+                />
                 <View style={styles.container}>
-                    <Text style={styles.title}>
-                        AahaRx{"\n"}For{"\n"}Diabetes{"\n"}Management
-                    </Text>
-                        <Text style={styles.login}>
-                            Clinician Login
-                        </Text>
-                    <TextInput
-                        placeholder={"Enter Email"}
-                        placeholderTextColor="#CFCFCF"
-                        onSubmitEditing={() => this.passwordInput.focus()}
-                        keyboardType = "email-address"
-                        autoCapitalize = "none"
-                        autoCorrect = {false}
-                        underlineColorAndroid ={'transparent'}
-                        style={styles.input}
-                        onChangeText={(text) => this.setState({email: text})}
-                        value={this.state.email}
-                    />
-                    <TextInput
-                        placeholder={"Enter Password"}
-                        placeholderTextColor="#CFCFCF"
-                        secureTextEntry
-                        underlineColorAndroid ={'transparent'}
-                        style={styles.input}
-                        ref={(input) => this.passwordInput = input}
-                        onChangeText={(text) => this.setState({password: text})}
-                        value={this.state.password}
-                    />
+                    <View style={styles.container}>
 
-                    <SeafoamButton
-                        title="LOGIN"
-                        onPress = {() => this._signIn()}
-                    />
+                        <Text style={styles.login}>Please Input Your Login Credentials</Text>
 
+                        <TextInput
+                            placeholder={"Enter Email"}
+                            placeholderTextColor="#CFCFCF"
+                            onSubmitEditing={() => this.passwordInput.focus()}
+                            keyboardType = "email-address"
+                            autoCapitalize = "none"
+                            autoCorrect = {false}
+                            underlineColorAndroid ={'transparent'}
+                            style={styles.input}
+                            onChangeText={(text) => this.setState({email: text})}
+                            value={this.state.email}
+                        />
+                        <TextInput
+                            placeholder={"Enter Password"}
+                            placeholderTextColor="#CFCFCF"
+                            secureTextEntry
+                            underlineColorAndroid ={'transparent'}
+                            style={styles.input}
+                            ref={(input) => this.passwordInput = input}
+                            onChangeText={(text) => this.setState({password: text})}
+                            value={this.state.password}
+                        />
+
+                        <SeafoamButton
+                            title="LOGIN"
+                            onPress = {() => this._signIn()}
+                        />
+
+                    </View>
                 </View>
             </View>
         );
@@ -107,13 +124,13 @@ export default class ClinicianSignIn extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
         padding: 20,
         justifyContent: 'center'
     },
     input: {
         fontSize: 16,
-        backgroundColor: '#FEFDF5',
+        backgroundColor: '#FFFFFF',
         marginBottom: 20,
         borderWidth: 1,
     },
@@ -123,14 +140,14 @@ const styles = StyleSheet.create({
         marginBottom: 30,
         textAlign: 'center',
         alignSelf: 'stretch',
-        color: "#000000",
+        color: "#ffffff",
     },
     login: {
         textAlign: 'center',
         alignSelf: 'stretch',
         fontWeight: 'bold',
         fontSize: 14,
-        color: "#000000",
+        color: "#112471",
     }
 
 });

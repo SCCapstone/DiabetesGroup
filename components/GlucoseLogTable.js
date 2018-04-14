@@ -19,7 +19,7 @@ class GlucoseLogTable extends Component {
             'Setting a timer'
         ];
 
-        this.isPatient = (this.props.user === firebaseApp.auth().currentUser.uid);
+        this.isNotPatient = (this.props.user != firebaseApp.auth().currentUser.uid);
 
         var userID;
         if(this.props.user === firebaseApp.auth().currentUser.uid){
@@ -111,8 +111,8 @@ class GlucoseLogTable extends Component {
                    useFlatList={true}
                    data={this.state.logs}
                    keyExtractor = {this.keyExtractor}
-                   disableRightSwipe={(this.isPatient == true) ? false : true}
-                   disableLeftSwipe={(this.isPatient == true) ? false : true}
+                   disableRightSwipe={this.isNotPatient}
+                   disableLeftSwipe={this.isNotPatient}
                    renderItem ={({item}) =>
                        <TouchableHighlight>
                            <Table borderStyle={{borderColor: 'transparent'}}>
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
         marginLeft: -0.5,
         height: 45,
         borderTopColor: '#6c6c6c',
-        borderTopWidth: 0.75,
+        borderTopWidth: 1,
     },
     backTextWhite: {
         color: '#ffffff',
@@ -168,10 +168,9 @@ const styles = StyleSheet.create({
     },
     backLeftBtn: {
         alignItems: 'center',
-        bottom: 0.72,
+        height: 43.5,
         justifyContent: 'center',
         position: 'absolute',
-        top: 0.72,
         width: 75
     },
     backLeftBtnLeft: {
@@ -185,10 +184,9 @@ const styles = StyleSheet.create({
     },
     backRightBtn: {
         alignItems: 'center',
-        bottom: 0.72,
+        height: 43.5,
         justifyContent: 'center',
         position: 'absolute',
-        top: 0.72,
         width: 75
     },
     backRightBtnRight: {

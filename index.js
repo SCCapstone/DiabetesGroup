@@ -1,7 +1,6 @@
 import { AppRegistry } from 'react-native';
 import { Text } from 'react-native';
 import React from 'react';
-import App from './App';
 import PatientList from './screens/PatientList';
 import UserSelect from './screens/UserSelect';
 import PatientSignIn from './screens/PatientSignIn';
@@ -52,9 +51,9 @@ const AppNavigator = StackNavigator({
         PList: {
             screen: PatientList,
             navigationOptions: ({navigation}) => ({
-                headerStyle: {backgroundColor: '#FF6127'},
-                title: 'Nutritionist Home Screen',
-                headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
+                headerStyle: {backgroundColor: '#112471'},
+                title: 'Nutritionist Patient List',
+                headerLeft: <Text style={{color: '#FFFFFF'}} onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
             })
         },
         PHome: {
@@ -91,9 +90,9 @@ const AppNavigator = StackNavigator({
 		CPList: {
             screen: ClinicianPList,
             navigationOptions: ({navigation}) => ({
-                headerStyle: {backgroundColor: '#FF6127'},
-                title: 'Clinician Home Screen',
-                headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
+                headerStyle: {backgroundColor: '#112471'},
+                title: 'Clinician Patient List',
+                headerLeft: <Text style={{color: '#FFFFFF'}} onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
             })
         },
     },

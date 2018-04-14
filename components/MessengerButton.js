@@ -14,7 +14,6 @@ class MessengerButton extends Component {
                 <TouchableHighlight
                     onPress={this.props.onPress}>
                     <Image
-                        style ={styles.button}
                         source = {require('./MessengerB.png')}/>
                 </TouchableHighlight>
             </View>
@@ -26,8 +25,6 @@ class MessengerButton extends Component {
 const styles = StyleSheet.create({
     press: {
         overflow: 'hidden',
-    },
-    button: {
     },
 });
 
