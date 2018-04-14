@@ -18,7 +18,9 @@ export default class Settings extends Component<{}> {
 
     static navigationOptions = {
         title: 'Settings',
-        headerStyle: {backgroundColor: "#FF6127"}
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerStyle: {backgroundColor: "#112471"},
+        headerTintColor: "#FFFFFF"
     };
 
     constructor(props) {
@@ -62,8 +64,8 @@ export default class Settings extends Component<{}> {
             Height: Height,
             DType: DType,
         });
-
-        //navigate('User')
+        alert('Settings updated, please sign in again');
+        navigate('User')
     }
 
     render() {
@@ -83,14 +85,15 @@ export default class Settings extends Component<{}> {
                                    onChangeText={(text) => this.setState({Age: text})}
                                    value={this.state.Age}
                         />
-                        <Text>Sex:</Text>
-                        <TextInput style={styles.input} defaultValue={this.state.Sex}
-                                   underlineColorAndroid ={'transparent'}
-                                   placeholderTextColor= "#CFCFCF"
-                                   onChangeText={(text) => this.setState({Sex: text})}
-                                   value={this.state.Sex}
-
-                        />
+                    <Text>Gender:</Text>
+                    <Picker
+                        style={{marginBottom: 15}}
+                        selectedValue={this.state.Sex}
+                        value={this.state.Sex}
+                        onValueChange={(itemValue) => this.setState({Sex: itemValue})}>
+                        <Picker.Item label="Male" value="Male"/>
+                        <Picker.Item label="Female" value="Female" />
+                    </Picker>
 
                         <Text>Weight:</Text>
                         <TextInput style={styles.input} defaultValue= {this.state.Weight}
@@ -99,21 +102,44 @@ export default class Settings extends Component<{}> {
                                    onChangeText={(text) => this.setState({Weight: text})}
                                    value={this.state.Weight}
                         />
-                        <Text>Height:</Text>
-                        <TextInput style={styles.input} defaultValue= {this.state.Height}
-                                   underlineColorAndroid ={'transparent'}
-                                   placeholderTextColor= "#CFCFCF"
-                                   onChangeText={(text) => this.setState({Height: text})}
-                                   value={this.state.Height}
-                        />
-
+                    <Text>Height:</Text>
+                    <Picker
+                        style={{marginBottom: 15}}
+                        selectedValue={this.state.Height}
+                        value={this.state.Height}
+                        onValueChange={(itemValue) => this.setState({Height: itemValue})}>
+                        <Picker.Item label="5'0''" value="5'0''"/>
+                        <Picker.Item label="5'1''" value="5'1''"/>
+                        <Picker.Item label="5'2''" value="5'2''"/>
+                        <Picker.Item label="5'3''" value="5'3''"/>
+                        <Picker.Item label="5'4''" value="5'4''"/>
+                        <Picker.Item label="5'5''" value="5'5''"/>
+                        <Picker.Item label="5'6''" value="5'6''"/>
+                        <Picker.Item label="5'7''" value="5'7''"/>
+                        <Picker.Item label="5'8''" value="5'8''"/>
+                        <Picker.Item label="5'9''" value="5'9''"/>
+                        <Picker.Item label="5'10''" value="5'10''"/>
+                        <Picker.Item label="5'11''" value="5'11''"/>
+                        <Picker.Item label="6'0''" value="6'0''"/>
+                        <Picker.Item label="6'1''" value="6'1''"/>
+                        <Picker.Item label="6'2''" value="6'2''"/>
+                        <Picker.Item label="6'3''" value="6'3''"/>
+                        <Picker.Item label="6'4''" value="6'4''"/>
+                        <Picker.Item label="6'5''" value="6'5''"/>
+                        <Picker.Item label="6'6''" value="6'6''"/>
+                        <Picker.Item label="6'7''" value="6'7''"/>
+                    </Picker>
                     <Text>Diabetes Type:</Text>
-                    <TextInput style={styles.input} defaultValue= {this.state.DType}
-                               underlineColorAndroid ={'transparent'}
-                               placeholderTextColor= "#CFCFCF"
-                               onChangeText={(text) => this.setState({DType: text})}
-                               value={this.state.DType}
-                    />
+                    <Picker
+                        style={{marginBottom: 15}}
+                        selectedValue={this.state.DType}
+                        value={this.state.DType}
+                        onValueChange={(itemValue) => this.setState({DType: itemValue})}>
+                        <Picker.Item label="Type 1 Diabetes" value="Type 1 Diabetes"/>
+                        <Picker.Item label="Type 2 Diabetes" value="Type 2 Diabetes" />
+                        <Picker.Item label="Prediabetes" value="Prediabetes" />
+                        <Picker.Item label="Gestational Diabetes" value="Gestational Diabetes" />
+                    </Picker>
 
                     <SeafoamButton
                         title="Update"
