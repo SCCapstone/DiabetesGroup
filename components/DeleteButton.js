@@ -6,7 +6,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-class SeafoamButton extends Component {
+class DeleteButton extends Component {
     render() {
         return (
             <View style={styles.press}>
@@ -22,7 +22,7 @@ class SeafoamButton extends Component {
 
 const styles = StyleSheet.create({
     press: {
-        backgroundColor: '#112471',
+        backgroundColor: '#e60000',
         borderRadius: 12,
         borderColor: '#000000',
         overflow: 'hidden',
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
     },
 });
 
-module.exports = SeafoamButton;
+module.exports = DeleteButton;

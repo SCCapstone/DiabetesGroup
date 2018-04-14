@@ -6,8 +6,11 @@ const SeafoamButton = require('../components/SeafoamButton');
 
 export default class PatientList extends React.Component {
     static navigationOptions = {
-        title: 'Patient List',
-        headerStyle: {backgroundColor: "#FF6127"}
+        title: 'Nutritionist Patient List',
+        headerStyle: {backgroundColor: "#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerTintColor: "#FFFFFF",
+        headerRight: (<View />)
     };
 
     constructor(props) {
@@ -73,7 +76,7 @@ export default class PatientList extends React.Component {
     render() {
         const {navigate} = this.props.navigation;
         var navigationView = (
-            <View style={{flex: 1, backgroundColor: '#F7F1D2'}}>
+            <View style={{flex: 1, backgroundColor: '#fffcf6'}}>
                 <SeafoamButton title="Patient List Home Screen"
                                onPress={() => navigate('PList')}/>
                 <Text></Text>
@@ -104,15 +107,15 @@ export default class PatientList extends React.Component {
                     <TouchableHighlight
 						onPress = {() => this._pDataCheck(item)}
                         style={styles.rowFront}
-                        underlayColor={'#AAA'}
+                        underlayColor={'#fffcf6'}
                     >
                         <Text style ={styles.rowText}>{item.userName}</Text>
                     </TouchableHighlight>
                 }
                  /*TODO: The Messenger Button needs to take the nutritionist to the messenger between them and this specific patient of theirs*/
-                renderHiddenItem={ (item, rowMap) => (
+                renderHiddenItem={ ({item}, rowMap) => (
                     <View style={styles.rowBack}>
-                        <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ _ => this.closeRow(rowMap, item.id) }>
+                        <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ () => navigate("NMess", {ID: item.id})}>
                             <Text style={styles.backTextWhite}>Messenger</Text>
                         </TouchableOpacity>
 
@@ -145,15 +148,15 @@ const styles = StyleSheet.create({
     },
     rowFront: {
         alignItems: 'center',
-        backgroundColor: '#f7f1d2',
-        borderBottomColor: 'orange',
+        backgroundColor: '#fffcf6',
+        borderBottomColor: '#112471',
         borderBottomWidth: 1,
         paddingTop: 20,
         height: 60,
     },
     rowBack: {
         alignItems: 'center',
-        backgroundColor: '#f7f1d2',
+        backgroundColor: '#fffcf6',
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -183,6 +186,6 @@ const styles = StyleSheet.create({
         right: 0
     },
     backGrnd: {
-        backgroundColor: '#f7f1d2'
+        backgroundColor: '#fffcf6'
     },
 });

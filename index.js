@@ -1,7 +1,6 @@
 import { AppRegistry } from 'react-native';
 import { Text } from 'react-native';
 import React from 'react';
-import App from './App';
 import PatientList from './screens/PatientList';
 import UserSelect from './screens/UserSelect';
 import PatientSignIn from './screens/PatientSignIn';
@@ -19,8 +18,10 @@ import dietInput from './screens/dietInput';
 import NPHome from './screens/NutritionistPHome';
 import NPDiet from './screens/NutritionistPDiet';
 import NPMed from './screens/NPMedications';
+import PMess from './screens/messaging/patientMessaging.js';
+import NMess from './screens/messaging/NMessaging.js';
+import CMess from './screens/messaging/CMessaging.js';
 import DHelp from './screens/DietHelp'
-
 import CPDiet from './screens/ClinicianPDiet';
 import CPMed from './screens/CPMedications';
 
@@ -50,9 +51,9 @@ const AppNavigator = StackNavigator({
         PList: {
             screen: PatientList,
             navigationOptions: ({navigation}) => ({
-                headerStyle: {backgroundColor: '#FF6127'},
-                title: 'Nutritionist Home Screen',
-                headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
+                headerStyle: {backgroundColor: '#112471'},
+                title: 'Nutritionist Patient List',
+                headerLeft: <Text style={{color: '#FFFFFF'}} onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
             })
         },
         PHome: {
@@ -81,15 +82,18 @@ const AppNavigator = StackNavigator({
         NPDiet: {screen: NPDiet},
         CPDiet: {screen: CPDiet},
         NPMed: {screen: NPMed},
+		PMess: {screen: PMess},
+		NMess: {screen: NMess},
+		CMess: {screen: CMess},
 		CSign: {screen: ClinicianSignIn},
 		CPHome: {screen: ClinicianPHome},
         CPMed: {screen: CPMed},
 		CPList: {
             screen: ClinicianPList,
             navigationOptions: ({navigation}) => ({
-                headerStyle: {backgroundColor: '#FF6127'},
-                title: 'Clinician Home Screen',
-                headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
+                headerStyle: {backgroundColor: '#112471'},
+                title: 'Clinician Patient List',
+                headerLeft: <Text style={{color: '#FFFFFF'}} onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
             })
         },
     },

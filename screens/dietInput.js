@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
+const DeleteButton = require('../components/DeleteButton');
 const DietPicker = require('../components/DietPicker');
 import firebaseApp from './FireBaseApp';
 import DatePicker from 'react-native-datepicker'
@@ -11,8 +12,7 @@ import {
     Button,
     AppRegistry,
     Picker,
-    TextInput,
-    ScrollView,
+    ScrollView, Alert,
 } from 'react-native';
 
 const pickerValues = [
@@ -43,8 +43,10 @@ const pickerValues = [
 export default class dietInput extends Component<{}> {
 
     static navigationOptions = {
-        title: "Today's Diet Input",
-        headerStyle: {backgroundColor: "#FF6127"}
+        title: "Update Diet",
+        headerStyle: {backgroundColor: "#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerTintColor: "#FFFFFF",
     };
 
     constructor(props) {
@@ -52,24 +54,10 @@ export default class dietInput extends Component<{}> {
         this.state = {date: '', fruits: '0', veges:'0', graStar:'0', prot:'0', dsrt:'0', water:'0', sugBev:'0', cofTea:'0'};
     }
 
-    /*onChanged(food, text){
-        let newText = '';
-        let numbers = '0123456789';
-
-        for (var i=0; i < text.length; i++) {
-            if(numbers.indexOf(text[i]) > -1 ) {
-                newText = newText + text[i];
-            }
-            else {
-                // your call back function
-                alert("please enter numbers only");
-            }
-        }
-        this.setState({ food: newText });
-    }*/
-
 
     _dietValues() {
+        var that = this;
+
         var date = this.state.date;
         var fruits = this.state.fruits;
         var veges = this.state.veges;
@@ -82,45 +70,119 @@ export default class dietInput extends Component<{}> {
 
 
         var user = firebaseApp.auth().currentUser;
+        var isUpdate = false;
 
-        if(fruits < 0 | veges < 0 | graStar < 0 | prot < 0 | dsrt < 0 | water < 0 | sugBev < 0 | cofTea < 0)
-        {
-            alert('Please enter a valid serving amount.');
-        }
-        else {
-
-            firebaseApp.database().ref('Patients/' + user.uid + '/diet/').push({
-                date: date,
-                fruits: fruits,
-                veges: veges,
-                graStar: graStar,
-                prot: prot,
-                dsrt: dsrt,
-                water: water,
-                sugBev: sugBev,
-                cofTea: cofTea,
+        if (date === '') {
+            alert('Please select a date for diet entry.');
+        }else {
+            var dietRef = firebaseApp.database().ref('Patients/' + user.uid + '/diet/');
+            dietRef.once('value', function (snapshot) {
+                snapshot.forEach((child) => {
+                    if(child.val().date === date) {
+                        firebaseApp.database().ref('Patients/' + user.uid + '/diet/' + child.key).update({
+                            date: date,
+                            fruits: fruits,
+                            veges: veges,
+                            graStar: graStar,
+                            prot: prot,
+                            dsrt: dsrt,
+                            water: water,
+                            sugBev: sugBev,
+                            cofTea: cofTea,
+                        });
+                        isUpdate = true;
+                    }
+                });
+                if(isUpdate === false) {
+                    firebaseApp.database().ref('Patients/' + user.uid + '/diet/').push({
+                        date: date,
+                        fruits: fruits,
+                        veges: veges,
+                        graStar: graStar,
+                        prot: prot,
+                        dsrt: dsrt,
+                        water: water,
+                        sugBev: sugBev,
+                        cofTea: cofTea,
+                    });
+                }
             });
-            const {navigate} = this.props.navigation;
-            navigate('PHome')
+            this.props.navigation.goBack();
         }
     }
 
+    getDayDiet (date) {
+        var that = this;
+        var user = firebaseApp.auth().currentUser;
+        this.setState({date: date});
+        var dietRef = firebaseApp.database().ref('Patients/' + user.uid + '/diet/');
+        dietRef.once('value', function (snapshot) {
+            var fruits = '0';
+            var veges = '0';
+            var graStar = '0';
+            var prot = '0';
+            var dsrt = '0';
+            var water = '0';
+            var sugBev = '0';
+            var cofTea = '0';
+            snapshot.forEach((child) => {
+                if(child.val().date === date) {
+                        fruits = child.val().fruits;
+                        veges = child.val().veges;
+                        graStar = child.val().graStar;
+                        prot = child.val().prot;
+                        dsrt = child.val().dsrt;
+                        water = child.val().water;
+                        sugBev = child.val().sugBev;
+                        cofTea = child.val().cofTea;
+                }
+            });
+            that.setState({fruits: fruits, veges: veges, graStar: graStar, prot: prot, dsrt: dsrt, water: water, sugBev: sugBev, cofTea: cofTea})
+        });
+    }
+
+    deleteEvent() {
+        Alert.alert(
+            "Day's Diet Deletion",
+            "Are you sure you want to delete this day's diet?",
+            [
+                {text: 'Cancel'},
+                {text: 'Yes', onPress: () => this.deleteDiet()},
+            ]
+        )
+    }
+
+    deleteDiet () {
+        var that = this;
+        var user = firebaseApp.auth().currentUser;
+        var delDietRef = firebaseApp.database().ref('Patients/' + user.uid + '/diet/');
+        delDietRef.once('value', function (snapshot) {
+            snapshot.forEach((child) => {
+                if(child.val().date === that.state.date) {
+                    var ref = firebaseApp.database().ref('Patients/' + user.uid + '/diet/' + child.key);
+                    ref.remove();
+                }
+            });
 
 
+        });
+        this.onComplete()
+    }
 
+    onComplete() {
+        this.props.navigation.goBack();
+    }
 
     render() {
-        const readingType = this.state.readingType;
-        const {navigate} = this.props.navigation;
         return (
-            <ScrollView>
+            <ScrollView style={{backgroundColor: '#fffcf6'}}>
                 <View style={styles.container}>
                     <Text style={styles.title}>
                         Please Enter the Following Fields:
                     </Text>
 
                     <Text style={styles.title}>
-                        *Input today's diet based on serving amounts.*
+                        *Input diet based on serving amounts.*
                     </Text>
                     <View style={styles.stretched}>
 
@@ -133,7 +195,7 @@ export default class dietInput extends Component<{}> {
                                 date={this.state.date}
                                 mode="date"
                                 placeholder="Date"
-                                format="YYYY-MM-DD"
+                                format="MM/DD/YYYY"
                                 minDate="2018-01-01"
                                 maxDate="2050-01-01"
                                 showIcon={false}
@@ -147,7 +209,7 @@ export default class dietInput extends Component<{}> {
                                 }}
 
 
-                                onDateChange={(date) => {this.setState({date: date})}}
+                                onDateChange={(date) => this.getDayDiet(date)}
                             />
 
                         </View>
@@ -261,11 +323,17 @@ export default class dietInput extends Component<{}> {
 
                         </View>
                     </View>
-                    <SeafoamButton title="Submit"
-                                   onPress = { () => this._dietValues()}
-                    />
 
+                    <View style={styles.bottomContainer}>
+                        <DeleteButton
+                            title = "Delete Day's Diet"
+                            onPress = { () => this.deleteEvent()}
+                        />
 
+                        <SeafoamButton title="Submit/Update"
+                                       onPress = { () => this._dietValues()}
+                        />
+                    </View>
                 </View>
             </ScrollView>
 
@@ -279,7 +347,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: 55,
         paddingRight: 55,
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     line:{
         flex:1,
@@ -304,8 +372,7 @@ const styles = StyleSheet.create({
         marginTop: -20,
     },
     input:{
-        fontSize: 16,
-        backgroundColor: '#f1cba2',
+        backgroundColor: '#ffffff',
         marginBottom: 20,
         borderWidth: 1,
         width: '60%',
@@ -320,4 +387,9 @@ const styles = StyleSheet.create({
     container3: {
       flex:1,
     },
+    bottomContainer: {
+        flex : 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    }
 });

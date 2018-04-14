@@ -10,7 +10,9 @@ const GlucoseGraph = require('../components/GlucoseGraph');
 export default class ClinicianPHome extends React.Component {
     static navigationOptions = {
         title: 'Patient Information',
-        headerStyle: {backgroundColor: "#FF6127"}
+        headerStyle: {backgroundColor: "#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerTintColor: "#FFFFFF",
     };
     constructor(props) {
         super(props);
@@ -78,13 +80,10 @@ export default class ClinicianPHome extends React.Component {
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
                 renderNavigationView={() => navigationView}>
 
-            <ScrollView>
-                <View style={styles.container3}>
-                    <MessengerButton
-                        onPress={() => navigate('PHome')}/>
-                </View>
+            <ScrollView style = {{backgroundColor: '#fffcf6' }}>
 
-                <View style={styles.container}>
+				
+                <View style={[styles.container, {marginTop: 50}]}>
                     <GlucoseCircle name={'HgbA1c'} user = {this.state.user}/>
                     <Text></Text>
                 </View>
@@ -168,20 +167,20 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     container2:{
         flex:1,
         paddingBottom: 50,
         flexDirection: 'row',
         justifyContent:'space-around',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     container3: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     nameText: {
         color: '#000000',
@@ -206,13 +205,13 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection: 'row',
         justifyContent:'space-around',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     dataPage: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     head: { height: 40, backgroundColor: 'orange' },
     text: { textAlign:'center', color:'black' },

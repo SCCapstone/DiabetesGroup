@@ -57,17 +57,17 @@ export default class HomeHelp extends React.Component {
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
                 renderNavigationView={() => navigationView}>
                 <ScrollView style={{backgroundColor: '#FFFCF6'}}>
-                    <View style={styles.container}>
+                    <View style={[styles.container, {marginLeft: 18}]}>
                         <MessengerButton/>
 
-                        <View style={{flex: 1, marginLeft: 85, justifyContent: 'center'}}>
+                        <View style={{flex: 1, marginLeft: 16, justifyContent: 'center'}}>
                             <Text style={styles.text}>
-                                This Button Takes you to the messenger.
+                                This Button Takes you to the messenger with you nutritionist.
                             </Text>
                         </View>
                     </View>
 
-                    <View style={styles.container}>
+                    <View style={[styles.container, {marginTop: 10}]}>
                         <GlucoseCircle name={'HgbA1c'} user = {this.state.user}/>
 
                         <View style={{flex: 1, marginLeft: 5, justifyContent: 'center'}}>
@@ -77,7 +77,7 @@ export default class HomeHelp extends React.Component {
                         </View>
                     </View>
 
-                    <View style={styles.container}>
+                    <View style={[styles.container, {marginTop: 10}]}>
                         <GlucoseCircle name={'FBG'} user = {this.state.user}/>
 
                         <View style={{flex: 1, marginLeft: 5, justifyContent: 'center'}}>
@@ -87,7 +87,7 @@ export default class HomeHelp extends React.Component {
                         </View>
                     </View>
 
-                    <View style={styles.container}>
+                    <View style={[styles.container, {marginTop: 10}]}>
                         <GlucoseCircle name={'PpBG'} user = {this.state.user}/>
 
                         <View style={{flex: 1, marginLeft: 5, justifyContent: 'center'}}>
@@ -97,9 +97,9 @@ export default class HomeHelp extends React.Component {
                         </View>
                     </View>
 
-                    <View style={styles.infotainer}>
+                    <View style={[styles.infotainer, {marginTop: 10}]}>
                         <Text style={styles.title}> *Graph Info* </Text>
-                        <Text style={styles.text}> The line graph on the home screen contains the average blood glucose levels of every day. You can slide the graph along the x-axis (by date) and you can two finger zoom along the x-axis to get a more accurate view all the way down to the average per hour. The graph will not appear untill you have at least two days worth of levels.
+                        <Text style={styles.text}> The line graph on the home screen contains the average blood glucose levels of every day. You can slide the graph along the x-axis (by date) and you can two finger zoom along the x-axis to get a more accurate view all the way down to the average per hour. The graph will display a blank graph with the current date untill you have at least two days worth of logs.
                         </Text>
                     </View>
                 </ScrollView>
@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 15,
+        textAlign: 'center',
         color: '#000000'
     }
 

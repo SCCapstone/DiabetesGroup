@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { VictoryChart, VictoryLine, VictoryZoomContainer } from 'victory-native';
+import { VictoryChart, VictoryLine, VictoryZoomContainer, VictoryLabel } from 'victory-native';
 import {View, Text, StyleSheet} from 'react-native';
 import firebaseApp from "../screens/FireBaseApp"
 import moment from 'moment';
@@ -84,23 +84,42 @@ class GlucoseGraph extends Component {
     };
 
     render() {
-        console.log(this.state.logs);
         return (
-            this.state.logs.length < 2 ? null : <VictoryChart
-                scale={{ x: 'time'}}
-                containerComponent={<VictoryZoomContainer zoomDimension='x'/>}
-            >
-                <VictoryLine
-                    style={{
-                        data: { stroke: "#c43a31" },
-                        parent: { border: "1px solid #ccc"}
-                    }}
-                    keyExtractor = {this.keyExtractor}
-                    data= {this.state.logs}
-                    x= "Time"
-                    y= "GlucoseLevel"
-                 />
-            </VictoryChart>
+            this.state.logs.length < 2 ?
+                <VictoryChart
+                >
+                    <VictoryLine
+                        style={{
+                            data: { stroke: "#c43a31" },
+                            parent: { border: "1px solid #ccc"}
+                        }}
+                        keyExtractor = {this.keyExtractor}
+                        data= {[{Time: moment().format("MM/DD/YYYY"), GlucoseLevel: 0}, {Time: moment().format("MM/DD/YYYY"), GlucoseLevel: 0}]}
+                        x= "Time"
+                        y= "GlucoseLevel"
+                    />
+                </VictoryChart>
+
+                :
+
+                <View>
+                    <Text style={styles.title}>Average Blood-Glucose Levels Over Time</Text>
+                    <VictoryChart
+                        scale={{ x: 'time'}}
+                        containerComponent={<VictoryZoomContainer zoomDimension='x'/>}
+                    >
+                        <VictoryLine
+                            style={{
+                                data: { stroke: "#c43a31" },
+                                parent: { border: "1px solid #ccc"}
+                            }}
+                            keyExtractor = {this.keyExtractor}
+                            data= {this.state.logs}
+                            x= "Time"
+                            y= "GlucoseLevel"
+                         />
+                    </VictoryChart>
+                </View>
         );
     }
 
@@ -116,6 +135,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fffcf6',
+    },
+    title: {
+        marginBottom: -30,
+        textAlign: 'center',
+        color: '#000000',
+        fontSize: 20,
+        fontWeight: "bold"
     },
 });
 

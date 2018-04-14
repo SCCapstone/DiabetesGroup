@@ -36,7 +36,7 @@ export default class patientHome extends React.Component {
     render(){
         const {navigate} = this.props.navigation;
         var navigationView = (
-            <View style={{flex: 1, backgroundColor: '#fefbea'}}>
+            <View style={{flex: 1, backgroundColor: '#fffcf6'}}>
                 <SeafoamButton title="My Home Screen"
                                onPress={() => navigate('PHome')}/>
                 <Text></Text>
@@ -53,6 +53,10 @@ export default class patientHome extends React.Component {
                             onPress={() => navigate('Setting')}/>
                 <Text></Text>
                 <Text></Text>
+                <SeafoamButton title="HomeScreen Help"
+                               onPress={() => navigate('HHelp')}/>
+                <Text></Text>
+                <Text></Text>
                 <Text></Text>
                 <Text></Text>
                 <Text></Text>
@@ -67,19 +71,10 @@ export default class patientHome extends React.Component {
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
                 renderNavigationView={() => navigationView}>
             <ScrollView>
-                <View style={styles.topContainer}>
-                    <View style={styles.helpView}>
-                        <TouchableHighlight
-                            onPress={() => navigate('HHelp')}>
-                            <Text style={styles.helpText}>Need Help?</Text>
-                        </TouchableHighlight>
-                    </View>
-
-                    <View style={styles.messageView}>
-                        <MessengerButton
-                            onPress={() => navigate('PHome')}/>
-                    </View>
-                </View>
+                <View style={styles.messageView}>
+                    <MessengerButton
+                        onPress={() => navigate('PMess')}/>
+				</View>
 
                 <View style={styles.container}>
                     <GlucoseCircle name={'HgbA1c'} user = {this.state.user}/>
@@ -149,18 +144,10 @@ const styles = StyleSheet.create({
     },
     messageView: {
         flex: 1,
-        marginRight: 5,
-        marginTop: 3,
+        marginTop: -10,
+        marginBottom: -10,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        backgroundColor: '#fffcf6',
-    },
-    helpView: {
-        flex: 1,
-        marginLeft: 5,
-        marginTop: 3,
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
         backgroundColor: '#fffcf6',
     },
     nText: {
