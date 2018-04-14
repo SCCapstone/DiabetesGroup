@@ -10,7 +10,9 @@ const GlucoseGraph = require('../components/GlucoseGraph');
 export default class NutritionistPHome extends React.Component {
     static navigationOptions = {
         title: 'Patient Information',
-        headerStyle: {backgroundColor: "#FF6127"}
+        headerStyle: {backgroundColor: "#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerTintColor: "#FFFFFF",
     };
     constructor(props) {
         super(props);
@@ -54,7 +56,7 @@ export default class NutritionistPHome extends React.Component {
         const val1 = 7.6;
         const {navigate} = this.props.navigation;
         var navigationView = (
-            <View style={{flex: 1, backgroundColor: '#F7F1D2'}}>
+            <View style={{flex: 1, backgroundColor: '#fffcf6'}}>
                 <SeafoamButton title="Patient List Home Screen"
                                onPress={() => navigate('PList')}/>
                 <Text></Text>
@@ -167,20 +169,20 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     container2:{
         flex:1,
         paddingBottom: 20,
         flexDirection: 'row',
         justifyContent:'space-around',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     container3: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     nameText: {
         color: '#000000',
@@ -205,13 +207,13 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection: 'row',
         justifyContent:'space-around',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     dataPage: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     head: { height: 40, backgroundColor: 'orange' },
     text: { textAlign:'center', color:'black' },

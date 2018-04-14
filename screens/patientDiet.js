@@ -16,7 +16,9 @@ export default class patientDiet extends Component<{}> {
 
     static navigationOptions = {
         title: 'My Diet',
-        headerStyle: {backgroundColor: "#FF6127"}
+        headerStyle: {backgroundColor: "#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerTintColor: "#FFFFFF",
     };
 
     constructor(props) {
@@ -139,6 +141,14 @@ export default class patientDiet extends Component<{}> {
         savg = savg/dCount;
         cavg = cavg/dCount;
 
+        favg = this.rounding1(favg, 2);
+        vavg = this.rounding1(vavg, 2);
+        gavg = this.rounding1(gavg, 2);
+        pavg = this.rounding1(pavg, 2);
+        davg = this.rounding1(davg, 2);
+        wavg = this.rounding1(wavg, 2);
+        savg = this.rounding1(savg, 2);
+        cavg = this.rounding1(cavg, 2);
 
         items.push(
             {name:'f', value: favg},
@@ -156,7 +166,16 @@ export default class patientDiet extends Component<{}> {
         return items;
     };
 
-
+    rounding1(number, precision) {
+        var shift = function (number, precision, reverseShift) {
+            if (reverseShift) {
+                precision = -precision;
+            }
+            var numArray = ("" + number).split("e");
+            return +(numArray[0] + "e" + (numArray[1] ? (+numArray[1] + precision) : precision));
+        };
+        return shift(Math.round(shift(number, precision, false)), precision, true);
+    };
 
 
     render() {
@@ -164,7 +183,7 @@ export default class patientDiet extends Component<{}> {
 
         const {navigate} = this.props.navigation;
         var navigationView = (
-            <View style={{flex: 1, backgroundColor: '#F7F1D2'}}>
+            <View style={{flex: 1, backgroundColor: '#fffcf6'}}>
                 <SeafoamButton title="My Home Screen"
                                onPress={() => navigate('PHome')}/>
                 <Text></Text>
@@ -261,7 +280,7 @@ export default class patientDiet extends Component<{}> {
                                    onPress = { () => navigate('TDiet')}
                     />
                     <Text/>
-                    <SeafoamButton title="Update Today's Diet"
+                    <SeafoamButton title="Update Diet"
                                    onPress = { () => navigate('DInput')}
                     />
                     <Text/>
@@ -284,7 +303,7 @@ export default class patientDiet extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     box:{
         backgroundColor:'white',
@@ -292,7 +311,7 @@ const styles = StyleSheet.create({
     footer:{
         flex: 2,
         height : 100,
-        backgroundColor:'#f1cba2',
+        backgroundColor:'#6c6c6c',
     },
     text:{
         color: 'black',

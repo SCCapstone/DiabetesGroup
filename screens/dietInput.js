@@ -43,30 +43,16 @@ const pickerValues = [
 export default class dietInput extends Component<{}> {
 
     static navigationOptions = {
-        title: "Today's Diet Input",
-        headerStyle: {backgroundColor: "#FF6127"}
+        title: "Update Diet",
+        headerStyle: {backgroundColor: "#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerTintColor: "#FFFFFF",
     };
 
     constructor(props) {
         super(props);
         this.state = {date: '', fruits: '0', veges:'0', graStar:'0', prot:'0', dsrt:'0', water:'0', sugBev:'0', cofTea:'0'};
     }
-
-    /*onChanged(food, text){
-        let newText = '';
-        let numbers = '0123456789';
-
-        for (var i=0; i < text.length; i++) {
-            if(numbers.indexOf(text[i]) > -1 ) {
-                newText = newText + text[i];
-            }
-            else {
-                // your call back function
-                alert("please enter numbers only");
-            }
-        }
-        this.setState({ food: newText });
-    }*/
 
 
     _dietValues() {
@@ -120,7 +106,7 @@ export default class dietInput extends Component<{}> {
                     </Text>
 
                     <Text style={styles.title}>
-                        *Input today's diet based on serving amounts.*
+                        *Input diet based on serving amounts.*
                     </Text>
                     <View style={styles.stretched}>
 
@@ -279,7 +265,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: 55,
         paddingRight: 55,
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     line:{
         flex:1,
@@ -305,7 +291,7 @@ const styles = StyleSheet.create({
     },
     input:{
         fontSize: 16,
-        backgroundColor: '#f1cba2',
+        backgroundColor: '#6c6c6c',
         marginBottom: 20,
         borderWidth: 1,
         width: '60%',
