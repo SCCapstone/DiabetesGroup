@@ -64,7 +64,6 @@ const AppNavigator = StackNavigator({
                 headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
                 headerTintColor: "#FFFFFF",
                 title: 'Home Screen',
-                headerLeft: <Text style={{color:'#FFFFFF'}} onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
             })
         },
         HHelp: {screen: HomeHelp},
