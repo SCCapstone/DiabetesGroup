@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView, DrawerLayoutAndroid, TouchableHighlight, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, DrawerLayoutAndroid, TouchableHighlight, TouchableOpacity,} from 'react-native';
 import firebaseApp from './FireBaseApp';
 const SeafoamButton = require('../components/SeafoamButton');
 const GlucoseCircle = require('../components/GlucoseCircle');
@@ -10,8 +10,11 @@ const GlucoseGraph = require('../components/GlucoseGraph');
 
 
 export default class patientHome extends React.Component {
-    static navigationOptions = {
-        headerLeft: <MenuButton/>
+    static navigationOptions = ({navigation}) => {
+        const {params = {}} = navigation.state;
+        return {
+            headerLeft: <MenuButton onPress = {() => params.open()}/>
+        };
     };
 
     constructor(props) {
@@ -21,6 +24,8 @@ export default class patientHome extends React.Component {
         var userID = firebaseApp.auth().currentUser.uid;
         this.myRef = firebaseApp.database().ref('Patients/' + userID);
         this.state = {nextAppt: '', user: userID};
+        super();
+        this.openDrawer = this.openDrawer.bind(this);
     }
 
     updateItems(myRef) {
@@ -32,10 +37,15 @@ export default class patientHome extends React.Component {
 
     componentDidMount() {
         this.updateItems(this.myRef);
+        this.props.navigation.setParams({ open: this.openDrawer });
     }
 
     componentWillUnmount(){
         this.myRef.off();
+    }
+
+    openDrawer(){
+        this.drawer.openDrawer();
     }
 
     render(){
@@ -86,7 +96,8 @@ export default class patientHome extends React.Component {
             <DrawerLayoutAndroid
                 drawerWidth={300}
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
-                renderNavigationView={() => navigationView}>
+                renderNavigationView={() => navigationView}
+                ref = {_drawer => (this.drawer = _drawer)}>
             <ScrollView>
                 <View style={styles.messageView}>
                     <MessengerButton
