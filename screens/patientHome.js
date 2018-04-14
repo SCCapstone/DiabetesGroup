@@ -144,18 +144,10 @@ const styles = StyleSheet.create({
     },
     messageView: {
         flex: 1,
-        marginRight: 5,
-        marginTop: 3,
+        marginTop: -10,
+        marginBottom: -10,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        backgroundColor: '#fffcf6',
-    },
-    helpView: {
-        flex: 1,
-        marginLeft: 5,
-        marginTop: 3,
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
         backgroundColor: '#fffcf6',
     },
     nText: {

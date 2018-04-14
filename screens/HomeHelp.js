@@ -99,7 +99,7 @@ export default class HomeHelp extends React.Component {
 
                     <View style={[styles.infotainer, {marginTop: 10}]}>
                         <Text style={styles.title}> *Graph Info* </Text>
-                        <Text style={styles.text}> The line graph on the home screen contains the average blood glucose levels of every day. You can slide the graph along the x-axis (by date) and you can two finger zoom along the x-axis to get a more accurate view all the way down to the average per hour. The graph will not appear untill you have at least two days worth of levels.
+                        <Text style={styles.text}> The line graph on the home screen contains the average blood glucose levels of every day. You can slide the graph along the x-axis (by date) and you can two finger zoom along the x-axis to get a more accurate view all the way down to the average per hour. The graph will display a blank graph with the current date untill you have at least two days worth of logs.
                         </Text>
                     </View>
                 </ScrollView>

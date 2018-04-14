@@ -26,7 +26,6 @@ export default class SignOut extends Component<{}> {
     }
 
     render() {
-        const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
                 <Text style={styles.input}>
@@ -41,7 +40,7 @@ export default class SignOut extends Component<{}> {
                 </Text>
                 <SeafoamButton
                     title="No"
-                    onPress={() => navigate('PHome')}
+                    onPress={() => this.props.navigation.goBack()}
                 />
                 <Text style={{marginBottom: 20}}>
                 </Text>

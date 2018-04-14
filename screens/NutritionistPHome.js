@@ -80,7 +80,7 @@ export default class NutritionistPHome extends React.Component {
                 renderNavigationView={() => navigationView}>
 
             <ScrollView>
-                <View style={styles.container3}>
+                <View style={styles.messageView}>
                     <MessengerButton
                         onPress={() => navigate("NMess", {ID: this.props.navigation.state.params.ID})}/>
                 </View>
@@ -178,8 +178,10 @@ const styles = StyleSheet.create({
         justifyContent:'space-around',
         backgroundColor: '#fffcf6',
     },
-    container3: {
+    messageView: {
         flex: 1,
+        marginTop: -10,
+        marginBottom: -10,
         flexDirection: 'row',
         justifyContent: 'flex-end',
         backgroundColor: '#fffcf6',

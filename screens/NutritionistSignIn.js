@@ -38,11 +38,11 @@ export default class NutritionistSignIn extends Component<{}> {
         if(password.length < 4){
 	        alert('Please enter a valid password');
         }
-        //Log in user if correct credentials are entered
+    //Log in user if correct credentials are entered
         firebaseApp.auth().signInWithEmailAndPassword(email,password).then(function(user){
-
-            var infoRef =  firebaseApp.database().ref('Nutritionists/' + user.uid);
-            infoRef.once('value', function (snapshot) {
+        //Checking whether the user that signed in is the correct user type
+            var userRef =  firebaseApp.database().ref('Nutritionists/' + user.uid);
+            userRef.once('value', function (snapshot) {
                 if(snapshot.exists()) {
                     navigate('PList');
                 }else{
@@ -78,7 +78,7 @@ export default class NutritionistSignIn extends Component<{}> {
 		return (
             <View style={{padding:0, paddingTop: 10, flex: 1, justifyContent: 'center', backgroundColor:'#fffcf6'}}>
                 <Image
-                    style={{width: 360, height: 100}}
+                    style={{width: 360, height: 100, alignSelf: 'center'}}
 
                     source = {require('../components/homeLogo.png')}
                 />
