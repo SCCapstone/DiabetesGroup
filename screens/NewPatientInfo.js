@@ -40,7 +40,7 @@ export default class NewPatientInfo extends Component<{}> {
 
         var user = firebaseApp.auth().currentUser;
         var database = firebaseApp.database();
-        if( Age == '' || Sex == '' || Weight == '' || Height == '' || DType == ''){
+        if( Age == '' ||   Weight == '' ){
             alert('Please enter a value for all fields');
         }
         else {

@@ -55,8 +55,6 @@ export default class patientMedication extends Component<{}> {
 
     keyExtractor = (item) => item.id;
 
-
-
     render() {
         const tableHead = ['Medicine', 'Dosage', 'Time'];
         const {navigate} = this.props.navigation;
