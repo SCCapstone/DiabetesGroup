@@ -204,14 +204,14 @@ export default class ClinicianPDiet extends Component<{}> {
                     <Text style={styles.sideText}>Diet Help</Text>
                 </TouchableOpacity>
 
-                <View style={{height: 190, width: 300, backgroundColor: '#fefbea'}}/>
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
 
                 <TouchableOpacity style={styles.sideButton}
                                   onPress={() => navigate('NutritionistSetting')}>
                     <Text style={styles.sideText}>Settings</Text>
                 </TouchableOpacity>
 
-                <View style={{height: 190, width: 300, backgroundColor: '#fefbea'}}/>
+                <View style={{height: 130, width: 300, backgroundColor: '#fefbea'}}/>
 
                 <TouchableOpacity style={styles.sideButton}
                                   onPress={() => navigate('Sign')}>

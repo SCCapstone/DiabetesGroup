@@ -126,14 +126,6 @@ export default class patientHome extends React.Component {
                     <MessengerButton
                         onPress={() => this.checkMessenger()}/>
 				</View>
-                <View style={styles.topContainer}>
-                    <View style={styles.helpView}>
-                        <TouchableHighlight
-                            onPress={() => navigate('HHelp')}>
-                            <Text style={styles.helpText}>Need Help?</Text>
-                        </TouchableHighlight>
-                    </View>
-                </View>
 
                 <View style={styles.container}>
                     <GlucoseCircle name={'HgbA1c'} user = {this.state.user}/>
@@ -203,18 +195,10 @@ const styles = StyleSheet.create({
     },
     messageView: {
         flex: 1,
-        marginRight: 5,
-        marginTop: 3,
+        marginTop: -10,
+        marginBottom: -10,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        backgroundColor: '#fffcf6',
-    },
-    helpView: {
-        flex: 1,
-        marginLeft: 5,
-        marginTop: 3,
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
         backgroundColor: '#fffcf6',
     },
     nText: {
