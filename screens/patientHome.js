@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView, DrawerLayoutAndroid, TouchableHighlight, TouchableOpacity,} from 'react-native';
+import {Alert, View, Text, StyleSheet, ScrollView, DrawerLayoutAndroid, TouchableHighlight, TouchableOpacity,} from 'react-native';
 import firebaseApp from './FireBaseApp';
 const SeafoamButton = require('../components/SeafoamButton');
 const GlucoseCircle = require('../components/GlucoseCircle');
@@ -28,7 +28,7 @@ export default class patientHome extends React.Component {
 
         var userID = firebaseApp.auth().currentUser.uid;
         this.myRef = firebaseApp.database().ref('Patients/' + userID);
-        this.state = {nextAppt: '', user: userID};
+        this.state = {nextAppt: '', user: userID, nutritionist: ''};
         super();
         this.openDrawer = this.openDrawer.bind(this);
     }
@@ -52,6 +52,24 @@ export default class patientHome extends React.Component {
     openDrawer(){
         this.drawer.openDrawer();
     }
+
+	checkMessenger(){
+        const {navigate} = this.props.navigation;
+		var ref = firebaseApp.database().ref('Patients/' + this.state.user);
+		console.log(this.state.user);
+		ref.on('value', (snap) => {
+			var nutri = snap.val().Nutritionist;
+			this.setState({nutritionist: nutri});
+		});
+		console.log(this.state.nutritionist);
+		if(typeof this.state.nutritionist !== 'undefined')
+		{
+			navigate('PMess');
+		}
+		else{
+			Alert.alert('You do not have a nutritionist');
+		}
+	}
 
     render(){
         const {navigate} = this.props.navigation;
@@ -106,7 +124,7 @@ export default class patientHome extends React.Component {
             <ScrollView>
                 <View style={styles.messageView}>
                     <MessengerButton
-                        onPress={() => navigate('PMess')}/>
+                        onPress={() => this.checkMessenger()}/>
 				</View>
                 <View style={styles.topContainer}>
                     <View style={styles.helpView}>

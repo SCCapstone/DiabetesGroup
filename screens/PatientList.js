@@ -85,6 +85,8 @@ export default class PatientList extends React.Component {
 		ref.remove();
 		var patref = firebaseApp.database().ref('Patients/' + pid + '/Nutritionist');
 		patref.remove();
+		var patmesref = firebaseApp.database().ref('Patients/' + pid + '/messages/');
+		patmesref.remove();
 		
 	}
 
