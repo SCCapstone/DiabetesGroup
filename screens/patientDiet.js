@@ -215,12 +215,18 @@ export default class patientDiet extends Component<{}> {
                 <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
 
                 <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('DHelp')}>
+                    <Text style={styles.sideText}>Diet Help</Text>
+                </TouchableOpacity>
+
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
                                   onPress={() => navigate('Setting')}>
                     <Text style={styles.sideText}>Settings</Text>
                 </TouchableOpacity>
 
-                <View style={{height: 190, width: 300, backgroundColor: '#fefbea'}}/>
-
+                <View style={{height: 130, width: 300, backgroundColor: '#fefbea'}}/>
                 <TouchableOpacity style={styles.sideButton}
                                   onPress={() => navigate('Sign')}>
                     <Text style={styles.sideText}>Sign Out</Text>
