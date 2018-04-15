@@ -49,7 +49,10 @@ export default class NutritionistSettings extends Component<{}> {
     }
     _submitInfo(){
         var userID = firebaseApp.auth().currentUser.uid;
-        if(this.state.userType == 'Nutritionist'){
+        if(this.state.username == ''){
+            alert('Please enter a username first');
+        }
+        else if(this.state.userType == 'Nutritionist'){
             firebaseApp.database().ref('Nutritionists/' + userID ).update({
                 "userName": this.state.username
             });

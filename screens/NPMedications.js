@@ -89,7 +89,7 @@ export default class patientMedication extends Component<{}> {
                             <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
 
                             {this.state.medications.map((data, i) => (
-                                <Row key = {i} data={data} style={[styles.row, i%2 && {backgroundColor: 'orange'}]} textStyle={styles.text}/> ))}
+                                <Row key = {i} data={data} style={[styles.row, i%2 && {backgroundColor: '#afc2f7'}]} textStyle={styles.text}/> ))}
 
                         </Table>
                         <Text/>
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
             color: '#333333',
             marginBottom: 5,
         },
-        head: { height: 40, backgroundColor: 'orange' },
+        head: { height: 40, backgroundColor: '#afc2f7' },
         text: { textAlign:'center', color:'black' },
         row: { height: 30 },
     container: {
