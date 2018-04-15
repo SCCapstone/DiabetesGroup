@@ -26,9 +26,44 @@ export default class NutritionistSettings extends Component<{}> {
 
     constructor(props) {
         super(props);
-        this.state ={email: ''};
+        this.state ={email: '', username:'', userType: '' };
+        var userID = firebaseApp.auth().currentUser.uid;
+        var clinicianRef = firebaseApp.database().ref('Clinician/' + userID);
+        var nutritionistRef = firebaseApp.database().ref('Nutritionists/' + userID);
+        //checking to see if clinician or nutritionist
+        clinicianRef.on('value', (snap) =>{
+            if(snap.val() != null){
+                this.state.userType = 'Clinician';
+                this.state.username = snap.val().userName;
+                this.render();
+            }
+        });
+        nutritionistRef.on('value', (snap) =>{
+            if(snap.val() != null){
+                this.state.userType = 'Nutritionist';
+                this.state.username = snap.val().userName;
+                this.render();
+            }
+        });
 
     }
+    _submitInfo(){
+        var userID = firebaseApp.auth().currentUser.uid;
+        if(this.state.userType == 'Nutritionist'){
+            firebaseApp.database().ref('Nutritionists/' + userID ).update({
+                "userName": this.state.username
+            });
+            alert('Username updated to ' + this.state.username);
+        }
+        else if(this.state.userType == 'Clinician'){
+            firebaseApp.database().ref('Clinician/' + userID ).update({
+                "userName": this.state.username
+            });
+            alert('Username updated to ' + this.state.username);
+        }
+
+    }
+
 
     _resetPassword(){
         const {navigate} = this.props.navigation;
@@ -37,7 +72,6 @@ export default class NutritionistSettings extends Component<{}> {
         firebaseApp.auth().sendPasswordResetEmail(email);
         firebaseApp.auth().signOut();
         navigate('User');
-
     }
 
     render() {
@@ -47,6 +81,17 @@ export default class NutritionistSettings extends Component<{}> {
 
                 <View style={styles.container}>
                     <View style={styles.stretched}>
+                        <Text>Username:</Text>
+                        <TextInput style={styles.input} placeholder= "Enter your new username here"
+                                   underlineColorAndroid ={'transparent'}
+                                   placeholderTextColor= "#CFCFCF"
+                                   onChangeText={(text) => this.setState({username: text})}
+                                   value = {this.state.username}
+                        />
+                        <SeafoamButton
+                            title="Update"
+                            onPress = {() => this._submitInfo()}
+                        />
 
                         <Text>Send a Reset Password Email</Text>
                         <TextInput style={styles.input} placeholder="Re-enter your email"
