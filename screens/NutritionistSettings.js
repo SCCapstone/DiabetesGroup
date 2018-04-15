@@ -18,7 +18,10 @@ export default class NutritionistSettings extends Component<{}> {
 
     static navigationOptions = {
         title: 'Settings',
-        headerStyle: {backgroundColor: "#FF6127"}
+        headerStyle: {backgroundColor: "#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
+        headerRight: (<View></View>),
+        headerTintColor: "#FFFFFF"
     };
 
     constructor(props) {

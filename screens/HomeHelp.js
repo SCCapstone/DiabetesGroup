@@ -8,8 +8,9 @@ const MessengerButton = require('../components/MessengerButton');
 
 export default class HomeHelp extends React.Component {
     static navigationOptions = {
-        headerStyle: {backgroundColor: '#112471'},
-        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+        headerStyle: {backgroundColor: "#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
+        headerRight: (<View></View>),
         headerTintColor: "#FFFFFF",
         title: 'Home Screen Help Page',
     };

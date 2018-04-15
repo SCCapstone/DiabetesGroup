@@ -6,6 +6,9 @@ import {View,  StyleSheet} from 'react-native';
 import {Table, TableWrapper, Row, Rows, Col, Cols, Cell} from 'react-native-table-component';
 import firebaseApp from "../screens/FireBaseApp";
 class MedicationLogTable extends Component {
+    static navigationOptions = {
+        headerStyle: {backgroundColor: "#afc2f7"}
+    };
     constructor(props) {
         super(props);
         //console.ignoredYellowBox = [
@@ -50,7 +53,7 @@ class MedicationLogTable extends Component {
                     <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
 
                     {this.state.medications.map((data, i) => (
-                        <Row key = {i} data={data} style={[styles.row, i%2 && {backgroundColor: 'orange'}]} textStyle={styles.text}/> ))}
+                        <Row key = {i} data={data} style={[styles.row, i%2 && {backgroundColor: '#bcf7ff'}]} textStyle={styles.text}/> ))}
 
                 </Table>
 
@@ -61,15 +64,15 @@ class MedicationLogTable extends Component {
 
 
 const styles = StyleSheet.create({
-    head: { height: 40, backgroundColor: 'orange' },
+    head: { height: 40, backgroundColor: '#afc2f7' },
     text: { textAlign:'center', color:'black' },
-    row: { height: 30 },
+    row: { height: 30, borderTopColor: '#afc2f7' },
     container: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#bcf7ff',
     },
 });
 

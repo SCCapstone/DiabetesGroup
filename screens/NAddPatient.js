@@ -16,9 +16,9 @@ export default class NAddPatient extends Component<{}> {
     static navigationOptions = {
         title: 'Add Patient',
         headerStyle: {backgroundColor: "#112471"},
-        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
-        headerTintColor: "#FFFFFF",
-        headerRight: (<View />)
+        headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
+        headerRight: (<View></View>),
+        headerTintColor: "#FFFFFF"
     };
 
     constructor(props){
