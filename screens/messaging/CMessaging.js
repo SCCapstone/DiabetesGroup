@@ -24,7 +24,10 @@ import CustomView from './CustomView';
 export default class patientMessaging extends React.Component {
   static navigationOptions = {
 		title: 'Chat',
-		headerStyle: {backgroundColor: "#FF6127"}
+      headerStyle: {backgroundColor: "#112471"},
+      headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
+      headerRight: (<View></View>),
+      headerTintColor: "#FFFFFF"
   };
   constructor(props) {
     super(props);
