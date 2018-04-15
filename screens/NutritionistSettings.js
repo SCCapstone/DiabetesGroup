@@ -80,7 +80,7 @@ export default class NutritionistSettings extends Component<{}> {
     render() {
 
         return (
-            <ScrollView style={{backgroundColor: '#F7F1D2'}}>
+            <ScrollView style={{backgroundColor: '#fffcf6'}}>
 
                 <View style={styles.container}>
                     <View style={styles.stretched}>
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: 55,
         paddingRight: 55,
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     submitbutton:{
         alignItems: 'center',
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     },
     stretched: {
         alignSelf: 'stretch',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
     title: {
         fontSize: 20,
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     input:{
         marginBottom: 10,
         alignSelf: 'stretch',
-        backgroundColor: '#FEFDF5',
+        backgroundColor: '#ffffff',
         borderColor: "#000000",
         borderWidth: 1,
         padding: 10,
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginLeft: 30,
         alignSelf: 'stretch',
-        backgroundColor: '#FEFDF5',
+        backgroundColor: '#ffffff',
         borderColor: "#000000",
         borderWidth: 1,
     },
