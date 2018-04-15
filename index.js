@@ -48,14 +48,7 @@ const AppNavigator = StackNavigator({
         NutritionistSetting: {screen: NutritionistSettings},
         NSign: {screen: NutritionistSignIn},
         NewUser: {screen: createNewUser},
-        PList: {
-            screen: PatientList,
-            navigationOptions: ({navigation}) => ({
-                headerStyle: {backgroundColor: '#112471'},
-                title: 'Nutritionist Patient List',
-                headerLeft: <Text style={{color: '#FFFFFF'}} onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
-            })
-        },
+        PList: {screen: PatientList},
         PHome: {
             screen: patientHome,
             navigationOptions: ({navigation}) => ({

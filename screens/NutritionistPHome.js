@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, BackHandler, StyleSheet, ScrollView, FlatList,DrawerLayoutAndroid} from 'react-native';
+import {View, Text, BackHandler, StyleSheet, ScrollView, FlatList,DrawerLayoutAndroid, TouchableOpacity,} from 'react-native';
 import firebaseApp from './FireBaseApp';
 const SeafoamButton = require('../components/SeafoamButton');
 const GlucoseCircle = require('../components/GlucoseCircle');
@@ -56,21 +56,31 @@ export default class NutritionistPHome extends React.Component {
         const val1 = 7.6;
         const {navigate} = this.props.navigation;
         var navigationView = (
-            <View style={{flex: 1, backgroundColor: '#fffcf6'}}>
-                <SeafoamButton title="Patient List Home Screen"
-                               onPress={() => navigate('PList')}/>
-                <Text></Text>
-                <Text></Text>
-                <SeafoamButton title="Settings"
-                               onPress={() => navigate('NutritionistSetting')}/>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <SeafoamButton title="Sign Out"
-                               onPress={() => navigate('Sign')}/>
+            <View style={{flex: 1, backgroundColor: '#fefbea'}}>
+                <View style={{height: 50, width: 300, backgroundColor: '#112471'}}>
+                    <Text style={{alignSelf: "center", fontSize: 30, color: '#FFFFFF'}}>Hello!
+                    </Text>
+                </View>
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('PList')}>
+                    <Text style={styles.sideText}>Home</Text>
+                </TouchableOpacity>
+
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('NutritionistSetting')}>
+                    <Text style={styles.sideText}>Settings</Text>
+                </TouchableOpacity>
+
+                <View style={{height: 190, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('Sign')}>
+                    <Text style={styles.sideText}>Sign Out</Text>
+                </TouchableOpacity>
             </View>
         );
         return (
@@ -221,4 +231,18 @@ const styles = StyleSheet.create({
     text: { textAlign:'center', color:'black' },
     row: { height: 30 },
 
+    sideButton: {
+        width: 280,
+        height: 40,
+        backgroundColor: '#112471',
+        alignSelf: 'center',
+        borderWidth: 3,
+        borderColor: '#000000'
+    },
+
+    sideText: {
+        fontSize: 25,
+        color: '#fefbea',
+        alignSelf: 'center'
+    },
 });
