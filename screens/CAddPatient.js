@@ -10,7 +10,7 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 
-export default class NAddPatient extends Component<{}> {
+export default class CAddPatient extends Component<{}> {
 
     static navigationOptions = {
         title: 'Add Patient',
@@ -36,8 +36,8 @@ export default class NAddPatient extends Component<{}> {
             snapshot.forEach((child) => {
                 var pID = child.key;
                 if(child.val().email === that.state.pEmail) {
-                    if(child.val().Nutritionist === '' || typeof child.val().Nutritionist == 'undefined') {
-                        firebaseApp.database().ref('Nutritionists/' + user.uid + '/patients').push({
+                    if(child.val().Clinician === '' || typeof child.val().Clinician == 'undefined') {
+                        firebaseApp.database().ref('Clinician/' + user.uid + '/patients').push({
                             pID: pID,
                             pEmail: child.val().email,
                             pUserName: child.val().userName,
@@ -46,11 +46,11 @@ export default class NAddPatient extends Component<{}> {
                         added = true;
 
                         firebaseApp.database().ref('Patients/' + pID).update({
-                            Nutritionist: user.email,
+                            Clinician: user.email,
                         });
                         that.props.navigation.goBack();
                     }else {
-                        alert('This patient already has a nutritionist')
+                        alert('This patient already has a Clinician')
                         alreadyTied = true;
                     }
                 }

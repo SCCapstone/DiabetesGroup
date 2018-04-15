@@ -33,7 +33,6 @@ export default class ClinicianPHome extends React.Component {
             var appt = snapshot.val().nextAppt;
             var name = snapshot.val().userName;
             this.setState({nextAppt: appt, Name: name});
-
         });
         infoRef.on('value', (snapshot) => {
             var age = snapshot.val().Age;
