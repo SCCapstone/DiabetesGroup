@@ -27,7 +27,7 @@ export default class NAddPatient extends Component<{}> {
     }
 
     addPatient () {
-		var that = this;
+        var that = this;
 		var added = false;
 		var alreadyTied = false;
         var user = firebaseApp.auth().currentUser;
@@ -36,7 +36,7 @@ export default class NAddPatient extends Component<{}> {
             snapshot.forEach((child) => {
                 var pID = child.key;
                 if(child.val().email === that.state.pEmail) {
-                    if(child.val().Nutritionist === '' || typeof child.val().Nutritionist == 'undefined') {
+                    if(child.val().Nutritionist === '' || child.val().Nutritionist === undefined) {
                         firebaseApp.database().ref('Nutritionists/' + user.uid + '/patients').push({
                             pID: pID,
                             pEmail: child.val().email,
@@ -48,6 +48,19 @@ export default class NAddPatient extends Component<{}> {
                         firebaseApp.database().ref('Patients/' + pID).update({
                             Nutritionist: user.email,
                         });
+
+                        var userName = '';
+                        var nutrRef = firebaseApp.database().ref('Nutritionists/' + user.uid);
+                        nutrRef.once('value', (snapshot) => {
+                            userName = snapshot.val().userName;
+                            firebaseApp.database().ref('Patients/' + pID + '/messages/').push({
+                                text: ("Welcome to AahaRx, I'm your nutritionist " + userName),
+                                user: {
+                                    _id: 2,
+                                },
+                            });
+                        });
+
                         that.props.navigation.goBack();
                     }else {
                         alert('This patient already has a nutritionist')

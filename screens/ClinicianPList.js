@@ -9,7 +9,7 @@ export default class ClinicianPList extends React.Component {
     static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
         return {
-            title: 'Clinician Patient List',
+            title: 'Patient List',
             headerStyle: {backgroundColor: "#112471"},
             headerTitleStyle: {color: "#FFFFFF", textAlign: 'center', alignSelf: 'center', flex: 1},
             headerRight: (<View></View>),
@@ -35,8 +35,6 @@ export default class ClinicianPList extends React.Component {
             var pIDs = [];
             snap.forEach((child) => {
 				var key = child.key;
-				console.log(key);
-                console.log(child.val().pID);
                 pIDs.push({
 					lKey: key,
                     pID: child.val().pID,
@@ -63,11 +61,11 @@ export default class ClinicianPList extends React.Component {
 
     keyExtractor = (item) => item.id;
 
+
     deleteEvent(key, pid) {
-		console.log(key);
     	Alert.alert(
-			'Patient Deletion',
-			'Are you sure you want to delete this patient?',
+			'Patient Removal',
+			'Are you sure you want to remove this patient?',
 			[
 				{text: 'Cancel'},
 				{text: 'Yes', onPress: () => this.deletePatient(key, pid)},
@@ -76,15 +74,11 @@ export default class ClinicianPList extends React.Component {
     }
 
 	deletePatient(key, pid) {
-		console.log(key);
-		console.log(pid);
 		var userID = firebaseApp.auth().currentUser.uid;
 		var ref = firebaseApp.database().ref('Clinician/' + userID + '/patients/' + key);
 		ref.remove();
 		var patref = firebaseApp.database().ref('Patients/' + pid + '/Clinician');
 		patref.remove();
-		var patmesref = firebaseApp.database().ref('Patients/' + pid + '/messages/');
-		patmesref.remove();
 		
 	}
 
@@ -95,7 +89,6 @@ export default class ClinicianPList extends React.Component {
     }
 
     onRowDidOpen = (item, rowMap) => {
-        console.log('This row opened', item);
         setTimeout(() => {
             this.closeRow(rowMap, item);
         }, 2000);
@@ -174,7 +167,7 @@ export default class ClinicianPList extends React.Component {
                             <Text style={styles.backTextWhite}>Messenger</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ () => this.deleteEvent(item.lKey, item.pID) }>
-                            <Text style={styles.backTextWhite}>Delete</Text>
+                            <Text style={styles.backTextWhite}>Remove</Text>
                         </TouchableOpacity>
                     </View>
                 )}

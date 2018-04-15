@@ -9,7 +9,7 @@ export default class PatientList extends React.Component {
     static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
         return {
-            title: 'Nutritionist Patient List',
+            title: 'Patient List',
             headerStyle: {backgroundColor: "#112471"},
             headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
             headerTintColor: "#FFFFFF",
@@ -35,8 +35,6 @@ export default class PatientList extends React.Component {
             var pIDs = [];
             snap.forEach((child) => {
 				var key = child.key;
-				console.log(key);
-                console.log(child.val().pID);
                 pIDs.push({
 					lKey: key,
                     pID: child.val().pID,
@@ -68,10 +66,9 @@ export default class PatientList extends React.Component {
     }
 
     deleteEvent(key, pid) {
-		console.log(key);
     	Alert.alert(
-			'Patient Deletion',
-			'Are you sure you want to delete this patient?',
+			'Patient Removal',
+			'Are you sure you want to remove this patient?',
 			[
 				{text: 'Cancel'},
 				{text: 'Yes', onPress: () => this.deletePatient(key, pid)},
@@ -91,7 +88,6 @@ export default class PatientList extends React.Component {
 	}
 
     onRowDidOpen = (item, rowMap) => {
-        console.log('This row opened', item);
         setTimeout(() => {
             this.closeRow(rowMap, item);
         }, 2000);
@@ -175,7 +171,7 @@ export default class PatientList extends React.Component {
 
 
                         <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ () => this.deleteEvent(item.lKey, item.pID) }>
-                            <Text style={styles.backTextWhite}>Delete</Text>
+                            <Text style={styles.backTextWhite}>Remove</Text>
                         </TouchableOpacity>
 
 

@@ -10,11 +10,6 @@ import {
   DrawerLayoutAndroid
 } from 'react-native';
 import firebaseApp from '../FireBaseApp';
-const SeafoamButton = require('../../components/SeafoamButton');
-const GlucoseCircle = require('../../components/GlucoseCircle');
-const MessengerButton = require('../../components/MessengerButton');
-const GlucoseLogTable = require('../../components/GlucoseLogTable');
-const GlucoseGraph = require('../../components/GlucoseGraph');
 
 
 import {GiftedChat, Actions, Bubble, SystemMessage} from 'react-native-gifted-chat';
@@ -23,9 +18,13 @@ import CustomView from './CustomView';
 
 export default class patientMessaging extends React.Component {
   static navigationOptions = {
-		title: 'Chat',
-		headerStyle: {backgroundColor: "#FF6127"}
+      title: 'Chat With Nutritonist',
+      headerStyle: {backgroundColor: "#112471"},
+      headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
+      headerRight: (<View></View>),
+      headerTintColor: "#FFFFFF"
   };
+
   constructor(props) {
     super(props);
 	var userID = firebaseApp.auth().currentUser.uid;
