@@ -19,7 +19,7 @@ export default class PatientList extends React.Component {
             'Setting a timer'
         ];
         this.itemsRef = firebaseApp.database().ref('Patients/');
-		this.patientRef = firebaseApp.database().ref('Nutritionists/');
+		this.patientRef = firebaseApp.database().ref('Nutritionists/' + firebaseApp.auth().currentUser.uid + 'patients/');
         this.state = {listType: 'FlatList', userName: '', Patients: [], listOfP: []};
     }
 	containsP(obj, list) {
@@ -35,11 +35,11 @@ export default class PatientList extends React.Component {
 		return false;
 	}
     listenForItems(itemsRef) {
-		this.listenForItems2(this.patientRef);
+		this.listenForItems2();
         itemsRef.on('value', (snap) => {
             var items = [];
             snap.forEach((child) => {
-				if(this.containsP(child.val().email, this.state.listOfP))
+				//if(this.containsP(child.val().email, this.state.listOfP))
 				{
 		            items.push({
 		                id: child.key,
@@ -51,10 +51,10 @@ export default class PatientList extends React.Component {
         });
     }
 	
-	listenForItems2(patientRef) {
+	listenForItems2() {
 		var tempList = [];
 		console.log(firebaseApp.auth().currentUser.uid);
-		patientRef.on('value', (snap) => {
+		this.patientRef.on('value', (snap) => {
 			snap.forEach((child) => {
 				console.log("nothing");
 				tempList.push(child.val().pEmail);
