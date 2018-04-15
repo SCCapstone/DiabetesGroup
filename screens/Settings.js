@@ -18,8 +18,9 @@ export default class Settings extends Component<{}> {
 
     static navigationOptions = {
         title: 'Settings',
-        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
         headerStyle: {backgroundColor: "#112471"},
+        headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
+        headerRight: (<View></View>),
         headerTintColor: "#FFFFFF"
     };
 
