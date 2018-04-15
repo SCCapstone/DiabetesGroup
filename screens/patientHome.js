@@ -12,7 +12,12 @@ const GlucoseGraph = require('../components/GlucoseGraph');
 export default class patientHome extends React.Component {
     static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
+
         return {
+            headerStyle: {backgroundColor: "#112471"},
+            headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
+            headerRight: (<View></View>),
+            headerTintColor: "#FFFFFF",
             headerLeft: <MenuButton onPress = {() => params.open()}/>
         };
     };
