@@ -79,7 +79,6 @@ export default class PatientSignIn extends Component<{}> {
     }
 
     render() {
-        const {navigate} = this.props.navigation;
         return (
             <View style={{padding:0, paddingTop: 10, flex: 1, justifyContent: 'center', backgroundColor:'#fffcf6'}}>
                 <Image

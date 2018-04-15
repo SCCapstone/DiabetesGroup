@@ -18,62 +18,34 @@ export default class PatientList extends React.Component {
         console.ignoredYellowBox = [
             'Setting a timer'
         ];
-        this.itemsRef = firebaseApp.database().ref('Patients/');
-		this.patientRef = firebaseApp.database().ref('Nutritionists/' + firebaseApp.auth().currentUser.uid + 'patients/');
-        this.state = {listType: 'FlatList', userName: '', Patients: [], listOfP: []};
+        var user = firebaseApp.auth().currentUser;
+        this.pRef = firebaseApp.database().ref('Nutritionists/' + user.uid + '/patients/');
+        this.state = {listType: 'FlatList', userName: '', patients: []};
     }
-	containsP(obj, list) {
-		console.log("something happens in contains");
-		var i;
-			for (i in list) {
-				if (list.hasOwnProperty(i) && list[i] === obj) {
-					console.log(list[i]);
-					console.log(obj);
-					return true;
-				}
-			}
-		return false;
-	}
-    listenForItems(itemsRef) {
-		this.listenForItems2();
-        itemsRef.on('value', (snap) => {
-            var items = [];
+
+    listenForPatientIDs(pRef) {
+        pRef.on('value', (snap) => {
+            var pIDs = [];
             snap.forEach((child) => {
-				//if(this.containsP(child.val().email, this.state.listOfP))
-				{
-		            items.push({
-		                id: child.key,
-		                userName: child.val().userName,
-		            });
-				}
+                console.log(child.val().pID);
+                pIDs.push({
+                    pID: child.val().pID,
+                    pUserName: child.val().pUserName
+                });
             });
-            this.setState({Patients: items});
+            this.setState({patients: pIDs});
         });
     }
-	
-	listenForItems2() {
-		var tempList = [];
-		console.log(firebaseApp.auth().currentUser.uid);
-		this.patientRef.on('value', (snap) => {
-			snap.forEach((child) => {
-				console.log("nothing");
-				tempList.push(child.val().pEmail);
-			
-			});
-		});
-		this.setState({listOfP: tempList});
-	}
 
     componentDidMount() {
-        this.listenForItems(this.itemsRef);
+        this.listenForPatientIDs(this.pRef);
     }
 
     componentWillUnmount(){
-        this.itemsRef.off();
-		this.patientRef.off();
+        this.pRef.off();
     }
 
-    keyExtractor = (item) => item.id;
+    keyExtractor = (item) => item.pID;
 
     closeRow(rowMap, item) {
         if (rowMap[item]) {
@@ -93,11 +65,11 @@ export default class PatientList extends React.Component {
 
     _pDataCheck(item) {
         const {navigate} = this.props.navigation;
-        this.itemsRef.child('/Pinfo').once('value', function (snapshot) {
+        this.pRef.child('/Pinfo').once('value', function (snapshot) {
             if(snapshot.exists()) {
                 alert("Patient hasn't finished account creation. Once they complete account initialization you can view their info.")
             }else{
-                navigate("NPHome", {ID: item.id});
+                navigate("NPHome", {ID: item.pID});
             }
         });
     }
@@ -134,7 +106,7 @@ export default class PatientList extends React.Component {
 
              <SwipeListView style={styles.backGrnd}
                 useFlatList={true}
-                data={this.state.Patients}
+                data={this.state.patients}
                 keyExtractor = {this.keyExtractor}
                 renderItem ={({item}) =>
                     <TouchableHighlight
@@ -142,13 +114,12 @@ export default class PatientList extends React.Component {
                         style={styles.rowFront}
                         underlayColor={'#fffcf6'}
                     >
-                        <Text style ={styles.rowText}>{item.userName}</Text>
+                        <Text style ={styles.rowText}>{item.pUserName}</Text>
                     </TouchableHighlight>
                 }
-                 /*TODO: The Messenger Button needs to take the nutritionist to the messenger between them and this specific patient of theirs*/
                 renderHiddenItem={ ({item}, rowMap) => (
                     <View style={styles.rowBack}>
-                        <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ () => navigate("NMess", {ID: item.id})}>
+                        <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ () => navigate("NMess", {ID: item.pID})}>
                             <Text style={styles.backTextWhite}>Messenger</Text>
                         </TouchableOpacity>
 
