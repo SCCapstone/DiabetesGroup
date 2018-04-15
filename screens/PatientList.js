@@ -46,12 +46,11 @@ export default class PatientList extends React.Component {
 
     componentDidMount() {
         this.listenForPatientIDs(this.pRef);
+        this.props.navigation.setParams({ open: this.openDrawer });
     }
 
     componentWillUnmount(){
         this.pRef.off();
-        this.props.navigation.setParams({ open: this.openDrawer });
-
     }
     openDrawer(){
         this.drawer.openDrawer();
