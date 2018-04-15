@@ -6,7 +6,6 @@ import {
     StyleSheet,
     Text,
     View,
-    Image,
     TextInput,
     KeyboardAvoidingView
 } from 'react-native';
@@ -30,35 +29,36 @@ export default class NAddPatient extends Component<{}> {
     addPatient () {
 		var that = this;
 		var added = false;
+		var alreadyTied = false;
         var user = firebaseApp.auth().currentUser;
         var pRef = firebaseApp.database().ref('Patients/');
         pRef.once('value', function (snapshot) {
             snapshot.forEach((child) => {
                 var pID = child.key;
-				//console.log(child.val().email);
-				//console.log(that.state.pEmail);
                 if(child.val().email === that.state.pEmail) {
-					console.log(child.val().Nutritionist);
                     if(child.val().Nutritionist === '' || typeof child.val().Nutritionist == 'undefined') {
                         firebaseApp.database().ref('Nutritionists/' + user.uid + '/patients').push({
                             pID: pID,
                             pEmail: child.val().email,
+                            pUserName: child.val().userName,
                         });
-						added = true;
+
+                        added = true;
+
                         firebaseApp.database().ref('Patients/' + pID).update({
                             Nutritionist: user.email,
                         });
                         that.props.navigation.goBack();
                     }else {
                         alert('This patient already has a nutritionist')
+                        alreadyTied = true;
                     }
                 }
-            })
-        });
-		if(added === false)
-		{
-        alert('Please enter in a valid patient email.')
-		}
+            });
+            if(added === false && alreadyTied === false) {
+               alert('Please enter in a valid patient email.')
+            }
+        })
     }
 
     render() {
@@ -73,7 +73,6 @@ export default class NAddPatient extends Component<{}> {
                         <TextInput
                             placeholder={"Enter Email"}
                             placeholderTextColor="#CFCFCF"
-                            onSubmitEditing={() => this.passwordInput.focus()}
                             keyboardType = "email-address"
                             autoCapitalize = "none"
                             autoCorrect = {false}

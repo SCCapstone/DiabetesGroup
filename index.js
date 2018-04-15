@@ -86,7 +86,6 @@ const AppNavigator = StackNavigator({
             navigationOptions: ({navigation}) => ({
                 headerStyle: {backgroundColor: '#112471'},
                 title: 'Clinician Patient List',
-                headerLeft: <Text style={{color: '#FFFFFF'}} onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
             })
         },
     },
