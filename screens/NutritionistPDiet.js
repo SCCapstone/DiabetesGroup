@@ -18,8 +18,9 @@ export default class NutritionistPDiet extends Component<{}> {
     static navigationOptions = {
         title: 'Patient Diet',
         headerStyle: {backgroundColor: "#112471"},
-        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
-        headerTintColor: "#FFFFFF",
+        headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
+        headerRight: (<View></View>),
+        headerTintColor: "#FFFFFF"
     };
 
     constructor(props) {

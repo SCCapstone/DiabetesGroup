@@ -3,14 +3,19 @@ import {View, Text, BackHandler, StyleSheet, FlatList, TouchableOpacity, Touchab
 import firebaseApp from './FireBaseApp';
 import { SwipeListView } from 'react-native-swipe-list-view';
 const SeafoamButton = require('../components/SeafoamButton');
+const MenuButton = require('../components/MenuButton');
 
 export default class PatientList extends React.Component {
-    static navigationOptions = {
-        title: 'Nutritionist Patient List',
-        headerStyle: {backgroundColor: "#112471"},
-        headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
-        headerTintColor: "#FFFFFF",
-        headerRight: (<View />)
+    static navigationOptions = ({navigation}) => {
+        const {params = {}} = navigation.state;
+        return {
+            title: 'Nutritionist Patient List',
+            headerStyle: {backgroundColor: "#112471"},
+            headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+            headerTintColor: "#FFFFFF",
+            headerRight: (<View/>),
+            headerLeft: <MenuButton onPress = {() => params.open()}/>
+        };
     };
 
     constructor(props) {
@@ -21,6 +26,8 @@ export default class PatientList extends React.Component {
         var user = firebaseApp.auth().currentUser;
         this.pRef = firebaseApp.database().ref('Nutritionists/' + user.uid + '/patients/');
         this.state = {listType: 'FlatList', userName: '', patients: []};
+        super();
+        this.openDrawer = this.openDrawer.bind(this);
     }
 
     listenForPatientIDs(pRef) {
@@ -43,6 +50,11 @@ export default class PatientList extends React.Component {
 
     componentWillUnmount(){
         this.pRef.off();
+        this.props.navigation.setParams({ open: this.openDrawer });
+
+    }
+    openDrawer(){
+        this.drawer.openDrawer();
     }
 
     keyExtractor = (item) => item.pID;
@@ -52,6 +64,7 @@ export default class PatientList extends React.Component {
             rowMap[item].closeRow();
         }
     }
+
     deleteRow(rowMap, item) {
         //TODO: Need to add delete patient from list functionality(this will use an "Are you Sure" alert before deletiong from list.
     }
@@ -77,34 +90,42 @@ export default class PatientList extends React.Component {
     render() {
         const {navigate} = this.props.navigation;
         var navigationView = (
-            <View style={{flex: 1, backgroundColor: '#fffcf6'}}>
-                <SeafoamButton title="Patient List Home Screen"
-                               onPress={() => navigate('PList')}/>
-                <Text></Text>
-                <Text></Text>
-				<SeafoamButton title="Add a patient"
-                               onPress={() => navigate('NAddP')}/>
-                <Text></Text>
-                <Text></Text>
-                <SeafoamButton title="Settings"
-                               onPress={() => navigate('NutritionistSetting')}/>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <SeafoamButton title="Sign Out"
-                               onPress={() => navigate('Sign')}/>
+            <View style={{flex: 1, backgroundColor: '#fefbea'}}>
+                <View style={{height: 50, width: 300, backgroundColor: '#112471'}}>
+                    <Text style={{alignSelf: "center", fontSize: 30, color: '#FFFFFF'}}>Hello!
+                    </Text>
+                </View>
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('PList')}>
+                    <Text style={styles.sideText}>Home</Text>
+                </TouchableOpacity>
+
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('NutritionistSetting')}>
+                    <Text style={styles.sideText}>Settings</Text>
+                </TouchableOpacity>
+
+                <View style={{height: 190, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('Sign')}>
+                    <Text style={styles.sideText}>Sign Out</Text>
+                </TouchableOpacity>
             </View>
+
         );
         return (
             <DrawerLayoutAndroid
                 drawerWidth={300}
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
-                renderNavigationView={() => navigationView}>
+                renderNavigationView={() => navigationView}
+                ref = {_drawer => (this.drawer = _drawer)}>
 
-             <SwipeListView style={styles.backGrnd}
+            <SwipeListView style={styles.backGrnd}
                 useFlatList={true}
                 data={this.state.patients}
                 keyExtractor = {this.keyExtractor}
@@ -191,5 +212,19 @@ const styles = StyleSheet.create({
     },
     backGrnd: {
         backgroundColor: '#fffcf6'
+    },
+    sideButton: {
+        width: 280,
+        height: 40,
+        backgroundColor: '#112471',
+        alignSelf: 'center',
+        borderWidth: 3,
+        borderColor: '#000000'
+    },
+
+    sideText: {
+        fontSize: 25,
+        color: '#fefbea',
+        alignSelf: 'center'
     },
 });

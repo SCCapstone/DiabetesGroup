@@ -1,14 +1,22 @@
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView, DrawerLayoutAndroid, TouchableHighlight} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, DrawerLayoutAndroid, TouchableHighlight, TouchableOpacity,} from 'react-native';
 import firebaseApp from './FireBaseApp';
 const SeafoamButton = require('../components/SeafoamButton');
 const GlucoseCircle = require('../components/GlucoseCircle');
 const MessengerButton = require('../components/MessengerButton');
 const GlucoseLogTable = require('../components/GlucoseLogTable');
+const MenuButton = require('../components/MenuButton');
 const GlucoseGraph = require('../components/GlucoseGraph');
 
 
 export default class patientHome extends React.Component {
+    static navigationOptions = ({navigation}) => {
+        const {params = {}} = navigation.state;
+        return {
+            headerLeft: <MenuButton onPress = {() => params.open()}/>
+        };
+    };
+
     constructor(props) {
         super(props);
         console.disableYellowBox = true;
@@ -16,6 +24,8 @@ export default class patientHome extends React.Component {
         var userID = firebaseApp.auth().currentUser.uid;
         this.myRef = firebaseApp.database().ref('Patients/' + userID);
         this.state = {nextAppt: '', user: userID};
+        super();
+        this.openDrawer = this.openDrawer.bind(this);
     }
 
     updateItems(myRef) {
@@ -27,54 +37,80 @@ export default class patientHome extends React.Component {
 
     componentDidMount() {
         this.updateItems(this.myRef);
+        this.props.navigation.setParams({ open: this.openDrawer });
     }
 
     componentWillUnmount(){
         this.myRef.off();
     }
 
+    openDrawer(){
+        this.drawer.openDrawer();
+    }
+
     render(){
         const {navigate} = this.props.navigation;
         var navigationView = (
-            <View style={{flex: 1, backgroundColor: '#fffcf6'}}>
-                <SeafoamButton title="My Home Screen"
-                               onPress={() => navigate('PHome')}/>
-                <Text></Text>
-                <Text></Text>
-                <SeafoamButton title="My Diet"
-                               onPress={() => navigate('PDiet')}/>
-                <Text></Text>
-                <Text></Text>
-                <SeafoamButton title="My Medication"
-                               onPress={() => navigate('PMed')}/>
-                <Text></Text>
-                <Text></Text>
-                <SeafoamButton title="Settings"
-                            onPress={() => navigate('Setting')}/>
-                <Text></Text>
-                <Text></Text>
-                <SeafoamButton title="HomeScreen Help"
-                               onPress={() => navigate('HHelp')}/>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <SeafoamButton title="Sign Out"
-                               onPress={() => navigate('Sign')}/>
+            <View style={{flex: 1, backgroundColor: '#fefbea'}}>
+                <View style={{height: 50, width: 300, backgroundColor: '#112471'}}>
+                    <Text style={{alignSelf: "center", fontSize: 30, color: '#FFFFFF'}}>Hello Patient!
+                    </Text>
+                </View>
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
+                               onPress={() => navigate('PHome')}>
+                    <Text style={styles.sideText}>Home</Text>
+                </TouchableOpacity>
+
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('PDiet')}>
+                    <Text style={styles.sideText}>My Diet</Text>
+                </TouchableOpacity>
+
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('PMed')}>
+                    <Text style={styles.sideText}>My Medication</Text>
+                </TouchableOpacity>
+
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('Setting')}>
+                    <Text style={styles.sideText}>Settings</Text>
+                </TouchableOpacity>
+
+                <View style={{height: 190, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('Sign')}>
+                    <Text style={styles.sideText}>Sign Out</Text>
+                </TouchableOpacity>
             </View>
         );
         return (
             <DrawerLayoutAndroid
                 drawerWidth={300}
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
-                renderNavigationView={() => navigationView}>
+                renderNavigationView={() => navigationView}
+                ref = {_drawer => (this.drawer = _drawer)}>
             <ScrollView>
                 <View style={styles.messageView}>
                     <MessengerButton
                         onPress={() => navigate('PMess')}/>
 				</View>
+                <View style={styles.topContainer}>
+                    <View style={styles.helpView}>
+                        <TouchableHighlight
+                            onPress={() => navigate('HHelp')}>
+                            <Text style={styles.helpText}>Need Help?</Text>
+                        </TouchableHighlight>
+                    </View>
+                </View>
 
                 <View style={styles.container}>
                     <GlucoseCircle name={'HgbA1c'} user = {this.state.user}/>
@@ -144,10 +180,18 @@ const styles = StyleSheet.create({
     },
     messageView: {
         flex: 1,
-        marginTop: -10,
-        marginBottom: -10,
+        marginRight: 5,
+        marginTop: 3,
         flexDirection: 'row',
         justifyContent: 'flex-end',
+        backgroundColor: '#fffcf6',
+    },
+    helpView: {
+        flex: 1,
+        marginLeft: 5,
+        marginTop: 3,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
         backgroundColor: '#fffcf6',
     },
     nText: {
@@ -172,4 +216,19 @@ const styles = StyleSheet.create({
     text: { textAlign:'center', color:'black' },
     row: { height: 30 },
 
+
+    sideButton: {
+        width: 280,
+        height: 40,
+        backgroundColor: '#112471',
+        alignSelf: 'center',
+        borderWidth: 3,
+        borderColor: '#000000'
+    },
+
+    sideText: {
+        fontSize: 25,
+        color: '#fefbea',
+        alignSelf: 'center'
+    },
 });
