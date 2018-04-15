@@ -18,33 +18,40 @@ export default class ClinicianPList extends React.Component {
         console.ignoredYellowBox = [
             'Setting a timer'
         ];
-        this.itemsRef = firebaseApp.database().ref('Patients/');
+		var user = firebaseApp.auth().currentUser;
+		this.pRef = firebaseApp.database().ref('Clinician/' + user.uid + '/patients/');
         this.state = {listType: 'FlatList', userName: '', Patients: []};
+		super();
+		this.openDrawer = this.openDrawer.bind(this);
     }
 
-    listenForItems(itemsRef) {
-        itemsRef.on('value', (snap) => {
-            var items = [];
+    listenForPatientIDs(pRef) {
+        pRef.on('value', (snap) => {
+            var pIDs = [];
             snap.forEach((child) => {
-                items.push({
-                    id: child.key,
-                    userName: child.val().userName,
+                pIDs.push({
+                    pID: child.val().pID,
+                    pUserName: child.val().pUserName
                 });
             });
-            this.setState({Patients: items});
+            this.setState({Patients: pIDs});
         });
     }
 
 
     componentDidMount() {
-        this.listenForItems(this.itemsRef);
+        this.listenForPatientIDs(this.pRef);
     }
 
     componentWillUnmount(){
-        this.itemsRef.off();
+        this.pRef.off();
+		this.props.navigation.setParams({ open: this.openDrawer });
     }
+	openDrawer(){
+		this.drawer.openDrawer();
+	}
 
-    keyExtractor = (item) => item.id;
+    keyExtractor = (item) => item.pID;
 
     closeRow(rowMap, item) {
         if (rowMap[item]) {
@@ -86,6 +93,11 @@ export default class ClinicianPList extends React.Component {
                                onPress={() => navigate('NutritionistSetting')}/>
                 <Text></Text>
                 <Text></Text>
+				<View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+				<TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('NAddP')}>
+                    <Text style={styles.sideText}>Add a patient</Text>
+                </TouchableOpacity>
                 <Text></Text>
                 <Text></Text>
                 <Text></Text>
