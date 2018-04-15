@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, BackHandler, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight, DrawerLayoutAndroid} from 'react-native';
+import {Alert,View, Text, BackHandler, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight, DrawerLayoutAndroid} from 'react-native';
 import firebaseApp from './FireBaseApp';
 import { SwipeListView } from 'react-native-swipe-list-view';
 const SeafoamButton = require('../components/SeafoamButton');
@@ -9,7 +9,7 @@ export default class PatientList extends React.Component {
     static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
         return {
-            title: 'Nutritionist Patient List',
+            title: 'Patient List',
             headerStyle: {backgroundColor: "#112471"},
             headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
             headerTintColor: "#FFFFFF",
@@ -34,8 +34,9 @@ export default class PatientList extends React.Component {
         pRef.on('value', (snap) => {
             var pIDs = [];
             snap.forEach((child) => {
-                console.log(child.val().pID);
+				var key = child.key;
                 pIDs.push({
+					lKey: key,
                     pID: child.val().pID,
                     pUserName: child.val().pUserName
                 });
@@ -56,7 +57,7 @@ export default class PatientList extends React.Component {
         this.drawer.openDrawer();
     }
 
-    keyExtractor = (item) => item.pID;
+    keyExtractor = (item) => item.id;
 
     closeRow(rowMap, item) {
         if (rowMap[item]) {
@@ -64,12 +65,29 @@ export default class PatientList extends React.Component {
         }
     }
 
-    deleteRow(rowMap, item) {
-        //TODO: Need to add delete patient from list functionality(this will use an "Are you Sure" alert before deletiong from list.
+    deleteEvent(key, pid) {
+    	Alert.alert(
+			'Patient Removal',
+			'Are you sure you want to remove this patient?',
+			[
+				{text: 'Cancel'},
+				{text: 'Yes', onPress: () => this.deletePatient(key, pid)},
+			]
+		)
     }
 
+	deletePatient(key, pid) {
+		var userID = firebaseApp.auth().currentUser.uid;
+		var ref = firebaseApp.database().ref('Nutritionists/' + userID + '/patients/' + key);
+		ref.remove();
+		var patref = firebaseApp.database().ref('Patients/' + pid + '/Nutritionist');
+		patref.remove();
+		var patmesref = firebaseApp.database().ref('Patients/' + pid + '/messages/');
+		patmesref.remove();
+		
+	}
+
     onRowDidOpen = (item, rowMap) => {
-        console.log('This row opened', item);
         setTimeout(() => {
             this.closeRow(rowMap, item);
         }, 2000);
@@ -99,6 +117,11 @@ export default class PatientList extends React.Component {
                 <TouchableOpacity style={styles.sideButton}
                                   onPress={() => navigate('PList')}>
                     <Text style={styles.sideText}>Home</Text>
+                </TouchableOpacity>
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+				<TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('NAddP')}>
+                    <Text style={styles.sideText}>Add a patient</Text>
                 </TouchableOpacity>
 
                 <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
@@ -137,15 +160,21 @@ export default class PatientList extends React.Component {
                         <Text style ={styles.rowText}>{item.pUserName}</Text>
                     </TouchableHighlight>
                 }
-                renderHiddenItem={ ({item}, rowMap) => (
+                renderHiddenItem={ ({item}, {rowMap}) => (
+
+
                     <View style={styles.rowBack}>
                         <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ () => navigate("NMess", {ID: item.pID})}>
                             <Text style={styles.backTextWhite}>Messenger</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ _ => this.deleteRow(rowMap, item.id) }>
-                            <Text style={styles.backTextWhite}>Delete</Text>
+
+
+                        <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ () => this.deleteEvent(item.lKey, item.pID) }>
+                            <Text style={styles.backTextWhite}>Remove</Text>
                         </TouchableOpacity>
+
+
                     </View>
                 )}
                 leftOpenValue={85}

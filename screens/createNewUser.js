@@ -76,12 +76,6 @@ export default class createNewUser extends Component<{}> {
                             nextAppt: "05/18/18, 12:20 PM",
                             nSuggestions: "Nutritionist suggestions pull here!",
                         });
-						firebaseApp.database().ref('Patients/' + user.uid + '/messages/').push({
-						text: 'Welcome to AahaRx',
-						user: {
-						  _id: 3,
-						},
-				  		});
                         navigate('NewPatient')
                     }
                 }).catch(function(error){

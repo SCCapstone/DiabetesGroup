@@ -92,7 +92,6 @@ export default class ClinicianPDiet extends Component<{}> {
     keyExtractor = (item) => item.id;
 
     averageDiet = () => {
-        console.log(this.state.fruits1.length);
         afruits = this.state.fruits1;
         aveges = this.state.veges1;
         agraStar = this.state.graStar1;
@@ -204,14 +203,14 @@ export default class ClinicianPDiet extends Component<{}> {
                     <Text style={styles.sideText}>Diet Help</Text>
                 </TouchableOpacity>
 
-                <View style={{height: 190, width: 300, backgroundColor: '#fefbea'}}/>
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
 
                 <TouchableOpacity style={styles.sideButton}
                                   onPress={() => navigate('NutritionistSetting')}>
                     <Text style={styles.sideText}>Settings</Text>
                 </TouchableOpacity>
 
-                <View style={{height: 190, width: 300, backgroundColor: '#fefbea'}}/>
+                <View style={{height: 130, width: 300, backgroundColor: '#fefbea'}}/>
 
                 <TouchableOpacity style={styles.sideButton}
                                   onPress={() => navigate('Sign')}>

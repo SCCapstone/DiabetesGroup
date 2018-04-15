@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, BackHandler, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight,DrawerLayoutAndroid} from 'react-native';
+import {Alert,View, Text, BackHandler, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight,DrawerLayoutAndroid} from 'react-native';
 import firebaseApp from './FireBaseApp';
 import { SwipeListView } from 'react-native-swipe-list-view';
 const SeafoamButton = require('../components/SeafoamButton');
@@ -9,7 +9,7 @@ export default class ClinicianPList extends React.Component {
     static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
         return {
-            title: 'Clinician Patient List',
+            title: 'Patient List',
             headerStyle: {backgroundColor: "#112471"},
             headerTitleStyle: {color: "#FFFFFF", textAlign: 'center', alignSelf: 'center', flex: 1},
             headerRight: (<View></View>),
@@ -23,33 +23,36 @@ export default class ClinicianPList extends React.Component {
         console.ignoredYellowBox = [
             'Setting a timer'
         ];
-        this.itemsRef = firebaseApp.database().ref('Patients/');
-        this.state = {listType: 'FlatList', userName: '', Patients: []};
+		var user = firebaseApp.auth().currentUser;
+        this.pRef = firebaseApp.database().ref('Clinician/' + user.uid + '/patients/');
+        this.state = {listType: 'FlatList', userName: '', patients: []};
         super();
         this.openDrawer = this.openDrawer.bind(this);
     }
 
-    listenForItems(itemsRef) {
-        itemsRef.on('value', (snap) => {
-            var items = [];
+    listenForPatientIDs(pRef) {
+        pRef.on('value', (snap) => {
+            var pIDs = [];
             snap.forEach((child) => {
-                items.push({
-                    id: child.key,
-                    userName: child.val().userName,
+				var key = child.key;
+                pIDs.push({
+					lKey: key,
+                    pID: child.val().pID,
+                    pUserName: child.val().pUserName
                 });
             });
-            this.setState({Patients: items});
+            this.setState({patients: pIDs});
         });
     }
 
-
     componentDidMount() {
-        this.listenForItems(this.itemsRef);
+        this.listenForPatientIDs(this.pRef);
         this.props.navigation.setParams({ open: this.openDrawer });
     }
 
     componentWillUnmount(){
-        this.itemsRef.off();
+        this.pRef.off();
+		this.props.navigation.setParams({ open: this.openDrawer });
     }
 
     openDrawer(){
@@ -58,18 +61,34 @@ export default class ClinicianPList extends React.Component {
 
     keyExtractor = (item) => item.id;
 
+
+    deleteEvent(key, pid) {
+    	Alert.alert(
+			'Patient Removal',
+			'Are you sure you want to remove this patient?',
+			[
+				{text: 'Cancel'},
+				{text: 'Yes', onPress: () => this.deletePatient(key, pid)},
+			]
+		)
+    }
+
+	deletePatient(key, pid) {
+		var userID = firebaseApp.auth().currentUser.uid;
+		var ref = firebaseApp.database().ref('Clinician/' + userID + '/patients/' + key);
+		ref.remove();
+		var patref = firebaseApp.database().ref('Patients/' + pid + '/Clinician');
+		patref.remove();
+		
+	}
+
     closeRow(rowMap, item) {
         if (rowMap[item]) {
             rowMap[item].closeRow();
         }
     }
 
-    deleteRow(rowMap, item) {
-        //TODO: Need to add delete patient from list functionality(this will use an "Are you Sure" alert before deletiong from list.
-    }
-
     onRowDidOpen = (item, rowMap) => {
-        console.log('This row opened', item);
         setTimeout(() => {
             this.closeRow(rowMap, item);
         }, 2000);
@@ -77,11 +96,11 @@ export default class ClinicianPList extends React.Component {
 
     _pDataCheck(item) {
         const {navigate} = this.props.navigation;
-        this.itemsRef.child('/Pinfo').once('value', function (snapshot) {
+        this.pRef.child('/Pinfo').once('value', function (snapshot) {
             if(snapshot.exists()) {
                 alert("Patient hasn't finished account creation. Once they complete account initialization you can view their info.")
             }else{
-                navigate("CPHome", {ID: item.id});
+                navigate("CPHome", {ID: item.pID});
             }
         });
     }
@@ -99,6 +118,11 @@ export default class ClinicianPList extends React.Component {
                 <TouchableOpacity style={styles.sideButton}
                                   onPress={() => navigate('CPList')}>
                     <Text style={styles.sideText}>Home</Text>
+                </TouchableOpacity>
+				<View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+				<TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('CAddP')}>
+                    <Text style={styles.sideText}>Add a patient</Text>
                 </TouchableOpacity>
 
                 <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
@@ -123,10 +147,9 @@ export default class ClinicianPList extends React.Component {
                 renderNavigationView={() => navigationView}
                 ref = {_drawer => (this.drawer = _drawer)}>
 
-
              <SwipeListView style={styles.backGrnd}
                 useFlatList={true}
-                data={this.state.Patients}
+                data={this.state.patients}
                 keyExtractor = {this.keyExtractor}
 				disableRightSwipe = {true}
                 renderItem ={({item}) =>
@@ -135,16 +158,16 @@ export default class ClinicianPList extends React.Component {
                         style={styles.rowFront}
                         underlayColor={'#fffcf6'}
                     >
-                        <Text style ={styles.rowText}>{item.userName}</Text>
+                        <Text style ={styles.rowText}>{item.pUserName}</Text>
                     </TouchableHighlight>
                 }
-                renderHiddenItem={ (item, rowMap) => (
+                renderHiddenItem={ ({item}, {rowMap}) => (
                     <View style={styles.rowBack}>
-                        <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ _ => this.closeRow(rowMap, item.id) }>
+                        <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ _ => this.closeRow(rowMap, {ID: item.pID}) }>
                             <Text style={styles.backTextWhite}>Messenger</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ _ => this.deleteRow(rowMap, item.id) }>
-                            <Text style={styles.backTextWhite}>Delete</Text>
+                        <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ () => this.deleteEvent(item.lKey, item.pID) }>
+                            <Text style={styles.backTextWhite}>Remove</Text>
                         </TouchableOpacity>
                     </View>
                 )}

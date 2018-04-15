@@ -62,7 +62,6 @@ class GlucoseLogTable extends Component {
     }
 
     onRowDidOpen = (item, rowMap) => {
-        console.log('This row opened', item);
         setTimeout(() => {
             this.closeRow(rowMap, item);
         }, 2000);
@@ -121,10 +120,14 @@ class GlucoseLogTable extends Component {
                        </TouchableHighlight>
                    }
                    renderHiddenItem={ ({item}, {rowMap}) => (
+
+
                        <View style={[styles.rowBack, item.count%2 > 0 && {backgroundColor: '#bcf7ff'}, item.count%2 === 0 && {backgroundColor: 'white'}]}>
                            <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ () => this.deleteEvent(item.lKey) }>
                                <Text style={styles.backTextWhite}>Delete</Text>
                            </TouchableOpacity>
+
+
 
                            <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ () => this.editLevels(item.lKey, item.gLevel, item.rType, item.note)}>
                                <Text style={styles.backTextWhite}>Edit</Text>

@@ -28,7 +28,7 @@ export default class patientHome extends React.Component {
 
         var userID = firebaseApp.auth().currentUser.uid;
         this.myRef = firebaseApp.database().ref('Patients/' + userID);
-        this.state = {nextAppt: '', user: userID};
+        this.state = {nextAppt: '', user: userID, nutritionist: ''};
         super();
         this.openDrawer = this.openDrawer.bind(this);
     }
@@ -52,6 +52,18 @@ export default class patientHome extends React.Component {
     openDrawer(){
         this.drawer.openDrawer();
     }
+
+	checkMessenger(){
+        const {navigate} = this.props.navigation;
+		var ref = firebaseApp.database().ref('Patients/' + this.state.user);
+		ref.once('value', (snap) => {
+            if(snap.val().Nutritionist !== undefined) {
+                navigate('PMess');
+            }else{
+                alert('You do not have a nutritionist');
+            }
+		});
+	}
 
     render(){
         const {navigate} = this.props.navigation;
@@ -85,11 +97,18 @@ export default class patientHome extends React.Component {
                 <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
 
                 <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('HHelp')}>
+                    <Text style={styles.sideText}>Home Screen Help</Text>
+                </TouchableOpacity>
+
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
                                   onPress={() => navigate('Setting')}>
                     <Text style={styles.sideText}>Settings</Text>
                 </TouchableOpacity>
 
-                <View style={{height: 190, width: 300, backgroundColor: '#fefbea'}}/>
+                <View style={{height: 140, width: 300, backgroundColor: '#fefbea'}}/>
 
                 <TouchableOpacity style={styles.sideButton}
                                   onPress={() => navigate('Sign')}>
@@ -106,16 +125,8 @@ export default class patientHome extends React.Component {
             <ScrollView>
                 <View style={styles.messageView}>
                     <MessengerButton
-                        onPress={() => navigate('PMess')}/>
+                        onPress={() => this.checkMessenger()}/>
 				</View>
-                <View style={styles.topContainer}>
-                    <View style={styles.helpView}>
-                        <TouchableHighlight
-                            onPress={() => navigate('HHelp')}>
-                            <Text style={styles.helpText}>Need Help?</Text>
-                        </TouchableHighlight>
-                    </View>
-                </View>
 
                 <View style={styles.container}>
                     <GlucoseCircle name={'HgbA1c'} user = {this.state.user}/>
@@ -185,18 +196,10 @@ const styles = StyleSheet.create({
     },
     messageView: {
         flex: 1,
-        marginRight: 5,
-        marginTop: 3,
+        marginTop: -10,
+        marginBottom: -10,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        backgroundColor: '#fffcf6',
-    },
-    helpView: {
-        flex: 1,
-        marginLeft: 5,
-        marginTop: 3,
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
         backgroundColor: '#fffcf6',
     },
     nText: {
