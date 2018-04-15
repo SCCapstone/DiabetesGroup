@@ -19,7 +19,7 @@ export default class PatientList extends React.Component {
             'Setting a timer'
         ];
         this.itemsRef = firebaseApp.database().ref('Patients/');
-		this.patientRef = firebaseApp.database().ref('Nutritionists/');
+		this.patientRef = firebaseApp.database().ref('Nutritionists/' + firebase.auth().currentUser.uid + 'patients/');
         this.state = {listType: 'FlatList', userName: '', Patients: [], listOfP: []};
     }
 	containsP(obj, list) {
