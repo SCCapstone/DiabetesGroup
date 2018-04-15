@@ -24,7 +24,7 @@ import CMess from './screens/messaging/CMessaging.js';
 import DHelp from './screens/DietHelp'
 import CPDiet from './screens/ClinicianPDiet';
 import CPMed from './screens/CPMedications';
-
+import NAddP from './screens/NAddPatient.js';
 import medicationInput from './screens/medicationInput';
 import NmedicationInput from './screens/NmedicationInput';
 import CmedicationInput from './screens/CmedicationInput';
@@ -79,6 +79,7 @@ const AppNavigator = StackNavigator({
         TDiet: {screen: todaysDietPatient},
         DInput: {screen: dietInput},
         NPHome: {screen: NPHome},
+		NAddP: {screen: NAddP},
         NPDiet: {screen: NPDiet},
         CPDiet: {screen: CPDiet},
         NPMed: {screen: NPMed},
