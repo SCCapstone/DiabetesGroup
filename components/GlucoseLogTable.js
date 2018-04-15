@@ -62,7 +62,6 @@ class GlucoseLogTable extends Component {
     }
 
     onRowDidOpen = (item, rowMap) => {
-        console.log('This row opened', item);
         setTimeout(() => {
             this.closeRow(rowMap, item);
         }, 2000);

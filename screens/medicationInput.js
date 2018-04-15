@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';
 import {
-    Platform,
     StyleSheet,
     Text,
     TextInput,
     View,
-    Button,
-    AppRegistry,
     TouchableOpacity,
     ScrollView,
     Picker,
@@ -68,13 +65,6 @@ export default class MedicationInput extends Component<{}> {
                 <TouchableOpacity style={styles.sideButton}
                                   onPress={() => navigate('PHome')}>
                     <Text style={styles.sideText}>Home</Text>
-                </TouchableOpacity>
-
-                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
-
-                <TouchableOpacity style={styles.sideButton}
-                                  onPress={() => navigate('PDiet')}>
-                    <Text style={styles.sideText}>My Diet</Text>
                 </TouchableOpacity>
 
                 <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>

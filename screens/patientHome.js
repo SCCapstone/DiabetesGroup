@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, View, Text, StyleSheet, ScrollView, DrawerLayoutAndroid, TouchableHighlight, TouchableOpacity,} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, DrawerLayoutAndroid, TouchableHighlight, TouchableOpacity,} from 'react-native';
 import firebaseApp from './FireBaseApp';
 const SeafoamButton = require('../components/SeafoamButton');
 const GlucoseCircle = require('../components/GlucoseCircle');
@@ -56,19 +56,13 @@ export default class patientHome extends React.Component {
 	checkMessenger(){
         const {navigate} = this.props.navigation;
 		var ref = firebaseApp.database().ref('Patients/' + this.state.user);
-		console.log(this.state.user);
-		ref.on('value', (snap) => {
-			var nutri = snap.val().Nutritionist;
-			this.setState({nutritionist: nutri});
+		ref.once('value', (snap) => {
+            if(snap.val().Nutritionist !== undefined) {
+                navigate('PMess');
+            }else{
+                alert('You do not have a nutritionist');
+            }
 		});
-		console.log(this.state.nutritionist);
-		if(typeof this.state.nutritionist !== 'undefined')
-		{
-			navigate('PMess');
-		}
-		else{
-			Alert.alert('You do not have a nutritionist');
-		}
 	}
 
     render(){
@@ -103,11 +97,18 @@ export default class patientHome extends React.Component {
                 <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
 
                 <TouchableOpacity style={styles.sideButton}
+                                  onPress={() => navigate('HHelp')}>
+                    <Text style={styles.sideText}>Home Screen Help</Text>
+                </TouchableOpacity>
+
+                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
+
+                <TouchableOpacity style={styles.sideButton}
                                   onPress={() => navigate('Setting')}>
                     <Text style={styles.sideText}>Settings</Text>
                 </TouchableOpacity>
 
-                <View style={{height: 190, width: 300, backgroundColor: '#fefbea'}}/>
+                <View style={{height: 140, width: 300, backgroundColor: '#fefbea'}}/>
 
                 <TouchableOpacity style={styles.sideButton}
                                   onPress={() => navigate('Sign')}>

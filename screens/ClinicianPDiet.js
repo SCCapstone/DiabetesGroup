@@ -92,7 +92,6 @@ export default class ClinicianPDiet extends Component<{}> {
     keyExtractor = (item) => item.id;
 
     averageDiet = () => {
-        console.log(this.state.fruits1.length);
         afruits = this.state.fruits1;
         aveges = this.state.veges1;
         agraStar = this.state.graStar1;

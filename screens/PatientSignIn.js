@@ -55,7 +55,6 @@ export default class PatientSignIn extends Component<{}> {
                 }else{
                     alert("You're not an authorized Patient. Please sign in using a Patient account.");
                     firebaseApp.auth().signOut().then(function(){
-                        console.log('Signed Out');
                     });
                 }
             });

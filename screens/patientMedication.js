@@ -43,13 +43,6 @@ export default class patientMedication extends Component<{}> {
                 <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
 
                 <TouchableOpacity style={styles.sideButton}
-                                  onPress={() => navigate('PDiet')}>
-                    <Text style={styles.sideText}>My Diet</Text>
-                </TouchableOpacity>
-
-                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
-
-                <TouchableOpacity style={styles.sideButton}
                                   onPress={() => navigate('PMed')}>
                     <Text style={styles.sideText}>My Medication</Text>
                 </TouchableOpacity>
