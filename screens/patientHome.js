@@ -151,7 +151,7 @@ export default class patientHome extends React.Component {
                                    onPress={() => navigate('PDiet')}/>
                     <Text></Text>
                     <SeafoamButton title="Medications"
-                                   onPress={() => navigate('PMed')}/>
+                                   onPress={() => navigate('PMed', {ID: this.state.user})}/>
                     <Text style={{paddingBottom: 80}}></Text>
 
                 </View>

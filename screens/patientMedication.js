@@ -25,6 +25,12 @@ export default class patientMedication extends Component<{}> {
         headerTintColor: "#FFFFFF"
     };
 
+    constructor(props) {
+        super(props);
+        var userID = props.navigation.state.params.ID;
+        this.state = {user: userID};
+    }
+
     render() {
         const {navigate} = this.props.navigation;
         var navigationView = (
@@ -68,13 +74,15 @@ export default class patientMedication extends Component<{}> {
     drawerPosition={DrawerLayoutAndroid.positions.Left}
     renderNavigationView={() => navigationView}>
             <ScrollView style={styles.container}>
-                <MedicationLogTable>
-
-                </MedicationLogTable>
+            <View style = {{marginBottom: 30, marginTop: 40}}>
                 <SeafoamButton
                     title="Add new medication"
                     onPress = { () => navigate('MInput')}
                 />
+            </View>
+                <MedicationLogTable user = {this.state.user}>
+
+                </MedicationLogTable>
             </ScrollView>
 </DrawerLayoutAndroid>
         );

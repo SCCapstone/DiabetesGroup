@@ -34,7 +34,7 @@ import ClinicianSignIn from './screens/ClinicianSignIn';
 import ClinicianPList from './screens/ClinicianPList';
 import Settings from './screens/Settings';
 import NutritionistSettings from './screens/NutritionistSettings';
-
+import MedicationEdit from './screens/MedicationEdit';
 
 
 import {StackNavigator,} from 'react-navigation';
@@ -64,6 +64,7 @@ const AppNavigator = StackNavigator({
         GEdit: {screen: GlucoseEdit},
         MInput: {screen: medicationInput},
         NMInput: {screen: NmedicationInput},
+        MEdit: { screen: MedicationEdit},
         CMInput: {screen: CmedicationInput},
         PMed: {screen: patientMedication},
         PDiet: {screen: patientDiet},
