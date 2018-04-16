@@ -26,6 +26,7 @@ export default class MedicationEdit extends Component<{}> {
         var medicine = props.navigation.state.params.medicine;
         var dosage = props.navigation.state.params.dosage;
         var mTime = props.navigation.state.params.mTime;
+        this.user = props.navigation.state.params.ID;
         this.state = {medicine: medicine, dosage: dosage, mTime: mTime};
     }
 
@@ -34,7 +35,7 @@ export default class MedicationEdit extends Component<{}> {
         var mTime = this.state.mTime;
         var medicine = this.state.medicine;
         var dosage = this.state.dosage;
-        var user = firebaseApp.auth().currentUser;
+        var user = this.user;
 
         if(mTime === "" || medicine === "" || dosage === "")
         {

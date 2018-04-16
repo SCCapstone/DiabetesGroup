@@ -10,49 +10,28 @@ import {
     TouchableOpacity,
     DrawerLayoutAndroid
 } from 'react-native';
+const MedicationLogTable = require('../components/MedicationLogTable');
+const AddToGraph = require('../components/AddToGraph');
 
 export default class patientMedication extends Component<{}> {
 
-    static navigationOptions = {
-        title: 'Patient Medications',
-        headerStyle: {backgroundColor: "#112471"},
-        headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
-        headerRight: (<View></View>),
-        headerTintColor: "#FFFFFF"
+    static navigationOptions = ({navigation}) => {
+        return {
+            title: 'Patient Medications',
+            headerStyle: {backgroundColor: "#112471"},
+            headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
+            headerRight: (<View></View>),
+            headerTintColor: "#FFFFFF",
+        };
     };
+
     constructor(props) {
         super(props);
-        //console.ignoredYellowBox = [
-        // 'Setting a timer'
-        //];
         var userID = props.navigation.state.params.ID;
-        this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/medications/');
-        this.state = { medications: [], medicine: '', dosage: '', time: '', user: userID};
-    }
-
-    listenForItems(itemsRef) {
-        itemsRef.on('value', (snap) => {
-            var items = [];
-            snap.forEach((child) => {
-                items.push(
-                    [child.val().medicine,
-                        child.val().dosage,
-                        child.val().time,])
-            });
-            this.setState({medications: items});
-        });
-    }
-
-    componentDidMount() {
-        this.listenForItems(this.itemsRef);
-    }
-
-    componentWillUnmount(){
-        this.itemsRef.off();
+        this.state = {user: userID};
     }
 
     keyExtractor = (item) => item.id;
-
     render() {
         const tableHead = ['Medicine', 'Dosage', 'Time'];
         const {navigate} = this.props.navigation;
@@ -89,19 +68,10 @@ export default class patientMedication extends Component<{}> {
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
                 renderNavigationView={() => navigationView}>
                 <ScrollView style={styles.container}>
-                        <Table>
-
-                            <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-
-                            {this.state.medications.map((data, i) => (
-                                <Row key = {i} data={data} style={[styles.row, i%2 && {backgroundColor: '#afc2f7'}]} textStyle={styles.text}/> ))}
-
-                        </Table>
-                        <Text/>
-                    <SeafoamButton
-                        title="Add new medication for patient"
-                        onPress = { () => navigate("NMInput", {ID: this.state.user})}
-                    />
+                    <MedicationLogTable user = {this.state.user}>
+                    </MedicationLogTable>
+                    <SeafoamButton title = 'Add Medications'
+                                   onPress = {() => navigate('NMInput', {ID: this.state.user})}/>
                 </ScrollView>
             </DrawerLayoutAndroid>
         );

@@ -28,10 +28,8 @@ export default class NmedicationInput extends Component<{}> {
     constructor(props) {
         super(props);
         var userID = props.navigation.state.params.ID;
-        this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/medications/');
-        this.state = { medications: [], medicine: '', dosage: '', time: '', user: userID,};
+        this.state = {medicine: '', dosage: '', time:'', user: userID};
     }
-
 
     _medicationValues() {
         var time = this.state.time;
@@ -51,8 +49,7 @@ export default class NmedicationInput extends Component<{}> {
                 medicine: medicine,
                 dosage: dosage,
             });
-            const {navigate} = this.props.navigation;
-            navigate("NPMed", {ID: this.state.user})
+            this.props.navigation.goBack();
         }
     }
 
@@ -122,7 +119,7 @@ export default class NmedicationInput extends Component<{}> {
 
 
                 </View>
-                <SeafoamButton title="Submit Medication for Patient"
+                <SeafoamButton title="Submit Patient Medication"
                                onPress = { () => this._medicationValues()}
                 />
 

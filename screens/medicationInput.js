@@ -24,10 +24,8 @@ export default class MedicationInput extends Component<{}> {
 
     constructor(props) {
         super(props);
-        const {navigate} = this.props.navigation;
         this.state = {medicine: '', dosage: '', time:''};
     }
-
 
     _medicationValues() {
         var time = this.state.time;
@@ -46,10 +44,10 @@ export default class MedicationInput extends Component<{}> {
                 medicine: medicine,
                 dosage: dosage,
             });
-            const {navigate} = this.props.navigation;
-            navigate('PMed')
+            this.props.navigation.goBack();
+
         }
-        }
+    }
 
 
     render() {

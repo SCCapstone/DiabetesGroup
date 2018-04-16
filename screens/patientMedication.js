@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';
 const MedicationLogTable = require('../components/MedicationLogTable');
+const AddToGraph = require('../components/AddToGraph');
 
 import {
     Platform,
@@ -17,12 +18,14 @@ import {
 
 export default class patientMedication extends Component<{}> {
 
-    static navigationOptions = {
-        title: 'Medication',
-        headerStyle: {backgroundColor: "#112471"},
-        headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
-        headerRight: (<View></View>),
-        headerTintColor: "#FFFFFF"
+    static navigationOptions = ({navigation}) => {
+        return {
+            title: 'Medications',
+            headerStyle: {backgroundColor: "#112471"},
+            headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
+            headerRight: (<AddToGraph onPress = {() => navigation.navigate('MInput')}/>),
+            headerTintColor: "#FFFFFF",
+        };
     };
 
     constructor(props) {
@@ -74,14 +77,7 @@ export default class patientMedication extends Component<{}> {
     drawerPosition={DrawerLayoutAndroid.positions.Left}
     renderNavigationView={() => navigationView}>
             <ScrollView style={styles.container}>
-            <View style = {{marginBottom: 30, marginTop: 40}}>
-                <SeafoamButton
-                    title="Add new medication"
-                    onPress = { () => navigate('MInput')}
-                />
-            </View>
                 <MedicationLogTable user = {this.state.user}>
-
                 </MedicationLogTable>
             </ScrollView>
 </DrawerLayoutAndroid>

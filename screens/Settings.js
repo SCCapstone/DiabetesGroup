@@ -82,6 +82,7 @@ export default class Settings extends Component<{}> {
                         <Text>Age:</Text>
                         <TextInput style={styles.input} defaultValue= {this.state.Age}
                                    underlineColorAndroid ={'transparent'}
+                                   keyboardType = 'numeric'
                                    placeholderTextColor= "#CFCFCF"
                                    onChangeText={(text) => this.setState({Age: text})}
                                    value={this.state.Age}
