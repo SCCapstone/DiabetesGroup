@@ -90,7 +90,7 @@ export default class patientHome extends React.Component {
                 <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
 
                 <TouchableOpacity style={styles.sideButton}
-                                  onPress={() => navigate('PMed')}>
+                                  onPress={() => navigate('PMed', {ID: this.state.user})}>
                     <Text style={styles.sideText}>My Medication</Text>
                 </TouchableOpacity>
 

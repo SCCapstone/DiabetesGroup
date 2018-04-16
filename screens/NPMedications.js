@@ -11,7 +11,6 @@ import {
     DrawerLayoutAndroid
 } from 'react-native';
 const MedicationLogTable = require('../components/MedicationLogTable');
-const AddToGraph = require('../components/AddToGraph');
 
 export default class patientMedication extends Component<{}> {
 
@@ -31,9 +30,7 @@ export default class patientMedication extends Component<{}> {
         this.state = {user: userID};
     }
 
-    keyExtractor = (item) => item.id;
     render() {
-        const tableHead = ['Medicine', 'Dosage', 'Time'];
         const {navigate} = this.props.navigation;
         var navigationView = (
             <View style={{flex: 1, backgroundColor: '#fefbea'}}>
@@ -96,7 +93,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingBottom: 20,
         flexDirection: 'column',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fff9ea',
     },
     sideButton: {
         width: 280,

@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingBottom: 20,
         flexDirection: 'column',
-        backgroundColor: '#fefbea',
+        backgroundColor: '#fff9ea',
     },
     welcome: {
         fontSize: 20,

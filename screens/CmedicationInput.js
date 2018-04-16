@@ -24,8 +24,7 @@ export default class CmedicationInput extends Component<{}> {
     constructor(props) {
         super(props);
         var userID = props.navigation.state.params.ID;
-        this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/medications/');
-        this.state = { medications: [], medicine: '', dosage: '', time: '', user: userID,};
+        this.state = {medicine: '', dosage: '', time:'', user: userID};
     }
 
 
@@ -132,7 +131,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: 55,
         paddingRight: 55,
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
 
     container2: {

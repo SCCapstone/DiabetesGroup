@@ -54,7 +54,7 @@ const AppNavigator = StackNavigator({
             screen: patientHome,
             navigationOptions: ({navigation}) => ({
                 headerStyle: {backgroundColor: '#112471'},
-                headerTitleStyle: {color: "#FFFFFF", textAlign: 'center'},
+                headerTitleStyle: {color: "#FFFFFF", textAlign: 'center', alignSelf:'center',flex:1},
                 headerTintColor: "#FFFFFF",
                 title: 'Home Screen',
             })

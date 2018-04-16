@@ -78,7 +78,7 @@ class MedicationLogTable extends Component {
     }
 
     deleteMed(key) {
-        var userID = firebaseApp.auth().currentUser.uid;
+        var userID = this.state.user;
         var ref = firebaseApp.database().ref('Patients/' + userID + '/medications/' + key);
         ref.remove();
     }

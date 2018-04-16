@@ -43,7 +43,7 @@ export default class MedicationEdit extends Component<{}> {
         }
         else {
 
-            firebaseApp.database().ref('Patients/' + user.uid + '/medications/' + this.key).update({
+            firebaseApp.database().ref('Patients/' + user + '/medications/' + this.key).update({
                 time: mTime,
                 medicine: medicine,
                 dosage: dosage,

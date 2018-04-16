@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: 55,
         paddingRight: 55,
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fffcf6',
     },
 
     container2: {
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     },
     input:{
         fontSize: 16,
-        backgroundColor: '#FEFDF5',
+        backgroundColor: '#ffffff',
         marginBottom: 20,
         borderWidth: 1,
 

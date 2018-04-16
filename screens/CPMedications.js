@@ -11,6 +11,7 @@ import {
     TouchableOpacity,
     DrawerLayoutAndroid
 } from 'react-native';
+const MedicationLogTable = require('../components/MedicationLogTable');
 
 export default class CPMedications extends Component<{}> {
 
@@ -23,41 +24,11 @@ export default class CPMedications extends Component<{}> {
     };
     constructor(props) {
         super(props);
-        //console.ignoredYellowBox = [
-        // 'Setting a timer'
-        //];
         var userID = props.navigation.state.params.ID;
-        this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/medications/');
-        this.state = { medications: [], medicine: '', dosage: '', time: '', user: userID};
+        this.state = {user: userID};
     }
-
-    listenForItems(itemsRef) {
-        itemsRef.on('value', (snap) => {
-            var items = [];
-            snap.forEach((child) => {
-                items.push(
-                    [child.val().medicine,
-                        child.val().dosage,
-                        child.val().time,])
-            });
-            this.setState({medications: items});
-        });
-    }
-
-    componentDidMount() {
-        this.listenForItems(this.itemsRef);
-    }
-
-    componentWillUnmount(){
-        this.itemsRef.off();
-    }
-
-    keyExtractor = (item) => item.id;
-
-
 
     render() {
-        const tableHead = ['Medicine', 'Dosage', 'Time'];
         const {navigate} = this.props.navigation;
         var navigationView = (
             <View style={{flex: 1, backgroundColor: '#fefbea'}}>
@@ -92,20 +63,10 @@ export default class CPMedications extends Component<{}> {
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
                 renderNavigationView={() => navigationView}>
                 <ScrollView style={styles.container}>
-                        <Table>
-
-                            <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-
-                            {this.state.medications.map((data, i) => (
-                                <Row key = {i} data={data} style={[styles.row, i%2 && {backgroundColor: '#afc2f7'}]} textStyle={styles.text}/> ))}
-
-                        </Table>
-
-                        <Text/>
-                    <SeafoamButton
-                        title="Add new medication for patient"
-                        onPress = { () => navigate("CMInput", {ID: this.state.user})}
-                    />
+                    <MedicationLogTable user = {this.state.user}>
+                    </MedicationLogTable>
+                    <SeafoamButton title = 'Add Medications'
+                                   onPress = {() => navigate('NMInput', {ID: this.state.user})}/>
                 </ScrollView>
             </DrawerLayoutAndroid>
         );
@@ -130,7 +91,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingBottom: 20,
         flexDirection: 'column',
-        backgroundColor: '#F7F1D2',
+        backgroundColor: '#fff9ea',
     },
     sideButton: {
         width: 280,

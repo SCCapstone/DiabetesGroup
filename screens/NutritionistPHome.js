@@ -24,7 +24,7 @@ export default class NutritionistPHome extends React.Component {
 		var userID = props.navigation.state.params.ID;
         this.apptRef = firebaseApp.database().ref('Patients/' + userID);
         this.infoRef = firebaseApp.database().ref('Patients/' + userID + '/Pinfo/');
-        this.state = {nextAppt: '', Age: '', Sex: '', Weight: '', Height: '', DType: '', user: userID, Name: ''};
+        this.state = {nextAppt: '', Age: '', Sex: '', Weight: '', Height: '', DType: '', userID: userID, Name: ''};
 
     }
 
@@ -97,13 +97,13 @@ export default class NutritionistPHome extends React.Component {
                 </View>
 
                 <View style={styles.container}>
-                    <GlucoseCircle name={'HgbA1c'} user = {this.state.user}/>
+                    <GlucoseCircle name={'HgbA1c'} user = {this.state.userID}/>
                     <Text></Text>
                 </View>
 
                 <View style = {styles.container2}>
-                    <GlucoseCircle name={'FBG'} user = {this.state.user}/>
-                    <GlucoseCircle name={'PpBG'} user = {this.state.user}/>
+                    <GlucoseCircle name={'FBG'} user = {this.state.userID}/>
+                    <GlucoseCircle name={'PpBG'} user = {this.state.userID}/>
                 </View>
 
                 <View style={styles.container}>
@@ -149,19 +149,19 @@ export default class NutritionistPHome extends React.Component {
                     </Text>
 
                     <SeafoamButton title="Patient's Diet"
-                                   onPress={() => navigate("NPDiet", {ID: this.state.user})}/>
+                                   onPress={() => navigate("NPDiet", {ID: this.state.userID})}/>
                     <Text></Text>
                     <SeafoamButton title="Medications"
-                                   onPress={() => navigate("NPMed", {ID: this.state.user})}/>
+                                   onPress={() => navigate("NPMed", {ID: this.state.userID})}/>
                     <Text style={{paddingBottom: 80}}></Text>
 
                 </View>
 
                 <View style={styles.dataPage}>
-                    <GlucoseGraph user = {this.state.user}>
+                    <GlucoseGraph user = {this.state.userID}>
                     </GlucoseGraph>
 
-                    <GlucoseLogTable user = {this.state.user}>
+                    <GlucoseLogTable user = {this.state.userID}>
                     </GlucoseLogTable>
                 </View>
             </ScrollView>
