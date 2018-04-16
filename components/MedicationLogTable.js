@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {View,  StyleSheet} from 'react-native';
+import {View,  StyleSheet, TouchableOpacity, TouchableHighlight, Text, Alert} from 'react-native';
+import {SwipeListView, SwipeRow} from 'react-native-swipe-list-view';
 //import firebaseApp from './FireBaseApp';
 //import Graph from 'react-native-line-plot';
-
+import { withNavigation } from 'react-navigation';
 import {Table, TableWrapper, Row, Rows, Col, Cols, Cell} from 'react-native-table-component';
 import firebaseApp from "../screens/FireBaseApp";
 class MedicationLogTable extends Component {
@@ -11,10 +12,14 @@ class MedicationLogTable extends Component {
     };
     constructor(props) {
         super(props);
-        //console.ignoredYellowBox = [
-           // 'Setting a timer'
-        //];
-        var userID = firebaseApp.auth().currentUser.uid;
+        this.isNotPatient = (this.props.user != firebaseApp.auth().currentUser.uid);
+        var userID;
+        if(this.props.user === firebaseApp.auth().currentUser.uid){
+            userID = firebaseApp.auth().currentUser.uid;
+        }else{
+            userID = this.props.user;
+        }
+        console.log(userID);
         this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/medications/');
         this.state = { medications: [], medicine: '', dosage: '', time: '',};
     }
@@ -22,11 +27,16 @@ class MedicationLogTable extends Component {
     listenForItems(itemsRef) {
         itemsRef.on('value', (snap) => {
             var items = [];
+            var i = 0;
             snap.forEach((child) => {
+                var key = child.key;
                 items.push(
-                    [child.val().medicine,
-                        child.val().dosage,
-                        child.val().time,])
+                    {
+                        medicine: child.val().medicine,
+                        dosage: child.val().dosage,
+                        mTime: child.val().time,
+                        lKey: key,
+                        count: i++,})
             });
             this.setState({medications: items});
         });
@@ -40,6 +50,39 @@ class MedicationLogTable extends Component {
         this.itemsRef.off();
     }
 
+    onRowDidOpen = (item, rowMap) => {
+        setTimeout(() => {
+            this.closeRow(rowMap, item);
+        }, 2000);
+    };
+
+    closeRow(rowMap, item) {
+        if (rowMap[item]) {
+            rowMap[item].closeRow();
+        }
+    }
+
+    editMedication(key, medicine, dosage, mTime) {
+        const {navigate} = this.props.navigation;
+        navigate('MEdit', {mKey: key, medicine: medicine, dosage: dosage, mTime: mTime})
+    }
+    deleteEvent(key) {
+        Alert.alert(
+            'Medication Deletion',
+            'Are you sure you want to delete this Medication?',
+            [
+                {text: 'Cancel'},
+                {text: 'Yes', onPress: () => this.deleteMed(key)},
+            ]
+        )
+    }
+
+    deleteMed(key) {
+        var userID = firebaseApp.auth().currentUser.uid;
+        var ref = firebaseApp.database().ref('Patients/' + userID + '/medications/' + key);
+        ref.remove();
+    }
+
     keyExtractor = (item) => item.id;
 
 
@@ -48,15 +91,38 @@ class MedicationLogTable extends Component {
 
         return (
             <View>
-                <Table>
-
-                    <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-
-                    {this.state.medications.map((data, i) => (
-                        <Row key = {i} data={data} style={[styles.row, i%2 && {backgroundColor: '#bcf7ff'}]} textStyle={styles.text}/> ))}
-
+                <Table borderStyle={{borderColor: 'transparent'}}>
+                    <Row data={tableHead} style={[styles.row, {backgroundColor: '#BCF7FF'}]} textStyle={styles.headText}/>
                 </Table>
+                <SwipeListView
+                    style={styles.backGrnd}
+                    useFlatList={true}
+                    data={this.state.medications}
+                    keyExtractor = {this.keyExtractor}
+                    disableRightSwipe={this.isNotPatient}
+                    disableLeftSwipe={this.isNotPatient}
+                    renderItem ={({item}) =>
+                        <TouchableHighlight>
+                            <Table borderStyle={{borderColor: 'transparent'}}>
+                                <Row data={[item.medicine, item.dosage, item.mTime,]} style={[styles.row, item.count%2 > 0 && {backgroundColor: '#bcf7ff'}, item.count%2 === 0 && {backgroundColor: 'white'}]} textStyle={styles.text}/>
+                            </Table>
+                        </TouchableHighlight>
+                    }
+                    renderHiddenItem={ ({item}, {rowMap}) => (
+                        <View style={[styles.rowBack, item.count%2 > 0 && {backgroundColor: '#bcf7ff'}, item.count%2 === 0 && {backgroundColor: 'white'}]}>
+                            <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ () => this.deleteEvent(item.lKey) }>
+                                <Text style={styles.backTextWhite}>Delete</Text>
+                            </TouchableOpacity>
 
+                            <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ () => this.editMedication(item.lKey, item.medicine, item.dosage, item.mTime)}>
+                                <Text style={styles.backTextWhite}>Edit</Text>
+                            </TouchableOpacity>
+                        </View>
+                    )}
+                    leftOpenValue={75}
+                    rightOpenValue={-75}
+                    onRowDidOpen={this.onRowDidOpen}
+                />
             </View>
         );
     }
@@ -64,16 +130,61 @@ class MedicationLogTable extends Component {
 
 
 const styles = StyleSheet.create({
-    head: { height: 40, backgroundColor: '#afc2f7' },
+    headText: { textAlign:'center', color:'black', fontWeight: 'bold'},
     text: { textAlign:'center', color:'black' },
-    row: { height: 30, borderTopColor: '#afc2f7' },
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
+    row: {
+        marginLeft: -0.5,
+        height: 45,
+        borderTopColor: '#6c6c6c',
+        borderTopWidth: 1,
+    },
+    backTextWhite: {
+        color: '#ffffff',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    rowText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        justifyContent: 'space-between',
+        color: 'black',
+    },
+    rowFront: {
+        justifyContent: 'space-between',
+        backgroundColor: '#f7f1d2',
+        paddingTop: 20,
+        height: 60,
+    },
+    backLeftBtn: {
         alignItems: 'center',
-        backgroundColor: '#bcf7ff',
+        height: 43.5,
+        justifyContent: 'center',
+        position: 'absolute',
+        width: 75
+    },
+    backLeftBtnLeft: {
+        backgroundColor: 'red',
+    },
+    rowBack: {
+        alignItems: 'center',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    backRightBtn: {
+        alignItems: 'center',
+        height: 43.5,
+        justifyContent: 'center',
+        position: 'absolute',
+        width: 75
+    },
+    backRightBtnRight: {
+        backgroundColor: '#112471',
+        right: 0
+    },
+    backGrnd: {
+        backgroundColor: 'white'
     },
 });
 
-module.exports = MedicationLogTable;
+module.exports = withNavigation(MedicationLogTable);
