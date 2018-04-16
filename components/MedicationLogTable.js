@@ -21,7 +21,7 @@ class MedicationLogTable extends Component {
         }
         console.log(userID);
         this.itemsRef = firebaseApp.database().ref('Patients/' + userID + '/medications/');
-        this.state = { medications: [], medicine: '', dosage: '', time: '',};
+        this.state = { medications: [], medicine: '', dosage: '', time: '', user: userID};
     }
 
     listenForItems(itemsRef) {
@@ -64,7 +64,7 @@ class MedicationLogTable extends Component {
 
     editMedication(key, medicine, dosage, mTime) {
         const {navigate} = this.props.navigation;
-        navigate('MEdit', {mKey: key, medicine: medicine, dosage: dosage, mTime: mTime})
+        navigate('MEdit', {mKey: key, medicine: medicine, dosage: dosage, mTime: mTime, ID: this.state.user})
     }
     deleteEvent(key) {
         Alert.alert(
@@ -99,8 +99,6 @@ class MedicationLogTable extends Component {
                     useFlatList={true}
                     data={this.state.medications}
                     keyExtractor = {this.keyExtractor}
-                    disableRightSwipe={this.isNotPatient}
-                    disableLeftSwipe={this.isNotPatient}
                     renderItem ={({item}) =>
                         <TouchableHighlight>
                             <Table borderStyle={{borderColor: 'transparent'}}>
