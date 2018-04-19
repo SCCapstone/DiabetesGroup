@@ -108,7 +108,7 @@ export default class patientHome extends React.Component {
                     <Text style={styles.sideText}>Settings</Text>
                 </TouchableOpacity>
 
-                <View style={{height: 140, width: 300, backgroundColor: '#fefbea'}}/>
+                <View style={{height: 100, width: 300, backgroundColor: '#fefbea'}}/>
 
                 <TouchableOpacity style={styles.sideButton}
                                   onPress={() => navigate('Sign')}>
