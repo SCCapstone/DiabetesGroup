@@ -14,8 +14,7 @@
   }
   .bottom{
 	width:100%;
-	margin-bottom:-2%;
-	height:10px;
+	height:2px;
 	background-color:#222222;
 }
   h2, h, p {
