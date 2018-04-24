@@ -31,7 +31,7 @@
 </div>
   
 <div class="section-content">
-  <div class="column column-text" style="padding-top:130px">
+  <div class="column column-text" style="padding-top:130px" align="left">
     <h2>Accessing your Patient List</h2>
     <p>Each nutritionist account has a unique set of patient accounts linked to them. This is so that each nutritionist is able to link and easily access their patient's diet, glucose, and medication logs. Patients can be added to a nutritionist's list by having the nutritionist enter their email and adding them.</p>
   </div>
