@@ -20,9 +20,9 @@
   }
 </style>
 
-<div>
+<div class="section-content">
   <div class="column">
-    <img src="https://i.imgur.com/IxOw6td.jpg" width="300" height="400">
+    <img src="https://i.imgur.com/IxOw6td.jpg" width="300" height="375">
   </div>
   <div class="column column-text" style= "padding-top:130px">
     <h2>Inputting Glucose Logs</h2>
@@ -35,7 +35,7 @@
   </div>
   
   <div class="column">
-    <img src="https://i.imgur.com/R7hXj4a.jpg" width="300" height="400">
+    <img src="https://i.imgur.com/R7hXj4a.jpg" width="300" height="375">
   </div>
 </div>
 
