@@ -27,7 +27,7 @@
   </div>
   
   <div class="column">
-    <img src="https://i.imgur.com/IxOw6td.jpg">
+    <img src="https://i.imgur.com/IxOw6td.jpg" width="350" height="600">
   </div>
 </div>
 
