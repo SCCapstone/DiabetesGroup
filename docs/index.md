@@ -31,7 +31,7 @@
 </div>
   
 <div class="section-content">
-  <div class="column" style="padding-top:130px>
+  <div class="column" style="padding-top:130px">
     <img src="https://i.imgur.com/R7hXj4a.jpg" width="300" height="350" align="left">
   </div>
   <div class="column column-text" style="padding-top:130px">
