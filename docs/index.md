@@ -8,10 +8,13 @@
     align-items: center;
     justify-content: center;
   }
-  h2, p {
+  h2, h, p {
     text-align: center;
   }
 </style>
+
+<h>Video Demo</h>
+[![AahaRx For Diabetes Management](https://i.imgur.com/R7hXj4a.jpg)](https://www.youtube.com/watch?v=xmATzya5VEU&feature=youtu.be)
 
 <div class="section-content">
   <div class="column column-left">
