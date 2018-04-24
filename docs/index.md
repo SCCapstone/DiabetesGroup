@@ -42,11 +42,11 @@
 
 <div class="row">
   <div class="column">
-    <img src="https://i.imgur.com/TSaqXbL.jpg" width="300" height="400">
-  </div>
-  <div class="column">
     <h2>Diet Screen</h2>
     <p>Here the patient can review and input their daily diet. They can also check for their nutritionist's suggestions regarding their diet. </p>
+  </div>
+  <div class="column">
+    <img src="https://i.imgur.com/TSaqXbL.jpg" width="300" height="400">
   </div>
 </div>
 
