@@ -12,6 +12,12 @@
     align-items: center;
     justify-content: center;
   }
+  .bottom{
+	width:100%;
+	margin-bottom:-2%;
+	height:10px;
+	background-color:#222222;
+}
   h2, h, p {
     text-align: center;
   }
@@ -20,15 +26,19 @@
 <h2>Video Demo</h2>
 [![AahaRx For Diabetes Management](https://i.imgur.com/8alubdc.jpg)](https://www.youtube.com/watch?v=xmATzya5VEU&feature=youtu.be)
 
+<div class="bottom"></div>
+
 <div class="row">
   <div class="column">
     <img src="https://i.imgur.com/IxOw6td.jpg" width="300" height="400">
   </div>
-  <div class="column" style="padding-top:30px">
+  <div class="column" style="padding-top:40px">
     <h2>Inputting Glucose Logs</h2>
     <p>The AahaRx application's main focus is the glucose levels of Diabetes patients. Here the patient can input their daily glucose levels which will display in the form of a graph once enough data has been added. Patients can also edit/remove glucose levels from the homepage in the glucose log table at the bottom</p>
   </div>
 </div>
+
+<div class="bottom"></div>
 
 <div class="row">
   <div class="column" style="padding-top:30px">
@@ -40,6 +50,8 @@
   </div>
 </div>
 
+<div class="bottom"></div>
+
 <div class="row">
   <div class="column">
     <img src="https://i.imgur.com/TSaqXbL.jpg" width="300" height="400">
@@ -50,6 +62,8 @@
   </div>
 </div>
 
+<div class="bottom"></div>
+
 <div class="row">
   <div class="column" style="padding-top:80px">
     <h2>Patient Home Screen</h2>
@@ -59,6 +73,8 @@
     <img src="https://i.imgur.com/fhVt89M.jpg" width="300" height="400">
   </div>
 </div>
+
+<div class="bottom"></div>
   
 <br/>
 <br/>
