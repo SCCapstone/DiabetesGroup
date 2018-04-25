@@ -6,7 +6,7 @@ const GlucoseCircle = require('../components/GlucoseCircle');
 const MessengerButton = require('../components/MessengerButton');
 const GlucoseLogTable = require('../components/GlucoseLogTable');
 const MenuButton = require('../components/MenuButton');
-const HelpButton = require('../components/HelpButton')
+const HelpButton = require('../components/HelpButton');
 const GlucoseGraph = require('../components/GlucoseGraph');
 
 

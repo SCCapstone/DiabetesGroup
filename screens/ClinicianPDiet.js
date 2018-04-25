@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
+const HelpButton = require('../components/HelpButton');
 import firebaseApp from './FireBaseApp';
 import moment from 'moment';
 import {
@@ -14,13 +15,16 @@ import {
 } from 'react-native';
 
 export default class ClinicianPDiet extends Component<{}> {
+    static navigationOptions = ({navigation}) => {
+        const {params = {}} = navigation.state;
 
-    static navigationOptions = {
-        title: 'Patient Diet',
-        headerStyle: {backgroundColor: "#112471"},
-        headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
-        headerRight: (<View></View>),
-        headerTintColor: "#FFFFFF"
+        return {
+            title: 'Patient Diet',
+            headerStyle: {backgroundColor: "#112471"},
+            headerTitleStyle: {color: "#FFFFFF", textAlign: 'center', alignSelf: 'center', flex: 1},
+            headerRight: (<HelpButton onPress={() => navigation.navigate('DHelp')}/>),
+            headerTintColor: "#FFFFFF"
+        };
     };
 
     constructor(props) {
@@ -194,13 +198,6 @@ export default class ClinicianPDiet extends Component<{}> {
                 <TouchableOpacity style={styles.sideButton}
                                   onPress={() => navigate('CPList')}>
                     <Text style={styles.sideText}>Home</Text>
-                </TouchableOpacity>
-
-                <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>
-
-                <TouchableOpacity style={styles.sideButton}
-                                  onPress={() => navigate('DHelp')}>
-                    <Text style={styles.sideText}>Diet Help</Text>
                 </TouchableOpacity>
 
                 <View style={{height: 30, width: 300, backgroundColor: '#fefbea'}}/>

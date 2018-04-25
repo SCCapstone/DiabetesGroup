@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
-const HelpButton = require('../components/HelpButton')
+const HelpButton = require('../components/HelpButton');
 import firebaseApp from './FireBaseApp';
 import moment from 'moment';
 import {

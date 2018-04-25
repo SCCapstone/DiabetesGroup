@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import {Alert, View,  StyleSheet, TouchableOpacity, Text, TouchableHighlight} from 'react-native';
+import {Alert, View,  StyleSheet, TouchableOpacity, Text, TouchableHighlight, FlatList} from 'react-native';
 import {Table, TableWrapper, Row, Rows, Col, Cols, Cell} from 'react-native-table-component';
 import {SwipeListView, SwipeRow} from 'react-native-swipe-list-view';
 import firebaseApp from "../screens/FireBaseApp";
@@ -100,46 +100,69 @@ class GlucoseLogTable extends Component {
     render() {
         const tableHead = ['Glucose Level (mg/dL)', 'Type', 'Time Recorded'];
 
-        return (
-            <View>
-                <Table borderStyle={{borderColor: 'transparent'}}>
-                    <Row data={tableHead} style={[styles.row, {backgroundColor: '#BCF7FF'}]} textStyle={styles.headText}/>
-                </Table>
-                <SwipeListView
-                   style={styles.backGrnd}
-                   useFlatList={true}
-                   data={this.state.logs}
-                   keyExtractor = {this.keyExtractor}
-                   disableRightSwipe={this.isNotPatient}
-                   disableLeftSwipe={this.isNotPatient}
-                   renderItem ={({item}) =>
-                       <TouchableHighlight>
-                           <Table borderStyle={{borderColor: 'transparent'}}>
-                               <Row data={[item.gLevel, item.rType, item.lDate,]} style={[styles.row, item.count%2 > 0 && {backgroundColor: '#bcf7ff'}, item.count%2 === 0 && {backgroundColor: 'white'}]} textStyle={styles.text}/>
-                           </Table>
-                       </TouchableHighlight>
-                   }
-                   renderHiddenItem={ ({item}, {rowMap}) => (
+        if(this.isNotPatient) {
+            return (
+                <View>
+                    <Table borderStyle={{borderColor: 'transparent'}}>
+                        <Row data={tableHead} style={[styles.row, {backgroundColor: '#BCF7FF'}]} textStyle={styles.headText}/>
+                    </Table>
+                    <FlatList
+                        style={styles.backGrnd}
+                        data={this.state.logs}
+                        keyExtractor = {this.keyExtractor}
+                        renderItem ={({item}) =>
+                            <TouchableHighlight>
+                                <Table borderStyle={{borderColor: 'transparent'}}>
+                                    <Row data={[item.gLevel, item.rType, item.lDate,]} style={[styles.row, item.count%2 > 0 && {backgroundColor: '#bcf7ff'}, item.count%2 === 0 && {backgroundColor: 'white'}]} textStyle={styles.text}/>
+                                </Table>
+                            </TouchableHighlight>
+                        }
+                    />
+                </View>
+            );
+        }else{
+            return (
+                <View>
+                    <Table borderStyle={{borderColor: 'transparent'}}>
+                        <Row data={tableHead} style={[styles.row, {backgroundColor: '#BCF7FF'}]} textStyle={styles.headText}/>
+                    </Table>
+                    <SwipeListView
+                        style={styles.backGrnd}
+                        useFlatList={true}
+                        data={this.state.logs}
+                        keyExtractor = {this.keyExtractor}
+                        disableRightSwipe={this.isNotPatient}
+                        disableLeftSwipe={this.isNotPatient}
+                        renderItem ={({item}) =>
+                            <TouchableHighlight>
+                                <Table borderStyle={{borderColor: 'transparent'}}>
+                                    <Row data={[item.gLevel, item.rType, item.lDate,]} style={[styles.row, item.count%2 > 0 && {backgroundColor: '#bcf7ff'}, item.count%2 === 0 && {backgroundColor: 'white'}]} textStyle={styles.text}/>
+                                </Table>
+                            </TouchableHighlight>
+                        }
+                        renderHiddenItem={ ({item}, {rowMap}) => (
 
 
-                       <View style={[styles.rowBack, item.count%2 > 0 && {backgroundColor: '#bcf7ff'}, item.count%2 === 0 && {backgroundColor: 'white'}]}>
-                           <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ () => this.deleteEvent(item.lKey) }>
-                               <Text style={styles.backTextWhite}>Delete</Text>
-                           </TouchableOpacity>
+                            <View style={[styles.rowBack, item.count%2 > 0 && {backgroundColor: '#bcf7ff'}, item.count%2 === 0 && {backgroundColor: 'white'}]}>
+                                <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ () => this.deleteEvent(item.lKey) }>
+                                    <Text style={styles.backTextWhite}>Delete</Text>
+                                </TouchableOpacity>
 
 
 
-                           <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ () => this.editLevels(item.lKey, item.gLevel, item.rType, item.note)}>
-                               <Text style={styles.backTextWhite}>Edit</Text>
-                           </TouchableOpacity>
-                       </View>
-                   )}
-                   leftOpenValue={75}
-                   rightOpenValue={-75}
-                   onRowDidOpen={this.onRowDidOpen}
-                />
-            </View>
-        );
+                                <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ () => this.editLevels(item.lKey, item.gLevel, item.rType, item.note)}>
+                                    <Text style={styles.backTextWhite}>Edit</Text>
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                        leftOpenValue={75}
+                        rightOpenValue={-75}
+                        onRowDidOpen={this.onRowDidOpen}
+                    />
+                </View>
+            );
+        }
+
     }
 }
 

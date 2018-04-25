@@ -24,6 +24,7 @@ export default class patientMedication extends Component<{}> {
             headerStyle: {backgroundColor: "#112471"},
             headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
             headerTintColor: "#FFFFFF",
+            headerRight: <View></View>
         };
     };
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View,  StyleSheet, TouchableOpacity, TouchableHighlight, Text, Alert} from 'react-native';
+import {View,  StyleSheet, TouchableOpacity, TouchableHighlight, Text, Alert, FlatList} from 'react-native';
 import {SwipeListView, SwipeRow} from 'react-native-swipe-list-view';
 //import firebaseApp from './FireBaseApp';
 //import Graph from 'react-native-line-plot';
@@ -89,40 +89,64 @@ class MedicationLogTable extends Component {
     render() {
         const tableHead = ['Medicine', 'Dosage', 'Time'];
 
-        return (
-            <View>
-                <Table borderStyle={{borderColor: 'transparent'}}>
-                    <Row data={tableHead} style={[styles.row, {backgroundColor: '#BCF7FF'}]} textStyle={styles.headText}/>
-                </Table>
-                <SwipeListView
-                    style={styles.backGrnd}
-                    useFlatList={true}
-                    data={this.state.medications}
-                    keyExtractor = {this.keyExtractor}
-                    renderItem ={({item}) =>
-                        <TouchableHighlight>
-                            <Table borderStyle={{borderColor: 'transparent'}}>
-                                <Row data={[item.medicine, item.dosage, item.mTime,]} style={[styles.row, item.count%2 > 0 && {backgroundColor: '#bcf7ff'}, item.count%2 === 0 && {backgroundColor: 'white'}]} textStyle={styles.text}/>
-                            </Table>
-                        </TouchableHighlight>
-                    }
-                    renderHiddenItem={ ({item}, {rowMap}) => (
-                        <View style={[styles.rowBack, item.count%2 > 0 && {backgroundColor: '#bcf7ff'}, item.count%2 === 0 && {backgroundColor: 'white'}]}>
-                            <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ () => this.deleteEvent(item.lKey) }>
-                                <Text style={styles.backTextWhite}>Delete</Text>
-                            </TouchableOpacity>
+        if(this.isNotPatient == false) {
+            return (
+                <View>
+                    <Table borderStyle={{borderColor: 'transparent'}}>
+                        <Row data={tableHead} style={[styles.row, {backgroundColor: '#BCF7FF'}]} textStyle={styles.headText}/>
+                    </Table>
+                    <FlatList
+                        style={styles.backGrnd}
+                        data={this.state.medications}
+                        keyExtractor = {this.keyExtractor}
+                        renderItem ={({item}) =>
+                            <TouchableHighlight>
+                                <Table borderStyle={{borderColor: 'transparent'}}>
+                                    <Row data={[item.medicine, item.dosage, item.mTime,]} style={[styles.row, item.count%2 > 0 && {backgroundColor: '#bcf7ff'}, item.count%2 === 0 && {backgroundColor: 'white'}]} textStyle={styles.text}/>
+                                </Table>
+                            </TouchableHighlight>
 
-                            <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ () => this.editMedication(item.lKey, item.medicine, item.dosage, item.mTime)}>
-                                <Text style={styles.backTextWhite}>Edit</Text>
-                            </TouchableOpacity>
-                        </View>
-                    )}
-                    leftOpenValue={75}
-                    rightOpenValue={-75}
-                    onRowDidOpen={this.onRowDidOpen}
-                />
-            </View>
-        );
+                         }
+                    />
+                </View>
+            );
+        }else{
+            return (
+                <View>
+                    <Table borderStyle={{borderColor: 'transparent'}}>
+                        <Row data={tableHead} style={[styles.row, {backgroundColor: '#BCF7FF'}]} textStyle={styles.headText}/>
+                    </Table>
+                    <SwipeListView
+                        style={styles.backGrnd}
+                        useFlatList={true}
+                        data={this.state.medications}
+                        keyExtractor = {this.keyExtractor}
+                        renderItem ={({item}) =>
+                            <TouchableHighlight>
+                                <Table borderStyle={{borderColor: 'transparent'}}>
+                                    <Row data={[item.medicine, item.dosage, item.mTime,]} style={[styles.row, item.count%2 > 0 && {backgroundColor: '#bcf7ff'}, item.count%2 === 0 && {backgroundColor: 'white'}]} textStyle={styles.text}/>
+                                </Table>
+                            </TouchableHighlight>
+                        }
+                        renderHiddenItem={ ({item}, {rowMap}) => (
+                            <View style={[styles.rowBack, item.count%2 > 0 && {backgroundColor: '#bcf7ff'}, item.count%2 === 0 && {backgroundColor: 'white'}]}>
+                                <TouchableOpacity style={[styles.backLeftBtn, styles.backLeftBtnLeft]} onPress={ () => this.deleteEvent(item.lKey) }>
+                                    <Text style={styles.backTextWhite}>Delete</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ () => this.editMedication(item.lKey, item.medicine, item.dosage, item.mTime)}>
+                                    <Text style={styles.backTextWhite}>Edit</Text>
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                        leftOpenValue={75}
+                        rightOpenValue={-75}
+                        onRowDidOpen={this.onRowDidOpen}
+                    />
+                </View>
+            );
+        }
+
     }
 }
 

@@ -6,15 +6,21 @@ const GlucoseCircle = require('../components/GlucoseCircle');
 const MessengerButton = require('../components/MessengerButton');
 const GlucoseLogTable = require('../components/GlucoseLogTable');
 const GlucoseGraph = require('../components/GlucoseGraph');
+const HelpButton = require('../components/HelpButton');
 
 export default class ClinicianPHome extends React.Component {
-    static navigationOptions = {
-        title: 'Patient Information',
-        headerStyle: {backgroundColor: "#112471"},
-        headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
-        headerRight: (<View></View>),
-        headerTintColor: "#FFFFFF"
+    static navigationOptions = ({navigation}) => {
+        const {params = {}} = navigation.state;
+
+        return {
+            title: 'Patient Information',
+            headerStyle: {backgroundColor: "#112471"},
+            headerTitleStyle: {color: "#FFFFFF", textAlign: 'center', alignSelf: 'center', flex: 1},
+            headerRight: (<HelpButton onPress={() => navigation.navigate('HHelp')}/>),
+            headerTintColor: "#FFFFFF"
+        };
     };
+
     constructor(props) {
         super(props);
         console.ignoredYellowBox = [
