@@ -23,7 +23,6 @@ export default class patientMedication extends Component<{}> {
             title: 'Medications',
             headerStyle: {backgroundColor: "#112471"},
             headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
-            headerRight: (<AddToGraph onPress = {() => navigation.navigate('MInput')}/>),
             headerTintColor: "#FFFFFF",
         };
     };

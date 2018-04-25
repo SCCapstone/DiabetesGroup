@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
+const HelpButton = require('../components/HelpButton')
 import firebaseApp from './FireBaseApp';
 import moment from 'moment';
 import {
@@ -15,13 +16,16 @@ import {
 } from 'react-native';
 
 export default class patientDiet extends Component<{}> {
+    static navigationOptions = ({navigation}) => {
+        const {params = {}} = navigation.state;
 
-    static navigationOptions = {
-        title: 'My Diet',
-        headerStyle: {backgroundColor: "#112471"},
-        headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
-        headerRight: (<View></View>),
-        headerTintColor: "#FFFFFF"
+        return {
+            title: 'My Diet',
+            headerStyle: {backgroundColor: "#112471"},
+            headerTitleStyle: {color: "#FFFFFF", textAlign: 'center', alignSelf: 'center', flex: 1},
+            headerRight: (<HelpButton onPress={() => navigation.navigate('DHelp')}/>),
+            headerTintColor: "#FFFFFF"
+        };
     };
 
     constructor(props) {
