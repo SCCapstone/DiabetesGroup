@@ -6,6 +6,7 @@ const GlucoseCircle = require('../components/GlucoseCircle');
 const MessengerButton = require('../components/MessengerButton');
 const GlucoseLogTable = require('../components/GlucoseLogTable');
 const MenuButton = require('../components/MenuButton');
+const HelpButton = require('../components/HelpButton')
 const GlucoseGraph = require('../components/GlucoseGraph');
 
 
@@ -16,7 +17,7 @@ export default class patientHome extends React.Component {
         return {
             headerStyle: {backgroundColor: "#112471"},
             headerTitleStyle: {color: "#FFFFFF", textAlign:'center', alignSelf:'center',flex:1},
-            headerRight: (<View></View>),
+            headerRight: (<HelpButton onPress={() => navigation.navigate('HHelp')}/>),
             headerTintColor: "#FFFFFF",
             headerLeft: <MenuButton onPress = {() => params.open()}/>
         };
