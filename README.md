@@ -1,6 +1,17 @@
 # DiabetesGroup
 DiabetesGroup is working on an app for Diabetes patients as well as their doctors and nutritionists.
 
+### Testing Accounts
+#### Patient
+ Username/Email: jane@email.com
+ Password: password
+#### Nutritionist
+ Username/Email: joe@email.com
+ Password: password
+#### Clinician
+ Username/Email: doe@email.com
+ Password: password
+
 ### Downloading the APK
 The quickest way to run our app is downloading the most recent APK from https://github.com/SCCapstone/DiabetesGroup/releases and installing it on your android device. However, in order to view our progress in between APK releases, the following steps can be used to set up your environment and run the app. 
 
