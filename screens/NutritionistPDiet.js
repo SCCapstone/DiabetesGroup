@@ -117,15 +117,23 @@ export default class NutritionistPDiet extends Component<{}> {
 
         var dCount = 0;
 
-        if (afruits.length > 7) {
+        if (afruits.length > 7){
             dCount = 7;
         }
-        else if (afruits.length == 0) {
-            dCount = 0;
+        else if (afruits.length == 0 || afruits === undefined)
+        {
+            dCount = 1;
+            favg = 0;
+            vavg = 0;
+            gavg = 0;
+            pavg = 0;
+            davg = 0;
+            wavg = 0;
+            savg = 0;
+            cavg = 0;
         }
-        else {
-            dCount = afruits.length;
-        }
+        else{
+            dCount = afruits.length;}
 
 
         for (i = 0; i < dCount; i++) {
@@ -300,7 +308,7 @@ export default class NutritionistPDiet extends Component<{}> {
                            Your Suggestions
                         </Text>
                         <View style={styles.box}>
-                            <Text style={styles.text}>{this.state.nSuggestions} </Text>
+                            <Text style={styles.text2}>{this.state.nSuggestions} </Text>
                             <Text/>
 
                         </View>
@@ -342,6 +350,11 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 18,
     },
+    text2:{
+        color: 'black',
+        fontSize: 18,
+        textAlign: 'center',
+    },
     container2: {
         flex: 1,
         flexDirection: 'row',
@@ -361,6 +374,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fffcf6',
         marginBottom: 50,
         borderWidth: 1,
+        textAlign: 'center',
     },
     title: {
         fontSize: 20,

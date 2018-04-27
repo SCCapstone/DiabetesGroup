@@ -119,12 +119,20 @@ export default class ClinicianPDiet extends Component<{}> {
         if (afruits.length > 7){
             dCount = 7;
         }
-        else if (afruits.length == 0)
+        else if (afruits.length == 0 || afruits === undefined)
         {
-            dCount = 0;}
+            dCount = 1;
+            favg = 0;
+            vavg = 0;
+            gavg = 0;
+            pavg = 0;
+            davg = 0;
+            wavg = 0;
+            savg = 0;
+            cavg = 0;
+        }
         else{
             dCount = afruits.length;}
-
 
         for(i = 0; i < dCount; i++) {
             favg += afruits[i];
@@ -291,7 +299,7 @@ export default class ClinicianPDiet extends Component<{}> {
                             Nutritionist's Suggestions
                         </Text>
                         <View style={styles.box}>
-                            <Text style={styles.text}>{this.state.nSuggestions} </Text>
+                            <Text style={styles.text2}>{this.state.nSuggestions} </Text>
                         </View>
                     </View>
                 </View>
@@ -317,6 +325,11 @@ const styles = StyleSheet.create({
     text:{
         color: 'black',
         fontSize: 18,
+    },
+    text2:{
+        color: 'black',
+        fontSize: 18,
+        textAlign: 'center',
     },
     container2: {
         flex: 1,
