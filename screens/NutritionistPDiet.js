@@ -13,6 +13,7 @@ import {
     AppRegistry,
     DrawerLayoutAndroid,
     TouchableOpacity,
+    ScrollView,
 } from 'react-native';
 
 export default class NutritionistPDiet extends Component<{}> {
@@ -238,6 +239,7 @@ export default class NutritionistPDiet extends Component<{}> {
                 drawerWidth={300}
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
                 renderNavigationView={() => navigationView}>
+                <ScrollView>
                 <View style={{flex:1}}>
                     <View style={styles.container}>
                         <View style={styles.stretched}>
@@ -314,7 +316,8 @@ export default class NutritionistPDiet extends Component<{}> {
                         </View>
                         <Text/>
                         <Text/>
-                        <TextInput style={styles.input} placeholder="Your Suggestions"
+                        <TextInput style={styles.input} multiline = {true}
+                                   numberOfLines = {4} placeholder="Your Suggestions"
                                    underlineColorAndroid ={'transparent'}
                                    placeholderTextColor="#CFCFCF"
                                    onChangeText={(text) => this.setState({nSuggestions: text})}
@@ -327,7 +330,7 @@ export default class NutritionistPDiet extends Component<{}> {
 
                     </View>
                 </View>
-
+            </ScrollView>
             </DrawerLayoutAndroid>
 
         );
@@ -342,8 +345,8 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
     },
     footer:{
-        flex: 2,
-        height : 100,
+        flex: 1,
+        //height : 100,
         backgroundColor:'#fff9ea',
     },
     text:{
@@ -372,7 +375,7 @@ const styles = StyleSheet.create({
     input:{
         fontSize: 16,
         backgroundColor: '#fffcf6',
-        marginBottom: 50,
+        marginBottom: 30,
         borderWidth: 1,
         textAlign: 'center',
     },
