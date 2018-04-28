@@ -13,6 +13,7 @@ import {
     AppRegistry,
     DrawerLayoutAndroid,
     TouchableOpacity,
+    ScrollView,
 } from 'react-native';
 
 export default class NutritionistPDiet extends Component<{}> {
@@ -117,36 +118,65 @@ export default class NutritionistPDiet extends Component<{}> {
 
         var dCount = 0;
 
-        if (afruits.length > 7) {
+        if (afruits.length > 7){
             dCount = 7;
+            for(i = 0; i < dCount; i++) {
+                favg += afruits[i];
+                vavg += aveges[i];
+                gavg += agraStar[i];
+                pavg += aprot[i];
+                davg += adsrt[i];
+                wavg += awater[i];
+                savg += asugBev[i];
+                cavg += acofTea[i];
+
+            }
+
+            favg = favg/dCount;
+            vavg = vavg/dCount;
+            gavg = gavg/dCount;
+            pavg = pavg/dCount;
+            davg = davg/dCount;
+            wavg = wavg/dCount;
+            savg = savg/dCount;
+            cavg = cavg/dCount;
+
         }
-        else if (afruits.length == 0) {
+        else if (afruits.length == 0 || afruits === undefined)
+        {
             dCount = 0;
+            favg = 0;
+            vavg = 0;
+            gavg = 0;
+            pavg = 0;
+            davg = 0;
+            wavg = 0;
+            savg = 0;
+            cavg = 0;
         }
-        else {
+        else{
             dCount = afruits.length;
+            for(i = 0; i < dCount; i++) {
+                favg += afruits[i];
+                vavg += aveges[i];
+                gavg += agraStar[i];
+                pavg += aprot[i];
+                davg += adsrt[i];
+                wavg += awater[i];
+                savg += asugBev[i];
+                cavg += acofTea[i];
+
+            }
+
+            favg = favg/dCount;
+            vavg = vavg/dCount;
+            gavg = gavg/dCount;
+            pavg = pavg/dCount;
+            davg = davg/dCount;
+            wavg = wavg/dCount;
+            savg = savg/dCount;
+            cavg = cavg/dCount;
         }
-
-
-        for (i = 0; i < dCount; i++) {
-            favg += afruits[i];
-            vavg += aveges[i];
-            gavg += agraStar[i];
-            pavg += aprot[i];
-            davg += adsrt[i];
-            wavg += awater[i];
-            savg += asugBev[i];
-            cavg += acofTea[i];
-        }
-
-        favg = favg / dCount;
-        vavg = vavg / dCount;
-        gavg = gavg / dCount;
-        pavg = pavg / dCount;
-        davg = davg / dCount;
-        wavg = wavg / dCount;
-        savg = savg / dCount;
-        cavg = cavg / dCount;
 
         favg = this.rounding1(favg, 2);
         vavg = this.rounding1(vavg, 2);
@@ -230,6 +260,7 @@ export default class NutritionistPDiet extends Component<{}> {
                 drawerWidth={300}
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
                 renderNavigationView={() => navigationView}>
+                <ScrollView>
                 <View style={{flex:1}}>
                     <View style={styles.container}>
                         <View style={styles.stretched}>
@@ -300,13 +331,14 @@ export default class NutritionistPDiet extends Component<{}> {
                            Your Suggestions
                         </Text>
                         <View style={styles.box}>
-                            <Text style={styles.text}>{this.state.nSuggestions} </Text>
+                            <Text style={styles.text2}>{this.state.nSuggestions} </Text>
                             <Text/>
 
                         </View>
                         <Text/>
                         <Text/>
-                        <TextInput style={styles.input} placeholder="Your Suggestions"
+                        <TextInput style={styles.input} multiline = {true}
+                                   numberOfLines = {4} placeholder="Your Suggestions"
                                    underlineColorAndroid ={'transparent'}
                                    placeholderTextColor="#CFCFCF"
                                    onChangeText={(text) => this.setState({nSuggestions: text})}
@@ -319,7 +351,7 @@ export default class NutritionistPDiet extends Component<{}> {
 
                     </View>
                 </View>
-
+            </ScrollView>
             </DrawerLayoutAndroid>
 
         );
@@ -334,13 +366,18 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
     },
     footer:{
-        flex: 2,
-        height : 100,
+        flex: 1,
+        //height : 100,
         backgroundColor:'#fff9ea',
     },
     text:{
         color: 'black',
         fontSize: 18,
+    },
+    text2:{
+        color: 'black',
+        fontSize: 18,
+        textAlign: 'center',
     },
     container2: {
         flex: 1,
@@ -359,8 +396,9 @@ const styles = StyleSheet.create({
     input:{
         fontSize: 16,
         backgroundColor: '#fffcf6',
-        marginBottom: 50,
+        marginBottom: 30,
         borderWidth: 1,
+        textAlign: 'center',
     },
     title: {
         fontSize: 20,
