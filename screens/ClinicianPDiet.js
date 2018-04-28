@@ -118,10 +118,31 @@ export default class ClinicianPDiet extends Component<{}> {
 
         if (afruits.length > 7){
             dCount = 7;
+            for(i = 0; i < dCount; i++) {
+                favg += afruits[i];
+                vavg += aveges[i];
+                gavg += agraStar[i];
+                pavg += aprot[i];
+                davg += adsrt[i];
+                wavg += awater[i];
+                savg += asugBev[i];
+                cavg += acofTea[i];
+
+            }
+
+            favg = favg/dCount;
+            vavg = vavg/dCount;
+            gavg = gavg/dCount;
+            pavg = pavg/dCount;
+            davg = davg/dCount;
+            wavg = wavg/dCount;
+            savg = savg/dCount;
+            cavg = cavg/dCount;
+
         }
         else if (afruits.length == 0 || afruits === undefined)
         {
-            dCount = 1;
+            dCount = 0;
             favg = 0;
             vavg = 0;
             gavg = 0;
@@ -132,27 +153,28 @@ export default class ClinicianPDiet extends Component<{}> {
             cavg = 0;
         }
         else{
-            dCount = afruits.length;}
+            dCount = afruits.length;
+            for(i = 0; i < dCount; i++) {
+                favg += afruits[i];
+                vavg += aveges[i];
+                gavg += agraStar[i];
+                pavg += aprot[i];
+                davg += adsrt[i];
+                wavg += awater[i];
+                savg += asugBev[i];
+                cavg += acofTea[i];
 
-        for(i = 0; i < dCount; i++) {
-            favg += afruits[i];
-            vavg += aveges[i];
-            gavg += agraStar[i];
-            pavg += aprot[i];
-            davg += adsrt[i];
-            wavg += awater[i];
-            savg += asugBev[i];
-            cavg += acofTea[i];
+            }
+
+            favg = favg/dCount;
+            vavg = vavg/dCount;
+            gavg = gavg/dCount;
+            pavg = pavg/dCount;
+            davg = davg/dCount;
+            wavg = wavg/dCount;
+            savg = savg/dCount;
+            cavg = cavg/dCount;
         }
-
-        favg = favg/dCount;
-        vavg = vavg/dCount;
-        gavg = gavg/dCount;
-        pavg = pavg/dCount;
-        davg = davg/dCount;
-        wavg = wavg/dCount;
-        savg = savg/dCount;
-        cavg = cavg/dCount;
 
         favg = this.rounding1(favg, 2);
         vavg = this.rounding1(vavg, 2);
