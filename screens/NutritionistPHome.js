@@ -135,7 +135,7 @@ export default class NutritionistPHome extends React.Component {
                     <View style={styles.textContainer} >
                         <Text style={styles.nText}>
                             <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
-                                {'Weight: '}
+                                {'Weight (lbs): '}
                             </Text>
                             {this.state.Weight}
                         </Text>

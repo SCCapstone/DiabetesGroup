@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 	paddingLeft: 55,
     paddingRight: 55,
-    backgroundColor: '#F7F1D2',
+    backgroundColor: '#fffcf6',
   },
   submitbutton:{
     alignItems: 'center',
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   input:{
       marginBottom: 10,
       alignSelf: 'stretch',
-      backgroundColor: '#FEFDF5',
+      backgroundColor: '#ffffff',
       borderColor: "#000000",
       borderWidth: 1,
   },
