@@ -2,11 +2,13 @@
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';
+import  Modal from 'react-native-modal';
 import {
   StyleSheet,
   Text,
   View,
   Image,
+  TouchableOpacity,
   TextInput,
     KeyboardAvoidingView
 } from 'react-native';
@@ -26,6 +28,16 @@ export default class PatientSignIn extends Component<{}> {
         console.disableYellowBox = true;
         this.state =  {email: '', password: ''};
     }
+
+	resetPress() {
+        const {navigate} = this.props.navigation;
+        var user = firebaseApp.auth().currentUser;
+        var email = this.state.email;
+        firebaseApp.auth().sendPasswordResetEmail(email);
+        firebaseApp.auth().signOut();
+		this.setState({visibleModal: null})
+        navigate('User');
+	}
 
     _signIn() {
         var email = this.state.email;
@@ -119,6 +131,37 @@ export default class PatientSignIn extends Component<{}> {
                             title="LOGIN"
                             onPress = {() => this._signIn()}
                         />
+						<TouchableOpacity
+							style={styles.reset}
+							onPress = {() => this.setState({visibleModal: 'password'})}
+						>
+						<Text> I forgot my password. </Text>
+						</TouchableOpacity>
+					<Modal
+                    isVisible={this.state.visibleModal === 'password'}
+                    animationIn="slideInLeft"
+                    animationOut="slideOutRight"
+                    onBackdropPress={() => this.setState({visibleModal: null})}
+                >
+                    <View style={[styles.modalContent, {height: 200}]}>
+                        <Text>Send a Reset Password Email</Text>
+                        <TextInput style={styles.passInput} placeholder="Re-enter your email"
+                                   underlineColorAndroid={'transparent'}
+                                   placeholderTextColor= "#CFCFCF"
+                                   keyboardType = "email-address"
+                                   autoCapitalize = "none"
+                                   onChangeText={(text) => this.setState({email: text})}
+                                   value={this.state.email}
+                        />
+                        <TouchableOpacity
+                            onPress = {() => this.resetPress()}
+                        >
+                            <View style={[styles.modalButton, {marginTop: 15}]}>
+                                <Text style={{color: '#000000'}}>Confirm</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
 
                     </View>
                 </View>
@@ -128,6 +171,12 @@ export default class PatientSignIn extends Component<{}> {
 }
 
 const styles = StyleSheet.create({
+	reset: {
+		height: 50,
+        backgroundColor: '#fffcf6',
+        padding: 12,
+		alignItems: 'center',
+    },
     container: {
         flex: 1,
         backgroundColor: '#fffcf6',
@@ -156,6 +205,29 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: "#112471",
         paddingTop: 5
-    }
+    },
+    modalContent: {
+        backgroundColor: "white",
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 4,
+        borderColor: "rgba(0, 0, 0, 0.1)"
+    },
+    modalButton: {
+        backgroundColor: "#059c29",
+        padding: 12,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 4,
+        borderColor: "rgba(0, 0, 0, 0.1)",
+        marginBottom: 15,
+    },
+    passInput:{
+        width: 200,
+        backgroundColor: '#ffffff',
+        borderColor: "#000000",
+        borderWidth: 1,
+        padding: 12,
+    },
 
 });
