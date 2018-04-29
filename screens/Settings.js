@@ -23,18 +23,38 @@ export default class Settings extends Component<{}> {
         headerTintColor: "#FFFFFF"
     };
 
+    //Constructor that pulls initial values from database and sets the state.
     constructor(props) {
         super(props);
         this.state = {Age: '', Sex: '', Weight: '', Height: '', DType: '', email: ''};
 
         var userID = firebaseApp.auth().currentUser.uid;
-        var userRef = firebaseApp.database().ref('Patients/' + userID + '/Pinfo/');
-        userRef.once('value', (snapshot) => {
-            this.state ={Age: snapshot.val().Age, Sex: snapshot.val().Sex, Weight: snapshot.val().Weight,
-                Height: snapshot.val().Height, DType: snapshot.val().DType, email: '', visibleModal: null};
+        this.userRef = firebaseApp.database().ref('Patients/' + userID + '/Pinfo/');
+        this.state ={Age: '', Sex: '', Weight: '', Height: '', DType: '', email: '', visibleModal: null};
+    }
+
+
+    listenForInfo(itemsRef) {
+        itemsRef.once('value', (snap) => {
+            this.setState({
+                Age: snap.val().Age,
+                Sex: snap.val().Sex,
+                Weight: snap.val().Weight,
+                Height: snap.val().Height,
+                DType: snap.val().DType,
+            })
         });
     }
 
+    componentDidMount() {
+        this.listenForInfo(this.userRef);
+    }
+
+    componentWillUnmount(){
+        this.userRef.off();
+    }
+
+    //function to reset the password (send email) and then signs user out
     _resetPassword(){
         const {navigate} = this.props.navigation;
         var user = firebaseApp.auth().currentUser;
@@ -44,9 +64,8 @@ export default class Settings extends Component<{}> {
         navigate('User');
     }
 
+    //function for submitting changed info and updating firebase
     _submitInfo() {
-        const {navigate} = this.props.navigation;
-
         var Age = this.state.Age;
         var Sex = this.state.Sex;
         var Weight = this.state.Weight;
@@ -66,6 +85,7 @@ export default class Settings extends Component<{}> {
         alert('Settings updated.');
     }
 
+    //These are functions for rendering the button to close the modals
     renderButton = (text, onPress) => (
         <TouchableOpacity onPress={onPress}>
             <View style={styles.button}>
@@ -82,6 +102,7 @@ export default class Settings extends Component<{}> {
         </TouchableOpacity>
     );
 
+    //this function checks the text input for letters which aren't valid
     checkNumberInput(text, type) {
         var newText = '';
         var numbers = '0123456789';
@@ -106,6 +127,7 @@ export default class Settings extends Component<{}> {
         }
     }
 
+    //This render function renders all the correct screens. It's impossible to comment inside render functions since it almost always breaks them.
     render() {
         const GenderData = ['Male', 'Female', 'N/A'];
         const HeightData = [];
@@ -115,7 +137,9 @@ export default class Settings extends Component<{}> {
             }
         }
         const TypeData = ['Type 1 Diabetes', 'Type 2 diabetes', 'Prediabetes', 'Gestational Diabetes'];
-
+        let tempGender = this.state.Sex;
+        let tempHeight = this.state.Height;
+        let tempDType = this.state.DType;
         return (
             <ScrollView style={{backgroundColor: '#FFFCF6'}}>
                 <View style={styles.container}>
@@ -144,16 +168,18 @@ export default class Settings extends Component<{}> {
                         >
                             <View style={styles.modalContent}>
                                 <WheelPicker
-                                    onItemSelected={(event) => this.setState({Sex: event.data})}
+                                    onItemSelected={(event) => tempGender = event.data}
                                     selectedItemPosition={GenderData.indexOf(this.state.Sex)}
                                     isCurved
                                     isCurtain
+                                    renderIndicator
+                                    indicatorColor='#112471'
                                     curtainColor='#112471BF'
                                     selectedItemTextColor='#000000'
                                     data={GenderData}
                                     style={{width: 300, height: 300}}
                                 />
-                                {this.renderModalButton('Confirm', () => this.setState({visibleModal: null}))}
+                                {this.renderModalButton('Confirm', () => this.setState({Sex: tempGender,visibleModal: null}))}
                             </View>
                         </Modal>
                     </View>
@@ -179,16 +205,18 @@ export default class Settings extends Component<{}> {
                         >
                             <View style={styles.modalContent}>
                                 <WheelPicker
-                                    onItemSelected={(event) => this.setState({Height: event.data})}
+                                    onItemSelected={(event) => tempHeight = event.data}
                                     selectedItemPosition={HeightData.indexOf(this.state.Height)}
                                     isCurved
                                     isCurtain
+                                    renderIndicator
+                                    indicatorColor='#112471'
                                     curtainColor='#112471BF'
                                     selectedItemTextColor='#000000'
                                     data={HeightData}
                                     style={{width: 300, height: 300}}
                                 />
-                                {this.renderModalButton('Confirm', () => this.setState({visibleModal: null}))}
+                                {this.renderModalButton('Confirm', () => this.setState({Height: tempHeight, visibleModal: null}))}
                             </View>
                         </Modal>
                     </View>
@@ -209,16 +237,18 @@ export default class Settings extends Component<{}> {
                             >
                                 <View style={styles.modalContent}>
                                     <WheelPicker
-                                        onItemSelected={(event) => this.setState({DType: event.data})}
+                                        onItemSelected={(event) => tempDType = event.data}
                                         selectedItemPosition={TypeData.indexOf(this.state.DType)}
                                         isCurved
                                         isCurtain
+                                        renderIndicator
+                                        indicatorColor='#112471'
                                         curtainColor='#112471BF'
                                         selectedItemTextColor='#000000'
                                         data={TypeData}
                                         style={{width: 300, height: 300}}
                                     />
-                                    {this.renderModalButton('Confirm', () => this.setState({visibleModal: null}))}
+                                    {this.renderModalButton('Confirm', () => this.setState({DType: tempDType, visibleModal: null}))}
                                 </View>
                             </Modal>
                         </View>
@@ -229,37 +259,43 @@ export default class Settings extends Component<{}> {
                         onPress = {() => this._submitInfo()}
                     />
 
-                    <View style={{marginTop: 30}}>
+                </View>
+
+                <View style={{alignItems: 'center', alignContent: 'center', alignSelf: 'center'}}>
+                    <View style={{marginTop: 40, width: 150,}}>
                         <SeafoamButton
                             title="Reset Password"
                             onPress = {() => this.setState({visibleModal: 'password'})}
                         />
                     </View>
-                    <Modal
-                        isVisible={this.state.visibleModal === 'password'}
-                        animationIn="slideInLeft"
-                        animationOut="slideOutRight"
-                        onBackdropPress={() => this.setState({visibleModal: null})}
-                    >
-                        <View style={[styles.modalContent, {height: 200}]}>
-                            <Text>Send a Reset Password Email</Text>
-                            <TextInput style={styles.passInput} placeholder="Re-enter your email"
-                                       underlineColorAndroid={'transparent'}
-                                       placeholderTextColor= "#CFCFCF"
-                                       onChangeText={(text) => this.setState({email: text})}
-                                       value={this.state.email}
-                            />
-                            <TouchableOpacity
-                                onPress = {() => this._resetPassword()}
-                            >
-                                <View style={[styles.modalButton, {marginTop: 15}]}>
-                                    <Text style={{color: '#000000'}}>Confirm</Text>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-                    </Modal>
-
                 </View>
+
+                <Modal
+                    isVisible={this.state.visibleModal === 'password'}
+                    animationIn="slideInLeft"
+                    animationOut="slideOutRight"
+                    onBackdropPress={() => this.setState({visibleModal: null})}
+                >
+                    <View style={[styles.modalContent, {height: 200}]}>
+                        <Text>Send a Reset Password Email</Text>
+                        <TextInput style={styles.passInput} placeholder="Re-enter your email"
+                                   underlineColorAndroid={'transparent'}
+                                   placeholderTextColor= "#CFCFCF"
+                                   keyboardType = "email-address"
+                                   autoCapitalize = "none"
+                                   onChangeText={(text) => this.setState({email: text})}
+                                   value={this.state.email}
+                        />
+                        <TouchableOpacity
+                            onPress = {() => this._resetPassword()}
+                        >
+                            <View style={[styles.modalButton, {marginTop: 15}]}>
+                                <Text style={{color: '#000000'}}>Confirm</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
+
             </ScrollView>
         );
     }
@@ -268,8 +304,8 @@ export default class Settings extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingLeft: 45,
-        paddingRight: 45,
+        paddingLeft: 25,
+        paddingRight: 25,
         backgroundColor: '#fffcf6',
     },
     submitbutton:{

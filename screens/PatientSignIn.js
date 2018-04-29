@@ -107,6 +107,7 @@ export default class PatientSignIn extends Component<{}> {
                             placeholder={"Enter Password"}
                             placeholderTextColor= "#CFCFCF"
                             secureTextEntry
+                            autoCapitalize = "none"
                             underlineColorAndroid ={'transparent'}
                             style={styles.input}
                             ref={(input) => this.passwordInput = input}
