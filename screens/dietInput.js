@@ -18,32 +18,6 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-const pickerValues = [
-    {label: "0", value: "0"},
-    {label: "1", value: "1"},
-    {label: "2", value: "2"},
-    {label: "3", value: "3"},
-    {label: "4", value: "4"},
-    {label: "5", value: "5"},
-    {label: "6", value: "6"},
-    {label: "7", value: "7"},
-    {label: "8", value: "8"},
-    {label: "9", value: "9"},
-    {label: "10", value: "10"},
-    {label: "11", value: "11"},
-    {label: "12", value: "12"},
-    {label: "13", value: "13"},
-    {label: "14", value: "14"},
-    {label: "15", value: "15"},
-    {label: "16", value: "16"},
-    {label: "17", value: "17"},
-    {label: "18", value: "18"},
-    {label: "19", value: "19"},
-    {label: "20", value: "20"},
-];
-
-
-
 export default class dietInput extends Component<{}> {
 
     static navigationOptions = {
@@ -201,6 +175,14 @@ export default class dietInput extends Component<{}> {
         for(var i = 0; i<21; i++) {
             dietData.push(i);
         }
+        let tempFruits = this.state.fruits;
+        let tempVeges = this.state.veges;
+        let tempGraStar = this.state.graStar;
+        let tempProt = this.state.prot;
+        let tempDsrt = this.state.dsrt;
+        let tempWater = this.state.water;
+        let tempSugBev = this.state.sugBev;
+        let tempCofTea = this.state.cofTea;
         return (
             <ScrollView style={{backgroundColor: '#fffcf6'}}>
                 <View style={styles.container}>
@@ -250,26 +232,28 @@ export default class dietInput extends Component<{}> {
                                 </View>
                                 <View style={{flex:.5}}>
                                     {this.renderButton(this.state.fruits, () => this.setState({visibleModal: 'fruits'}))}
-                                                            <Modal
-                                                                isVisible={this.state.visibleModal === 'fruits'}
-                                                                animationIn="slideInLeft"
-                                                                animationOut="slideOutRight"
-                                                                onBackdropPress={() => this.setState({visibleModal: null})}
-                                                            >
-                                                                <View style={styles.modalContent}>
-                                                                    <WheelPicker
-                                                                        onItemSelected={(event) => this.setState({fruits: event.data})}
-                                                                        selectedItemPosition={dietData.indexOf(this.state.fruits)}
-                                                                        isCurved
-                                                                        isCurtain
-                                                                        curtainColor='#112471BF'
-                                                                        selectedItemTextColor='#000000'
-                                                                        data={dietData}
-                                                                        style={{width: 300, height: 300}}
-                                                                    />
-                                                                    {this.renderModalButton('Confirm', () => this.setState({visibleModal: null}))}
-                                                                </View>
-                                                        </Modal>
+                                    <Modal
+                                        isVisible={this.state.visibleModal === 'fruits'}
+                                        animationIn="slideInLeft"
+                                        animationOut="slideOutRight"
+                                        onBackdropPress={() => this.setState({visibleModal: null})}
+                                    >
+                                        <View style={styles.modalContent}>
+                                            <WheelPicker
+                                                onItemSelected={(event) => tempFruits = event.data}
+                                                selectedItemPosition={dietData.indexOf(this.state.fruits)}
+                                                isCurved
+                                                isCurtain
+                                                renderIndicator
+                                                indicatorColor='#112471'
+                                                curtainColor='#112471BF'
+                                                selectedItemTextColor='#000000'
+                                                data={dietData}
+                                                style={{width: 300, height: 300}}
+                                            />
+                                            {this.renderModalButton('Confirm', () => this.setState({fruits: tempFruits, visibleModal: null}))}
+                                        </View>
+                                    </Modal>
                                 </View>
                             </View>
                             <Text/>
@@ -288,16 +272,18 @@ export default class dietInput extends Component<{}> {
                                     >
                                         <View style={styles.modalContent}>
                                             <WheelPicker
-                                                onItemSelected={(event) => this.setState({veges: event.data})}
+                                                onItemSelected={(event) => tempVeges =  event.data}
                                                 selectedItemPosition={dietData.indexOf(this.state.veges)}
                                                 isCurved
                                                 isCurtain
+                                                renderIndicator
+                                                indicatorColor='#112471'
                                                 curtainColor='#112471BF'
                                                 selectedItemTextColor='#000000'
                                                 data={dietData}
                                                 style={{width: 300, height: 300}}
                                             />
-                                            {this.renderModalButton('Confirm', () => this.setState({visibleModal: null}))}
+                                            {this.renderModalButton('Confirm', () => this.setState({veges: tempVeges, visibleModal: null}))}
                                         </View>
                                     </Modal>
                                 </View>
@@ -318,16 +304,18 @@ export default class dietInput extends Component<{}> {
                                     >
                                         <View style={styles.modalContent}>
                                             <WheelPicker
-                                                onItemSelected={(event) => this.setState({graStar: event.data})}
+                                                onItemSelected={(event) => tempGraStar = event.data}
                                                 selectedItemPosition={dietData.indexOf(this.state.graStar)}
                                                 isCurved
                                                 isCurtain
+                                                renderIndicator
+                                                indicatorColor='#112471'
                                                 curtainColor='#112471BF'
                                                 selectedItemTextColor='#000000'
                                                 data={dietData}
                                                 style={{width: 300, height: 300}}
                                             />
-                                            {this.renderModalButton('Confirm', () => this.setState({visibleModal: null}))}
+                                            {this.renderModalButton('Confirm', () => this.setState({graStar: tempGraStar, visibleModal: null}))}
                                         </View>
                                     </Modal>
                                 </View>
@@ -348,16 +336,18 @@ export default class dietInput extends Component<{}> {
                                     >
                                         <View style={styles.modalContent}>
                                             <WheelPicker
-                                                onItemSelected={(event) => this.setState({prot: event.data})}
+                                                onItemSelected={(event) => tempProt = event.data}
                                                 selectedItemPosition={dietData.indexOf(this.state.prot)}
                                                 isCurved
                                                 isCurtain
+                                                renderIndicator
+                                                indicatorColor='#112471'
                                                 curtainColor='#112471BF'
                                                 selectedItemTextColor='#000000'
                                                 data={dietData}
                                                 style={{width: 300, height: 300}}
                                             />
-                                            {this.renderModalButton('Confirm', () => this.setState({visibleModal: null}))}
+                                            {this.renderModalButton('Confirm', () => this.setState({prot: tempProt, visibleModal: null}))}
                                         </View>
                                     </Modal>
                                 </View>
@@ -378,16 +368,18 @@ export default class dietInput extends Component<{}> {
                                     >
                                         <View style={styles.modalContent}>
                                             <WheelPicker
-                                                onItemSelected={(event) => this.setState({dsrt: event.data})}
+                                                onItemSelected={(event) => tempDsrt = event.data}
                                                 selectedItemPosition={dietData.indexOf(this.state.dsrt)}
                                                 isCurved
                                                 isCurtain
+                                                renderIndicator
+                                                indicatorColor='#112471'
                                                 curtainColor='#112471BF'
                                                 selectedItemTextColor='#000000'
                                                 data={dietData}
                                                 style={{width: 300, height: 300}}
                                             />
-                                            {this.renderModalButton('Confirm', () => this.setState({visibleModal: null}))}
+                                            {this.renderModalButton('Confirm', () => this.setState({dsrt: tempDsrt, visibleModal: null}))}
                                         </View>
                                     </Modal>
                                 </View>
@@ -408,16 +400,18 @@ export default class dietInput extends Component<{}> {
                                     >
                                         <View style={styles.modalContent}>
                                             <WheelPicker
-                                                onItemSelected={(event) => this.setState({water: event.data})}
+                                                onItemSelected={(event) => tempWater = event.data}
                                                 selectedItemPosition={dietData.indexOf(this.state.water)}
                                                 isCurved
                                                 isCurtain
+                                                renderIndicator
+                                                indicatorColor='#112471'
                                                 curtainColor='#112471BF'
                                                 selectedItemTextColor='#000000'
                                                 data={dietData}
                                                 style={{width: 300, height: 300}}
                                             />
-                                            {this.renderModalButton('Confirm', () => this.setState({visibleModal: null}))}
+                                            {this.renderModalButton('Confirm', () => this.setState({water: tempWater, visibleModal: null}))}
                                         </View>
                                     </Modal>
                                 </View>
@@ -438,16 +432,18 @@ export default class dietInput extends Component<{}> {
                                     >
                                         <View style={styles.modalContent}>
                                             <WheelPicker
-                                                onItemSelected={(event) => this.setState({sugBev: event.data})}
+                                                onItemSelected={(event) => tempSugBev = event.data}
                                                 selectedItemPosition={dietData.indexOf(this.state.sugBev)}
                                                 isCurved
                                                 isCurtain
+                                                renderIndicator
+                                                indicatorColor='#112471'
                                                 curtainColor='#112471BF'
                                                 selectedItemTextColor='#000000'
                                                 data={dietData}
                                                 style={{width: 300, height: 300}}
                                             />
-                                            {this.renderModalButton('Confirm', () => this.setState({visibleModal: null}))}
+                                            {this.renderModalButton('Confirm', () => this.setState({sugBev: tempSugBev, visibleModal: null}))}
                                         </View>
                                     </Modal>
                                 </View>
@@ -468,16 +464,18 @@ export default class dietInput extends Component<{}> {
                                     >
                                         <View style={styles.modalContent}>
                                             <WheelPicker
-                                                onItemSelected={(event) => this.setState({cofTea: event.data})}
+                                                onItemSelected={(event) => tempCofTea = event.data}
                                                 selectedItemPosition={dietData.indexOf(this.state.cofTea)}
                                                 isCurved
                                                 isCurtain
+                                                renderIndicator
+                                                indicatorColor='#112471'
                                                 curtainColor='#112471BF'
                                                 selectedItemTextColor='#000000'
                                                 data={dietData}
                                                 style={{width: 300, height: 300}}
                                             />
-                                            {this.renderModalButton('Confirm', () => this.setState({visibleModal: null}))}
+                                            {this.renderModalButton('Confirm', () => this.setState({cofTea: tempCofTea, visibleModal: null}))}
                                         </View>
                                     </Modal>
                                 </View>
@@ -509,8 +507,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        paddingLeft: 55,
-        paddingRight: 55,
+        paddingLeft: 35,
+        paddingRight: 35,
         backgroundColor: '#fffcf6',
     },
     line:{

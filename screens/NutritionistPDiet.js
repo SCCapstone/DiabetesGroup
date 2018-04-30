@@ -68,9 +68,10 @@ export default class NutritionistPDiet extends Component<{}> {
                 acofTea.push(parseInt(child.val().cofTea));
 
             });
-            this.setState({fruits1: afruits, veges1: aveges, graStar1: agraStar, prot1: aprot, dsrt1: adsrt, water1: awater, sugBev1: asugBev, cofTea1: acofTea });
-            var items = this.averageDiet();
-            this.setState({diet: items});
+            this.setState({fruits1: afruits, veges1: aveges, graStar1: agraStar, prot1: aprot, dsrt1: adsrt, water1: awater, sugBev1: asugBev, cofTea1: acofTea }, () => {
+                var items = this.averageDiet();
+                this.setState({diet: items});
+            });
         });
     }
 

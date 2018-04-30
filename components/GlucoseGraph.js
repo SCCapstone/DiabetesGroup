@@ -20,6 +20,7 @@ class GlucoseGraph extends Component {
         this.state = { logs: [{Time: '00/00/0000', GlucoseLevel: 0}, {Time: '00/00/0000', GlucoseLevel: 0}], dates: [], glogs: []};
     }
 
+    //listener for collecting all the glucose level data
     listenForItems(itemsRef) {
         itemsRef.on('value', (snap) => {
             var lDates = [];
@@ -45,6 +46,7 @@ class GlucoseGraph extends Component {
 
     keyExtractor = (item) => item.id;
 
+    //This function takes all times and the logs and averages them per day (avg. level per day) and outputs the new logs and dates.
     averageDates = () => {
         lDates = this.state.dates;
         lLogs = this.state.glogs;
