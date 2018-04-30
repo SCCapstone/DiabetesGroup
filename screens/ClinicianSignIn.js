@@ -32,10 +32,23 @@ export default class ClinicianSignIn extends Component<{}> {
         const {navigate} = this.props.navigation;
         var user = firebaseApp.auth().currentUser;
         var email = this.state.email;
-        firebaseApp.auth().sendPasswordResetEmail(email);
-        firebaseApp.auth().signOut();
-		this.setState({visibleModal: null})
-        navigate('User');
+        firebaseApp.auth().sendPasswordResetEmail(email).then(function (user){
+            firebaseApp.auth().signOut();
+            this.setState({visibleModal: null});
+            navigate('User');
+        }).catch(function (error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode === 'auth/user-not-found') {
+                alert('User not found.');
+            }
+            else if (errorCode === 'auth/invalid-email') {
+                alert('Invalid Email.');
+            }
+            else {
+                alert(errorMessage);
+            }
+        });
 	}
 
 
