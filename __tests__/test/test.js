@@ -1,3 +1,4 @@
+/*
             import React from 'react';
             import chai from 'chai';
             import sinon from 'sinon';
@@ -33,4 +34,5 @@
                         expect(textInput.props().placeholder).to.eql(expectedPlaceholder);
                     });
                 });
+*/
 
