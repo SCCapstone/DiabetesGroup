@@ -1,4 +1,13 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: NAddPatient
 
+Puropse: This screen is used by Nutritionists to add a patient to their patient lists.
+
+Functions Used:
+    addPatient(): Accesses Firebase and verifies that the email input exists, is not currently assigned to another
+                    Nutritionist, and upon passing those conditions, adds that patient to the list.
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';

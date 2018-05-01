@@ -1,3 +1,14 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: glucoseInput
+
+Puropse: This screen is used by patients to input their glucose level, reading type, and an optional note.
+
+Functions Used:
+    _patientValues(): Checks to ensure glucose level is a number between 30 and 600 and pushes the log to Firebase.
+    checkNumberInput(text): Checks to make sure glucose level input is only a number otherwise it is erased from the
+                                input box.
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';

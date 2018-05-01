@@ -1,3 +1,12 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: FirebaseApp
+
+Puropse: This simply holds pertinent information about our Firebase app.
+
+Functions Used:
+        N/A
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import * as firebase from 'firebase';
 
 //Initialize Firebase

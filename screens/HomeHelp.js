@@ -1,3 +1,12 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: HomeHelp
+
+Puropse: This screen is used by all users to help understand the information on a patient's home page.
+
+Functions Used:
+    N/A
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView, DrawerLayoutAndroid, Dimensions} from 'react-native';
 import firebaseApp from './FireBaseApp';

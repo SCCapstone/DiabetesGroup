@@ -1,3 +1,11 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: NMessaging
+
+Purpose: This screen is to render the nutritionist and clinician messenger.
+
+Functions Used:
+    onSend(): Pushes the message to firebase.
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React from 'react';
 import {
   Platform,

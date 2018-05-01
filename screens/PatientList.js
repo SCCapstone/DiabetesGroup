@@ -1,3 +1,16 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: PatientList
+
+Puropse: This screen is used by Nutritionists to view their list of patients.
+
+Functions Used:
+    _pDataCheck(item): Checks to make sure the selected patient has finished account setup before allowing
+                        the Nutritionist to view their information.
+    deletePatient(key, pid): Allows the Nutritionist to delete a patient from their list.
+    deleteEvent(key, pid): Uses a popup to ensure deletion of that patient from the Nutritionist's list is what the
+                            Nutritionist actually wants to do.
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React from 'react';
 import {Alert,View, Text, BackHandler, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight, DrawerLayoutAndroid} from 'react-native';
 import firebaseApp from './FireBaseApp';

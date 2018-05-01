@@ -1,4 +1,11 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: UserSelect
 
+Purpose: This screen is used by all users to select their account type or create a new user.
+
+Functions Used:
+    N/A
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import {

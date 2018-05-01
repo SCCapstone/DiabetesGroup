@@ -1,3 +1,16 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: ClinicianPDiet
+
+Puropse: This screen is used by Clinicians to view a patient's diet along with the suggestions given by the
+            patient's nutritionist.
+
+Functions Used:
+    averageDiet(): Uses the data referenced from Firebase for that patiet's diet values. It then averages those values
+                    over the last 7 days and calls rounding1() to get a rounded number.
+    rounding1(number, precision): Takes in a number and the desired precision to round the number to match
+                                    that precision.
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 const HelpButton = require('../components/HelpButton');

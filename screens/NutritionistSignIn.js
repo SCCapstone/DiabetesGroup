@@ -1,3 +1,14 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: NutritionistSignIn
+
+Puropse: This screen is used by Nutritionists to sign in to their account.
+
+Functions Used:
+    _signIn: Verifies input to make sure username and password match and checks to ensure user type is a Nutritionist.
+    resetPress(): When selected this sends a generated email from Firebase to the user so that they can reset
+                    their password.
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
