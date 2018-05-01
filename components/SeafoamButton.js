@@ -19,7 +19,6 @@ class SeafoamButton extends Component {
     }
 }
 
-
 const styles = StyleSheet.create({
     press: {
         backgroundColor: '#112471',
