@@ -1,3 +1,13 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: patientHome
+
+Puropse: This screen is used by Patients to view their information, glucose logs, and the glucose graph. From here they
+            can also access the messenger.
+
+Functions Used:
+    checkMessenger(): Checks to ensure that patient is attached to a nutritionist before they can send messages.
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView, DrawerLayoutAndroid, TouchableHighlight, TouchableOpacity,} from 'react-native';
 import firebaseApp from './FireBaseApp';

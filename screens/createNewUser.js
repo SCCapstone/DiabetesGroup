@@ -1,4 +1,12 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: createNewUser
 
+Puropse: This screen is used by all users to create a new account.
+
+Functions Used:
+    signUp(): Used to verify new user information input and if the account does not exist, adds it to the database.
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';

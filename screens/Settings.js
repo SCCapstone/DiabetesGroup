@@ -1,3 +1,15 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: Settings
+
+Purpose: This screen is used by patients to update settings and account information.
+
+Functions Used:
+    _submitInfo(): Used to verify updates to user information input and updates the database.
+    checkNumberInput(text, type): Checks to make sure input is only a number otherwise it is erased from the
+                                input box for age and weight.
+    _resetPassword(): Allows user to reset his/her password.
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';

@@ -1,3 +1,12 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: patientInput
+
+Puropse: This screen is used by patients to view their medications.
+
+Functions Used:
+    N/A
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';

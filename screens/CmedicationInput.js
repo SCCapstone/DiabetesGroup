@@ -1,3 +1,12 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: CmedicationInput
+
+Puropse: This screen is used by Clinicians to add medications for a patient.
+
+Functions Used:
+    _medicationValues(): Verifies input to make sure all fields were entered and pushes medication information to Firebase.
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';

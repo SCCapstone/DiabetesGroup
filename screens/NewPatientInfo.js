@@ -1,4 +1,13 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: NewPatientInfo
 
+Puropse: This screen is used by patients to add new account information.
+
+Functions Used:
+    _submitInfo(): Used to verify new user information input adds it to the database.
+    checkNumberInput(text, type): Checks to make sure input is only a number otherwise it is erased from the
+                                input box for age and weight.
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';

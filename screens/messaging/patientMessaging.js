@@ -1,3 +1,11 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: patientMessaging
+
+Purpose: This screen is to render the patient messenger.
+
+Functions Used:
+    onSend(): Pushes the message to firebase.
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React from 'react';
 import {
   Platform,

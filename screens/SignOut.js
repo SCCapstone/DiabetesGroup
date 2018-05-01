@@ -1,3 +1,11 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: SignOut
+
+Purpose: This screen is used by all users to sign out.
+
+Functions Used:
+    N/A
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';

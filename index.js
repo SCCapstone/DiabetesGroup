@@ -1,3 +1,11 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: index
+
+Purpose: This holds all our screens and import information for navigating between them.
+
+Functions Used:
+    N/A
+---------------------------------------------------------------------------------------------------------------------------------*/
 import { AppRegistry } from 'react-native';
 import { Text } from 'react-native';
 import React from 'react';

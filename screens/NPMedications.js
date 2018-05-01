@@ -1,3 +1,12 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: NPMedications
+
+Puropse: This screen is used by nutritionists to view a patient's medications.
+
+Functions Used:
+    N/A
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';

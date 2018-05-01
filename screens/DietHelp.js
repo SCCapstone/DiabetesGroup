@@ -1,3 +1,13 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: DietHelp
+
+Puropse: This screen is used by all users to help understand how diet should be input and it also shows an Indian
+            Food Pyramid.
+
+Functions Used:
+    N/A
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 import firebaseApp from './FireBaseApp';

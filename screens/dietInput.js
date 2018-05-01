@@ -1,3 +1,15 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: dietInput
+
+Puropse: This screen is used by patients to input their diet logs for a particular date.
+
+Functions Used:
+    _dietValues(): Pushes the input values in the log to Firebase.
+    getDayDiet (date): Checks for and loads diet values for a particular selected day if they exist in Firebase.
+    deleteEvent(): Ensures that a user acually wants to delete that particular day's diet log.
+    deleteDiet(): Deletes the selected day's diet from Firebase.
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React, { Component } from 'react';
 const SeafoamButton = require('../components/SeafoamButton');
 const DeleteButton = require('../components/DeleteButton');

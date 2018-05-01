@@ -1,3 +1,12 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: ClinicianPHome
+
+Puropse: This screen is used by Clinicians to view a patient's information, glucose logs, and the glucose graph.
+
+Functions Used:
+    N/A
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React from 'react';
 import {View, Text, BackHandler, StyleSheet, ScrollView, FlatList,DrawerLayoutAndroid,TouchableOpacity,rr} from 'react-native';
 import firebaseApp from './FireBaseApp';

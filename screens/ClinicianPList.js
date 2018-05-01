@@ -1,3 +1,16 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: ClinicianPList
+
+Puropse: This screen is used by Clinicians to view their list of patients.
+
+Functions Used:
+    _pDataCheck(item): Checks to make sure the selected patient has finished account setup before allowing
+                        the Clinician to view their information.
+    deletePatient(key, pid): Allows the clinician to delete a patient from their list.
+    deleteEvent(key, pid): Uses a popup to ensure deletion of that patient from the clinician's list is what the
+                            clinician actually wants to do.
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React from 'react';
 import {Alert,View, Text, BackHandler, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight,DrawerLayoutAndroid} from 'react-native';
 import firebaseApp from './FireBaseApp';

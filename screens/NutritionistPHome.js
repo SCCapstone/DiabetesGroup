@@ -1,3 +1,12 @@
+/*--------------------------------------------------------------------------------------------------------------------------------
+Screen Name: NutritionistPHome
+
+Puropse: This screen is used by Nutritionist to view a patient's information, glucose logs, and the glucose graph.
+
+Functions Used:
+    N/A
+
+---------------------------------------------------------------------------------------------------------------------------------*/
 import React from 'react';
 import {View, Text, BackHandler, StyleSheet, ScrollView, FlatList,DrawerLayoutAndroid, TouchableOpacity,} from 'react-native';
 import firebaseApp from './FireBaseApp';
