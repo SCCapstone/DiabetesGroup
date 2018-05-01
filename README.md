@@ -98,6 +98,7 @@ The following steps can also be found at https://facebook.github.io/react-native
  
  
 ### To run Unit-Testing with Jest:
+ Check Wiki Page for Dependencies on Unit-Testing
  1. Open the project directory using node.js CLI
  2. Navigate to the test directory using the following command:
  ```
